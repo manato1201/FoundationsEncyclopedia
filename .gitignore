@@ -21,3 +21,6 @@ next-env.d.ts
 ### Windows
 Thumbs.db
 [Dd]esktop.ini
+
+.vercel
+.env*
