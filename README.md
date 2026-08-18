@@ -1,0 +1,2 @@
+# FoundationsEncyclopedia
+基礎的な内容をまとめたリポジトリです
