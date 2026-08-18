@@ -1,0 +1,108 @@
+.layout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  width: 100%;
+}
+
+.stack {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  width: 100%;
+  max-width: 16rem;
+}
+
+.stackItem {
+  border: 2px solid var(--color-line);
+  border-radius: 4px;
+  padding: var(--space-2) var(--space-3);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  opacity: 0.4;
+  transition:
+    border-color 200ms ease-out,
+    color 200ms ease-out,
+    opacity 200ms ease-out;
+}
+
+[data-step="0"] .mirrorItem,
+[data-step="1"] .mirrorItem,
+[data-step="2"] .mirrorItem {
+  opacity: 1;
+  border-color: var(--color-accent-blue);
+  color: var(--color-accent-blue);
+}
+
+[data-step="1"] .subdivItem,
+[data-step="2"] .subdivItem {
+  opacity: 1;
+  border-color: var(--color-accent-green);
+  color: var(--color-accent-green);
+}
+
+[data-step="2"] .bevelItem {
+  opacity: 1;
+  border-color: var(--color-accent-amber);
+  color: var(--color-accent-amber);
+}
+
+/* メッシュ形状の見た目をステップごとに切り替える(角の丸みと幅で「分割・面取り」の進行を表現) */
+.mesh {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 6rem;
+}
+
+.shape {
+  width: 6rem;
+  height: 4rem;
+  background: var(--color-bg-surface-2);
+  border: 2px solid var(--color-line);
+  border-radius: 2px;
+  transition:
+    border-radius 250ms ease-out,
+    width 250ms ease-out,
+    border-color 250ms ease-out;
+}
+
+[data-step="0"] .shape {
+  width: 10rem;
+  border-color: var(--color-accent-blue);
+}
+
+[data-step="1"] .shape {
+  border-radius: 40%;
+  border-color: var(--color-accent-green);
+}
+
+[data-step="2"] .shape {
+  border-radius: 12px;
+  border-color: var(--color-accent-amber);
+}
+
+.caption {
+  text-align: center;
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  display: none;
+}
+
+[data-step="0"] .caption[data-caption="0"],
+[data-step="1"] .caption[data-caption="1"],
+[data-step="2"] .caption[data-caption="2"] {
+  display: block;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shape,
+  .stackItem {
+    transition: none;
+  }
+}

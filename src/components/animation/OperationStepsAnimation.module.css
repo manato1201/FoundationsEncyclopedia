@@ -1,0 +1,100 @@
+.list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  width: 100%;
+}
+
+.item {
+  display: flex;
+  gap: var(--space-3);
+  border: 1px solid var(--color-line);
+  border-radius: 6px;
+  padding: var(--space-3) var(--space-4);
+  opacity: 0.45;
+  transition:
+    border-color 200ms ease-out,
+    opacity 200ms ease-out,
+    box-shadow 200ms ease-out;
+}
+
+.indexBadge {
+  flex-shrink: 0;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  border: 1px solid var(--color-line);
+  color: var(--color-text-muted);
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
+.label {
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  color: var(--color-text);
+}
+
+.menuPath {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--color-accent-blue);
+}
+
+.note {
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+}
+
+/* 現在のステップに対応するitemだけを強調する。operationStepsは通常数個〜十数個程度のため、
+   0-11の範囲を静的に用意しておく(汎用コンポーネントなのでステップ数固有のCSSを新規に書く必要はない)。 */
+[data-step="0"] .item[data-index="0"],
+[data-step="1"] .item[data-index="1"],
+[data-step="2"] .item[data-index="2"],
+[data-step="3"] .item[data-index="3"],
+[data-step="4"] .item[data-index="4"],
+[data-step="5"] .item[data-index="5"],
+[data-step="6"] .item[data-index="6"],
+[data-step="7"] .item[data-index="7"],
+[data-step="8"] .item[data-index="8"],
+[data-step="9"] .item[data-index="9"],
+[data-step="10"] .item[data-index="10"],
+[data-step="11"] .item[data-index="11"] {
+  opacity: 1;
+  border-color: var(--color-accent-blue);
+  box-shadow: var(--glow-blue);
+}
+
+[data-step="0"] .item[data-index="0"] .indexBadge,
+[data-step="1"] .item[data-index="1"] .indexBadge,
+[data-step="2"] .item[data-index="2"] .indexBadge,
+[data-step="3"] .item[data-index="3"] .indexBadge,
+[data-step="4"] .item[data-index="4"] .indexBadge,
+[data-step="5"] .item[data-index="5"] .indexBadge,
+[data-step="6"] .item[data-index="6"] .indexBadge,
+[data-step="7"] .item[data-index="7"] .indexBadge,
+[data-step="8"] .item[data-index="8"] .indexBadge,
+[data-step="9"] .item[data-index="9"] .indexBadge,
+[data-step="10"] .item[data-index="10"] .indexBadge,
+[data-step="11"] .item[data-index="11"] .indexBadge {
+  border-color: var(--color-accent-blue);
+  color: var(--color-accent-blue);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .item {
+    transition: none;
+  }
+}

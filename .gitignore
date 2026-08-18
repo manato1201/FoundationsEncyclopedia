@@ -1,0 +1,23 @@
+# Dependencies
+node_modules/
+
+# Framework build output and caches
+.next
+out/
+
+# TypeScript cache
+*.tsbuildinfo
+
+# dotenv environment variable files
+.env
+.env.local
+.env.*.local
+
+### Next.js
+next-env.d.ts
+.vercel
+*.pem
+
+### Windows
+Thumbs.db
+[Dd]esktop.ini
