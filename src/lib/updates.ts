@@ -15,6 +15,13 @@ export type UpdateItem = {
  */
 export const UPDATES: UpdateItem[] = [
   {
+    id: "2026-08-19-programming-it-mass-expansion",
+    date: "2026-08-19",
+    title: "プログラミング言語・IT知識を140件拡充(29件→169件)",
+    description:
+      "プログラミング言語にJava/Go/Rust/Kotlin/Swift/JavaScript/SQL/Ruby/PHP/Luaの10サブカテゴリを、IT知識にセキュリティ/クラウド/データベース/コンテナ・仮想化/Webの基礎/ソフトウェア工学・開発プロセス/Linux・シェル操作の7サブカテゴリを新設。両カテゴリにそれぞれ70件、計140件のエントリを追加し、収録数を29件から169件に拡充した。",
+  },
+  {
     id: "2026-08-19-basics-updates-about",
     date: "2026-08-19",
     title: "はじめての方へ/更新情報/Aboutページを追加、エントリを10件拡充",
