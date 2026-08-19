@@ -2,6 +2,8 @@ import { FOR_LOOP_ANIMATIONS } from "./animations/for-loop-animations";
 import { GIT_ANIMATIONS } from "./animations/git-animations";
 import { DCC_STEP_ANIMATIONS } from "./animations/dcc-step-animations";
 import { NETWORK_ANIMATIONS } from "./animations/network-animations";
+import { GAME_ENGINE_ANIMATIONS } from "./animations/game-engine-animations";
+import { CONTAINER_ANIMATIONS } from "./animations/container-animations";
 
 /**
  * このidに対応するCSSステップアニメーション(Phase 3の手書きkeyframe型)があるかどうか。
@@ -14,6 +16,8 @@ export function hasAnimation(id: string): boolean {
     id in FOR_LOOP_ANIMATIONS ||
     id in GIT_ANIMATIONS ||
     id in DCC_STEP_ANIMATIONS ||
-    id in NETWORK_ANIMATIONS
+    id in NETWORK_ANIMATIONS ||
+    id in GAME_ENGINE_ANIMATIONS ||
+    id in CONTAINER_ANIMATIONS
   );
 }

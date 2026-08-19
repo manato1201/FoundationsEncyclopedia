@@ -4,6 +4,15 @@ category: IT知識
 subcategory: バージョン管理
 masteryBadge: done
 summary: ブランチの変更を本流に取り込む前に、レビューと議論の場を設けるための仕組み。
+operationSteps:
+  - label: ブランチを作成する
+    note: mainから新しいブランチを作成し、変更をコミットする
+  - label: プルリクエストを作成する
+    note: リモートリポジトリへpushし、変更内容と意図をまとめる
+  - label: レビューを受ける
+    note: レビュアーがコードを確認し、コメント・修正依頼・承認を行う
+  - label: マージする
+    note: 承認とCIのパスが揃ったらmainへマージする
 ---
 
 ## 概要

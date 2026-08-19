@@ -4,6 +4,15 @@ category: IT知識
 subcategory: Linux・シェル操作
 masteryBadge: review
 summary: 離れたサーバーへ暗号化された通信で安全にログイン・操作するためのプロトコルとツール。
+operationSteps:
+  - label: 鍵ペアを生成する
+    note: "ssh-keygen等で公開鍵・秘密鍵のペアを作成する"
+  - label: 公開鍵をサーバーへ登録する
+    note: サーバー側の authorized_keys に公開鍵を追加する
+  - label: 秘密鍵を使って接続する
+    menuPath: "ssh -i ~/.ssh/my_key user@example.com"
+  - label: サーバー側で秘密鍵の対応を検証する
+    note: 検証に成功すればパスワードなしでログインできる
 ---
 
 ## 概要
