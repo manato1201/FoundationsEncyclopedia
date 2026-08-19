@@ -4,6 +4,15 @@ category: IT知識
 subcategory: ネットワーク
 masteryBadge: done
 summary: 人間が読めるドメイン名を、コンピュータが通信に使うIPアドレスへ変換する電話帳のような仕組み。
+operationSteps:
+  - label: ブラウザがOSに問い合わせる
+    note: ドメイン名の名前解決をOSに依頼する
+  - label: OSがキャッシュを確認する
+    note: 既に解決済みならここで即座に返る
+  - label: DNSリゾルバへ問い合わせる
+    note: ルートサーバー→TLDサーバー→権威サーバーの順に辿る
+  - label: IPアドレスを取得し通信する
+    note: 得られたIPアドレスへ実際のHTTPリクエスト等を行う
 ---
 
 ## 概要

@@ -1,0 +1,74 @@
+.flow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  position: relative;
+}
+
+.box {
+  border: 2px solid var(--color-line);
+  border-radius: 6px;
+  padding: var(--space-3) var(--space-4);
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+  transition:
+    border-color 200ms ease-out,
+    color 200ms ease-out,
+    box-shadow 200ms ease-out;
+}
+
+.arrow,
+.loopArrow {
+  font-family: var(--font-mono);
+  color: var(--color-text-muted);
+}
+
+.loopArrow {
+  flex-basis: 100%;
+  text-align: center;
+  font-size: 0.75rem;
+  opacity: 0.6;
+}
+
+[data-step="0"] .inputBox {
+  border-color: var(--color-accent-blue);
+  color: var(--color-accent-blue);
+  box-shadow: var(--glow-blue);
+}
+
+[data-step="1"] .updateBox {
+  border-color: var(--color-accent-green);
+  color: var(--color-accent-green);
+  box-shadow: var(--glow-green);
+}
+
+[data-step="2"] .renderBox {
+  border-color: var(--color-accent-amber);
+  color: var(--color-accent-amber);
+  box-shadow: var(--glow-amber);
+}
+
+.caption {
+  flex-basis: 100%;
+  text-align: center;
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  margin-top: var(--space-2);
+  display: none;
+}
+
+[data-step="0"] .caption[data-caption="0"],
+[data-step="1"] .caption[data-caption="1"],
+[data-step="2"] .caption[data-caption="2"] {
+  display: block;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .box {
+    transition: none;
+  }
+}

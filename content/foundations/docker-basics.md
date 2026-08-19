@@ -4,6 +4,15 @@ category: IT知識
 subcategory: コンテナ・仮想化
 masteryBadge: review
 summary: アプリケーションと実行環境を「イメージ」としてパッケージ化し、どこでも同じ挙動で動かせるようにするツール。
+operationSteps:
+  - label: Dockerfileからイメージをビルドする
+    menuPath: "docker build -t my-app ."
+  - label: イメージからコンテナを起動する
+    menuPath: "docker run -p 3000:3000 my-app"
+  - label: 実行中のコンテナを確認する
+    menuPath: "docker ps"
+  - label: コンテナを停止する
+    menuPath: "docker stop <コンテナID>"
 ---
 
 ## 概要

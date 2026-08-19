@@ -4,6 +4,17 @@ category: IT知識
 subcategory: ソフトウェア工学・開発プロセス
 masteryBadge: review
 summary: 大きな計画を最初に固めるのではなく、短い期間で作っては見直す反復を繰り返す開発手法の総称。
+operationSteps:
+  - label: スプリント計画
+    note: このスプリントで何を作るかを決める
+  - label: デイリースクラム
+    note: 毎日短時間で進捗と障害を共有する
+  - label: 開発
+    note: 実際にコードを書く
+  - label: スプリントレビュー
+    note: 完成したものをステークホルダーに見せる
+  - label: 振り返り(レトロスペクティブ)
+    note: 次のスプリントに向けて改善点を話し合う
 ---
 
 ## 概要

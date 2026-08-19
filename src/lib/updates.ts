@@ -15,6 +15,13 @@ export type UpdateItem = {
  */
 export const UPDATES: UpdateItem[] = [
   {
+    id: "2026-08-19-dcc-tool-framework-expansion",
+    date: "2026-08-19",
+    title: "DCC・ツール別・Frameworkを75件拡充(169件→244件)、CSSアニメーションも拡大",
+    description:
+      "DCC(Maya/Blender/Houdini)・ツール別(Unity/UnrealEngine)・Frameworkをそれぞれ30件まで拡充(計75件追加)。あわせて、既存の手続き的なエントリ8件にoperationStepsを後付けしてCSSステップアニメーション対応を広げ、ゲームループ・ステートマシン・コンテナイメージレイヤーの3件には専用のCSSステップアニメーションを新規実装した。収録数は169件から244件に拡充。",
+  },
+  {
     id: "2026-08-19-programming-it-mass-expansion",
     date: "2026-08-19",
     title: "プログラミング言語・IT知識を140件拡充(29件→169件)",
