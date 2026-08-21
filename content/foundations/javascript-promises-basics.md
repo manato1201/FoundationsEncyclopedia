@@ -4,6 +4,15 @@ category: プログラミング言語
 subcategory: JavaScript
 masteryBadge: done
 summary: 「いつか終わる非同期処理の結果」を表現するオブジェクト。async/awaitの土台になっている仕組み。
+operationSteps:
+  - label: Promiseを生成する
+    note: "pending(実行中)状態でPromiseオブジェクトが作られる"
+  - label: 非同期処理が実行される
+    note: fetchやタイマーなど、時間のかかる処理が裏側で進む
+  - label: resolveまたはrejectが呼ばれる
+    note: 成功ならresolve(結果)、失敗ならreject(エラー)が呼ばれ状態が確定する
+  - label: thenまたはcatchが実行される
+    note: "fulfilled状態ならthen()、rejected状態ならcatch()に登録したコールバックが呼ばれる"
 ---
 
 ## 概要

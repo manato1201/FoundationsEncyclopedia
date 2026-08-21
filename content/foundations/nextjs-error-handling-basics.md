@@ -4,6 +4,16 @@ category: Framework
 subcategory: Web(Next.js等)
 masteryBadge: review
 summary: ルートごとにエラー時の表示を差し込める、Next.js App Router特有の規約ファイル。
+operationSteps:
+  - label: レンダリング中に例外が発生する
+    note: ページやコンポーネントの描画処理中にエラーが投げられる
+  - label: 最も近いerror.tsxが捕捉する
+    note: そのルート配下に配置されたerror.tsxがError Boundaryとして機能する
+  - label: フォールバックUIが表示される
+    note: 通常の画面の代わりに、エラー内容とresetボタンを含む画面が表示される
+  - label: resetで再試行できる
+    menuPath: "reset()"
+    note: 呼び出すと、エラーが起きたセグメントの再レンダリングを試みる
 ---
 
 ## 概要

@@ -3,6 +3,16 @@ name: WebSocketの基礎
 category: IT知識
 subcategory: Webの基礎
 summary: 1本のTCP接続を維持したまま、クライアントとサーバーが双方向にいつでもメッセージを送り合える通信方式。
+operationSteps:
+  - label: 通常のHTTPリクエストとして開始する
+    menuPath: "Upgrade: websocket ヘッダ"
+    note: WebSocketへの切り替えを要求するハンドシェイクを送る
+  - label: サーバーが切り替えを許可する
+    note: 成功するとHTTP接続がWebSocket接続へ切り替わる
+  - label: 1本の接続を維持したまま通信する
+    note: 以後どちらからでも自由なタイミングでメッセージを送信できる
+  - label: 接続が切断される
+    note: どちらかが明示的に閉じるか、ネットワーク断で切断される
 ---
 
 ## 概要

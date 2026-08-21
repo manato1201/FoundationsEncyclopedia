@@ -5,6 +5,9 @@ import { NETWORK_ANIMATIONS } from "./animations/network-animations";
 import { GAME_ENGINE_ANIMATIONS } from "./animations/game-engine-animations";
 import { CONTAINER_ANIMATIONS } from "./animations/container-animations";
 import { POINTER_ANIMATIONS } from "./animations/pointer-animations";
+import { RECURSION_ANIMATIONS } from "./animations/recursion-animations";
+import { OWNERSHIP_ANIMATIONS } from "./animations/ownership-animations";
+import { ARRAY_ANIMATIONS } from "./animations/array-animations";
 
 /**
  * このidに対応するCSSステップアニメーション(Phase 3の手書きkeyframe型)があるかどうか。
@@ -20,6 +23,9 @@ export function hasAnimation(id: string): boolean {
     id in NETWORK_ANIMATIONS ||
     id in GAME_ENGINE_ANIMATIONS ||
     id in CONTAINER_ANIMATIONS ||
-    id in POINTER_ANIMATIONS
+    id in POINTER_ANIMATIONS ||
+    id in RECURSION_ANIMATIONS ||
+    id in OWNERSHIP_ANIMATIONS ||
+    id in ARRAY_ANIMATIONS
   );
 }

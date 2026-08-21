@@ -3,6 +3,15 @@ name: CSRF(クロスサイトリクエストフォージェリ)の基礎
 category: IT知識
 subcategory: セキュリティ
 summary: ログイン中のユーザーに、意図しないリクエストを別サイト経由で送信させてしまう攻撃。
+operationSteps:
+  - label: ユーザーがサイトAにログインする
+    note: 認証Cookieがブラウザに保存される
+  - label: ユーザーが悪意あるサイトBを開く
+    note: 攻撃者が用意した自動送信フォームが仕込まれている
+  - label: サイトBがサイトAへリクエストを送信する
+    note: ブラウザはサイトAのCookieを自動的に付与して送信してしまう
+  - label: サイトAが正当なリクエストと誤認する
+    note: CSRFトークンやSameSite Cookieがなければ、本人の意図しない操作が実行される
 ---
 
 ## 概要

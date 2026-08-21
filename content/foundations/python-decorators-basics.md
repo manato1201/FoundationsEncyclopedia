@@ -4,6 +4,16 @@ category: プログラミング言語
 subcategory: Python
 masteryBadge: review
 summary: 既存の関数を変更せずに、その前後に処理を追加できるPythonの構文糖衣。
+operationSteps:
+  - label: デコレータ関数を定義する
+    note: 関数を受け取り、新しい関数を返す「関数を変換する関数」を用意する
+  - label: 対象の関数に@をつけて適用する
+    menuPath: "@measure_time"
+    note: "load_all_entries = measure_time(load_all_entries) と同じ意味になる"
+  - label: 元の関数を呼び出す
+    note: 実際には内側のwrapper関数が呼ばれ、前後に処理が差し込まれる
+  - label: 前後の処理を含めた結果が返る
+    note: ログ出力や実行時間計測など、本来のロジックとは別の関心事が挟み込まれる
 ---
 
 ## 概要

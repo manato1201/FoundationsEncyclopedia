@@ -3,6 +3,17 @@ name: マテリアルエディタの基礎
 category: ツール別
 subcategory: UnrealEngine
 summary: UnrealでのマテリアルもBlenderやUnityと同様、ノードを繋いで見た目を構築するビジュアルシステム。
+operationSteps:
+  - label: Texture Sampleノードを追加する
+    note: テクスチャ画像を読み込むノードを配置する
+  - label: 計算ノードを挟んで加工する
+    menuPath: "Multiply等"
+    note: 色味の調整等、必要な計算をノードで組み立てる
+  - label: Materialノードの入力ピンへ接続する
+    menuPath: "Base Color / Roughness 等"
+    note: 最終的な見た目を決める各入力ピンへ計算結果をつなぐ
+  - label: Material Instanceで数値だけ調整する
+    note: 再コンパイルなしで、色味等の微調整を高速に行える
 ---
 
 ## 概要

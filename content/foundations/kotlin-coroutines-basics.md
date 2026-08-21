@@ -4,6 +4,16 @@ category: プログラミング言語
 subcategory: Kotlin
 masteryBadge: review
 summary: スレッドをブロックせずに非同期処理を「同期処理のように」書けるKotlinの軽量な並行処理機構。
+operationSteps:
+  - label: コルーチンを起動する
+    menuPath: "launch { ... } または async { ... }"
+    note: 新しいコルーチンが起動され、呼び出し元はブロックされない
+  - label: suspend関数を呼び出す
+    note: 実行を中断できる関数(delay等)が呼ばれると、そこで一旦中断する
+  - label: スレッドが他の作業に使われる
+    note: 中断している間、スレッド自体は他のコルーチンの実行に使い回される
+  - label: 再開して結果を返す
+    note: 中断していた処理が完了すると、続きから再開して結果が返る
 ---
 
 ## 概要

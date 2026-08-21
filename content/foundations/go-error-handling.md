@@ -3,6 +3,17 @@ name: Goのエラーハンドリング
 category: プログラミング言語
 subcategory: Go
 summary: 例外機構を持たず、戻り値としてエラーを明示的に返し合うGo言語独自のエラー処理スタイル。
+operationSteps:
+  - label: 関数が(結果, error)を返す
+    note: "エラーが起きうる処理は慣習的に2値を返す"
+  - label: 呼び出し側がerrを確認する
+    menuPath: "if err != nil"
+    note: 都度チェックすることが前提の設計
+  - label: 必要ならエラーをラップする
+    menuPath: "fmt.Errorf(\"context: %w\", err)"
+    note: 元のエラー情報を保持したまま文脈を追加できる
+  - label: errors.Is/Asで種別を判定する
+    note: ラップされていても元のエラーの種類を判定できる
 ---
 
 ## 概要

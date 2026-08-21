@@ -1,0 +1,106 @@
+.stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  width: 100%;
+}
+
+.stack {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  gap: var(--space-1);
+  width: 100%;
+  max-width: 16rem;
+}
+
+.frame {
+  width: 100%;
+  text-align: center;
+  border: 2px solid var(--color-line);
+  border-radius: 4px;
+  padding: var(--space-2) var(--space-3);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  opacity: 0;
+  transform: scale(0.9);
+  transition:
+    opacity 200ms ease-out,
+    transform 200ms ease-out,
+    border-color 200ms ease-out,
+    color 200ms ease-out;
+}
+
+/* 呼び出し(積む)フェーズ: ステップが進むごとにフレームが1つずつ積み上がる */
+[data-step="0"] .frame[data-index="0"],
+[data-step="1"] .frame[data-index="0"],
+[data-step="1"] .frame[data-index="1"],
+[data-step="2"] .frame[data-index="0"],
+[data-step="2"] .frame[data-index="1"],
+[data-step="2"] .frame[data-index="2"] {
+  opacity: 1;
+  transform: scale(1);
+  border-color: var(--color-accent-blue);
+  color: var(--color-accent-blue);
+}
+
+/* 基底ケース: 一番上のフレームが完了色になる */
+[data-step="3"] .frame[data-index="0"],
+[data-step="3"] .frame[data-index="1"] {
+  opacity: 1;
+  transform: scale(1);
+  border-color: var(--color-accent-blue);
+  color: var(--color-accent-blue);
+}
+[data-step="3"] .frame[data-index="3"] {
+  opacity: 1;
+  transform: scale(1);
+  border-color: var(--color-accent-green);
+  color: var(--color-accent-green);
+}
+
+/* 巻き戻り(畳む)フェーズ: 戻り値が確定したフレームに置き換わっていく */
+[data-step="4"] .frame[data-index="0"] {
+  opacity: 1;
+  transform: scale(1);
+  border-color: var(--color-accent-blue);
+  color: var(--color-accent-blue);
+}
+[data-step="4"] .frame[data-index="4"] {
+  opacity: 1;
+  transform: scale(1);
+  border-color: var(--color-accent-green);
+  color: var(--color-accent-green);
+}
+
+[data-step="5"] .frame[data-index="5"] {
+  opacity: 1;
+  transform: scale(1);
+  border-color: var(--color-accent-amber);
+  color: var(--color-accent-amber);
+}
+
+.caption {
+  text-align: center;
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  display: none;
+}
+
+[data-step="0"] .caption[data-caption="0"],
+[data-step="1"] .caption[data-caption="1"],
+[data-step="2"] .caption[data-caption="2"],
+[data-step="3"] .caption[data-caption="3"],
+[data-step="4"] .caption[data-caption="4"],
+[data-step="5"] .caption[data-caption="5"] {
+  display: block;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .frame {
+    transition: none;
+  }
+}

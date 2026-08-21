@@ -3,6 +3,16 @@ name: VOP(Vector Operator)ネットワークの基礎
 category: DCC
 subcategory: Houdini
 summary: VEXコードを直接書く代わりに、ノードを繋いで同等の計算をビジュアルに構築する仕組み。
+operationSteps:
+  - label: VOPネットワークを作成する
+    note: SOP内にAttribute VOP等のノードを配置する
+  - label: パラメータノードを配置する
+    note: 外部から調整したい値(振幅等)を入力として用意する
+  - label: 計算ノードを繋ぐ
+    menuPath: "Sine、Add 等"
+    note: 目的の計算をノードの組み合わせで表現する
+  - label: 出力ノードへ接続する
+    note: 計算結果をアトリビュート(変位量等)として出力する
 ---
 
 ## 概要

@@ -4,6 +4,15 @@ category: Framework
 subcategory: テスト・CI
 masteryBadge: next
 summary: 実装コードより先にテストを書き、そのテストを通すために実装を進める開発スタイル。
+operationSteps:
+  - label: "Red: 失敗するテストを書く"
+    note: まだ実装していない機能に対するテストを先に書き、失敗することを確認する
+  - label: "Green: テストを通す最小限の実装をする"
+    note: きれいさより「とにかくテストを通す」ことを優先する
+  - label: "Refactor: コードを整理する"
+    note: 動作を変えずに重複の除去や命名の改善を行う
+  - label: 次のテストへ進む
+    note: このサイクルを小さく繰り返しながら機能を積み上げていく
 ---
 
 ## 概要

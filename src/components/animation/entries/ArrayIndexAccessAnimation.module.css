@@ -1,0 +1,75 @@
+.stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  width: 100%;
+}
+
+.array {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.value {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  border: 2px solid var(--color-line);
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.9375rem;
+  color: var(--color-text-muted);
+  transition:
+    border-color 200ms ease-out,
+    color 200ms ease-out,
+    box-shadow 200ms ease-out,
+    transform 200ms ease-out;
+}
+
+.index {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--color-text-muted);
+  opacity: 0.6;
+}
+
+[data-step="0"] .cell0,
+[data-step="1"] .cell1,
+[data-step="2"] .cell2,
+[data-step="3"] .cell3 {
+  border-color: var(--color-accent-blue);
+  color: var(--color-accent-blue);
+  box-shadow: var(--glow-blue);
+  transform: translateY(-4px);
+}
+
+.caption {
+  text-align: center;
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  display: none;
+}
+
+[data-step="0"] .caption[data-caption="0"],
+[data-step="1"] .caption[data-caption="1"],
+[data-step="2"] .caption[data-caption="2"],
+[data-step="3"] .caption[data-caption="3"] {
+  display: block;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .value {
+    transition: none;
+  }
+}

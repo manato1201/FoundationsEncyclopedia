@@ -3,6 +3,15 @@ name: Stream APIの基礎
 category: プログラミング言語
 subcategory: Java
 summary: コレクションに対するフィルタ・変換・集計を宣言的に書けるJava 8以降の機能。C#のLINQに近い発想。
+operationSteps:
+  - label: コレクションからStreamを作る
+    menuPath: ".stream()"
+  - label: filterで絞り込む
+    note: 条件に合う要素だけを残す(中間操作、まだ実行されない)
+  - label: mapで変換する
+    note: 各要素を別の形に変換する(中間操作、まだ実行されない)
+  - label: collectで結果を確定させる
+    note: 終端操作が呼ばれた時点で、初めて中間操作がまとめて実行される
 ---
 
 ## 概要

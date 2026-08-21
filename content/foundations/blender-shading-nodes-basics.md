@@ -4,6 +4,15 @@ category: DCC
 subcategory: Blender
 masteryBadge: review
 summary: マテリアルの見た目を、ノードを繋いで構築するBlenderのビジュアルシェーディングシステム。
+operationSteps:
+  - label: Image Textureノードを追加する
+    note: テクスチャ画像を読み込み、色情報として出力する
+  - label: Principled BSDFノードに接続する
+    note: 金属感・粗さ・透明度等をまとめて扱う万能ノードへ色を渡す
+  - label: Material Outputノードに接続する
+    note: 最終的にレンダリングされる出口のノードへつなぐ
+  - label: プレビューで見た目を確認する
+    note: ビューポート上でリアルタイムに結果を確認しながら調整する
 ---
 
 ## 概要
