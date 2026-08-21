@@ -4,6 +4,13 @@ category: IT知識
 subcategory: クラウド
 masteryBadge: review
 summary: サーバーの存在を意識せず、関数単位でコードを実行できる実行モデル。実際にはサーバーは存在するが管理不要。
+operationSteps:
+  - label: リクエストが届く
+  - label: 実行環境が起動する
+    note: しばらく呼ばれていない関数は起動に追加の時間がかかる(コールドスタート)
+  - label: 関数が実行される
+  - label: 処理が終わると環境が破棄される
+    note: 状態を保持しないステートレスな前提で設計する必要がある
 ---
 
 ## 概要

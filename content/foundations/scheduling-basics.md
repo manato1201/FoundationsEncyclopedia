@@ -4,6 +4,13 @@ category: IT知識
 subcategory: OS・アーキテクチャ
 masteryBadge: next
 summary: 限られたCPUコアを、複数のプロセス・スレッドにどう割り当てるかを決めるOSカーネルの仕組み。
+operationSteps:
+  - label: 複数のプロセスが実行を待っている
+  - label: スケジューラがどれを実行するか決定する
+    note: 優先度やタイムスライスのルールに基づいて選ぶ
+  - label: タイムスライス分だけCPUを割り当てる
+  - label: コンテキストスイッチして次のプロセスへ切り替える
+    note: レジスタの状態を保存・復元するオーバーヘッドを伴う
 ---
 
 ## 概要

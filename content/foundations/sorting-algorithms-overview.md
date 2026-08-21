@@ -4,6 +4,14 @@ category: IT知識
 subcategory: データ構造・計算量
 masteryBadge: advanced
 summary: 単純だが遅いものから、複雑だが速いものまで。計算量と安定性という2つの軸で整理する。
+operationSteps:
+  - label: 隣り合う要素を比較する
+    note: バブルソートの例。先頭から順に隣同士を見ていく
+  - label: 順序が逆なら入れ替える
+  - label: 末尾まで1周する
+    note: 1回の走査でその区間の最大値が末尾に確定する
+  - label: ソート済みになるまで繰り返す
+    note: 入れ替えが1回も発生しなくなったら終了できる
 ---
 
 ## 概要

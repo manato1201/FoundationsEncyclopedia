@@ -4,6 +4,14 @@ category: IT知識
 subcategory: Webの基礎
 masteryBadge: review
 summary: ステートレスなHTTPに「継続的な状態」を持たせるための代表的な2つの仕組み。保存場所と情報量が異なる。
+operationSteps:
+  - label: ユーザーがログインする
+  - label: サーバーがセッションIDを発行する
+    note: 実データはサーバー側(メモリやRedis等)に保存する
+  - label: セッションIDだけがCookieとして送られる
+    menuPath: "Set-Cookie: session_id=abc123"
+  - label: 以降のリクエストで自動的に送信される
+    note: ブラウザがCookieを付与し、サーバーがセッションIDから実データを参照する
 ---
 
 ## 概要

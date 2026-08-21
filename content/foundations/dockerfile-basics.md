@@ -3,6 +3,16 @@ name: Dockerfileの基礎
 category: IT知識
 subcategory: コンテナ・仮想化
 summary: どのようにコンテナイメージを組み立てるかを記述する、テキストベースのビルド手順書。
+operationSteps:
+  - label: ベースイメージを指定する
+    menuPath: "FROM node:20-alpine"
+  - label: 依存関係だけ先にコピーしインストールする
+    menuPath: "COPY package.json ./  RUN npm install"
+    note: この順序によりコード変更時のキャッシュ再利用が効きやすくなる
+  - label: 残りのアプリケーションコードをコピーする
+    menuPath: "COPY . ."
+  - label: 起動コマンドを指定する
+    menuPath: "CMD [\"npm\", \"start\"]"
 ---
 
 ## 概要

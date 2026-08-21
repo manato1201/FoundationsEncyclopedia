@@ -4,6 +4,13 @@ category: IT知識
 subcategory: ネットワーク
 masteryBadge: next
 summary: 複数のサーバーにリクエストを分散させ、単一障害点を避けながら処理能力を積み増す仕組み。
+operationSteps:
+  - label: リクエストがロードバランサーに届く
+  - label: アルゴリズムに従い振り分け先を決める
+    note: ラウンドロビン・最少接続数・IPハッシュ等
+  - label: ヘルスチェックで正常なサーバーだけを対象にする
+    note: 故障したサーバーには振り分けない
+  - label: 選ばれたサーバーへ転送する
 ---
 
 ## 概要

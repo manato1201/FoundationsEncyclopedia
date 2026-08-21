@@ -4,6 +4,15 @@ category: IT知識
 subcategory: ネットワーク
 masteryBadge: done
 summary: クライアントが要求し、サーバーが応答するという1往復のやり取りが基本単位になるWebの通信プロトコル。
+operationSteps:
+  - label: クライアントがリクエストを送る
+    menuPath: "GET /foundations/xxx HTTP/1.1"
+  - label: サーバーがリクエストを解析する
+    note: メソッド・パス・ヘッダの内容を読み取る
+  - label: サーバーが処理してレスポンスを返す
+    menuPath: "HTTP/1.1 200 OK"
+  - label: クライアントが結果を受け取る
+    note: ステータスコードとボディを解釈して画面に反映する
 ---
 
 ## 概要

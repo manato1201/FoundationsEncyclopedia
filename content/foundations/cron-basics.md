@@ -3,6 +3,14 @@ name: cronによるジョブスケジューリングの基礎
 category: IT知識
 subcategory: Linux・シェル操作
 summary: 「毎日3時に」「5分ごとに」のような周期でコマンドを自動実行する、Linux標準のスケジューリング機能。
+operationSteps:
+  - label: crontabに実行タイミングとコマンドを記述する
+    menuPath: "crontab -e"
+  - label: 指定時刻になるとcronデーモンが起動する
+    note: 分・時・日・月・曜日のパターンに一致した瞬間に実行される
+  - label: コマンドが実行される
+  - label: 結果をログへ記録する
+    note: 標準出力・エラー出力をリダイレクトしておかないと、失敗に気づけないことがある
 ---
 
 ## 概要

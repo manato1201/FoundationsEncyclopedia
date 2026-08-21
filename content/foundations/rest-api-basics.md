@@ -4,6 +4,13 @@ category: IT知識
 subcategory: Webの基礎
 masteryBadge: done
 summary: リソースをURLで表現し、HTTPメソッドで操作するというWeb API設計の代表的なスタイル。
+operationSteps:
+  - label: リソースをURLで表現する
+    menuPath: "/api/entries/123"
+  - label: 適切なHTTPメソッドを選ぶ
+    note: GET/POST/PUT/DELETEのいずれかで操作を表す
+  - label: リクエストを送信する
+  - label: レスポンスのステータスコードとボディを確認する
 ---
 
 ## 概要

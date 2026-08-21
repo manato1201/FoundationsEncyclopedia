@@ -4,6 +4,15 @@ category: IT知識
 subcategory: Webの基礎
 masteryBadge: done
 summary: リクエストが「何をしたいのか」を表す動詞。それぞれ安全性・冪等性という性質の違いを持つ。
+operationSteps:
+  - label: GET でデータを取得する
+    note: 安全(データを変更しない)かつ冪等(何度送っても結果が同じ)
+  - label: POST で新規作成する
+    note: 非冪等。2回送ると2つのリソースが作られうる
+  - label: PUT でリソース全体を置き換える
+    note: 冪等。何度送っても最終結果は同じになる
+  - label: DELETE で削除する
+    note: 冪等。既に削除済みでも結果は変わらない
 ---
 
 ## 概要

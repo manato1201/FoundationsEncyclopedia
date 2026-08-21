@@ -3,6 +3,14 @@ name: git stashの基礎
 category: IT知識
 subcategory: バージョン管理
 summary: 作業中の変更を一時的に退避させ、コミットせずに別の作業へ切り替えられるようにするコマンド。
+operationSteps:
+  - label: 作業中の変更をstashで退避する
+    menuPath: "git stash"
+  - label: 別のブランチへ切り替えて作業する
+    note: 作業ディレクトリはクリーンな状態(直前のコミット時点)に戻る
+  - label: 元のブランチへ戻る
+  - label: stash popで退避した変更を復元する
+    menuPath: "git stash pop"
 ---
 
 ## 概要

@@ -4,6 +4,15 @@ category: IT知識
 subcategory: バージョン管理
 masteryBadge: review
 summary: ブランチの変更を統合する2つの方法。履歴を残すか、書き換えて一直線にするかという設計思想の違い。
+operationSteps:
+  - label: mergeは両方の履歴を残す
+    note: マージコミットが作られ、枝分かれした履歴がそのまま残る
+  - label: rebaseはコミットを積み直す
+    note: featureのコミットをmainの先端に付け替え、履歴が一直線になる
+  - label: 履歴の見た目を比較する
+    note: mergeは枝分かれだらけ、rebaseは一直線で読みやすい
+  - label: 共有ブランチではrebaseを避ける
+    note: 既にpush済みの履歴を書き換えると、共同作業者の履歴と食い違う
 ---
 
 ## 概要

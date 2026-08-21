@@ -4,6 +4,15 @@ category: IT知識
 subcategory: バージョン管理
 masteryBadge: done
 summary: バージョン管理から除外したいファイル・ディレクトリを指定する設定ファイル。
+operationSteps:
+  - label: .gitignoreに除外パターンを記述する
+    menuPath: "node_modules/ 、 *.log 、 .env"
+  - label: git addで自動的に除外される
+    note: 新規ファイルであれば、指定パターンに一致するものは追跡対象にならない
+  - label: 既に追跡済みのファイルは別途除外する
+    menuPath: "git rm --cached <ファイル>"
+    note: .gitignoreへの追加だけでは、既に追跡中のファイルには効果がない
+  - label: リポジトリが余計なファイルで汚れなくなる
 ---
 
 ## 概要

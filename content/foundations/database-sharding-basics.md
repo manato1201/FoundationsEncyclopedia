@@ -4,6 +4,15 @@ category: IT知識
 subcategory: データベース
 masteryBadge: advanced
 summary: 1台のデータベースに収まりきらない規模のデータを、複数台に水平分割して保持する手法。
+operationSteps:
+  - label: シャードキーを決める
+    note: ユーザーID等、どの基準でデータを分割するかを決める
+  - label: キーに応じてシャードを計算する
+    menuPath: "user_id % シャード数"
+  - label: 各シャードへデータを分散配置する
+    note: 異なるデータが複数台のサーバーに分かれて保存される
+  - label: クロスシャードクエリはアプリ側で統合する
+    note: 複数シャードにまたがる集計は、単純なJOINでは実行できない
 ---
 
 ## 概要

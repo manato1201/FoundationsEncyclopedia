@@ -4,6 +4,15 @@ category: IT知識
 subcategory: コンテナ・仮想化
 masteryBadge: done
 summary: OSごと仮想化するVMと、OSのカーネルを共有しつつプロセスを隔離するコンテナ。軽量さと隔離の強さがトレードオフ。
+operationSteps:
+  - label: VMはゲストOSごと仮想化する
+    note: ハイパーバイザーの上でOS全体を起動する
+  - label: コンテナはホストOSのカーネルを共有する
+    note: OS自体は共有し、プロセスやファイルシステムだけを隔離する
+  - label: 起動時間を比較する
+    note: VMは数十秒〜分単位、コンテナは数秒以内で起動できる
+  - label: 隔離の強さを比較する
+    note: VMの方が強い隔離を提供する。コンテナは軽量さとのトレードオフがある
 ---
 
 ## 概要

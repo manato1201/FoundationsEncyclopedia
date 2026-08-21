@@ -4,6 +4,13 @@ category: IT知識
 subcategory: コンテナ・仮想化
 masteryBadge: next
 summary: 複数のコンテナ(Webサーバー、DB等)をまとめて定義・起動できるようにするツール。開発環境の構築で特に重宝する。
+operationSteps:
+  - label: docker-compose.ymlにサービスを定義する
+    note: Webサーバー・データベース等、必要なコンテナをまとめて記述する
+  - label: docker compose upを実行する
+  - label: 各サービスが起動しネットワークで接続される
+    note: サービス名がそのままコンテナ間のホスト名として使える
+  - label: docker compose downで一括停止・削除する
 ---
 
 ## 概要

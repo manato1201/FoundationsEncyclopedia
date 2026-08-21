@@ -4,6 +4,15 @@ category: IT知識
 subcategory: Linux・シェル操作
 masteryBadge: done
 summary: あるコマンドの出力を、別のコマンドの入力やファイルへつなぎ替える、シェル操作の基本構文。
+operationSteps:
+  - label: 最初のコマンドを実行する
+    menuPath: "cat access.log"
+  - label: パイプで次のコマンドへつなぐ
+    menuPath: "| grep \"ERROR\""
+    note: 標準出力が次のコマンドの標準入力になる
+  - label: 必要ならリダイレクトでファイルへ出力する
+    menuPath: "> output.txt"
+  - label: 最終的な結果を確認する
 ---
 
 ## 概要

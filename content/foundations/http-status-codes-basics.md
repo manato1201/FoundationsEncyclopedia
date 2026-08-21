@@ -4,6 +4,15 @@ category: IT知識
 subcategory: Webの基礎
 masteryBadge: done
 summary: レスポンスの結果を3桁の数字で表す規約。先頭の桁で大まかな分類(成功/リダイレクト/エラー等)が分かる。
+operationSteps:
+  - label: 2xxなら成功を確認する
+    menuPath: "200 OK, 201 Created"
+  - label: 3xxならリダイレクトに従う
+    menuPath: "301, 304"
+  - label: 4xxならクライアント側の問題を確認する
+    menuPath: "400, 401, 403, 404"
+  - label: 5xxならサーバー側の問題を確認する
+    menuPath: "500, 503"
 ---
 
 ## 概要

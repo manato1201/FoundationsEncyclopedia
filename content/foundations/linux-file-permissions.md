@@ -4,6 +4,15 @@ category: IT知識
 subcategory: Linux・シェル操作
 masteryBadge: review
 summary: 所有者・グループ・その他という3つの主体に対する、読み取り・書き込み・実行の権限設定の仕組み。
+operationSteps:
+  - label: 現在の権限を確認する
+    menuPath: "ls -l"
+  - label: 必要な権限を判断する
+    note: 所有者・グループ・その他ごとに、何ができるべきかを見極める
+  - label: chmodで権限を設定する
+    menuPath: "chmod 750 script.sh"
+  - label: 意図した権限になっているか再確認する
+    note: "777のような過剰な権限を避け、最小限に留める"
 ---
 
 ## 概要

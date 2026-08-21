@@ -4,6 +4,15 @@ category: IT知識
 subcategory: データベース
 masteryBadge: done
 summary: 表形式で厳格なスキーマを持つRDBと、柔軟な形式でスケールしやすさを重視するNoSQLの設計思想の違い。
+operationSteps:
+  - label: データの構造を検討する
+    note: 厳格な表形式か、柔軟なドキュメント形式かを考える
+  - label: 整合性の要求を検討する
+    note: 強い整合性(ACID)が必要かどうかを見極める
+  - label: スケールの方向を検討する
+    note: 垂直スケール中心か、水平スケールが必要かを考える
+  - label: 要件に合わせて選ぶ
+    note: 在庫管理等はRDB、大量書き込みが必要な用途はNoSQLが向くことが多い
 ---
 
 ## 概要

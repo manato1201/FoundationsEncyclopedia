@@ -4,6 +4,15 @@ category: IT知識
 subcategory: Webの基礎
 masteryBadge: done
 summary: HTML文書をプログラムから操作できるツリー構造のオブジェクトとして表現したもの。
+operationSteps:
+  - label: HTMLが解析されDOMツリーが構築される
+    note: 各タグがツリー上のノードに対応する
+  - label: JavaScriptがノードを取得する
+    menuPath: "document.querySelector(...)"
+  - label: ノードを操作する
+    note: テキストの変更、要素の追加・削除等を行う
+  - label: 画面が再描画される
+    note: DOMの変更がブラウザの表示にリアルタイムに反映される
 ---
 
 ## 概要

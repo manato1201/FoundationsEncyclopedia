@@ -4,6 +4,15 @@ category: IT知識
 subcategory: セキュリティ
 masteryBadge: review
 summary: ユーザー入力をSQL文に直接連結することで、意図しないSQLを実行させてしまう脆弱性。
+operationSteps:
+  - label: ユーザー入力を直接SQL文に連結する(脆弱な例)
+    menuPath: "\"SELECT * FROM users WHERE id = \" + id"
+  - label: 攻撃者が特殊な入力を送る
+    menuPath: "1 OR 1=1"
+  - label: 意図しないSQLとして解釈されてしまう
+    note: 全ユーザーの情報が取得される等の被害につながる
+  - label: プリペアドステートメントで対策する
+    note: 値をプレースホルダ経由でバインドし、SQLとして解釈されないようにする
 ---
 
 ## 概要

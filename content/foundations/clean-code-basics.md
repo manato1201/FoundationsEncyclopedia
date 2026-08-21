@@ -4,6 +4,15 @@ category: IT知識
 subcategory: ソフトウェア工学・開発プロセス
 masteryBadge: done
 summary: 動くだけでなく、他人(未来の自分を含む)が読んで理解しやすいコードを書くための基本的な習慣。
+operationSteps:
+  - label: 意図が伝わる名前を選ぶ
+    note: "dではなくdaysSinceLastLoginのように、変数名だけで意味が伝わるようにする"
+  - label: 関数を小さく保つ
+    note: 1つの関数は1つのことだけを行うようにする
+  - label: 早期returnでネストを浅くする
+    note: 条件を満たさない場合は早めに関数を抜ける
+  - label: マジックナンバーを定数に置き換える
+    note: "if (age > 18) ではなく if (age > ADULT_AGE) のようにする"
 ---
 
 ## 概要

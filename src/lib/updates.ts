@@ -15,6 +15,13 @@ export type UpdateItem = {
  */
 export const UPDATES: UpdateItem[] = [
   {
+    id: "2026-08-19-it-knowledge-full-visualization",
+    date: "2026-08-19",
+    title: "IT知識カテゴリを可視化対応100%に(77件全件)",
+    description:
+      "IT知識カテゴリの残り57件全てにoperationStepsを後付けし、既存の5件(bespokeアニメーション: forループ/Gitブランチ/OSIカプセル化/コンテナレイヤー/再帰スタック)と合わせて77件全件を可視化対応にした。ネットワーク・OS・データベース・セキュリティ・クラウド・コンテナ・Web基礎・ソフトウェア工学・バージョン管理・Linux操作・データ構造の全サブカテゴリを網羅し、比較・概念型のエントリ(RDB vs NoSQL、SOLID原則、ハッシュ化と暗号化の違い等)もチェックリスト形式のステップとして可視化した。",
+  },
+  {
     id: "2026-08-19-visualization-expansion",
     date: "2026-08-19",
     title: "視覚化対応を大幅拡大(可視化済み34件→69件)",

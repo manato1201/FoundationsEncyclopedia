@@ -4,6 +4,15 @@ category: IT知識
 subcategory: Linux・シェル操作
 masteryBadge: done
 summary: OSやシェルがプロセスに渡す、キーと値のペアの集合。設定やAPIキーの受け渡しに広く使われる。
+operationSteps:
+  - label: .envファイルに値を定義する
+    menuPath: "API_KEY=secret123"
+  - label: プロセス起動時に環境変数として読み込まれる
+    note: exportされた変数は子プロセスにも引き継がれる
+  - label: コードから参照する
+    menuPath: "process.env.API_KEY"
+  - label: 環境ごとに異なる値を切り替える
+    note: 開発用と本番用でファイルを分けて管理する
 ---
 
 ## 概要

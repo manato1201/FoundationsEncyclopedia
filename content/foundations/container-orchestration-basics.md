@@ -4,6 +4,16 @@ category: IT知識
 subcategory: コンテナ・仮想化
 masteryBadge: advanced
 summary: 多数のコンテナの起動・停止・スケーリング・障害復旧を自動管理する仕組み。Kubernetesが代表格。
+operationSteps:
+  - label: 望ましい状態を宣言する
+    menuPath: "Deployment(replicas: 3)"
+    note: 「このPodを何個維持するか」を宣言的に定義する
+  - label: スケジューラがノードに配置する
+    note: 利用可能なサーバー群の中から実行先を自動的に選ぶ
+  - label: ヘルスチェックで稼働を監視する
+    note: 各Podが正常に応答するか継続的に確認する
+  - label: 落ちたPodを自動的に再起動する
+    note: 実際の状態が宣言した状態と異なれば自動的に調整される
 ---
 
 ## 概要
