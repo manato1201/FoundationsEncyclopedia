@@ -3,6 +3,16 @@ name: psとkillによるプロセス管理
 category: IT知識
 subcategory: Linux・シェル操作
 summary: 実行中のプロセスを確認し、必要に応じて終了させるための基本的なコマンド操作。
+operationSteps:
+  - label: プロセス一覧を確認する
+    menuPath: "ps aux"
+  - label: 問題のあるプロセスのPIDを特定する
+    menuPath: "ps aux | grep node"
+  - label: まずSIGTERMで穏やかに終了要求する
+    menuPath: "kill <PID>"
+  - label: 終了しなければSIGKILLで強制終了する
+    menuPath: "kill -9 <PID>"
+    note: 後片付けの機会を与えないため、最終手段として使う
 ---
 
 ## 概要

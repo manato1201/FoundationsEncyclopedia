@@ -4,6 +4,15 @@ category: IT知識
 subcategory: クラウド
 masteryBadge: done
 summary: クラウドサービスが「どこまでを提供者が管理し、どこからを利用者が管理するか」で分類する3つのモデル。
+operationSteps:
+  - label: IaaSはOS以上を自分で管理する
+    note: 物理サーバーや仮想化基盤だけを提供者が管理する
+  - label: PaaSはコードだけ書けば動く
+    note: OSや実行環境の管理も提供者が担う
+  - label: SaaSはアプリケーションをそのまま使う
+    note: 利用者はデータの入力・利用のみを行う
+  - label: 必要な管理範囲に応じて選ぶ
+    note: 手軽さと自由度はトレードオフの関係にある
 ---
 
 ## 概要

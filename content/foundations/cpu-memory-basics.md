@@ -4,6 +4,14 @@ category: IT知識
 subcategory: OS・アーキテクチャ
 masteryBadge: review
 summary: レジスタ→L1/L2/L3キャッシュ→主記憶→ストレージという速度と容量のトレードオフを持つ階層構造。
+operationSteps:
+  - label: CPUがデータを要求する
+  - label: L1キャッシュを確認する
+    note: ヒットすれば数ns未満で即座に返る
+  - label: L2、L3キャッシュを順に確認する
+    note: 見つからなければより大きく低速な階層を順に探す
+  - label: 主記憶(DRAM)まで取りに行く
+    note: どのキャッシュにもなければ、最も低速な主記憶へアクセスする
 ---
 
 ## 概要

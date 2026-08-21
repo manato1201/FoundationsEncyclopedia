@@ -3,6 +3,15 @@ name: クラウドストレージの基礎
 category: IT知識
 subcategory: クラウド
 summary: サーバーのファイルシステムとは異なる、オブジェクトという単位で大量のファイルを保存するサービス。
+operationSteps:
+  - label: バケットを作成する
+    note: オブジェクトを入れる入れ物を用意する
+  - label: オブジェクトキーを指定してアップロードする
+    menuPath: "aws s3 cp local-file.png s3://bucket/images/photo.png"
+  - label: URLで直接アクセスする
+    note: オブジェクトキーがそのままアクセスパスの一部になる
+  - label: 公開範囲を設定する
+    note: デフォルトは非公開にし、必要な範囲だけ明示的に公開する
 ---
 
 ## 概要

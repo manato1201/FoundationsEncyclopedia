@@ -4,6 +4,16 @@ category: IT知識
 subcategory: データベース
 masteryBadge: next
 summary: どの列にインデックスを張るべきかを、実際のクエリパターンから逆算して設計する考え方。
+operationSteps:
+  - label: 頻出するクエリパターンを洗い出す
+    note: WHERE句・JOIN条件・ORDER BYでよく使われる列を確認する
+  - label: 対象の列にインデックスを作成する
+    menuPath: "CREATE INDEX idx_entries_category ON entries (category)"
+  - label: 実行計画を確認する
+    menuPath: "EXPLAIN ANALYZE"
+    note: インデックスが実際に使われているかを検証する
+  - label: 書き込みコストとのバランスを見直す
+    note: インデックスは検索を速くする代わりに書き込みコストが増える
 ---
 
 ## 概要

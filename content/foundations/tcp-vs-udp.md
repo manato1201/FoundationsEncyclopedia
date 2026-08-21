@@ -4,6 +4,15 @@ category: IT知識
 subcategory: ネットワーク
 masteryBadge: review
 summary: 信頼性を優先するか速度を優先するかで使い分ける、トランスポート層の2大プロトコル。
+operationSteps:
+  - label: TCPは3ウェイハンドシェイクで接続を確立する
+    note: 通信を始める前に、双方向の準備確認を行う
+  - label: TCPは到達確認と再送で信頼性を保証する
+    note: パケットが届かなければ再送する
+  - label: UDPはいきなりデータを送る
+    note: 接続確立の手順がなく、すぐに送信できる
+  - label: UDPは到達確認をしない分高速
+    note: 多少データが欠けても最新の状態が届けばよい用途(オンラインゲーム等)に向く
 ---
 
 ## 概要

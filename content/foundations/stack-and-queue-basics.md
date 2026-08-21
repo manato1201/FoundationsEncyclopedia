@@ -4,6 +4,15 @@ category: IT知識
 subcategory: データ構造・計算量
 masteryBadge: done
 summary: 「後入れ先出し」と「先入れ先出し」という2つの基本的なデータの出し入れ順序。
+operationSteps:
+  - label: スタックにpushする
+    note: "LIFO(Last In First Out): 最後に入れたものが最初に出る"
+  - label: スタックからpopする
+    note: 最後にpushした要素が取り出される
+  - label: キューにenqueueする
+    note: "FIFO(First In First Out): 最初に入れたものが最初に出る"
+  - label: キューからdequeueする
+    note: 最初にenqueueした要素が取り出される
 ---
 
 ## 概要

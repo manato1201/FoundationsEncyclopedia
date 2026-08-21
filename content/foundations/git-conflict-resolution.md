@@ -4,6 +4,14 @@ category: IT知識
 subcategory: バージョン管理
 masteryBadge: next
 summary: 同じ箇所を異なる形で変更した2つの履歴を統合しようとした際に発生する、Gitが自動解決できない状態。
+operationSteps:
+  - label: mergeまたはrebaseを実行する
+  - label: 競合箇所にマーカーが挿入される
+    menuPath: "<<<<<<< / ======= / >>>>>>>"
+  - label: マーカーを見て正しい内容に編集する
+    note: マーカー自体も削除する
+  - label: 解決を確定する
+    menuPath: "git add <ファイル> && git commit"
 ---
 
 ## 概要

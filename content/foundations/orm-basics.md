@@ -4,6 +4,15 @@ category: IT知識
 subcategory: データベース
 masteryBadge: review
 summary: SQLを直接書かず、プログラミング言語のオブジェクトとしてデータベースを操作できるようにするライブラリ。
+operationSteps:
+  - label: モデル(クラス)を定義する
+    note: テーブルの構造に対応するクラスを用意する
+  - label: ORMのAPIでデータを操作する
+    menuPath: "prisma.user.findFirst({ where: {...} })"
+  - label: 内部でSQLが自動生成される
+    note: 開発者は生のSQLを書かずに済む
+  - label: 実行されたSQLを確認し効率を検証する
+    note: N+1問題のような非効率なクエリが生成されていないか確認する
 ---
 
 ## 概要
