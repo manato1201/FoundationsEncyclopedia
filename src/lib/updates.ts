@@ -15,6 +15,13 @@ export type UpdateItem = {
  */
 export const UPDATES: UpdateItem[] = [
   {
+    id: "2026-08-19-language-fundamentals-expansion",
+    date: "2026-08-19",
+    title: "言語基礎文法を45件拡充(244件→289件)、ポインタ可視化を新規実装",
+    description:
+      "C#・C++・Python・TypeScript・Java・Go・Rustの7言語について、変数と型・for/whileループ・自作関数・配列・二次元配列・文字列(char配列)の基礎を追加し、言語ごとの違い(Goにwhileがない、Rustの変数はデフォルト不変、Pythonにchar型がない等)を明示的に比較した。C++/C#(unsafe)/Go/Rustにはポインタの基礎も追加し、「変数→アドレス取得→逆参照→書き換えの反映」を4言語共通で示す専用CSSアニメーション(PointerDereferenceAnimation)を新規実装した。",
+  },
+  {
     id: "2026-08-19-dcc-tool-framework-expansion",
     date: "2026-08-19",
     title: "DCC・ツール別・Frameworkを75件拡充(169件→244件)、CSSアニメーションも拡大",
