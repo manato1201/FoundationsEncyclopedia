@@ -4,6 +4,16 @@ category: Framework
 subcategory: テスト・CI
 masteryBadge: review
 summary: テスト対象が依存する外部要素を、本物の代わりに「偽物」に差し替え、テストを独立させる技法。
+operationSteps:
+  - label: 依存先をモックに置き換える
+    menuPath: "jest.mock(\"./api\")"
+    note: 外部APIやデータベースアクセスを、制御可能な偽物に差し替える
+  - label: モックの戻り値を指定する
+    note: テストしたい状況(成功・失敗等)に応じた戻り値を用意する
+  - label: テスト対象のコードを実行する
+    note: モックに差し替えた依存先を使って、テスト対象の関数を呼び出す
+  - label: 呼び出され方や結果を検証する
+    note: モックが期待通りの引数で呼ばれたか、戻り値が正しく使われたかを確認する
 ---
 
 ## 概要

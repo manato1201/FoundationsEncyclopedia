@@ -4,6 +4,15 @@ category: プログラミング言語
 subcategory: Python
 masteryBadge: next
 summary: リソースの確保と解放を確実にペアで実行させるPythonの構文。C++のRAIIに近い発想。
+operationSteps:
+  - label: withブロックに入る
+    note: "__enter__ メソッドが呼ばれ、リソースの確保などの準備処理が実行される"
+  - label: ブロックの中身を実行する
+    note: ここで例外が発生してもしなくても、次のステップは必ず実行される
+  - label: withブロックを抜ける
+    note: "__exit__ メソッドが呼ばれ、後始末処理(クローズ・解放)が実行される"
+  - label: 正常終了または例外の伝播
+    note: "__exit__がTrueを返さない限り、ブロック内で発生した例外は呼び出し元に伝播する"
 ---
 
 ## 概要

@@ -1,0 +1,98 @@
+.stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  width: 100%;
+}
+
+.row {
+  display: flex;
+  gap: var(--space-8);
+  justify-content: center;
+}
+
+.slot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.slotLabel {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+.valueBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 5.5rem;
+  height: 3rem;
+  padding: 0 var(--space-3);
+  border: 2px solid var(--color-line);
+  border-radius: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  opacity: 0.3;
+  transition:
+    opacity 200ms ease-out,
+    border-color 200ms ease-out,
+    color 200ms ease-out,
+    box-shadow 200ms ease-out;
+}
+
+/* ステップ0: s1だけが値を所有している */
+[data-step="0"] .s1Box,
+[data-step="1"] .s1Box {
+  opacity: 1;
+  border-color: var(--color-accent-blue);
+  color: var(--color-accent-blue);
+  box-shadow: var(--glow-blue);
+}
+
+/* ステップ1: s2へムーブし、s2が値を表示する(s1はまだ薄く残っている="無効"の予告) */
+[data-step="1"] .s2Box::after,
+[data-step="2"] .s2Box::after {
+  content: '"hello"';
+}
+
+[data-step="1"] .s2Box,
+[data-step="2"] .s2Box {
+  opacity: 1;
+  border-color: var(--color-accent-green);
+  color: var(--color-accent-green);
+  box-shadow: var(--glow-green);
+}
+
+/* ステップ2: s1は完全に無効(グレーアウト+取り消し線相当の演出) */
+[data-step="2"] .s1Box {
+  opacity: 0.15;
+  border-style: dashed;
+  border-color: var(--color-line);
+  color: var(--color-text-muted);
+  box-shadow: none;
+}
+
+.caption {
+  text-align: center;
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  display: none;
+}
+
+[data-step="0"] .caption[data-caption="0"],
+[data-step="1"] .caption[data-caption="1"],
+[data-step="2"] .caption[data-caption="2"] {
+  display: block;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .valueBox {
+    transition: none;
+  }
+}

@@ -2,7 +2,16 @@
 name: Sequencerの基礎
 category: ツール別
 subcategory: UnrealEngine
-summary: カットシーンやカメラワークを時間軸上で編集する、Unreal EngineのノンリニアシネマティックツールDrop。
+summary: カットシーンやカメラワークを時間軸上で編集する、Unreal Engineのノンリニアシネマティックツール。
+operationSteps:
+  - label: Sequenceアセットを作成する
+    note: カットシーン全体のデータを保持するアセットを用意する
+  - label: Trackを追加する
+    note: カメラ・キャラクター・音声等、種類ごとのレーンを追加する
+  - label: Clipを配置する
+    note: 各Trackの上に、実際に再生する区間(アニメーション、カメラ切り替え等)を並べる
+  - label: 再生して確認する
+    note: タイムラインを動かしながら、演出のタイミングを調整する
 ---
 
 ## 概要

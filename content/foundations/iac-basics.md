@@ -4,6 +4,17 @@ category: IT知識
 subcategory: クラウド
 masteryBadge: advanced
 summary: サーバーやネットワークの構成をコードとして記述し、バージョン管理・再現可能にする手法。
+operationSteps:
+  - label: インフラの構成をコードで記述する
+    note: サーバー・ネットワーク等の定義をHCLやYAML等のファイルに書く
+  - label: 差分をプランで確認する
+    menuPath: "terraform plan"
+    note: 実際に適用する前に、何が変更されるかを確認する
+  - label: 変更を適用する
+    menuPath: "terraform apply"
+    note: プランに沿って実際のインフラへ変更が反映される
+  - label: コードと実際の状態を同期させる
+    note: 手動変更によるドリフトが起きないよう、常にコード経由で変更する運用を保つ
 ---
 
 ## 概要

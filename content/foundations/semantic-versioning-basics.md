@@ -3,6 +3,18 @@ name: セマンティックバージョニングの基礎
 category: IT知識
 subcategory: バージョン管理
 summary: MAJOR.MINOR.PATCHという3つの数値に「何が変わったか」の意味を持たせるバージョン番号の付け方の規約。
+operationSteps:
+  - label: バグ修正だけならPATCHを上げる
+    menuPath: "1.4.2 -> 1.4.3"
+    note: 後方互換性を保ったバグ修正のみの変更
+  - label: 機能追加ならMINORを上げる
+    menuPath: "1.4.2 -> 1.5.0"
+    note: 後方互換性を保ったまま機能を追加した変更
+  - label: 破壊的変更ならMAJORを上げる
+    menuPath: "1.4.2 -> 2.0.0"
+    note: 既存の使い方が動かなくなる可能性がある変更
+  - label: 利用者がバージョン番号から影響範囲を判断する
+    note: 番号を見ただけで、更新しても安全かどうかをある程度予測できる
 ---
 
 ## 概要

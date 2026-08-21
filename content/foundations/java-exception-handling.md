@@ -4,6 +4,15 @@ category: プログラミング言語
 subcategory: Java
 masteryBadge: next
 summary: エラーの発生と、その後始末を分離して記述するための仕組み。検査例外と非検査例外の区別がJava特有。
+operationSteps:
+  - label: tryブロックを実行する
+    note: 例外が発生しうる処理をtryブロックで囲む
+  - label: 例外が発生したらcatchへ移る
+    note: 発生した例外の型に一致するcatchブロックが実行される
+  - label: finallyブロックが実行される
+    note: 例外の有無に関わらず必ず実行される(リソース解放等に使う)
+  - label: try-with-resourcesなら自動クローズされる
+    note: AutoCloseableを実装したリソースは、finallyを書かなくても自動的にクローズされる
 ---
 
 ## 概要

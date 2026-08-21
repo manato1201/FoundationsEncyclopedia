@@ -3,6 +3,18 @@ name: イベントとデリゲート
 category: プログラミング言語
 subcategory: C#
 summary: 「関数を値として持ち回す」デリゲートと、それを安全に公開するためのイベント機構。
+operationSteps:
+  - label: イベントを持つクラスを用意する
+    menuPath: "public event Action<int> OnDamaged;"
+  - label: 購読側がハンドラを登録する
+    menuPath: "health.OnDamaged += handler;"
+    note: "+= で購読すると、イベント発生時にhandlerが呼ばれるようになる"
+  - label: イベントが発火する
+    menuPath: "OnDamaged?.Invoke(amount);"
+    note: 登録された全てのハンドラが順番に呼び出される
+  - label: 不要になったら購読を解除する
+    menuPath: "health.OnDamaged -= handler;"
+    note: 解除を忘れるとメモリリークの原因になる
 ---
 
 ## 概要

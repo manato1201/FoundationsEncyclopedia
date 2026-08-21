@@ -3,6 +3,16 @@ name: Middlewareの基礎
 category: Framework
 subcategory: Web(Next.js等)
 summary: リクエストがページに到達する前に、認証チェックやリダイレクトのような共通処理を差し込める仕組み。
+operationSteps:
+  - label: リクエストが届く
+    note: ブラウザからのリクエストがサーバーに到達する
+  - label: matcherに一致するか確認する
+    note: 設定したパターンに一致するリクエストだけがMiddlewareを通る
+  - label: Middlewareが実行される
+    note: 認証チェックやCookieの読み書き等、共通の前処理を行う
+  - label: 続行・リダイレクト・書き換えのいずれかを返す
+    menuPath: "NextResponse.next() / redirect() / rewrite()"
+    note: 判定結果に応じて、通常通り処理を続けるか、別の場所へ誘導する
 ---
 
 ## 概要

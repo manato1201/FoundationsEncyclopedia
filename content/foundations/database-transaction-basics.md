@@ -4,6 +4,17 @@ category: IT知識
 subcategory: データベース
 masteryBadge: review
 summary: 複数の操作を「全て成功するか、全て失敗するか」の単位でまとめる仕組み。ACIDという4つの性質で特徴づけられる。
+operationSteps:
+  - label: トランザクションを開始する
+    menuPath: "BEGIN;"
+  - label: 複数の操作を実行する
+    note: 例えばAから引き落とし、Bへ入金する2つのUPDATE文
+  - label: 全て成功すれば確定する
+    menuPath: "COMMIT;"
+    note: ここまでの全ての変更が確定する
+  - label: 途中で失敗すれば取り消す
+    menuPath: "ROLLBACK;"
+    note: 1つでも失敗した場合、全ての変更がなかったことになる
 ---
 
 ## 概要

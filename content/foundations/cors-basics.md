@@ -4,6 +4,17 @@ category: IT知識
 subcategory: Webの基礎
 masteryBadge: next
 summary: 異なるオリジン(ドメイン)間のリクエストを、ブラウザがデフォルトで制限するセキュリティ機構の緩和策。
+operationSteps:
+  - label: ブラウザがプリフライトリクエストを送る
+    menuPath: "OPTIONS メソッド"
+    note: 単純なリクエスト以外では、本番のリクエストの前に事前確認が送られる
+  - label: サーバーが許可するオリジンを返す
+    menuPath: "Access-Control-Allow-Origin"
+    note: このオリジンからのアクセスを許可するという意思表示
+  - label: ブラウザが許可を確認する
+    note: 許可されていなければ、ここでリクエスト自体がブロックされる
+  - label: 本番のリクエストを送信する
+    note: 許可されていれば、実際のリクエストが送信されレスポンスが読み取れる
 ---
 
 ## 概要

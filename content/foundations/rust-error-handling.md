@@ -3,6 +3,16 @@ name: Result型によるエラーハンドリング
 category: プログラミング言語
 subcategory: Rust
 summary: 例外ではなく戻り値の型として成功/失敗を表現し、コンパイラにエラー処理を強制させる仕組み。
+operationSteps:
+  - label: "関数がResult<T, E>を返す"
+    note: 成功ならOk(T)、失敗ならErr(E)を返す
+  - label: 呼び出し側がmatchで分岐する
+    note: OkとErrのどちらであるかに応じて処理を分ける
+  - label: ?演算子で即座に伝播させる
+    menuPath: "let content = std::fs::read_to_string(path)?;"
+    note: Errなら即座に呼び出し元へエラーを返し、Okなら中身を取り出して続行する
+  - label: 呼び出し元も同様にエラーを処理する
+    note: "?を使う関数自体もResult(またはOption)を返す必要がある"
 ---
 
 ## 概要
