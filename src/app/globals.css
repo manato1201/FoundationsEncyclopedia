@@ -3,23 +3,30 @@
    ブランドアクセントをブルー系に変更している。CSSステップアニメーション(Phase 3)のステップ配色は
    blue(初期化・進行中)/green(完了・本体実行)/amber(更新・注意)の3色を意味用途別に使い分ける。 */
 :root {
-  /* コアカラー */
+  /* コアカラー(ダーク。ライトは下の :root[data-theme="light"] で同じトークン名の値だけ替える) */
   --color-bg-void: #05070c;
   --color-bg-surface: #10141d;
   --color-bg-surface-2: #171c28;
   --color-text: #eaf0f7;
   --color-text-muted: #8792a6;
+  /* 色の役割: 青=現在地・操作 / 緑=完了・正解 / アンバー=注意・補足(ほかの用途には使わない) */
   --color-accent-blue: #3ba7ff;
   --color-accent-green: #4dffb0;
   --color-accent-amber: #ffa733;
 
-  /* 罫線・発光 */
+  /* 罫線 */
   --color-line: rgba(59, 167, 255, 0.16);
+
+  /* グロー: 「現在の段階」の要素にだけ使う。静的な装飾には使わない(P7)。
+     ライトテーマでは発光が意味を持たないため、同じトークン名のまま影に置き換える。 */
   --glow-blue: 0 0 12px rgba(59, 167, 255, 0.35);
   --glow-green: 0 0 12px rgba(77, 255, 176, 0.35);
   --glow-amber: 0 0 12px rgba(255, 167, 51, 0.35);
 
-  /* タイポグラフィ
+  /* 静的カードの浮き(ダークでは使わない=none、ライトでは影で代替) */
+  --shadow-card: none;
+
+/* タイポグラフィ
      --font-display-raw 等は next/font/google が <html> に注入する生のCSS変数(フォールバック込み)。
      ここでプロジェクト固有のフォールバックを足した最終トークンにラップする。 */
   --font-display:
@@ -38,6 +45,47 @@
   --space-8: 2rem;
   --space-12: 3rem;
   --space-16: 4rem;
+}
+
+/* ライトテーマ(P10)。トークン名はダークと同一、値だけ替える。
+   文字 #1b2230 on #f6f8fb = 約15:1、補助文字 #556075 on #f6f8fb = 約6:1(いずれもAA以上)。 */
+:root[data-theme="light"] {
+  color-scheme: light;
+  --color-bg-void: #f6f8fb;
+  --color-bg-surface: #ffffff;
+  --color-bg-surface-2: #eef2f7;
+  --color-text: #1b2230;
+  --color-text-muted: #556075;
+  --color-accent-blue: #0b62c4;
+  --color-accent-green: #0b7a4b;
+  --color-accent-amber: #a35a00;
+  --color-line: rgba(27, 34, 48, 0.16);
+  --glow-blue: 0 1px 4px rgba(11, 98, 196, 0.35);
+  --glow-green: 0 1px 4px rgba(11, 122, 75, 0.35);
+  --glow-amber: 0 1px 4px rgba(163, 90, 0, 0.35);
+  --shadow-card: 0 1px 2px rgba(27, 34, 48, 0.08);
+}
+
+:root[data-theme="light"] body::before {
+  opacity: 0.02;
+}
+
+/* 数字は半角・等幅で桁を揃える(P1) */
+.num,
+time,
+[data-tabular] {
+  font-variant-numeric: tabular-nums;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 html {

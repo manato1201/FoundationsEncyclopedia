@@ -1,10 +1,12 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useState, type CSSProperties } from "react";
 import Link from "next/link";
 import styles from "./FoundationsCatalog.module.css";
 import { MasteryBadgeChip } from "@/components/badge/MasteryBadgeChip";
 import { FOUNDATIONS_CATEGORY_ORDER, FOUNDATIONS_SUBCATEGORIES_BY_CATEGORY } from "@/lib/foundations-categories";
+import { Icon } from "@/components/icons/Icon";
+import { computeGridLayout } from "@/lib/grid-layout";
 import { matchesSearchQuery } from "@/lib/foundations-search";
 import { MASTERY_BADGE_META, MASTERY_BADGE_ORDER, type MasteryBadge } from "@/lib/mastery-badge";
 import type { FoundationsMeta } from "@/lib/content/foundations";
@@ -132,20 +134,38 @@ export function FoundationsCatalog({ entries, featuredId }: FoundationsCatalogPr
   return (
     <div className={styles.page}>
       <section className={styles.hero}>
-        <p className={styles.eyebrow}>■ CATALOG 基礎学習図鑑</p>
+        <p className={styles.eyebrow}>CATALOG</p>
         <h1 className={styles.heroTitle}>
-          基礎を、
-          <br />
-          一覧して深掘りする。
+          基礎を、<span className={styles.heroAccent}>順番に</span>。
         </h1>
-        <p className={styles.heroLead}>
-          プログラミング言語・IT知識・DCC・ツール別・Framework——あらゆる専門分野の土台になる基礎知識を、
-          カタログ・詳細・可視化の3層で体系化した図鑑です。
-        </p>
-        <p className={styles.countLine}>
-          <span className={styles.countNumber}>{entries.length}</span>
-          <span className={styles.countLabel}>件の基礎知識を収録</span>
-        </p>
+        <p className={styles.heroSubtitle}>プログラミング言語・IT知識・DCC・ツール別・Frameworkの土台を、一覧して深掘りする図鑑</p>
+        <dl className={styles.stats}>
+          <div className={styles.stat}>
+            <dt className={styles.statLabel}>章</dt>
+            <dd className={styles.statValue}>
+              <span className="num">{entries.length}</span>
+              <span className={styles.statUnit}>件</span>
+            </dd>
+          </div>
+          <div className={styles.stat}>
+            <dt className={styles.statLabel}>段階アニメ</dt>
+            <dd className={styles.statValue}>
+              <span className="num">{animatedCount}</span>
+              <span className={styles.statUnit}>件</span>
+            </dd>
+          </div>
+          <div className={styles.stat}>
+            <dt className={styles.statLabel}>カテゴリ</dt>
+            <dd className={styles.statValue}>
+              <span className="num">{categoryCounts.size}</span>
+              <span className={styles.statUnit}>種</span>
+            </dd>
+          </div>
+        </dl>
+        <a href="#catalog-list" className={styles.startLink}>
+          始める
+          <Icon name="arrow-down" size={14} />
+        </a>
         <form className={styles.searchBar} role="search" onSubmit={(event) => event.preventDefault()}>
           <span className={styles.searchLabel}>SEARCH</span>
           <input
@@ -234,7 +254,7 @@ export function FoundationsCatalog({ entries, featuredId }: FoundationsCatalogPr
       </section>
 
       {isFiltering ? (
-        <section className={styles.results} aria-labelledby="results-heading">
+        <section id="catalog-list" className={styles.results} aria-labelledby="results-heading">
           <div className={styles.resultsHeader}>
             <h2 id="results-heading" className={styles.sectionLabel}>
               ■ RESULTS {filterLabel}の絞り込み結果 — {filteredResults.length}件
@@ -254,11 +274,7 @@ export function FoundationsCatalog({ entries, featuredId }: FoundationsCatalogPr
               該当する基礎知識が見つかりませんでした。別のキーワードやカテゴリでお試しください。
             </div>
           ) : (
-            <ul className={styles.listItems}>
-              {filteredResults.map((entry) => (
-                <FoundationsRow key={entry.id} entry={entry} showCategory />
-              ))}
-            </ul>
+            <EntryGrid entries={filteredResults} showCategory />
           )}
         </section>
       ) : (
@@ -280,7 +296,7 @@ export function FoundationsCatalog({ entries, featuredId }: FoundationsCatalogPr
             </Link>
           </section>
 
-          <section className={styles.list} aria-labelledby="list-heading">
+          <section id="catalog-list" className={styles.list} aria-labelledby="list-heading">
             <h2 id="list-heading" className={styles.sectionLabel}>
               ■ INDEX 一覧
             </h2>
@@ -290,11 +306,7 @@ export function FoundationsCatalog({ entries, featuredId }: FoundationsCatalogPr
                   {category}
                   <span className={styles.categoryCount}>{items.length}</span>
                 </h3>
-                <ul className={styles.listItems}>
-                  {items.map((entry) => (
-                    <FoundationsRow key={entry.id} entry={entry} />
-                  ))}
-                </ul>
+                <EntryGrid entries={items} />
               </div>
             ))}
           </section>
@@ -304,9 +316,40 @@ export function FoundationsCatalog({ entries, featuredId }: FoundationsCatalogPr
   );
 }
 
-function FoundationsRow({ entry, showCategory = false }: { entry: FoundationsMeta; showCategory?: boolean }) {
+/** 件数に合わせて列数を決め、最終段に余りを作らないカードグリッド(P1) */
+function EntryGrid({ entries, showCategory = false }: { entries: FoundationsMeta[]; showCategory?: boolean }) {
+  const layout = computeGridLayout(entries.length);
+  const gridStyle = {
+    "--tracks-lg": layout.trackCount,
+  } as CSSProperties;
   return (
-    <li className={styles.listRow}>
+    <ul className={styles.listItems} style={gridStyle}>
+      {entries.map((entry, index) => {
+        const span = index >= layout.lastRowStart ? layout.lastSpan : layout.normalSpan;
+        return (
+          <FoundationsRow
+            key={entry.id}
+            entry={entry}
+            showCategory={showCategory}
+            style={{ "--span-lg": span } as CSSProperties}
+          />
+        );
+      })}
+    </ul>
+  );
+}
+
+function FoundationsRow({
+  entry,
+  showCategory = false,
+  style,
+}: {
+  entry: FoundationsMeta;
+  showCategory?: boolean;
+  style?: CSSProperties;
+}) {
+  return (
+    <li className={styles.listRow} style={style}>
       <Link href={`/foundations/${entry.id}`} className={styles.listRowHead}>
         <span className={styles.listName}>{entry.name}</span>
         {showCategory ? (

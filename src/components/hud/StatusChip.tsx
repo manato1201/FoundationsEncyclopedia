@@ -4,15 +4,14 @@ type Status = "online" | "active" | "idle";
 
 const STATUS_CONFIG: Record<
   Status,
-  { colorVar: string; label: string; glow: boolean }
+  { colorVar: string; label: string }
 > = {
   online: {
     colorVar: "var(--color-accent-green)",
     label: "SYSTEM ONLINE",
-    glow: true,
   },
-  active: { colorVar: "var(--color-accent-blue)", label: "実行中", glow: true },
-  idle: { colorVar: "var(--color-text-muted)", label: "待機中", glow: false },
+  active: { colorVar: "var(--color-accent-blue)", label: "実行中" },
+  idle: { colorVar: "var(--color-text-muted)", label: "待機中" },
 };
 
 type StatusChipProps = {
@@ -30,7 +29,6 @@ export function StatusChip({ status = "online", label }: StatusChipProps) {
         className={styles.dot}
         style={{
           backgroundColor: config.colorVar,
-          boxShadow: config.glow ? `0 0 8px ${config.colorVar}` : "none",
         }}
         aria-hidden="true"
       />

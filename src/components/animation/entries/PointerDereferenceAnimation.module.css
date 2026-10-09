@@ -55,7 +55,6 @@
 [data-step="3"] .valueBox {
   border-color: var(--color-accent-blue);
   color: var(--color-accent-blue);
-  box-shadow: var(--glow-blue);
 }
 
 [data-step="1"] .pointerBox,
@@ -63,13 +62,11 @@
 [data-step="3"] .pointerBox {
   border-color: var(--color-accent-green);
   color: var(--color-accent-green);
-  box-shadow: var(--glow-green);
 }
 
 [data-step="3"] .valueBox {
   border-color: var(--color-accent-amber);
   color: var(--color-accent-amber);
-  box-shadow: var(--glow-amber);
 }
 
 .arrowSvg {
@@ -92,6 +89,19 @@
 
 .arrowHead {
   fill: var(--color-accent-green);
+}
+
+/* グローは「いま変わった箱」だけ(現在の段階) */
+[data-step="0"] .valueBox {
+  box-shadow: var(--glow-blue);
+}
+
+[data-step="1"] .pointerBox {
+  box-shadow: var(--glow-green);
+}
+
+[data-step="3"] .valueBox {
+  box-shadow: var(--glow-amber);
 }
 
 .caption {

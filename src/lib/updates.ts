@@ -15,6 +15,19 @@ export type UpdateItem = {
  */
 export const UPDATES: UpdateItem[] = [
   {
+    id: "2026-10-09-ui-quiz-ai-basics",
+    date: "2026-10-09",
+    title: "UI改善・ライトテーマ・章末クイズ・AI基礎の4章を追加",
+    description:
+      "ダークとライトのテーマ切替(OS設定に追従、初回のちらつきなし)を追加し、光るのは「いま見ているステップ」だけに整理した。カタログ先頭を「基礎を、順番に。」のヒーローと3つの数字に刷新し、カードの並びは端が余らないレイアウトにした。章ページは左に同じ分類の目次、中央に解説とステップアニメの型にし、再生速度(0.5x/1x/2x)と「3 / 9」形式の進捗表示を追加。章末クイズと、間違えた問題を1・3・7日後に再出題する復習(固定間隔)をトップに追加した。新章は、CPU・GPU・NPUの違い(3レーンの専用アニメ)、生成モデルと判断モデル、実行環境の分離、埋め込みとベクトル検索の4つ。なお、実行環境の分離の比較表は一般的な整理で、各ツールの公式ドキュメントでの確認が必要。",
+    entryIds: [
+      "cpu-gpu-npu",
+      "generative-vs-decision-model",
+      "execution-environment-isolation",
+      "embedding-vector-search",
+    ],
+  },
+  {
     id: "2026-08-19-it-knowledge-full-visualization",
     date: "2026-08-19",
     title: "IT知識カテゴリを可視化対応100%に(77件全件)",
