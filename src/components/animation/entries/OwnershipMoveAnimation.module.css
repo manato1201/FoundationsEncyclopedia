@@ -51,7 +51,6 @@
   opacity: 1;
   border-color: var(--color-accent-blue);
   color: var(--color-accent-blue);
-  box-shadow: var(--glow-blue);
 }
 
 /* ステップ1: s2へムーブし、s2が値を表示する(s1はまだ薄く残っている="無効"の予告) */
@@ -65,7 +64,6 @@
   opacity: 1;
   border-color: var(--color-accent-green);
   color: var(--color-accent-green);
-  box-shadow: var(--glow-green);
 }
 
 /* ステップ2: s1は完全に無効(グレーアウト+取り消し線相当の演出) */
@@ -75,6 +73,15 @@
   border-color: var(--color-line);
   color: var(--color-text-muted);
   box-shadow: none;
+}
+
+/* グローは「いま変わった箱」だけ(現在の段階) */
+[data-step="0"] .s1Box {
+  box-shadow: var(--glow-blue);
+}
+
+[data-step="1"] .s2Box {
+  box-shadow: var(--glow-green);
 }
 
 .caption {

@@ -12,66 +12,92 @@
   font-family: var(--font-mono);
   font-size: 0.75rem;
   letter-spacing: 0.12em;
-  color: var(--color-accent-blue);
+  color: var(--color-text-muted);
   margin-bottom: var(--space-4);
 }
 
 .heroTitle {
   font-family: var(--font-display);
   font-weight: 900;
-  font-size: clamp(2rem, 5vw, 3.5rem);
-  line-height: 1.25;
-  margin-bottom: var(--space-6);
-  animation: flicker-in 0.6s ease-out both;
+  font-size: clamp(2.25rem, 6vw, 4rem);
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+  margin-bottom: var(--space-3);
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .heroTitle {
-    animation: none;
-  }
-}
-
-@keyframes flicker-in {
-  from {
-    opacity: 0;
-    filter: drop-shadow(0 0 0 transparent);
-  }
-  60% {
-    opacity: 1;
-    filter: drop-shadow(0 0 18px rgba(59, 167, 255, 0.45));
-  }
-  to {
-    opacity: 1;
-    filter: drop-shadow(0 0 0 transparent);
-  }
-}
-
-.heroLead {
-  font-family: var(--font-body);
-  font-size: 1rem;
-  line-height: 1.8;
-  color: var(--color-text-muted);
-  max-width: 38rem;
-  margin-bottom: var(--space-6);
-}
-
-.countLine {
-  display: flex;
-  align-items: baseline;
-  gap: var(--space-2);
-  font-family: var(--font-mono);
-  margin-bottom: var(--space-6);
-}
-
-.countNumber {
-  font-size: 1.5rem;
-  font-weight: 700;
+/* 差し色は見出しの1語だけ(P4) */
+.heroAccent {
   color: var(--color-accent-blue);
 }
 
-.countLabel {
-  font-size: 0.8125rem;
+.heroSubtitle {
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  line-height: 1.7;
   color: var(--color-text-muted);
+  max-width: 38rem;
+  margin-bottom: var(--space-8);
+}
+
+/* 主要数値: 数字は大きく等幅、単位は小さく(P4) */
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-8);
+  margin-bottom: var(--space-6);
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  min-width: 5rem;
+}
+
+.statLabel {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.12em;
+  color: var(--color-text-muted);
+}
+
+.statValue {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-1);
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-size: 2.25rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.statUnit {
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: var(--color-text-muted);
+}
+
+.startLink {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-8);
+  padding: var(--space-2) var(--space-4);
+  border: 1px solid var(--color-line);
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  letter-spacing: 0.08em;
+  color: var(--color-text);
+  transition:
+    border-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.startLink:hover {
+  border-color: var(--color-accent-blue);
+  color: var(--color-accent-blue);
 }
 
 .searchBar {
@@ -89,7 +115,6 @@
 
 .searchBar:focus-within {
   border-color: var(--color-accent-blue);
-  box-shadow: var(--glow-blue);
 }
 
 .searchLabel {
@@ -229,15 +254,14 @@
   border-radius: 8px;
   padding: var(--space-8);
   background: var(--color-bg-surface);
+  box-shadow: var(--shadow-card);
   transition:
-    border-color 0.15s ease,
-    box-shadow 0.15s ease;
+    border-color 0.15s ease;
 }
 
 .featuredCard:hover,
 .featuredCard:focus-visible {
   border-color: var(--color-accent-blue);
-  box-shadow: var(--glow-blue);
 }
 
 .featuredMeta {
@@ -348,15 +372,25 @@
   padding-top: var(--space-4);
 }
 
-@media (min-width: 640px) {
+/* 2列: 奇数件のとき最後の1枚が余らないよう横幅いっぱいに伸ばす */
+@media (min-width: 640px) and (max-width: 1023px) {
   .listItems {
     grid-template-columns: repeat(2, 1fr);
   }
+
+  .listRow:last-child:nth-child(odd) {
+    grid-column: span 2;
+  }
 }
 
+/* 3〜4列: 列数・各カードの幅(--span-lg)はEntryGridが件数から計算し、最終段の余りを埋める */
 @media (min-width: 1024px) {
   .listItems {
-    grid-template-columns: repeat(auto-fill, minmax(22rem, 1fr));
+    grid-template-columns: repeat(var(--tracks-lg, 3), 1fr);
+  }
+
+  .listRow {
+    grid-column: span var(--span-lg, 1);
   }
 }
 
@@ -364,15 +398,13 @@
   border: 1px solid var(--color-line);
   border-radius: 8px;
   padding: var(--space-4);
-  transition:
-    border-color 0.15s ease,
-    box-shadow 0.15s ease;
+  box-shadow: var(--shadow-card);
+  transition: border-color 0.15s ease;
 }
 
 .listRow:hover,
 .listRow:focus-within {
   border-color: var(--color-accent-blue);
-  box-shadow: var(--glow-blue);
 }
 
 @media (prefers-reduced-motion: reduce) {

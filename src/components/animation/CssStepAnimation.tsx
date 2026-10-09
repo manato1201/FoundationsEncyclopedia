@@ -1,8 +1,8 @@
 "use client";
 
-import type { CSSProperties, ReactNode } from "react";
+import { useState, type CSSProperties, type ReactNode } from "react";
 import { useStepPlayer } from "@/components/visualizer/useStepPlayer";
-import { PlaybackControls } from "@/components/visualizer/PlaybackControls";
+import { PlaybackControls, type PlaybackSpeed } from "@/components/visualizer/PlaybackControls";
 import styles from "./CssStepAnimation.module.css";
 
 type CssStepAnimationProps = {
@@ -13,7 +13,7 @@ type CssStepAnimationProps = {
 
 /**
  * CSSステップアニメーションの共通土台(FoundationsEncyclopedia_DESIGN.md Phase 3、本図鑑最大の差別化要素)。
- * 状態管理はThe-Algorithm-Illustrated移植元の`useStepPlayer`に完全委譲し、ここでは一切変更しない。
+ * 状態管理はThe-Algorithm-Illustrated移植元の`useStepPlayer`に委譲する(再生速度の間隔だけを渡す)。
  * `stepIndex`をCSS custom property(`--step-index`)と`data-step`属性の両方に反映するだけで、
  * 実際の見た目はエントリ側の`.module.css`が持つkeyframe/`[data-step="N"]`セレクタが決める。
  * これによりエントリ作者は新規Reactコンポーネントを書かずに新しい可視化を追加できる。
@@ -23,7 +23,8 @@ export function CssStepAnimation({
   children,
   resetLabel,
 }: CssStepAnimationProps) {
-  const player = useStepPlayer(frameCount);
+  const [speed, setSpeed] = useState<PlaybackSpeed>(1);
+  const player = useStepPlayer(frameCount, 400 / speed);
 
   return (
     <div className={styles.wrapper}>
@@ -43,6 +44,8 @@ export function CssStepAnimation({
         onStep={player.handleStep}
         onReset={player.reset}
         resetLabel={resetLabel}
+        speed={speed}
+        onSpeedChange={setSpeed}
       />
     </div>
   );

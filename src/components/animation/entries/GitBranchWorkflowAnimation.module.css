@@ -47,7 +47,6 @@
   opacity: 1;
   border-color: var(--color-accent-blue);
   color: var(--color-accent-blue);
-  box-shadow: var(--glow-blue);
 }
 
 /* ステップ2: commitノードが確定 */
@@ -56,7 +55,6 @@
   opacity: 1;
   border-color: var(--color-accent-green);
   color: var(--color-accent-green);
-  box-shadow: var(--glow-green);
 }
 
 /* ステップ3: mergeノードが確定 */
@@ -64,13 +62,25 @@
   opacity: 1;
   border-color: var(--color-accent-amber);
   color: var(--color-accent-amber);
-  box-shadow: var(--glow-amber);
 }
 
 .mainLine .node:not(.mergeNode) {
   opacity: 1;
   border-color: var(--color-text-muted);
   color: var(--color-text);
+}
+
+/* グローは「いま現れたノード」だけ(現在の段階) */
+[data-step="0"] .checkoutNode {
+  box-shadow: var(--glow-blue);
+}
+
+[data-step="2"] .commitNode {
+  box-shadow: var(--glow-green);
+}
+
+[data-step="3"] .mergeNode {
+  box-shadow: var(--glow-amber);
 }
 
 .caption {

@@ -2,18 +2,13 @@ import Link from "next/link";
 import { CornerBrackets } from "./CornerBrackets";
 import { StatusChip } from "./StatusChip";
 import { LiveClock } from "./LiveClock";
+import { MainNav } from "./MainNav";
+import { ThemeToggle } from "@/components/theme/ThemeToggle";
 import styles from "./AppShell.module.css";
 
 type AppShellProps = {
   children: React.ReactNode;
 };
-
-const NAV_ITEMS: { href: string; label: string }[] = [
-  { href: "/basics", label: "基礎学習図鑑とは?" },
-  { href: "/", label: "図鑑" },
-  { href: "/updates", label: "更新情報" },
-  { href: "/about", label: "About" },
-];
 
 /**
  * 全画面共通のHUDフレーム(The-Algorithm-Illustrated/ColorEncyclopediaのAppShellを踏襲)。
@@ -31,14 +26,9 @@ export function AppShell({ children }: AppShellProps) {
           </Link>
           <span className={styles.brandSub}>基礎学習図鑑 — プログラミング/IT/DCC/ツール/フレームワークの土台知識</span>
         </div>
-        <nav className={styles.nav} aria-label="メインナビゲーション">
-          {NAV_ITEMS.map((item) => (
-            <Link key={item.href} href={item.href} className={styles.navLink}>
-              {item.label}
-            </Link>
-          ))}
-        </nav>
+        <MainNav />
         <div className={styles.headerRight}>
+          <ThemeToggle />
           <StatusChip status="online" />
           <LiveClock />
         </div>
