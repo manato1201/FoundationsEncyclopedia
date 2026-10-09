@@ -8,6 +8,7 @@ import { POINTER_ANIMATIONS } from "./animations/pointer-animations";
 import { RECURSION_ANIMATIONS } from "./animations/recursion-animations";
 import { OWNERSHIP_ANIMATIONS } from "./animations/ownership-animations";
 import { ARRAY_ANIMATIONS } from "./animations/array-animations";
+import { ACCELERATOR_ANIMATIONS } from "./animations/accelerator-animations";
 
 /**
  * このidに対応するCSSステップアニメーション(Phase 3の手書きkeyframe型)があるかどうか。
@@ -26,6 +27,7 @@ export function hasAnimation(id: string): boolean {
     id in POINTER_ANIMATIONS ||
     id in RECURSION_ANIMATIONS ||
     id in OWNERSHIP_ANIMATIONS ||
-    id in ARRAY_ANIMATIONS
+    id in ARRAY_ANIMATIONS ||
+    id in ACCELERATOR_ANIMATIONS
   );
 }

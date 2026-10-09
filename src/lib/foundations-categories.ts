@@ -38,6 +38,7 @@ export const FOUNDATIONS_TAXONOMY = [
       "Webの基礎",
       "ソフトウェア工学・開発プロセス",
       "Linux・シェル操作",
+      "AI基礎",
     ],
   },
   { category: "DCC", subcategories: ["Maya", "Blender", "Houdini"] },

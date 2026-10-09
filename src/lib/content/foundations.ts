@@ -11,9 +11,18 @@ export interface OperationStep {
   note?: string;
 }
 
+/** 章末の理解度クイズ1問(frontmatterの`quiz`)。answerは choices のインデックス(0始まり) */
+export interface QuizItem {
+  question: string;
+  choices: string[];
+  answer: number;
+  explanation?: string;
+}
+
 export interface FoundationsFrontmatter extends ContentFrontmatterBase {
   masteryBadge?: MasteryBadge;
   operationSteps?: OperationStep[];
+  quiz?: QuizItem[];
 }
 
 /**

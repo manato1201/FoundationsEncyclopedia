@@ -1,0 +1,133 @@
+.stage {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  width: 100%;
+}
+
+.task {
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+}
+
+.task code {
+  font-family: var(--font-mono);
+  color: var(--color-text);
+}
+
+.lane {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--color-line);
+  border-radius: 6px;
+  background: var(--color-bg-surface);
+}
+
+.laneHead {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.laneName {
+  font-family: var(--font-mono);
+  font-size: 0.9375rem;
+  font-weight: 700;
+}
+
+.laneRole {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+.cells {
+  display: flex;
+  gap: var(--space-2);
+  flex-shrink: 0;
+}
+
+.cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 2px solid var(--color-line);
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  transition:
+    border-color 200ms ease-out,
+    color 200ms ease-out,
+    box-shadow 200ms ease-out,
+    background-color 200ms ease-out;
+}
+
+/* 色の役割: 青=いま処理中(現在地)。光らせるのは現在のステップの対象だけ */
+[data-step="1"] .cpuCell0,
+[data-step="2"] .gpuCell0,
+[data-step="2"] .gpuCell1,
+[data-step="2"] .gpuCell2,
+[data-step="2"] .gpuCell3,
+[data-step="3"] .npuCell0,
+[data-step="3"] .npuCell1,
+[data-step="3"] .npuCell2,
+[data-step="3"] .npuCell3 {
+  border-color: var(--color-accent-blue);
+  color: var(--color-accent-blue);
+  box-shadow: var(--glow-blue);
+}
+
+/* CPUは待ちのセルが残ることを、色ではなく薄さで示す */
+[data-step="1"] .cpuCell1,
+[data-step="1"] .cpuCell2,
+[data-step="1"] .cpuCell3 {
+  opacity: 0.45;
+}
+
+/* NPUは流れ作業なので、セルを少しずつずらして順に通過させる */
+[data-step="3"] .npuCell1 {
+  transition-delay: 80ms;
+}
+
+[data-step="3"] .npuCell2 {
+  transition-delay: 160ms;
+}
+
+[data-step="3"] .npuCell3 {
+  transition-delay: 240ms;
+}
+
+.caption {
+  display: none;
+  min-height: 3em;
+  font-size: 0.875rem;
+  line-height: 1.7;
+  color: var(--color-text-muted);
+}
+
+[data-step="0"] .caption[data-caption="0"],
+[data-step="1"] .caption[data-caption="1"],
+[data-step="2"] .caption[data-caption="2"],
+[data-step="3"] .caption[data-caption="3"] {
+  display: block;
+}
+
+@media (max-width: 480px) {
+  .lane {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cell {
+    transition: none;
+    transition-delay: 0s !important;
+  }
+}
