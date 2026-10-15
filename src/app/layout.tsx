@@ -35,7 +35,7 @@ export const metadata: Metadata = {
 };
 
 /** 初回描画前にテーマを確定する(保存値 → なければOS設定)。ちらつき防止のためインラインで同期実行する。 */
-const THEME_INIT_SCRIPT = `(function(){try{var t=localStorage.getItem("fe-theme");if(t!=="light"&&t!=="dark"){t=window.matchMedia("(prefers-color-scheme: light)").matches?"light":"dark"}document.documentElement.dataset.theme=t}catch(e){document.documentElement.dataset.theme="dark"}})();`;
+const THEME_INIT_SCRIPT = `(function(){try{var t=localStorage.getItem("fe-theme");if(t!=="light"&&t!=="dark"){t=window.matchMedia("(prefers-color-scheme: light)").matches?"light":"dark"}document.documentElement.dataset.theme=t}catch(e){document.documentElement.dataset.theme="dark"}try{var d=document.documentElement,os=window.matchMedia("(prefers-reduced-motion: reduce)").matches,m=localStorage.getItem("fe-motion");d.dataset.motion=os||m==="reduce"?"reduce":"full";if(os)d.dataset.motionOs="reduce"}catch(e){}})();`;
 
 export default function RootLayout({
   children,

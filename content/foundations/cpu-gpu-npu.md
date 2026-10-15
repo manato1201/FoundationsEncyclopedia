@@ -3,6 +3,10 @@ name: CPU・GPU・NPUの違い
 category: IT知識
 subcategory: AI基礎
 summary: 同じ行列計算でも、CPUは順番に、GPUは同時に、NPUは流れ作業で進める。得意な仕事が違う。
+guide:
+  watch: "同じ4つの掛け算が、3つのレーンで「どの順で処理されるか」を見る。1つずつか、全部同時か、流れ作業か。"
+  caution: "電力の大小は傾向であって実測値ではない。機種や処理内容で変わるので、数字として比べない。"
+  misconception: "NPUが常に一番速いわけではない。向いた仕事(ニューラルネットの推論)で力を発揮する専用品。"
 quiz:
   - question: "GPUがAIの計算に向いている主な理由はどれか"
     choices:
