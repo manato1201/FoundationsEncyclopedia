@@ -6,6 +6,8 @@ import styles from "./FoundationsCatalog.module.css";
 import { MasteryBadgeChip } from "@/components/badge/MasteryBadgeChip";
 import { FOUNDATIONS_CATEGORY_ORDER, FOUNDATIONS_SUBCATEGORIES_BY_CATEGORY } from "@/lib/foundations-categories";
 import { Icon } from "@/components/icons/Icon";
+import { StepPreview } from "@/components/visual/StepPreview";
+import { HeroTrack } from "@/components/visual/HeroTrack";
 import { computeGridLayout } from "@/lib/grid-layout";
 import { matchesSearchQuery } from "@/lib/foundations-search";
 import { PURPOSE_GROUPS, STARTER_IDS, type EntryMode } from "@/lib/catalog-entry-points";
@@ -40,6 +42,7 @@ export function FoundationsCatalog({ entries, featuredId }: FoundationsCatalogPr
   const [activeBadge, setActiveBadge] = useState<MasteryBadge | null>(null);
   const [sortOrder, setSortOrder] = useState<SortOrder>("category");
   const [mode, setMode] = useState<EntryMode>("start");
+  const [livePreview, setLivePreview] = useState(false);
   const [expandedPurposes, setExpandedPurposes] = useState<Set<string>>(new Set());
   const trimmedQuery = query.trim().toLowerCase();
   const isSearching = trimmedQuery.length > 0;
@@ -169,13 +172,14 @@ export function FoundationsCatalog({ entries, featuredId }: FoundationsCatalogPr
   };
 
   return (
-    <div className={styles.page}>
+    <div className={styles.page} data-preview={livePreview ? "live" : undefined}>
       <section className={styles.hero}>
         <p className={styles.eyebrow}>CATALOG</p>
         <h1 className={styles.heroTitle}>
           基礎を、<span className={styles.heroAccent}>順番に</span>。
         </h1>
         <p className={styles.heroSubtitle}>プログラミング言語・IT知識・DCC・ツール別・Frameworkの土台を、一覧して深掘りする図鑑</p>
+        <HeroTrack />
         <dl className={styles.stats}>
           <div className={styles.stat}>
             <dt className={styles.statLabel}>章</dt>
@@ -336,6 +340,19 @@ export function FoundationsCatalog({ entries, featuredId }: FoundationsCatalogPr
                 {item.count !== undefined ? <span className={styles.chipCount}>{item.count}</span> : null}
               </button>
             ))}
+            <button
+              type="button"
+              role="switch"
+              aria-checked={livePreview}
+              className={styles.liveSwitch}
+              onClick={() => setLivePreview((current) => !current)}
+              title="カードの段階プレビューを、ホバーしなくても動かします"
+            >
+              <span className={styles.liveTrack} aria-hidden="true">
+                <span className={styles.liveThumb} />
+              </span>
+              プレビューを動かす
+            </button>
           </div>
 
           {mode === "start" ? (
@@ -345,7 +362,7 @@ export function FoundationsCatalog({ entries, featuredId }: FoundationsCatalogPr
               </h2>
               <ol className={styles.startList}>
                 {starterEntries.map((entry, index) => (
-                  <li key={entry.id} className={styles.startItem}>
+                  <li key={entry.id} className={styles.startItem} data-step-preview-host>
                     <span className={styles.startNumber} data-tabular>
                       {String(index + 1).padStart(2, "0")}
                     </span>
@@ -355,6 +372,7 @@ export function FoundationsCatalog({ entries, featuredId }: FoundationsCatalogPr
                         {isAnimated(entry) ? <AnimatedBadge /> : null}
                       </Link>
                       <p className={styles.listSummary}>{entry.summary}</p>
+                      <StepPreview steps={entry.operationSteps} bespoke={entry.hasVisualizer} />
                     </div>
                   </li>
                 ))}
@@ -477,7 +495,7 @@ function FoundationsRow({
   style?: CSSProperties;
 }) {
   return (
-    <li className={styles.listRow} style={style}>
+    <li className={styles.listRow} style={style} data-step-preview-host>
       <Link href={`/foundations/${entry.id}`} className={styles.listRowHead}>
         <span className={styles.listName}>{entry.name}</span>
         {showCategory ? (
@@ -489,6 +507,7 @@ function FoundationsRow({
         {isAnimated(entry) ? <AnimatedBadge /> : null}
       </Link>
       <p className={styles.listSummary}>{entry.summary}</p>
+      <StepPreview steps={entry.operationSteps} bespoke={entry.hasVisualizer} />
     </li>
   );
 }
