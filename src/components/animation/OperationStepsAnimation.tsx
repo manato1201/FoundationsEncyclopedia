@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { CssStepAnimation } from "./CssStepAnimation";
+import { Icon } from "@/components/icons/Icon";
 import type { OperationStep } from "@/lib/content/foundations";
 import stepStyles from "./CssStepAnimation.module.css";
 import styles from "./OperationStepsAnimation.module.css";
@@ -55,8 +56,9 @@ function StepList({ steps, stepIndex }: { steps: OperationStep[]; stepIndex: num
           className={styles.item}
           data-index={index}
           data-state={index === stepIndex ? "current" : index === stepIndex - 1 ? "prev" : undefined}
+          data-done={index < stepIndex ? "" : undefined}
         >
-          <span className={styles.indexBadge}>{index + 1}</span>
+          <span className={styles.indexBadge}>{index < stepIndex ? <Icon name="check" size={12} /> : index + 1}</span>
           <div className={styles.body}>
             <p className={styles.label}>{step.label}</p>
             {step.menuPath ? <p className={styles.menuPath}>{step.menuPath}</p> : null}

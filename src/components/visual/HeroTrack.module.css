@@ -1,0 +1,102 @@
+/* ヒーローの「順番に」を示す装飾トラック。5つの節を順に点灯する(常時ループ) */
+.track {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  margin: var(--space-8) 0 var(--space-6);
+  padding: 0;
+  list-style: none;
+  max-width: 40rem;
+}
+
+.node {
+  position: relative;
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  min-width: 0;
+}
+
+.dot {
+  position: relative;
+  width: 0.75rem;
+  height: 0.75rem;
+  border: 2px solid var(--color-line);
+  border-radius: 50%;
+  background: var(--color-bg-void);
+}
+
+/* 節と節をつなぐ線 */
+.node:not(:last-child) .dot::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  width: calc(100% * 5.5);
+  height: 2px;
+  margin-top: -1px;
+  background: var(--color-line);
+}
+
+.name {
+  font-size: 0.75rem;
+  line-height: 1.4;
+  color: var(--color-text-muted);
+}
+
+.dot,
+.name {
+  animation-duration: 6s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  animation-delay: calc(var(--o) * -1.2s);
+}
+
+.dot {
+  animation-name: hero-dot;
+}
+
+.name {
+  animation-name: hero-name;
+}
+
+@keyframes hero-dot {
+  0% { border-color: var(--color-accent-blue); background: var(--color-accent-blue); transform: scale(1.35); }
+  20%, 100% { border-color: var(--color-line); background: var(--color-bg-void); transform: scale(1); }
+}
+
+@keyframes hero-name {
+  0% { color: var(--color-accent-blue); }
+  20%, 100% { color: var(--color-text-muted); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dot,
+  .name {
+    animation: none;
+  }
+
+  .node:first-child .dot {
+    border-color: var(--color-accent-blue);
+    background: var(--color-accent-blue);
+  }
+
+  .node:first-child .name {
+    color: var(--color-accent-blue);
+  }
+}
+
+:global(:root[data-motion="reduce"]) .dot,
+:global(:root[data-motion="reduce"]) .name {
+  animation: none;
+}
+
+:global(:root[data-motion="reduce"]) .node:first-child .dot {
+  border-color: var(--color-accent-blue);
+  background: var(--color-accent-blue);
+}
+
+:global(:root[data-motion="reduce"]) .node:first-child .name {
+  color: var(--color-accent-blue);
+}

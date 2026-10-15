@@ -93,6 +93,30 @@
   color: var(--color-accent-blue);
 }
 
+/* 通過したステップは緑のチェックで示す(色の役割: 緑 = 完了)。 */
+.item[data-done] {
+  opacity: 0.7;
+}
+
+.item[data-done] .indexBadge {
+  border-color: var(--color-accent-green);
+  color: var(--color-accent-green);
+}
+
+/* 現在のステップに切り替わった瞬間だけ、右へ少しずれて入る(1回だけ再生) */
+.item[data-state="current"] {
+  animation: step-enter 0.28s ease-out;
+}
+
+@keyframes step-enter {
+  from {
+    transform: translateX(-8px);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
 /* 直前ステップを薄く残す(オニオンスキン)。「直前を残す」を選んだときだけ */
 [data-onion="on"] .item[data-state="prev"] {
   opacity: 0.75;
