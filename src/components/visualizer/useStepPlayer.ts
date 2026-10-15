@@ -43,6 +43,14 @@ export function useStepPlayer(frameCount: number, intervalMs: number = PLAY_INTE
     [frameCount],
   );
 
+  const goTo = useCallback(
+    (index: number) => {
+      setIsPlaying(false);
+      setStepIndex(Math.min(Math.max(index, 0), frameCount - 1));
+    },
+    [frameCount],
+  );
+
   const reset = useCallback(() => {
     setIsPlaying(false);
     setStepIndex(0);
@@ -54,6 +62,7 @@ export function useStepPlayer(frameCount: number, intervalMs: number = PLAY_INTE
     showPause,
     handlePlayPause,
     handleStep,
+    goTo,
     reset,
   };
 }

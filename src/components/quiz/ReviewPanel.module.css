@@ -54,3 +54,54 @@
   font-family: var(--font-mono);
   color: var(--color-text-muted);
 }
+
+/* 期限が来た問題がないときは、書き出し・読み込みだけを目立たない1行で置く */
+.quiet {
+  margin: 0 var(--space-6) var(--space-8);
+}
+
+.tools {
+  margin-top: var(--space-4);
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+}
+
+.tools summary {
+  cursor: pointer;
+}
+
+.toolsNote {
+  margin: var(--space-2) 0;
+  line-height: 1.7;
+}
+
+.toolsRow {
+  display: flex;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+.toolButton {
+  padding: var(--space-1) var(--space-3);
+  border: 1px solid var(--color-line);
+  border-radius: 4px;
+  background: transparent;
+  color: var(--color-text);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  cursor: pointer;
+}
+
+.toolButton:hover {
+  border-color: var(--color-accent-blue);
+  color: var(--color-accent-blue);
+}
+
+.fileInput {
+  display: none;
+}
+
+.toolsMessage {
+  margin-top: var(--space-2);
+  color: var(--color-text);
+}

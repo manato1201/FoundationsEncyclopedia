@@ -19,10 +19,21 @@ export interface QuizItem {
   explanation?: string;
 }
 
+/** 章の定型項目(frontmatterの`guide`)。書いた項目だけ表示する */
+export interface ChapterGuideFrontmatter {
+  /** 見るポイント */
+  watch?: string;
+  /** 使うときの注意 */
+  caution?: string;
+  /** よくある誤解 */
+  misconception?: string;
+}
+
 export interface FoundationsFrontmatter extends ContentFrontmatterBase {
   masteryBadge?: MasteryBadge;
   operationSteps?: OperationStep[];
   quiz?: QuizItem[];
+  guide?: ChapterGuideFrontmatter;
 }
 
 /**

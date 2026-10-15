@@ -5,7 +5,9 @@ import { Icon } from "@/components/icons/Icon";
 import { MasteryBadgeChip } from "@/components/badge/MasteryBadgeChip";
 import { FoundationsAnimation } from "@/components/animation/FoundationsAnimation";
 import { OperationStepsAnimation } from "@/components/animation/OperationStepsAnimation";
-import { ChapterQuiz } from "@/components/quiz/ChapterQuiz";
+import { ChapterContent } from "@/components/chapter/ChapterContent";
+import { ScrollSpyOutline, type OutlineItem } from "@/components/chapter/ScrollSpyOutline";
+import { splitChapterBody } from "@/lib/chapter-sections";
 import { foundationsLoader } from "@/lib/content/foundations";
 
 type FoundationsDetailPageProps = {
@@ -31,6 +33,15 @@ export default async function FoundationsDetailPage({ params }: FoundationsDetai
   const operationSteps = entry.operationSteps ?? [];
   const hasOperationSteps = operationSteps.length > 0;
   const quiz = entry.quiz ?? [];
+  const sections = splitChapterBody(entry.bodyHtml);
+  const hasVisual = hasOperationSteps || entry.hasVisualizer;
+
+  // 現在の章の下に出す、このページの見出し(スクロールスパイ)
+  const outline: OutlineItem[] = [
+    ...(hasVisual ? [{ id: "visual-heading", label: "ステップで見る" }] : []),
+    ...sections.headings.map((heading) => ({ id: heading.id, label: heading.text })),
+    ...(quiz.length > 0 ? [{ id: "quiz-heading", label: "クイズ" }] : []),
+  ];
 
   const siblings = foundationsLoader
     .getAllMeta()
@@ -68,6 +79,7 @@ export default async function FoundationsDetailPage({ params }: FoundationsDetai
                     </span>
                     <span>{sibling.name}</span>
                   </Link>
+                  {current ? <ScrollSpyOutline items={outline} /> : null}
                 </li>
               );
             })}
@@ -99,18 +111,13 @@ export default async function FoundationsDetailPage({ params }: FoundationsDetai
             )}
           </section>
 
-          <section className={styles.explainPane} aria-labelledby="explain-heading">
-            <h2 id="explain-heading" className={styles.sectionLabel}>
-              解説
-            </h2>
-            <div
-              className={styles.markdownBody}
-              // content/foundations/*.md はリポジトリで管理する信頼済みコンテンツのみ(外部入力なし)
-              dangerouslySetInnerHTML={{ __html: entry.bodyHtml }}
-            />
-          </section>
-
-          {quiz.length > 0 ? <ChapterQuiz entryId={id} items={quiz} /> : null}
+          <ChapterContent
+            entryId={id}
+            explanationHtml={sections.explanationHtml}
+            exampleHtml={sections.exampleHtml}
+            quiz={quiz}
+            guide={entry.guide}
+          />
 
           <nav className={styles.pager} aria-label="前後の章">
             {previous ? (
