@@ -1,0 +1,51 @@
+.switch {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  cursor: pointer;
+}
+
+.switch:disabled {
+  cursor: not-allowed;
+}
+
+.track {
+  position: relative;
+  width: 2rem;
+  height: 1.125rem;
+  border: 1px solid var(--color-line);
+  border-radius: 999px;
+  background: transparent;
+}
+
+.thumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 50%;
+  background: var(--color-text-muted);
+  transition: transform 0.15s ease;
+}
+
+/* ONのとき(= 動きを減らす)は青の枠・つまみを右へ。現在の状態を示すので青を使う */
+.switch[aria-checked="true"] .track {
+  border-color: var(--color-accent-blue);
+}
+
+.switch[aria-checked="true"] .thumb {
+  background: var(--color-accent-blue);
+  transform: translateX(0.875rem);
+}
+
+.switch:focus-visible .track {
+  outline: 2px solid var(--color-accent-blue);
+  outline-offset: 2px;
+}

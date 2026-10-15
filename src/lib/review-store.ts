@@ -67,3 +67,55 @@ export function subscribeReviews(onChange: () => void): () => void {
 }
 
 export const REVIEW_INTERVAL_DAYS = INTERVAL_DAYS;
+
+const EXPORT_VERSION = 1;
+
+/** 復習記録をJSON文字列にして返す(別の端末・ブラウザへ持ち出す用) */
+export function exportReviews(): string {
+  return JSON.stringify({ version: EXPORT_VERSION, records: listAll() }, null, 2);
+}
+
+function isRecord(value: unknown): value is ReviewRecord {
+  if (typeof value !== "object" || value === null) return false;
+  const v = value as Record<string, unknown>;
+  return (
+    typeof v.entryId === "string" &&
+    v.entryId.length > 0 &&
+    Number.isInteger(v.questionIndex) &&
+    (v.questionIndex as number) >= 0 &&
+    Number.isInteger(v.stage) &&
+    (v.stage as number) >= 0 &&
+    (v.stage as number) < INTERVAL_DAYS.length &&
+    typeof v.dueAt === "number" &&
+    Number.isFinite(v.dueAt)
+  );
+}
+
+/**
+ * 書き出したJSONを読み込んで、いまの記録へ統合する。同じ問題は期限が後のほうを残す。
+ * 形式が正しくなければ何も変更しない。
+ */
+export function importReviews(json: string): { ok: true; imported: number } | { ok: false } {
+  try {
+    const parsed: unknown = JSON.parse(json);
+    const list = (parsed as { records?: unknown })?.records;
+    if (!Array.isArray(list) || !list.every(isRecord)) return { ok: false };
+    const records = readAll();
+    for (const record of list) {
+      const key = keyOf(record.entryId, record.questionIndex);
+      const existing = records[key];
+      if (!existing || existing.dueAt < record.dueAt) {
+        records[key] = {
+          entryId: record.entryId,
+          questionIndex: record.questionIndex,
+          stage: record.stage,
+          dueAt: record.dueAt,
+        };
+      }
+    }
+    writeAll(records);
+    return { ok: true, imported: list.length };
+  } catch {
+    return { ok: false };
+  }
+}

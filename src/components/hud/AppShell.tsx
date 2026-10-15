@@ -4,6 +4,7 @@ import { StatusChip } from "./StatusChip";
 import { LiveClock } from "./LiveClock";
 import { MainNav } from "./MainNav";
 import { ThemeToggle } from "@/components/theme/ThemeToggle";
+import { MotionToggle } from "@/components/theme/MotionToggle";
 import styles from "./AppShell.module.css";
 
 type AppShellProps = {
@@ -28,6 +29,7 @@ export function AppShell({ children }: AppShellProps) {
         </div>
         <MainNav />
         <div className={styles.headerRight}>
+          <MotionToggle />
           <ThemeToggle />
           <StatusChip status="online" />
           <LiveClock />

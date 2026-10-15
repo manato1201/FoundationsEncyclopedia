@@ -1,13 +1,14 @@
 "use client";
 
-import { useState, type CSSProperties, type ReactNode } from "react";
+import { useState, type CSSProperties, type KeyboardEvent, type ReactNode } from "react";
 import { useStepPlayer } from "@/components/visualizer/useStepPlayer";
 import { PlaybackControls, type PlaybackSpeed } from "@/components/visualizer/PlaybackControls";
 import styles from "./CssStepAnimation.module.css";
 
 type CssStepAnimationProps = {
   frameCount: number;
-  children: ReactNode;
+  /** 関数を渡すと現在のステップ番号を受け取れる(直前ステップの表示などに使う)。その場合はオニオンスキンの切替も出る */
+  children: ReactNode | ((context: { stepIndex: number }) => ReactNode);
   resetLabel?: string;
 };
 
@@ -24,16 +25,31 @@ export function CssStepAnimation({
   resetLabel,
 }: CssStepAnimationProps) {
   const [speed, setSpeed] = useState<PlaybackSpeed>(1);
+  const [onion, setOnion] = useState(false);
   const player = useStepPlayer(frameCount, 400 / speed);
+  const renderPrev = typeof children === "function";
+
+  // コマ送りのキー: , = 前 / . = 次(この枠にフォーカスがあるときだけ)
+  const handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
+    if (event.target instanceof HTMLElement && event.target.closest("input, textarea, select")) return;
+    if (event.key === ",") {
+      event.preventDefault();
+      player.handleStep(-1);
+    } else if (event.key === ".") {
+      event.preventDefault();
+      player.handleStep(1);
+    }
+  };
 
   return (
-    <div className={styles.wrapper}>
+    <div className={styles.wrapper} tabIndex={0} onKeyDown={handleKeyDown} aria-keyshortcuts=", .">
       <div
         className={styles.stage}
         data-step={player.stepIndex}
+        data-onion={onion ? "on" : undefined}
         style={{ "--step-index": player.stepIndex } as CSSProperties}
       >
-        {children}
+        {typeof children === "function" ? children({ stepIndex: player.stepIndex }) : children}
       </div>
       <PlaybackControls
         stepIndex={player.stepIndex}
@@ -46,6 +62,9 @@ export function CssStepAnimation({
         resetLabel={resetLabel}
         speed={speed}
         onSpeedChange={setSpeed}
+        onSeek={player.goTo}
+        onion={renderPrev ? onion : undefined}
+        onOnionChange={renderPrev ? setOnion : undefined}
       />
     </div>
   );

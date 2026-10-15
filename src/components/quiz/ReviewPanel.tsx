@@ -1,8 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useSyncExternalStore } from "react";
+import { useMemo, useRef, useState, useSyncExternalStore } from "react";
 import {
+  exportReviews,
+  importReviews,
   listAll,
   REVIEW_INTERVAL_DAYS,
   subscribeReviews,
@@ -51,7 +53,60 @@ export function ReviewPanel({ titles }: ReviewPanelProps) {
     return [...counts.entries()];
   }, [records, titles]);
 
-  if (dueEntries.length === 0) return null;
+  const fileInput = useRef<HTMLInputElement>(null);
+  const [message, setMessage] = useState<string | null>(null);
+
+  const handleExport = () => {
+    const blob = new Blob([exportReviews()], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "foundations-review.json";
+    link.click();
+    URL.revokeObjectURL(url);
+    setMessage("復習の記録を書き出しました");
+  };
+
+  const handleImport = async (file: File | undefined) => {
+    if (!file) return;
+    const result = importReviews(await file.text());
+    setMessage(result.ok ? `${result.imported}件の記録を読み込みました` : "読み込めませんでした。書き出したJSONファイルを選んでください");
+    if (fileInput.current) fileInput.current.value = "";
+  };
+
+  const tools = (
+    <details className={styles.tools}>
+      <summary>復習の記録を書き出す・読み込む</summary>
+      <p className={styles.toolsNote}>
+        記録はこのブラウザの中だけに保存されています。別の端末へ移すときは、書き出したファイルを読み込んでください。
+      </p>
+      <div className={styles.toolsRow}>
+        <button type="button" className={styles.toolButton} onClick={handleExport}>
+          書き出す(JSON)
+        </button>
+        <button type="button" className={styles.toolButton} onClick={() => fileInput.current?.click()}>
+          読み込む
+        </button>
+        <input
+          ref={fileInput}
+          type="file"
+          accept="application/json,.json"
+          className={styles.fileInput}
+          onChange={(event) => void handleImport(event.target.files?.[0])}
+          aria-label="復習の記録ファイルを選ぶ"
+        />
+      </div>
+      {message ? (
+        <p className={styles.toolsMessage} role="status">
+          {message}
+        </p>
+      ) : null}
+    </details>
+  );
+
+  if (dueEntries.length === 0) {
+    return <section className={styles.quiet}>{tools}</section>;
+  }
 
   return (
     <section className={styles.panel} aria-labelledby="review-heading">
@@ -79,6 +134,7 @@ export function ReviewPanel({ titles }: ReviewPanelProps) {
           </li>
         ))}
       </ul>
+      {tools}
     </section>
   );
 }

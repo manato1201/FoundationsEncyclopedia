@@ -8,10 +8,18 @@ import { FOUNDATIONS_CATEGORY_ORDER, FOUNDATIONS_SUBCATEGORIES_BY_CATEGORY } fro
 import { Icon } from "@/components/icons/Icon";
 import { computeGridLayout } from "@/lib/grid-layout";
 import { matchesSearchQuery } from "@/lib/foundations-search";
+import { PURPOSE_GROUPS, STARTER_IDS, type EntryMode } from "@/lib/catalog-entry-points";
 import { MASTERY_BADGE_META, MASTERY_BADGE_ORDER, type MasteryBadge } from "@/lib/mastery-badge";
 import type { FoundationsMeta } from "@/lib/content/foundations";
 
 type SortOrder = "category" | "name";
+
+/** ステップ表示を持つ章(専用アニメ または operationSteps) */
+const isAnimated = (entry: FoundationsMeta) =>
+  entry.hasVisualizer || (entry.operationSteps?.length ?? 0) > 0;
+
+/** 「用途から」で最初に見せる章数(残りは「すべて見る」で展開) */
+const PURPOSE_PREVIEW_COUNT = 6;
 
 type FoundationsCatalogProps = {
   entries: FoundationsMeta[];
@@ -31,12 +39,14 @@ export function FoundationsCatalog({ entries, featuredId }: FoundationsCatalogPr
   const [animatedOnly, setAnimatedOnly] = useState(false);
   const [activeBadge, setActiveBadge] = useState<MasteryBadge | null>(null);
   const [sortOrder, setSortOrder] = useState<SortOrder>("category");
+  const [mode, setMode] = useState<EntryMode>("start");
+  const [expandedPurposes, setExpandedPurposes] = useState<Set<string>>(new Set());
   const trimmedQuery = query.trim().toLowerCase();
   const isSearching = trimmedQuery.length > 0;
   const isFiltering = isSearching || activeCategory !== null || animatedOnly || activeBadge !== null;
 
   const animatedCount = useMemo(
-    () => entries.reduce((count, e) => count + (e.hasVisualizer ? 1 : 0), 0),
+    () => entries.reduce((count, e) => count + (isAnimated(e) ? 1 : 0), 0),
     [entries],
   );
 
@@ -87,7 +97,7 @@ export function FoundationsCatalog({ entries, featuredId }: FoundationsCatalogPr
     const results = entries.filter((entry) => {
       if (activeCategory && entry.category !== activeCategory) return false;
       if (activeSubcategory && entry.subcategory !== activeSubcategory) return false;
-      if (animatedOnly && !entry.hasVisualizer) return false;
+      if (animatedOnly && !isAnimated(entry)) return false;
       if (activeBadge && entry.masteryBadge !== activeBadge) return false;
       if (isSearching && !matchesSearchQuery(entry, query)) return false;
       return true;
@@ -130,6 +140,33 @@ export function FoundationsCatalog({ entries, featuredId }: FoundationsCatalogPr
       items: groups.get(category)!,
     }));
   }, [entries, featured.id]);
+
+  const starterEntries = useMemo(() => {
+    const byId = new Map(entries.map((entry) => [entry.id, entry]));
+    return STARTER_IDS.map((id) => byId.get(id)).filter((entry): entry is FoundationsMeta => entry !== undefined);
+  }, [entries]);
+
+  const purposeGroups = useMemo(
+    () =>
+      PURPOSE_GROUPS.map((group) => ({ group, items: entries.filter(group.match) })).filter(
+        ({ items }) => items.length > 0,
+      ),
+    [entries],
+  );
+
+  const sortedAll = useMemo(
+    () => (sortOrder === "name" ? [...entries].sort((a, b) => a.name.localeCompare(b.name, "ja")) : entries),
+    [entries, sortOrder],
+  );
+
+  const togglePurpose = (key: string) => {
+    setExpandedPurposes((current) => {
+      const next = new Set(current);
+      if (next.has(key)) next.delete(key);
+      else next.add(key);
+      return next;
+    });
+  };
 
   return (
     <div className={styles.page}>
@@ -279,37 +316,128 @@ export function FoundationsCatalog({ entries, featuredId }: FoundationsCatalogPr
         </section>
       ) : (
         <>
-          <section className={styles.showcase} aria-labelledby="featured-heading">
-            <h2 id="featured-heading" className={styles.sectionLabel}>
-              ■ FEATURED 代表エントリ
-            </h2>
-            <Link href={`/foundations/${featured.id}`} className={styles.featuredCard}>
-              <div className={styles.featuredMeta}>
-                <span className={styles.category}>
-                  {featured.category} ・ {featured.subcategory}
-                </span>
-                {featured.masteryBadge ? <MasteryBadgeChip badge={featured.masteryBadge} /> : null}
-                {featured.hasVisualizer ? <AnimatedBadge /> : null}
-              </div>
-              <h3 className={styles.featuredName}>{featured.name}</h3>
-              <p className={styles.featuredDesc}>{featured.summary}</p>
-            </Link>
-          </section>
-
-          <section id="catalog-list" className={styles.list} aria-labelledby="list-heading">
-            <h2 id="list-heading" className={styles.sectionLabel}>
-              ■ INDEX 一覧
-            </h2>
-            {groupedByCategory.map(({ category, items }) => (
-              <div key={category} className={styles.categoryGroup}>
-                <h3 className={styles.categoryHeading}>
-                  {category}
-                  <span className={styles.categoryCount}>{items.length}</span>
-                </h3>
-                <EntryGrid entries={items} />
-              </div>
+          <div className={styles.entryTabs} role="tablist" aria-label="入口の切り替え">
+            {(
+              [
+                { key: "start", label: "まずはここから" },
+                { key: "purpose", label: "用途から" },
+                { key: "all", label: "すべて", count: entries.length },
+              ] as { key: EntryMode; label: string; count?: number }[]
+            ).map((item) => (
+              <button
+                key={item.key}
+                type="button"
+                role="tab"
+                aria-selected={mode === item.key}
+                className={`${styles.entryTab} ${mode === item.key ? styles.entryTabActive : ""}`}
+                onClick={() => setMode(item.key)}
+              >
+                {item.label}
+                {item.count !== undefined ? <span className={styles.chipCount}>{item.count}</span> : null}
+              </button>
             ))}
-          </section>
+          </div>
+
+          {mode === "start" ? (
+            <section id="catalog-list" className={styles.list} aria-labelledby="start-heading">
+              <h2 id="start-heading" className={styles.sectionLabel}>
+                ■ START この順に読むと、基礎が積み上がります
+              </h2>
+              <ol className={styles.startList}>
+                {starterEntries.map((entry, index) => (
+                  <li key={entry.id} className={styles.startItem}>
+                    <span className={styles.startNumber} data-tabular>
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <div className={styles.startBody}>
+                      <Link href={`/foundations/${entry.id}`} className={styles.startName}>
+                        {entry.name}
+                        {isAnimated(entry) ? <AnimatedBadge /> : null}
+                      </Link>
+                      <p className={styles.listSummary}>{entry.summary}</p>
+                    </div>
+                  </li>
+                ))}
+              </ol>
+            </section>
+          ) : null}
+
+          {mode === "purpose" ? (
+            <section id="catalog-list" className={styles.list} aria-labelledby="purpose-heading">
+              <h2 id="purpose-heading" className={styles.sectionLabel}>
+                ■ PURPOSE やりたいことから探す
+              </h2>
+              {purposeGroups.map(({ group, items }) => {
+                const expanded = expandedPurposes.has(group.key);
+                const visible = expanded ? items : items.slice(0, PURPOSE_PREVIEW_COUNT);
+                return (
+                  <div key={group.key} className={styles.categoryGroup}>
+                    <h3 className={styles.categoryHeading}>
+                      {group.label}
+                      <span className={styles.categoryCount}>{items.length}</span>
+                    </h3>
+                    <p className={styles.purposeDescription}>{group.description}</p>
+                    <EntryGrid entries={visible} />
+                    {items.length > PURPOSE_PREVIEW_COUNT ? (
+                      <button type="button" className={styles.moreButton} onClick={() => togglePurpose(group.key)}>
+                        {expanded ? "最初の数件だけ表示" : `すべて見る(${items.length}件)`}
+                        <Icon name={expanded ? "chevron-up" : "chevron-down"} size={14} />
+                      </button>
+                    ) : null}
+                  </div>
+                );
+              })}
+            </section>
+          ) : null}
+
+          {mode === "all" ? (
+            <>
+              <section className={styles.showcase} aria-labelledby="featured-heading">
+                <h2 id="featured-heading" className={styles.sectionLabel}>
+                  ■ FEATURED 代表エントリ
+                </h2>
+                <Link href={`/foundations/${featured.id}`} className={styles.featuredCard}>
+                  <div className={styles.featuredMeta}>
+                    <span className={styles.category}>
+                      {featured.category} ・ {featured.subcategory}
+                    </span>
+                    {featured.masteryBadge ? <MasteryBadgeChip badge={featured.masteryBadge} /> : null}
+                    {isAnimated(featured) ? <AnimatedBadge /> : null}
+                  </div>
+                  <h3 className={styles.featuredName}>{featured.name}</h3>
+                  <p className={styles.featuredDesc}>{featured.summary}</p>
+                </Link>
+              </section>
+
+              <section id="catalog-list" className={styles.list} aria-labelledby="list-heading">
+                <div className={styles.resultsHeader}>
+                  <h2 id="list-heading" className={styles.sectionLabel}>
+                    ■ INDEX 一覧 — {entries.length}件
+                  </h2>
+                  <label className={styles.sortControl}>
+                    並べ替え
+                    <select value={sortOrder} onChange={(event) => setSortOrder(event.target.value as SortOrder)}>
+                      <option value="category">カテゴリ順</option>
+                      <option value="name">名前順</option>
+                    </select>
+                  </label>
+                </div>
+                {sortOrder === "name" ? (
+                  <EntryGrid entries={sortedAll} showCategory />
+                ) : (
+                  groupedByCategory.map(({ category, items }) => (
+                    <div key={category} className={styles.categoryGroup}>
+                      <h3 className={styles.categoryHeading}>
+                        {category}
+                        <span className={styles.categoryCount}>{items.length}</span>
+                      </h3>
+                      <EntryGrid entries={items} />
+                    </div>
+                  ))
+                )}
+              </section>
+            </>
+          ) : null}
         </>
       )}
     </div>
@@ -358,7 +486,7 @@ function FoundationsRow({
           </span>
         ) : null}
         {entry.masteryBadge ? <MasteryBadgeChip badge={entry.masteryBadge} /> : null}
-        {entry.hasVisualizer ? <AnimatedBadge /> : null}
+        {isAnimated(entry) ? <AnimatedBadge /> : null}
       </Link>
       <p className={styles.listSummary}>{entry.summary}</p>
     </li>

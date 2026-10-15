@@ -79,3 +79,70 @@
   color: var(--color-text);
   font-variant-numeric: tabular-nums;
 }
+
+/* ステップインジケーター(全体のうちの位置)。青 = 現在地 / 緑 = 通過済み。1行を専有する */
+.indicator {
+  list-style: none;
+  display: flex;
+  flex-basis: 100%;
+  gap: var(--space-1);
+}
+
+.indicatorItem {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.indicatorDot {
+  display: block;
+  width: 100%;
+  height: 0.5rem;
+  padding: 0;
+  border: none;
+  border-radius: 999px;
+  background: var(--color-line);
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.indicatorDot:disabled {
+  cursor: default;
+}
+
+.indicator_done {
+  background: var(--color-accent-green);
+}
+
+.indicator_current {
+  background: var(--color-accent-blue);
+}
+
+.indicatorBar {
+  flex-basis: 100%;
+  height: 0.5rem;
+  border-radius: 999px;
+  background: var(--color-line);
+  overflow: hidden;
+}
+
+.indicatorBarFill {
+  display: block;
+  height: 100%;
+  background: var(--color-accent-blue);
+}
+
+.toggleButton {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--color-line);
+  border-radius: 4px;
+  background: transparent;
+  color: var(--color-text-muted);
+  cursor: pointer;
+}
+
+.toggleActive {
+  border-color: var(--color-accent-blue);
+  color: var(--color-accent-blue);
+}
