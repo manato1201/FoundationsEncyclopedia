@@ -12,6 +12,7 @@ import { RecursionStackAnimation } from "./entries/RecursionStackAnimation";
 import { OwnershipMoveAnimation } from "./entries/OwnershipMoveAnimation";
 import { ArrayIndexAccessAnimation } from "./entries/ArrayIndexAccessAnimation";
 import { ProcessorLanesAnimation } from "./entries/ProcessorLanesAnimation";
+import { IsolationLayersAnimation } from "./entries/IsolationLayersAnimation";
 import { FOR_LOOP_ANIMATIONS } from "@/lib/animations/for-loop-animations";
 import { GIT_ANIMATIONS } from "@/lib/animations/git-animations";
 import { DCC_STEP_ANIMATIONS } from "@/lib/animations/dcc-step-animations";
@@ -22,6 +23,7 @@ import { RECURSION_ANIMATIONS } from "@/lib/animations/recursion-animations";
 import { OWNERSHIP_ANIMATIONS } from "@/lib/animations/ownership-animations";
 import { ARRAY_ANIMATIONS } from "@/lib/animations/array-animations";
 import { ACCELERATOR_ANIMATIONS } from "@/lib/animations/accelerator-animations";
+import { ISOLATION_ANIMATIONS } from "@/lib/animations/isolation-animations";
 
 type FoundationsAnimationProps = {
   id: string;
@@ -43,6 +45,7 @@ export function FoundationsAnimation({ id }: FoundationsAnimationProps) {
   if (id in OWNERSHIP_ANIMATIONS) return <OwnershipMoveAnimation />;
   if (id in ARRAY_ANIMATIONS) return <ArrayIndexAccessAnimation />;
   if (id in ACCELERATOR_ANIMATIONS) return <ProcessorLanesAnimation />;
+  if (id in ISOLATION_ANIMATIONS) return <IsolationLayersAnimation />;
   if (id === "game-loop-basics") return <GameLoopAnimation />;
   if (id === "state-machine-basics") return <StateMachineAnimation />;
   return null;

@@ -39,7 +39,7 @@ export function OperationStepsAnimation({ steps }: OperationStepsAnimationProps)
       {scrolly ? (
         <ScrollSteppedList steps={steps} />
       ) : (
-        <CssStepAnimation frameCount={steps.length}>
+        <CssStepAnimation frameCount={steps.length} stepLabels={steps.map((step) => step.label)}>
           {({ stepIndex }) => <StepList steps={steps} stepIndex={stepIndex} />}
         </CssStepAnimation>
       )}

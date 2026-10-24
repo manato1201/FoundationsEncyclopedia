@@ -34,6 +34,8 @@ export interface FoundationsFrontmatter extends ContentFrontmatterBase {
   operationSteps?: OperationStep[];
   quiz?: QuizItem[];
   guide?: ChapterGuideFrontmatter;
+  /** 章の主張を1文で(「GPUは同じ計算を一斉に行う」の形)。1文で言えない章は2つに分ける */
+  claim?: string;
 }
 
 /**

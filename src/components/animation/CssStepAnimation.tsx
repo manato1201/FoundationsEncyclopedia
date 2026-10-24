@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, type CSSProperties, type KeyboardEvent, type ReactNode } from "react";
+import { Icon } from "@/components/icons/Icon";
 import { useStepPlayer } from "@/components/visualizer/useStepPlayer";
 import { PlaybackControls, type PlaybackSpeed } from "@/components/visualizer/PlaybackControls";
 import styles from "./CssStepAnimation.module.css";
@@ -10,6 +11,11 @@ type CssStepAnimationProps = {
   /** 関数を渡すと現在のステップ番号を受け取れる(直前ステップの表示などに使う)。その場合はオニオンスキンの切替も出る */
   children: ReactNode | ((context: { stepIndex: number }) => ReactNode);
   resetLabel?: string;
+  /**
+   * ステップごとの短い名前(0番目から)。渡すと、ステージの下に「次へ: ○○」の大きなボタンを出す。
+   * 有効な操作を「次の1つ」に絞って、迷わず順に進められるようにする(anatomyの原則)。
+   */
+  stepLabels?: string[];
 };
 
 /**
@@ -23,6 +29,7 @@ export function CssStepAnimation({
   frameCount,
   children,
   resetLabel,
+  stepLabels,
 }: CssStepAnimationProps) {
   const [speed, setSpeed] = useState<PlaybackSpeed>(1);
   const [onion, setOnion] = useState(false);
@@ -51,6 +58,25 @@ export function CssStepAnimation({
       >
         {typeof children === "function" ? children({ stepIndex: player.stepIndex }) : children}
       </div>
+      {stepLabels && stepLabels.length === frameCount ? (
+        <button
+          type="button"
+          className={styles.nextButton}
+          onClick={player.isFinished ? player.reset : () => player.handleStep(1)}
+        >
+          {player.isFinished ? (
+            <>
+              <Icon name="reset" size={16} />
+              最初からもう一度
+            </>
+          ) : (
+            <>
+              次へ: {stepLabels[player.stepIndex + 1]}
+              <Icon name="arrow-right" size={16} />
+            </>
+          )}
+        </button>
+      ) : null}
       <PlaybackControls
         stepIndex={player.stepIndex}
         frameCount={frameCount}

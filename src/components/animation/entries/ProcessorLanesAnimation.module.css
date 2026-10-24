@@ -131,3 +131,117 @@
     transition-delay: 0s !important;
   }
 }
+
+/* 1文の主張(anatomyの原則: 章で言いたいことを1文で) */
+.claim {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  line-height: 1.6;
+  color: var(--color-text);
+}
+
+/* 内部をのぞく窓。いまのステップの装置だけを見せる(概念図) */
+.window {
+  padding: var(--space-3) var(--space-4);
+  border: 1px dashed var(--color-line);
+  border-radius: 6px;
+  background: var(--color-bg-void);
+}
+
+.windowTitle {
+  margin-bottom: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  color: var(--color-text-muted);
+}
+
+.windowBody {
+  display: none;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+[data-step="0"] .windowBody[data-window="0"],
+[data-step="1"] .windowBody[data-window="1"],
+[data-step="2"] .windowBody[data-window="2"],
+[data-step="3"] .windowBody[data-window="3"] {
+  display: flex;
+}
+
+.windowHint,
+.windowNote {
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  color: var(--color-text-muted);
+}
+
+.cpuCores {
+  display: grid;
+  grid-template-columns: repeat(4, 3.5rem);
+  gap: var(--space-2);
+}
+
+.core {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 3rem;
+  border: 2px solid var(--color-line);
+  border-radius: 4px;
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+/* 色の役割: 青 = いま処理中(現在地) */
+.coreActive {
+  border-color: var(--color-accent-blue);
+  color: var(--color-accent-blue);
+}
+
+.gpuGrid {
+  display: grid;
+  grid-template-columns: repeat(12, 1rem);
+  gap: 4px;
+}
+
+.unit {
+  height: 1rem;
+  border: 1px solid var(--color-accent-blue);
+  border-radius: 2px;
+  background: transparent;
+}
+
+.npuFlow {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  font-size: 0.8125rem;
+}
+
+.flowData {
+  padding: var(--space-1) var(--space-2);
+  border: 1px solid var(--color-accent-blue);
+  border-radius: 4px;
+  color: var(--color-accent-blue);
+}
+
+.flowArrow {
+  color: var(--color-text-muted);
+}
+
+.weights {
+  display: inline-flex;
+  gap: var(--space-1);
+  padding: var(--space-1);
+  border: 1px solid var(--color-line);
+  border-radius: 4px;
+}
+
+.weight {
+  padding: 0 var(--space-2);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
