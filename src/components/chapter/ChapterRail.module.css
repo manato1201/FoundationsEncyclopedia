@@ -1,0 +1,56 @@
+/* 目次レール(monochord)。画面右端の縦の細い線。広い画面だけで出す */
+.rail {
+  display: none;
+}
+
+@media (min-width: 1200px) {
+  .rail {
+    position: fixed;
+    top: 20vh;
+    right: var(--space-4);
+    z-index: 5;
+    display: block;
+    width: 1.5rem;
+    height: 60vh;
+    cursor: pointer;
+    touch-action: none;
+  }
+}
+
+.line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 2px;
+  margin-left: -1px;
+  background: var(--color-line);
+}
+
+/* 目盛り = 章の見出しの位置 */
+.tick {
+  position: absolute;
+  left: 50%;
+  width: 0.625rem;
+  height: 2px;
+  margin-left: -0.3125rem;
+  background: var(--color-text-muted);
+}
+
+/* つまみ = いまの位置(青 = 現在地)。動きは出さず、位置の更新だけ */
+.thumb {
+  position: absolute;
+  left: 50%;
+  width: 0.875rem;
+  height: 0.875rem;
+  margin: -0.4375rem 0 0 -0.4375rem;
+  border: 2px solid var(--color-accent-blue);
+  border-radius: 50%;
+  background: var(--color-bg-void);
+}
+
+.rail:focus-visible {
+  outline: 2px solid var(--color-accent-blue);
+  outline-offset: 2px;
+  border-radius: 4px;
+}

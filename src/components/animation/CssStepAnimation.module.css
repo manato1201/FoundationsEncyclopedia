@@ -19,3 +19,30 @@
   outline: 2px solid var(--color-accent-blue);
   outline-offset: 2px;
 }
+
+/* 「次へ」: 有効な操作を次の1つに絞る主ボタン。青 = 操作(色の役割) */
+.nextButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  width: 100%;
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--color-accent-blue);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--color-accent-blue);
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.nextButton:hover {
+  background: var(--color-bg-surface-2);
+}
+
+.nextButton:focus-visible {
+  outline: 2px solid var(--color-accent-blue);
+  outline-offset: 2px;
+}

@@ -61,7 +61,7 @@ export function PlaybackControls({
                 <li key={index} className={styles.indicatorItem}>
                   <button
                     type="button"
-                    className={`${styles.indicatorDot} ${styles[`indicator_${state}`]}`}
+                    className={[styles.indicatorDot, styles[`indicator_${state}`]].filter(Boolean).join(" ")}
                     aria-label={`${index + 1}番目のステップへ`}
                     aria-current={state === "current" ? "step" : undefined}
                     disabled={!onSeek}

@@ -189,3 +189,26 @@
   margin-left: auto;
   text-align: right;
 }
+
+/* 章の主張(1文)。見出し・副題の下に置く */
+.claim {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  border-left: 3px solid var(--color-accent-blue);
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.6;
+  color: var(--color-text);
+}
+
+.claimLabel {
+  flex-shrink: 0;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  color: var(--color-text-muted);
+}

@@ -6,6 +6,7 @@ import { MasteryBadgeChip } from "@/components/badge/MasteryBadgeChip";
 import { FoundationsAnimation } from "@/components/animation/FoundationsAnimation";
 import { OperationStepsAnimation } from "@/components/animation/OperationStepsAnimation";
 import { ChapterContent } from "@/components/chapter/ChapterContent";
+import { ChapterRail } from "@/components/chapter/ChapterRail";
 import { ScrollSpyOutline, type OutlineItem } from "@/components/chapter/ScrollSpyOutline";
 import { splitChapterBody } from "@/lib/chapter-sections";
 import { foundationsLoader } from "@/lib/content/foundations";
@@ -58,6 +59,8 @@ export default async function FoundationsDetailPage({ params }: FoundationsDetai
         カタログに戻る
       </Link>
 
+      <ChapterRail />
+
       <div className={styles.layout}>
         <aside className={styles.toc} aria-label="同じ分類の章">
           <p className={styles.tocLabel}>
@@ -93,6 +96,12 @@ export default async function FoundationsDetailPage({ params }: FoundationsDetai
             </p>
             <h1 className={styles.title}>{entry.name}</h1>
             <p className={styles.subtitle}>{entry.summary}</p>
+            {entry.claim ? (
+              <p className={styles.claim}>
+                <span className={styles.claimLabel}>ひとことで</span>
+                {entry.claim}
+              </p>
+            ) : null}
             {entry.masteryBadge ? <MasteryBadgeChip badge={entry.masteryBadge} /> : null}
           </header>
 

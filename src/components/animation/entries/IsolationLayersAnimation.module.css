@@ -1,0 +1,137 @@
+.stage {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  width: 100%;
+}
+
+.claim {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  line-height: 1.6;
+  color: var(--color-text);
+}
+
+.scene {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--space-4);
+  align-items: center;
+}
+
+@media (max-width: 560px) {
+  .scene {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* 層を斜め上から見る(Exploded view)。重ねた状態では層の間隔が小さく、分解すると広がる */
+.viewport {
+  height: 15rem;
+  perspective: 900px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stack {
+  --gap: 0.5rem;
+  position: relative;
+  width: 12rem;
+  height: 8rem;
+  transform-style: preserve-3d;
+  transform: rotateX(58deg) rotateZ(-28deg);
+  transition: transform 400ms ease-out;
+}
+
+.plate {
+  position: absolute;
+  inset: calc(var(--i) * 7%);
+  border: 2px solid var(--color-line);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--color-bg-surface) 82%, transparent);
+  transform: translateZ(calc(var(--i) * var(--gap)));
+  transition:
+    transform 400ms ease-out,
+    border-color 200ms ease-out,
+    box-shadow 200ms ease-out;
+}
+
+/* 分解して見せる(ステップ1以降)。層の間隔を広げる */
+[data-step="1"] .stack,
+[data-step="2"] .stack,
+[data-step="3"] .stack {
+  --gap: 2.6rem;
+}
+
+.legend {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.legendItem {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: var(--space-2) var(--space-3);
+  border-left: 2px solid var(--color-line);
+  opacity: 0.6;
+  transition:
+    opacity 200ms ease-out,
+    border-color 200ms ease-out;
+}
+
+.legendName {
+  font-size: 0.875rem;
+  color: var(--color-text);
+}
+
+.legendDetail {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+/* 色の役割: 青 = いま見ている層(現在地)。光らせるのは現在のステップの層だけ */
+[data-step="2"] .plate1,
+[data-step="3"] .plate2,
+[data-step="3"] .plate3 {
+  border-color: var(--color-accent-blue);
+  box-shadow: var(--glow-blue);
+}
+
+[data-step="2"] .legend1,
+[data-step="3"] .legend2,
+[data-step="3"] .legend3 {
+  opacity: 1;
+  border-left-color: var(--color-accent-blue);
+}
+
+.caption {
+  display: none;
+  min-height: 3em;
+  font-size: 0.875rem;
+  line-height: 1.7;
+  color: var(--color-text-muted);
+}
+
+[data-step="0"] .caption[data-caption="0"],
+[data-step="1"] .caption[data-caption="1"],
+[data-step="2"] .caption[data-caption="2"],
+[data-step="3"] .caption[data-caption="3"] {
+  display: block;
+}
+
+.note {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stack,
+  .plate,
+  .legendItem {
+    transition: none;
+  }
+}
