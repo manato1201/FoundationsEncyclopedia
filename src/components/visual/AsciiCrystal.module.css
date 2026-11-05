@@ -1,0 +1,12 @@
+.crystal {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  line-height: 1;
+  letter-spacing: 0;
+  white-space: pre;
+  color: var(--color-accent-blue);
+  opacity: 0.55;
+  user-select: none;
+  pointer-events: none;
+}

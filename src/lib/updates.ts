@@ -15,6 +15,13 @@ export type UpdateItem = {
  */
 export const UPDATES: UpdateItem[] = [
   {
+    id: "2026-11-06-expansion-crystal",
+    date: "2026-11-06",
+    title: "IT知識・DCC・ツール別を52章拡充(293件→345件)、鉱石モチーフ(結晶)を追加",
+    description:
+      "IT知識を22章(AI基礎: RAG・トークンとコンテキストウィンドウ・ハルシネーション・量子化 / ネットワーク: IPとサブネット・DHCP / OS: システムコール・割り込み / セキュリティ: パスワード保存・JWT / データベース: N+1・コネクションプール / Linux: grepとfind・systemd / 工学: 単体と結合テスト・リファクタリング / Git: resetとrevert・cherry-pick / データ構造: グラフ探索・ヒープ / Web: HTTPキャッシュ / クラウド: オブザーバビリティ)、DCCを15章(Maya・Blender・Houdini各5章)、ツール別を15章(Unity 8章・Unreal Engine 7章)追加した。すべてにステップ表示(operationSteps)を付けている。あわせて、設計書の追補(ASCIIモチーフ)に沿って、結晶(雪の結晶のような6回対称)をASCII文字で描いた静止画を、トップのヒーロー・検索結果なしの表示・404ページに追加した。動きはなく、既存の青のトークンだけを使い、本文や操作部品には出さない。",
+  },
+  {
     id: "2026-10-25-anatomy-exploded-rail",
     date: "2026-10-25",
     title: "章に「ひとことで」・次へボタン・内部の窓、実行環境の分解ビュー、目次レールを追加",

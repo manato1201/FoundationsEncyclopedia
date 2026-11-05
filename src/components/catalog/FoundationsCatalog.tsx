@@ -8,6 +8,7 @@ import { FOUNDATIONS_CATEGORY_ORDER, FOUNDATIONS_SUBCATEGORIES_BY_CATEGORY } fro
 import { Icon } from "@/components/icons/Icon";
 import { StepPreview } from "@/components/visual/StepPreview";
 import { HeroTrack } from "@/components/visual/HeroTrack";
+import { AsciiCrystal } from "@/components/visual/AsciiCrystal";
 import { computeGridLayout } from "@/lib/grid-layout";
 import { matchesSearchQuery } from "@/lib/foundations-search";
 import { PURPOSE_GROUPS, STARTER_IDS, type EntryMode } from "@/lib/catalog-entry-points";
@@ -173,6 +174,7 @@ export function FoundationsCatalog({ entries, featuredId }: FoundationsCatalogPr
 
   return (
     <div className={styles.page} data-preview={livePreview ? "live" : undefined}>
+      <AsciiCrystal className={styles.heroCrystal} />
       <section className={styles.hero}>
         <p className={styles.eyebrow}>CATALOG</p>
         <h1 className={styles.heroTitle}>
@@ -312,7 +314,8 @@ export function FoundationsCatalog({ entries, featuredId }: FoundationsCatalogPr
           </div>
           {filteredResults.length === 0 ? (
             <div className={styles.emptyState}>
-              該当する基礎知識が見つかりませんでした。別のキーワードやカテゴリでお試しください。
+              <AsciiCrystal cols={29} rows={15} />
+              <p>該当する基礎知識が見つかりませんでした。別のキーワードやカテゴリでお試しください。</p>
             </div>
           ) : (
             <EntryGrid entries={filteredResults} showCategory />
