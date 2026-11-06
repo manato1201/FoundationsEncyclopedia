@@ -4,6 +4,17 @@ category: プログラミング言語
 subcategory: Go
 masteryBadge: review
 summary: Goの文字列はUTF-8のバイト列。char型は存在せず、1文字を扱うにはruneという専用の型を使う。
+operationSteps:
+  - label: "文字列はバイト列"
+    note: "Goの文字列は、UTF-8のバイトの並び"
+  - label: "lenはバイト数を返す"
+    note: "日本語は、1文字が複数のバイトになる"
+  - label: "1文字はruneで扱う"
+    note: "rune は、Unicodeの1文字を表す型"
+  - label: "rangeで文字ごとに回る"
+    note: "for range は、runeごとに、取り出す"
+  - label: "[]runeに変換して加工する"
+    note: "文字単位で加工するときは、[]rune へ変換する"
 ---
 
 ## 概要

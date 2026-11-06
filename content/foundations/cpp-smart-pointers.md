@@ -4,6 +4,17 @@ category: プログラミング言語
 subcategory: C++
 masteryBadge: done
 summary: RAIIの原則をメモリ管理に適用した、生ポインタのnew/deleteを代替する標準ライブラリの仕組み。
+operationSteps:
+  - label: "newとdeleteの問題を知る"
+    note: "生ポインタは、delete の忘れや、二重解放が起きやすい"
+  - label: "unique_ptrで所有者を1つにする"
+    note: "1つの所有者だけが持つ。スコープを抜けると、自動で解放される"
+  - label: "shared_ptrで共有する"
+    note: "参照を数えて、最後の持ち主が手放すと、解放される"
+  - label: "makeで作る"
+    note: "make_unique や make_shared で、安全に作る"
+  - label: "循環参照に注意する"
+    note: "shared_ptr どうしが互いに持つと、解放されない。weak_ptr で防ぐ"
 ---
 
 ## 概要

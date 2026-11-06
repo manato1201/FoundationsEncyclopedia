@@ -4,6 +4,17 @@ category: プログラミング言語
 subcategory: TypeScript
 masteryBadge: done
 summary: 条件分岐の中でユニオン型をより具体的な型に絞り込んでいく、TypeScriptの型推論の仕組み。
+operationSteps:
+  - label: "ユニオン型の値を受け取る"
+    note: "string | number のように、複数の型の可能性がある"
+  - label: "条件分岐で型を調べる"
+    note: "typeof や in、instanceof などで、確認する"
+  - label: "分岐の中で型が絞られる"
+    note: "その分岐の中では、より具体的な型として扱える"
+  - label: "型ガード関数を作る"
+    note: "x is T の形で、独自の判定を書ける"
+  - label: "安全にプロパティを使う"
+    note: "絞り込んだあとは、その型のメンバーを使える"
 ---
 
 ## 概要

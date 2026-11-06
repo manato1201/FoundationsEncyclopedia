@@ -3,6 +3,17 @@ name: enumの基礎
 category: プログラミング言語
 subcategory: TypeScript
 summary: 名前付きの定数集合を表現する機能。ユニオン型のリテラル型との使い分けが論点になりやすい。
+operationSteps:
+  - label: "enumで定数の集まりを定義する"
+    note: "enum Color { Red, Green } のように書く"
+  - label: "値は数値または文字列"
+    note: "既定では、0から順に、数値が割り当てられる"
+  - label: "名前で値を使う"
+    note: "Color.Red のように、使う"
+  - label: "ユニオン型のリテラルと比べる"
+    note: "\"red\" | \"green\" という書き方も、選べる"
+  - label: "用途で選ぶ"
+    note: "実行時にオブジェクトが必要か、型だけで足りるかで決める"
 ---
 
 ## 概要

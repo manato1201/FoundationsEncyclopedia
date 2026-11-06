@@ -4,6 +4,17 @@ category: ツール別
 subcategory: UnrealEngine
 masteryBadge: next
 summary: シーンに配置できる基本単位(Actor)と、その振る舞い・見た目を構成する部品(Component)の関係。
+operationSteps:
+  - label: "Actorを配置する"
+    note: "シーンに置ける、基本の単位として、Actorを置く"
+  - label: "コンポーネントを追加する"
+    note: "見た目や動きなどの、部品を、Actorへ付ける"
+  - label: "ルートコンポーネントを決める"
+    note: "Actorの位置の基準になる、ルートを決める"
+  - label: "コンポーネントを組み合わせる"
+    note: "メッシュ・コリジョン・ライトなどを、組み合わせる"
+  - label: "Blueprintで振る舞いを書く"
+    note: "イベントグラフで、Actorの動きを作る"
 ---
 
 ## 概要

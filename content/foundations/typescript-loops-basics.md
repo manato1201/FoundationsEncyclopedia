@@ -4,6 +4,17 @@ category: プログラミング言語
 subcategory: TypeScript
 masteryBadge: done
 summary: JavaScript由来のfor/while/do-whileに加え、for...ofとfor...inという2種類の反復専用構文を持つ。
+operationSteps:
+  - label: "ループの種類を選ぶ"
+    note: "for・while・do-while・for...of・for...in から選ぶ"
+  - label: "for...ofで値を取り出す"
+    note: "配列などの、要素の値を、順に取り出す"
+  - label: "for...inでキーを取り出す"
+    note: "オブジェクトの、キーを取り出す"
+  - label: "配列にfor...inは避ける"
+    note: "インデックスが文字列で取れて、意図と違う場合がある"
+  - label: "forEachやmapも使う"
+    note: "配列のメソッドで、繰り返しや変換を書く"
 ---
 
 ## 概要

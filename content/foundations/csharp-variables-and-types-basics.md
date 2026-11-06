@@ -4,6 +4,17 @@ category: プログラミング言語
 subcategory: C#
 masteryBadge: done
 summary: C#は静的型付け言語。変数は宣言時に型が確定し、以降その型以外の値を代入できない。
+operationSteps:
+  - label: "型を指定して宣言する"
+    note: "例: int count = 0;"
+  - label: "varで型推論を使う"
+    note: "右辺から、型が決まる(型が決まった変数であることは変わらない)"
+  - label: "値型と参照型を区別する"
+    note: "int などの値型と、string などの参照型がある"
+  - label: "型が合わない代入はエラー"
+    note: "静的型付けなので、コンパイル時に検出される"
+  - label: "明示的に型を変換する"
+    note: "キャストや、Parse で、型を変える"
 ---
 
 ## 概要

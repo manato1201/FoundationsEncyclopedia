@@ -3,6 +3,17 @@ name: インデックスの基礎
 category: プログラミング言語
 subcategory: SQL
 summary: 本の索引のように、特定の列での検索を高速化するデータベースの補助的なデータ構造。
+operationSteps:
+  - label: "検索が遅い列を見つける"
+    note: "WHEREやJOINでよく使う列を探す"
+  - label: "インデックスを作成する"
+    note: "CREATE INDEX で、その列に、索引を作る"
+  - label: "検索が索引を使う"
+    note: "全行を読まず、索引から、目的の行へたどり着く"
+  - label: "書き込みの負荷を考える"
+    note: "追加・更新のたびに、索引も更新される"
+  - label: "実行計画で効いているか確認する"
+    note: "EXPLAINで、索引が使われているかを確かめる"
 ---
 
 ## 概要

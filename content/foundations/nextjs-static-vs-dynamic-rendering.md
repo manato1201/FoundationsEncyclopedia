@@ -4,6 +4,17 @@ category: Framework
 subcategory: Web(Next.js等)
 masteryBadge: done
 summary: ビルド時にHTMLを生成しておくか、リクエストのたびに生成するか。ページごとに選べるNext.jsの中核概念。
+operationSteps:
+  - label: "ページの性質を考える"
+    note: "内容が、ほとんど変わらないか、リクエストごとに変わるかを考える"
+  - label: "静的: ビルド時にHTMLを作る"
+    note: "あらかじめ作ったHTMLを返すので、速い"
+  - label: "動的: リクエストごとに作る"
+    note: "リクエストの内容に応じて、その都度、HTMLを作る"
+  - label: "使う機能で方式が決まる"
+    note: "cookiesやheadersを使うと、動的になる"
+  - label: "ページごとに選ぶ"
+    note: "ページごとに、適した方式を使い分ける"
 ---
 
 ## 概要

@@ -4,6 +4,17 @@ category: ツール別
 subcategory: UnrealEngine
 masteryBadge: review
 summary: ビジュアルスクリプティングのBlueprintと、コードベースのC++。両者は排他ではなく組み合わせて使うのが一般的。
+operationSteps:
+  - label: "作りたいものを考える"
+    note: "素早く試したいのか、性能や構造が重要かを考える"
+  - label: "Blueprintが向く場面"
+    note: "見た目の調整・簡単な流れの組み立て・試作"
+  - label: "C++が向く場面"
+    note: "重い計算・基盤となるクラス・細かい制御"
+  - label: "C++で基盤を作る"
+    note: "共通の機能を、C++で作る"
+  - label: "Blueprintで拡張する"
+    note: "C++のクラスを継承して、値や見た目を調整する"
 ---
 
 ## 概要

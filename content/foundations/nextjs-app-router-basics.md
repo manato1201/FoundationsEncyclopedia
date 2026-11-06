@@ -4,6 +4,17 @@ category: Framework
 subcategory: Web(Next.js等)
 masteryBadge: review
 summary: ディレクトリ構造がそのままURLパスに対応する、Next.js App Routerの基本規約。
+operationSteps:
+  - label: "appフォルダを用意する"
+    note: "ルーティングの起点となる、appフォルダを作る"
+  - label: "フォルダがURLになる"
+    note: "フォルダ名が、そのままURLのパスになる"
+  - label: "page.tsxでページを作る"
+    note: "フォルダの中の、page.tsxが、そのURLの画面になる"
+  - label: "layout.tsxで共通部分を作る"
+    note: "ヘッダーなど、共通のレイアウトを、layout.tsxに書く"
+  - label: "動的なパスを作る"
+    note: "[id]のような、角括弧のフォルダで、可変のパスを作る"
 ---
 
 ## 概要

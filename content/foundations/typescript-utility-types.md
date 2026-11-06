@@ -4,6 +4,17 @@ category: プログラミング言語
 subcategory: TypeScript
 masteryBadge: next
 summary: 既存の型を元に「一部だけ変更した型」を作るための組み込み型。型定義の重複を避けられる。
+operationSteps:
+  - label: "元になる型を用意する"
+    note: "User のような、基本の型を決める"
+  - label: "Partialで全て任意にする"
+    note: "すべてのプロパティを、省略可能にした型を作る"
+  - label: "Pickで一部だけ取り出す"
+    note: "必要なプロパティだけを、選んだ型を作る"
+  - label: "Omitで一部を除く"
+    note: "不要なプロパティを、除いた型を作る"
+  - label: "元の型を変えずに派生できる"
+    note: "型の重複を、避けられる"
 ---
 
 ## 概要

@@ -4,6 +4,17 @@ category: ツール別
 subcategory: UnrealEngine
 masteryBadge: review
 summary: キャラクターのアニメーション状態遷移を、専用のブループリントグラフで管理するUnrealの仕組み。
+operationSteps:
+  - label: "Animation Blueprintを作る"
+    note: "スケルトンに対応する、アニメーション用のBlueprintを作る"
+  - label: "Event Graphで値を更新する"
+    note: "速さなどの、アニメーションに必要な値を、毎フレーム更新する"
+  - label: "ステートマシンを作る"
+    note: "待機・歩く・走るなどを、状態として、作る"
+  - label: "遷移の条件を設定する"
+    note: "速さなどの値で、状態が切り替わる条件を決める"
+  - label: "最終のポーズを出力する"
+    note: "アニメーショングラフから、ポーズを出す"
 ---
 
 ## 概要

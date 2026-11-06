@@ -3,6 +3,17 @@ name: const正しさ(const correctness)
 category: プログラミング言語
 subcategory: C++
 summary: 「変更しない」という意図を型システムで表明し、コンパイラに保証させる設計習慣。
+operationSteps:
+  - label: "変更しない値にconstを付ける"
+    note: "変えるつもりのない変数や引数に、constを付ける"
+  - label: "参照渡しでコピーを避ける"
+    note: "大きなオブジェクトは、const参照で受け取る"
+  - label: "メンバ関数をconstにする"
+    note: "オブジェクトの状態を変えない関数に、constを付ける"
+  - label: "コンパイラが違反を検出する"
+    note: "constの値を書き換えようとすると、コンパイルエラーになる"
+  - label: "意図が型に表れる"
+    note: "読む人が、変更されるかどうかを、型から判断できる"
 ---
 
 ## 概要

@@ -4,6 +4,17 @@ category: プログラミング言語
 subcategory: Python
 masteryBadge: next
 summary: Pythonの二次元配列は「リストのリスト」で表現する。作り方次第で行同士が意図せず共有されてしまう罠がある。
+operationSteps:
+  - label: "リストのリストで作る"
+    note: "[[0, 0], [0, 0]] のように、リストを入れ子にする"
+  - label: "内包表記で作る"
+    note: "[[0] * 3 for _ in range(2)] で、行ごとに別のリストを作る"
+  - label: "乗算での作成に注意する"
+    note: "[[0] * 3] * 2 は、同じ行を複数参照してしまう"
+  - label: "grid[i][j]でアクセスする"
+    note: "i行j列の要素を読み書きする"
+  - label: "二重ループで全体をたどる"
+    note: "外側が行、内側が列を回る"
 ---
 
 ## 概要

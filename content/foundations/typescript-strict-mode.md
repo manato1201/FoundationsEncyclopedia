@@ -4,6 +4,17 @@ category: プログラミング言語
 subcategory: TypeScript
 masteryBadge: done
 summary: tsconfig.jsonの1オプションで、型検査の厳格さを一括で引き上げる設定群。
+operationSteps:
+  - label: "tsconfig.jsonでstrictを有効にする"
+    note: "\"strict\": true を設定する"
+  - label: "複数の検査が一度に有効になる"
+    note: "noImplicitAny や strictNullChecks などが、まとめて有効になる"
+  - label: "暗黙のanyがエラーになる"
+    note: "型が決まらない値を、許さない"
+  - label: "nullの扱いが厳しくなる"
+    note: "null や undefined の可能性があれば、確認が要る"
+  - label: "バグを早く見つける"
+    note: "実行前に、問題を、検出できる"
 ---
 
 ## 概要

@@ -4,6 +4,17 @@ category: ツール別
 subcategory: Unity
 masteryBadge: next
 summary: コードを書かずにノードを繋いでシェーダーを構築できる、UnityのビジュアルシェーダーエディタツールDrop。
+operationSteps:
+  - label: "Shader Graphを作る"
+    note: "対応するレンダーパイプラインで、アセットを作る"
+  - label: "ノードを追加する"
+    note: "テクスチャ・色・計算のノードを、追加する"
+  - label: "ノードをつなぐ"
+    note: "出力を、マスターの入力(色・粗さなど)へつなぐ"
+  - label: "プロパティを公開する"
+    note: "色などを、プロパティとして、公開する"
+  - label: "マテリアルに割り当てて確認する"
+    note: "マテリアルを作り、見た目を確認する"
 ---
 
 ## 概要

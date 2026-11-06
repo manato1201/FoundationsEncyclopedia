@@ -4,6 +4,19 @@ category: DCC
 subcategory: Blender
 masteryBadge: next
 summary: リアルタイム重視のEeveeと、物理的正確さ重視のCycles。目的に応じた使い分けが必要な2大レンダーエンジン。
+operationSteps:
+  - label: "用途を決める"
+    note: "素早い確認が必要か、写実的な仕上がりが必要かを考える"
+  - label: "Eeveeを選ぶ場合"
+    note: "リアルタイムに近い速さで描画できる。確認や、アニメーションに向く"
+  - label: "Cyclesを選ぶ場合"
+    note: "光の経路を計算するため、写実的だが、時間がかかる"
+  - label: "サンプル数などを設定する"
+    note: "品質と時間のバランスを、サンプル数で調整する"
+  - label: "レンダリングして確認する"
+    note: "仕上がりと所要時間を確認する"
+  - label: "必要なら切り替えて比べる"
+    note: "同じシーンで、両方を比べて、用途に合うほうを選ぶ"
 ---
 
 ## 概要

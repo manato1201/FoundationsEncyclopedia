@@ -4,6 +4,17 @@ category: プログラミング言語
 subcategory: Python
 masteryBadge: done
 summary: Pythonは動的型付け言語。変数に型宣言は不要で、代入された値によって型が決まり、後から変わることもできる。
+operationSteps:
+  - label: "代入で変数を作る"
+    note: "x = 10 と書くだけでよい(型宣言は不要)"
+  - label: "値が型を持つ"
+    note: "変数ではなく、値が型を持つ(動的型付け)"
+  - label: "再代入で型が変わる"
+    note: "x = \"a\" のように、別の型の値を入れられる"
+  - label: "type()で型を確認する"
+    note: "実行中に、型を調べられる"
+  - label: "型ヒントで意図を示す"
+    note: "x: int = 10 のように書ける(強制はされない)"
 ---
 
 ## 概要

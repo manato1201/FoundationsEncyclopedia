@@ -3,6 +3,17 @@ name: UGUIのCanvas基礎
 category: ツール別
 subcategory: Unity
 summary: UnityのUI要素を配置・描画するための土台となるコンポーネント。3種類の描画モードを持つ。
+operationSteps:
+  - label: "Canvasを作る"
+    note: "UIを置く、土台のCanvasを作る"
+  - label: "描画モードを選ぶ"
+    note: "Screen Space Overlay・Camera・World Spaceから選ぶ"
+  - label: "UI要素を配置する"
+    note: "Canvasの下に、ボタンやテキストを置く"
+  - label: "Canvas Scalerで解像度に対応する"
+    note: "画面サイズが変わっても、大きさをそろえる"
+  - label: "EventSystemで入力を受け取る"
+    note: "クリックなどが、UIへ届くようにする"
 ---
 
 ## 概要

@@ -4,6 +4,19 @@ category: ツール別
 subcategory: UnrealEngine
 masteryBadge: advanced
 summary: サーバー上のActorの状態を、接続中の各クライアントへ自動的に同期させるUnrealのネットワーキング機構。
+operationSteps:
+  - label: "サーバーが正しい状態を持つ"
+    note: "ゲームの状態は、サーバーが、管理する"
+  - label: "変数をReplicatedにする"
+    note: "同期したい変数に、Replicatedの設定をする"
+  - label: "Actorのレプリケーションを有効にする"
+    note: "そのActorを、同期の対象にする"
+  - label: "サーバーから各クライアントへ送られる"
+    note: "変数の変化が、接続中のクライアントへ送られる"
+  - label: "RPCで操作を伝える"
+    note: "クライアントからサーバーへ、操作を依頼する"
+  - label: "通知で見た目を更新する"
+    note: "値が変わったときに、クライアント側の表示を更新する"
 ---
 
 ## 概要

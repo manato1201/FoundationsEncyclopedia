@@ -3,6 +3,17 @@ name: データテーブルの基礎
 category: ツール別
 subcategory: UnrealEngine
 summary: CSVやスプレッドシートに近い表形式で、大量のゲームデータ(敵のステータス等)を管理する仕組み。
+operationSteps:
+  - label: "行の構造(Struct)を作る"
+    note: "1行が持つ項目を、Structで定義する"
+  - label: "Data Tableを作る"
+    note: "そのStructを使って、テーブルを作る"
+  - label: "行を追加して値を入力する"
+    note: "表に、データを入力する(CSVの取り込みもできる)"
+  - label: "行の名前で取得する"
+    note: "Blueprintやコードから、行名を指定して取得する"
+  - label: "値を変えて調整する"
+    note: "表を直すだけで、ゲームの数値を調整できる"
 ---
 
 ## 概要

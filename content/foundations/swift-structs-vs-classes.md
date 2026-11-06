@@ -3,6 +3,17 @@ name: structとclassの違い
 category: プログラミング言語
 subcategory: Swift
 summary: Swiftのstructは値型、classは参照型。標準ライブラリの多くの型がstructで実装されている点が特徴的。
+operationSteps:
+  - label: "値型か参照型かを知る"
+    note: "struct は値型、class は参照型"
+  - label: "代入するとコピーされる(struct)"
+    note: "別の変数へ渡すと、複製される"
+  - label: "代入すると参照を共有する(class)"
+    note: "同じインスタンスを、複数の変数が指す"
+  - label: "継承は classだけ"
+    note: "継承が必要なら、class を使う"
+  - label: "既定はstructを選ぶ"
+    note: "共有が必要なときだけ、class にする"
 ---
 
 ## 概要

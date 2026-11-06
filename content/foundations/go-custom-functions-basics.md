@@ -4,6 +4,17 @@ category: プログラミング言語
 subcategory: Go
 masteryBadge: done
 summary: Goの関数は複数の戻り値を返せる点が最大の特徴。エラーハンドリングの慣習と密接に結びついている。
+operationSteps:
+  - label: "funcで関数を定義する"
+    note: "名前・引数・戻り値の型を書く"
+  - label: "複数の戻り値を返す"
+    note: "値とエラーなど、複数の値を、同時に返せる"
+  - label: "呼び出し側で受け取る"
+    note: "result, err := f() のように、複数の値を受ける"
+  - label: "errorを確認する"
+    note: "err が nil でなければ、失敗として扱う"
+  - label: "使わない値は_で捨てる"
+    note: "不要な戻り値は、空識別子 _ で無視する"
 ---
 
 ## 概要

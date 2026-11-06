@@ -3,6 +3,17 @@ name: データクラス
 category: プログラミング言語
 subcategory: Kotlin
 summary: equals/hashCode/toString/copyを自動生成してくれる、値の入れ物としてのクラス定義を簡潔にする機能。
+operationSteps:
+  - label: "dataを付けてクラスを宣言する"
+    note: "data class User(val name: String, val age: Int)"
+  - label: "プロパティを主コンストラクタに書く"
+    note: "書いたプロパティを元に、各機能が作られる"
+  - label: "equals・hashCode・toStringが自動生成される"
+    note: "中身で等しいかの比較や、文字列表示が、自動で使える"
+  - label: "copyで一部だけ変えた複製を作る"
+    note: "u.copy(age = 20) のように、変更箇所だけ指定する"
+  - label: "分解して取り出す"
+    note: "val (name, age) = user のように、まとめて取り出せる"
 ---
 
 ## 概要

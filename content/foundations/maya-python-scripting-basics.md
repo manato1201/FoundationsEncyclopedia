@@ -4,6 +4,19 @@ category: DCC
 subcategory: Maya
 masteryBadge: review
 summary: Pythonの標準的な文法でMayaを操作できるようにする、MELの後継として広く使われているAPI。
+operationSteps:
+  - label: "Pythonのタブを開く"
+    note: "スクリプトエディタで、Pythonを選ぶ"
+  - label: "maya.cmdsを読み込む"
+    note: "`import maya.cmds as cmds` で、コマンドを使えるようにする"
+  - label: "オブジェクトを作る"
+    note: "`cmds.polyCube()` などで、オブジェクトを作る"
+  - label: "属性を読み書きする"
+    note: "getAttrとsetAttrで、値を取得・変更する"
+  - label: "選択を扱う"
+    note: "`cmds.ls(selection=True)` で、選択中のものを取得する"
+  - label: "処理をまとめて自動化する"
+    note: "関数にして、繰り返し使う"
 ---
 
 ## 概要

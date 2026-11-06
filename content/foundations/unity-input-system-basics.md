@@ -3,6 +3,17 @@ name: 新Input Systemの基礎
 category: ツール別
 subcategory: Unity
 summary: 複数の入力デバイスをイベント駆動で統一的に扱える、従来のInput Managerを置き換える新しい入力パッケージ。
+operationSteps:
+  - label: "Input Systemを導入する"
+    note: "パッケージを入れ、設定を切り替える"
+  - label: "Input Actionsを作る"
+    note: "動作(Move・Jumpなど)と、割り当てを、アセットに作る"
+  - label: "デバイスにバインドする"
+    note: "キーボード・ゲームパッドなどの入力を、動作に結びつける"
+  - label: "コードでイベントを受け取る"
+    note: "performedなどのコールバックで、入力を処理する"
+  - label: "再割り当てに対応する"
+    note: "プレイヤーが、キーを変えられるようにする"
 ---
 
 ## 概要

@@ -4,6 +4,17 @@ category: ツール別
 subcategory: Unity
 masteryBadge: done
 summary: オブジェクトに物理的な振る舞いを与えるRigidbodyと、当たり判定の形状を定義するColliderの役割分担。
+operationSteps:
+  - label: "Colliderで形を決める"
+    note: "当たり判定の形を、Colliderで設定する"
+  - label: "Rigidbodyで物理を与える"
+    note: "重力や力に反応するようにする"
+  - label: "衝突が検知される"
+    note: "ぶつかると、OnCollisionEnterなどが呼ばれる"
+  - label: "物理の更新に合わせて動かす"
+    note: "FixedUpdateで、力を加える"
+  - label: "質量や摩擦を調整する"
+    note: "動きの手応えを、調整する"
 ---
 
 ## 概要

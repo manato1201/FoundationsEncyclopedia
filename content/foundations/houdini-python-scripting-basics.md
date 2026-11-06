@@ -4,6 +4,19 @@ category: DCC
 subcategory: Houdini
 masteryBadge: review
 summary: HoudiniのシーンをPythonから直接操作できるようにする、hou モジュールを使ったスクリプティング。
+operationSteps:
+  - label: "houモジュールを使う準備をする"
+    note: "Pythonシェルや、Python Sopなどで、`import hou` を使える状態にする"
+  - label: "ノードを取得する"
+    note: "hou.nodeで、パスを指定して、ノードを取得する"
+  - label: "パラメーターを読み書きする"
+    note: "ノードのパラメーターの値を、取得したり、設定したりする"
+  - label: "ノードを作る・つなぐ"
+    note: "createNodeでノードを作り、setInputでつなぐ"
+  - label: "ジオメトリのデータを読む"
+    note: "geometry()で、点や面のデータを取得する"
+  - label: "作業を自動化する"
+    note: "繰り返しの操作を、スクリプトにまとめる"
 ---
 
 ## 概要

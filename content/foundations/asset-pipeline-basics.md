@@ -4,6 +4,17 @@ category: Framework
 subcategory: ゲームエンジン基盤
 masteryBadge: next
 summary: DCCツールで作成した素材を、ゲームエンジンで使える形式へ変換・最適化して取り込む一連の工程。
+operationSteps:
+  - label: "DCCツールで素材を作る"
+    note: "モデル・テクスチャ・アニメーションを、DCCツールで作る"
+  - label: "書き出し形式へ変換する"
+    note: "FBXやPNGなどの形式で、書き出す"
+  - label: "エンジンへ取り込む"
+    note: "ゲームエンジンのプロジェクトへ、素材をインポートする"
+  - label: "エンジン向けに最適化する"
+    note: "圧縮・LOD・テクスチャの大きさなどを、設定する"
+  - label: "ビルドに含めて確認する"
+    note: "ゲームの中で表示し、見た目と負荷を確認する"
 ---
 
 ## 概要

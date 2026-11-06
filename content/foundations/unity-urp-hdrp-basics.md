@@ -3,6 +3,17 @@ name: URP/HDRPの違い
 category: ツール別
 subcategory: Unity
 summary: 描画パフォーマンス重視のURPと、視覚品質重視のHDRP。Unityが提供する2つのScriptable Render Pipeline。
+operationSteps:
+  - label: "目的を決める"
+    note: "対応する機材と、求める見た目を考える"
+  - label: "URPを選ぶ場合"
+    note: "軽く、幅広い機材に向く。モバイルなどに使われる"
+  - label: "HDRPを選ぶ場合"
+    note: "高品質な表現ができるが、高い性能が要る"
+  - label: "プロジェクトに導入する"
+    note: "選んだレンダーパイプラインを設定する"
+  - label: "機能の対応を確認する"
+    note: "使いたい機能が、選んだものに対応しているかを確認する"
 ---
 
 ## 概要

@@ -4,6 +4,17 @@ category: プログラミング言語
 subcategory: シェーダー言語
 masteryBadge: advanced
 summary: 描画パイプラインを介さず、GPUを汎用的な並列計算装置として使うためのシェーダーステージ。
+operationSteps:
+  - label: "計算用のバッファを用意する"
+    note: "入出力のデータを、GPUのメモリへ置く"
+  - label: "コンピュートシェーダーを書く"
+    note: "1つのスレッドが行う処理を、書く"
+  - label: "スレッドグループの数を決める"
+    note: "並列に動かす、スレッドの数を決める"
+  - label: "Dispatchで実行する"
+    note: "GPUへ、計算を依頼する"
+  - label: "結果を読み出す"
+    note: "バッファの中の結果を、使う、または読み出す"
 ---
 
 ## 概要

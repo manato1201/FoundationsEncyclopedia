@@ -3,6 +3,17 @@ name: チャネルによる通信
 category: プログラミング言語
 subcategory: Go
 summary: Goroutine間でデータを安全にやり取りするための通信路。「共有メモリを使わずに通信することで状態を共有する」という設計思想の中核。
+operationSteps:
+  - label: "チャネルを作る"
+    note: "make(chan int) で、値を受け渡す通り道を作る"
+  - label: "送る側が値を送る"
+    note: "ch <- 値 で送る"
+  - label: "受ける側が値を受け取る"
+    note: "値 := <-ch で受け取る"
+  - label: "同期される"
+    note: "バッファがないチャネルは、送受信が揃うまで待つ"
+  - label: "closeで終わりを知らせる"
+    note: "送り終えたら close し、受け側は range で終わりまで受ける"
 ---
 
 ## 概要

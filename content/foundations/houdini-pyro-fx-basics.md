@@ -4,6 +4,19 @@ category: DCC
 subcategory: Houdini
 masteryBadge: advanced
 summary: 気体の流体力学的な挙動を計算し、炎・煙・爆発のような視覚効果を生成するHoudiniの得意分野。
+operationSteps:
+  - label: "燃料(炎や煙の元)を用意する"
+    note: "炎や煙を出す、形や点を用意する"
+  - label: "Pyroの設定をする"
+    note: "温度・燃焼・拡散などの、パラメーターを設定する"
+  - label: "ソルバーでシミュレーションする"
+    note: "気体の動きを、時間ごとに計算する"
+  - label: "結果をキャッシュする"
+    note: "重い計算結果を、ファイルに保存する"
+  - label: "見た目を調整する"
+    note: "密度や温度から、色や明るさを決める"
+  - label: "レンダリングする"
+    note: "ボリュームとして、レンダリングする"
 ---
 
 ## 概要

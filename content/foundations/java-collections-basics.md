@@ -4,6 +4,17 @@ category: プログラミング言語
 subcategory: Java
 masteryBadge: review
 summary: List/Set/Mapという3つの基本インターフェースを軸にした、Java標準のコレクション体系。
+operationSteps:
+  - label: "3つの基本を知る"
+    note: "List(順序あり)・Set(重複なし)・Map(キーと値)"
+  - label: "目的に合う型を選ぶ"
+    note: "並び順が必要ならList、重複を避けたいならSet、検索ならMap"
+  - label: "実装クラスを選ぶ"
+    note: "ArrayList・HashSet・HashMap など、実装を選ぶ"
+  - label: "追加・取得・削除をする"
+    note: "add・get・remove などで、要素を操作する"
+  - label: "拡張forで順に処理する"
+    note: "for (var x : list) で、すべての要素を回る"
 ---
 
 ## 概要

@@ -3,6 +3,17 @@ name: 名前空間の基礎
 category: プログラミング言語
 subcategory: PHP
 summary: クラス名の衝突を避けるための階層的な区分け。Composerのオートローディングとも密接に関わる。
+operationSteps:
+  - label: "namespaceを宣言する"
+    note: "ファイルの先頭に、namespace 名前; を書く"
+  - label: "クラスが名前空間に属する"
+    note: "同じクラス名でも、名前空間が違えば、別物になる"
+  - label: "useでクラスを取り込む"
+    note: "use で、完全な名前を、短く使えるようにする"
+  - label: "オートロードと対応させる"
+    note: "名前空間とフォルダを対応させると、自動で読み込まれる"
+  - label: "名前の衝突を避ける"
+    note: "複数のライブラリを使っても、クラス名が衝突しない"
 ---
 
 ## 概要

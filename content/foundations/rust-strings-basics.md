@@ -4,6 +4,17 @@ category: プログラミング言語
 subcategory: Rust
 masteryBadge: advanced
 summary: Rustには所有権を持つStringと、借用した文字列スライスstrという2つの文字列型があり、この使い分けが最初の壁になる。
+operationSteps:
+  - label: "2つの文字列型を知る"
+    note: "所有するString と、借用のstrがある"
+  - label: "&strは借用した文字列スライス"
+    note: "文字列リテラルは、&str"
+  - label: "Stringは所有して伸び縮みする"
+    note: "String::from で作り、push_str で追加できる"
+  - label: "相互に変換する"
+    note: "&str から String は to_string()、String から &str は & で借りる"
+  - label: "文字単位で扱う"
+    note: "chars() で、文字ごとに、取り出す"
 ---
 
 ## 概要

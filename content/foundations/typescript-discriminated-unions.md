@@ -4,6 +4,17 @@ category: プログラミング言語
 subcategory: TypeScript
 masteryBadge: review
 summary: 共通の「タグ」プロパティでユニオン型のどの型かを判別できるようにする設計パターン。
+operationSteps:
+  - label: "共通のタグを持つ型を定義する"
+    note: "kind: \"circle\" のような、リテラル型のプロパティを持たせる"
+  - label: "ユニオン型にまとめる"
+    note: "type Shape = Circle | Square"
+  - label: "タグで分岐する"
+    note: "switch (s.kind) で、どの型かを判別する"
+  - label: "型が自動で絞り込まれる"
+    note: "各分岐の中で、その型のプロパティが使える"
+  - label: "網羅性を確認する"
+    note: "足りない分岐があれば、コンパイラが、知らせる"
 ---
 
 ## 概要

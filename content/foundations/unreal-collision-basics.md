@@ -4,6 +4,17 @@ category: ツール別
 subcategory: UnrealEngine
 masteryBadge: done
 summary: オブジェクト同士がどう衝突・重なりを検知するかを、チャンネルとレスポンスの組み合わせで細かく制御する仕組み。
+operationSteps:
+  - label: "コリジョンの形を設定する"
+    note: "メッシュなどに、当たり判定の形を持たせる"
+  - label: "オブジェクトタイプを決める"
+    note: "そのオブジェクトの種類(Pawn・WorldStaticなど)を決める"
+  - label: "チャンネルごとの反応を設定する"
+    note: "ほかの種類に対し、無視・重なり・ブロックを設定する"
+  - label: "イベントを使う"
+    note: "OverlapやHitのイベントで、処理を行う"
+  - label: "デバッグ表示で確認する"
+    note: "コリジョンを表示して、設定を確かめる"
 ---
 
 ## 概要

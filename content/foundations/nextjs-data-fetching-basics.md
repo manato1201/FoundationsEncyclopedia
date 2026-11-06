@@ -4,6 +4,17 @@ category: Framework
 subcategory: Web(Next.js等)
 masteryBadge: review
 summary: Server Component内でasync/awaitを使い、クライアント側のローディング状態管理なしにデータを取得できる仕組み。
+operationSteps:
+  - label: "Server Componentを非同期関数にする"
+    note: "コンポーネントを、async関数として書く"
+  - label: "fetchやDBでデータを取得する"
+    note: "awaitで、サーバー側でデータを取得する"
+  - label: "取得したデータで画面を作る"
+    note: "取得した値を使って、JSXを作る"
+  - label: "HTMLとして返す"
+    note: "完成したHTMLが、ブラウザへ送られる"
+  - label: "キャッシュと再検証を決める"
+    note: "データをどのくらい使い回すかを、設定する"
 ---
 
 ## 概要

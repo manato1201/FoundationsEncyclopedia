@@ -4,6 +4,17 @@ category: Framework
 subcategory: Web(Next.js等)
 masteryBadge: next
 summary: 画像の自動リサイズ・フォーマット変換・遅延読み込みをまとめて行ってくれる、Next.js標準の画像コンポーネント。
+operationSteps:
+  - label: "next/imageを読み込む"
+    note: "Imageコンポーネントを、読み込んで使う"
+  - label: "幅と高さを指定する"
+    note: "レイアウトのずれを防ぐため、大きさを指定する"
+  - label: "自動でリサイズ・変換される"
+    note: "画面に合う大きさと、軽い形式に変換される"
+  - label: "遅延読み込みされる"
+    note: "画面に入るまで、読み込みを遅らせる"
+  - label: "表示を確認する"
+    note: "ネットワークで、画像の大きさと形式を確認する"
 ---
 
 ## 概要

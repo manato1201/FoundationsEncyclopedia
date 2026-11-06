@@ -4,6 +4,17 @@ category: プログラミング言語
 subcategory: Rust
 masteryBadge: advanced
 summary: Rustの二次元配列も「配列の配列」やVecの入れ子で表現するが、所有権のルールが絡み扱いがやや複雑になる。
+operationSteps:
+  - label: "配列の配列で作る"
+    note: "[[0; 3]; 2] で、固定長の二次元配列を作る"
+  - label: "可変にしたいならVecの入れ子"
+    note: "Vec<Vec<i32>> で、大きさを変えられる"
+  - label: "grid[i][j]でアクセスする"
+    note: "範囲外は、実行時にpanicする"
+  - label: "所有権に注意する"
+    note: "行を取り出すと、所有権や借用のルールが関わる"
+  - label: "イテレータで全体をたどる"
+    note: "iter() で、行と列を、順に取り出す"
 ---
 
 ## 概要

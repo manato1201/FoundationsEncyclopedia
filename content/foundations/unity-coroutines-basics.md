@@ -4,6 +4,17 @@ category: ツール別
 subcategory: Unity
 masteryBadge: done
 summary: 複数フレームにまたがる処理を、通常の関数のように直線的に書けるようにするUnity独自の仕組み。
+operationSteps:
+  - label: "コルーチンの関数を書く"
+    note: "戻り値をIEnumeratorにして、yield returnを使う"
+  - label: "StartCoroutineで開始する"
+    note: "呼び出して、処理を始める"
+  - label: "yieldで一時停止する"
+    note: "WaitForSecondsなどで、指定の時間だけ待つ"
+  - label: "次のフレームで再開する"
+    note: "待ち終わると、続きから処理が再開する"
+  - label: "StopCoroutineで止める"
+    note: "不要になったら、止める。オブジェクトが無効になると止まる"
 ---
 
 ## 概要

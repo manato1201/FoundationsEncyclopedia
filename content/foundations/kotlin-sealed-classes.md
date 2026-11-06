@@ -4,6 +4,17 @@ category: プログラミング言語
 subcategory: Kotlin
 masteryBadge: next
 summary: 継承できるサブクラスをコンパイル時に限定し、when式での網羅性チェックを可能にするKotlinの機能。
+operationSteps:
+  - label: "sealedで継承を限定する"
+    note: "サブクラスを、同じパッケージ・モジュールの中に限る"
+  - label: "取りうる型を列挙する"
+    note: "結果の種類(成功・失敗など)を、サブクラスとして定義する"
+  - label: "when式で分岐する"
+    note: "型ごとに、処理を書く"
+  - label: "網羅性がチェックされる"
+    note: "すべての型を扱っているかを、コンパイラが確認する"
+  - label: "型を追加すると警告が出る"
+    note: "新しい型を足すと、扱いが漏れた場所が、分かる"
 ---
 
 ## 概要

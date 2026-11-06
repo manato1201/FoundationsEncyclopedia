@@ -4,6 +4,17 @@ category: Framework
 subcategory: テスト・CI
 masteryBadge: review
 summary: Arrange(準備)/Act(実行)/Assert(検証)の3段構成でテストを書くと、意図が読み取りやすくなる。
+operationSteps:
+  - label: "Arrange: 準備する"
+    note: "テストに必要な、データや対象を用意する"
+  - label: "Act: 実行する"
+    note: "確かめたい処理を、実行する"
+  - label: "Assert: 検証する"
+    note: "結果が、期待どおりかを確かめる"
+  - label: "1つのテストで1つの目的にする"
+    note: "確認する内容を絞って、失敗の原因を分かりやすくする"
+  - label: "名前で意図を伝える"
+    note: "テストの名前に、何を確かめるかを書く"
 ---
 
 ## 概要

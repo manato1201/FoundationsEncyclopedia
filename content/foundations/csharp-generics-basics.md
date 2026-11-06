@@ -4,6 +4,17 @@ category: プログラミング言語
 subcategory: C#
 masteryBadge: done
 summary: 型をパラメータとして受け取ることで、型安全性を保ったまま再利用可能なクラス・メソッドを書く機能。
+operationSteps:
+  - label: "型パラメータを宣言する"
+    note: "例: class Box<T>。Tが、後で決まる型"
+  - label: "Tを使って処理を書く"
+    note: "型に依存しない、共通の処理を書く"
+  - label: "使うときに型を指定する"
+    note: "Box<int> のように、具体的な型を渡す"
+  - label: "型安全に使える"
+    note: "異なる型を入れようとすると、コンパイルエラーになる"
+  - label: "制約で使える範囲を絞る"
+    note: "where で、型が満たすべき条件を指定できる"
 ---
 
 ## 概要

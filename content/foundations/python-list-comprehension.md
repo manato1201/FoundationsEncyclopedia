@@ -4,6 +4,17 @@ category: プログラミング言語
 subcategory: Python
 masteryBadge: next
 summary: for文とif文を1行に凝縮してリストを構築するPythonの構文糖衣。可読性と速度を両立させやすい。
+operationSteps:
+  - label: "元になるイテラブルを用意する"
+    note: "リストやrangeなどを用意する"
+  - label: "for部分で要素を取り出す"
+    note: "[式 for 変数 in 元] の形"
+  - label: "if部分で絞り込む"
+    note: "条件に合う要素だけを、対象にする"
+  - label: "式で値を変換する"
+    note: "各要素から、新しい値を作る"
+  - label: "新しいリストができる"
+    note: "1行で、結果のリストを作る"
 ---
 
 ## 概要

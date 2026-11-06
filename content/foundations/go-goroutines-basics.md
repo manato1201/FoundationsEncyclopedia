@@ -4,6 +4,17 @@ category: プログラミング言語
 subcategory: Go
 masteryBadge: next
 summary: goキーワード1つで起動できる軽量な並行処理単位。OSスレッドより遥かに軽く、大量に生成できる。
+operationSteps:
+  - label: "関数をgoで起動する"
+    note: "go f() で、新しいGoroutineが始まる"
+  - label: "並行して実行される"
+    note: "呼び出し元は待たず、すぐに次へ進む"
+  - label: "軽量なので大量に作れる"
+    note: "OSのスレッドより、はるかに軽い"
+  - label: "終了を待つ"
+    note: "WaitGroupやチャネルで、完了を待つ"
+  - label: "main終了で全体が終わる"
+    note: "main関数が終わると、残りのGoroutineも終了する"
 ---
 
 ## 概要

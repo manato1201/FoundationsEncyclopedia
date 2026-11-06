@@ -4,6 +4,17 @@ category: プログラミング言語
 subcategory: Rust
 masteryBadge: review
 summary: Rustはfor/whileに加え、無限ループ専用のloopキーワードを持ち、breakで値を返せるという独自の機能がある。
+operationSteps:
+  - label: "forでイテレータを回す"
+    note: "for x in 1..5 のように、範囲やコレクションを回す"
+  - label: "whileは条件で繰り返す"
+    note: "条件が真のあいだ、繰り返す"
+  - label: "loopは無限ループ"
+    note: "break で抜ける"
+  - label: "breakで値を返せる"
+    note: "loop は、break 値; の形で、値を返せる"
+  - label: "ラベルで外側を抜ける"
+    note: "'outer: で、入れ子のループから、一度に抜ける"
 ---
 
 ## 概要

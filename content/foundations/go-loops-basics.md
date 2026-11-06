@@ -4,6 +4,17 @@ category: プログラミング言語
 subcategory: Go
 masteryBadge: done
 summary: GoにはC#やC++にあるwhile文が存在せず、forという1つのキーワードだけで全てのループを表現する。
+operationSteps:
+  - label: "Goのループはforだけ"
+    note: "while はなく、for が全てを担う"
+  - label: "3つの部分を持つfor"
+    note: "for i := 0; i < n; i++ の形"
+  - label: "条件だけのfor(whileの代わり)"
+    note: "for 条件 { } で、while と同じ動きになる"
+  - label: "無限ループ"
+    note: "for { } と書き、break で抜ける"
+  - label: "rangeで反復する"
+    note: "スライスやマップを、range で順に取り出す"
 ---
 
 ## 概要

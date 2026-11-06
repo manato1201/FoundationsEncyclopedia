@@ -4,6 +4,17 @@ category: プログラミング言語
 subcategory: TypeScript
 masteryBadge: done
 summary: JavaScriptに型注釈を追加した言語。let/constという変数宣言はJS由来、型の部分がTypeScript独自。
+operationSteps:
+  - label: "let・constで宣言する"
+    note: "JavaScriptと同じ。constは再代入できない"
+  - label: "型注釈を付ける"
+    note: "let x: number = 1 のように書く"
+  - label: "型推論に任せる"
+    note: "初期値から、型が決まるので、書かなくてもよい"
+  - label: "型が合わない代入はエラー"
+    note: "コンパイル時に、検出される"
+  - label: "実行時にはJavaScriptになる"
+    note: "型は、コンパイルで取り除かれる"
 ---
 
 ## 概要

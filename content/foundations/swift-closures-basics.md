@@ -4,6 +4,17 @@ category: プログラミング言語
 subcategory: Swift
 masteryBadge: review
 summary: 周囲の変数を捕捉できる、名前を持たない自己完結型の関数ブロック。
+operationSteps:
+  - label: "クロージャを書く"
+    note: "{ (引数) in 処理 } の形で、関数のような塊を作る"
+  - label: "変数に入れる・渡す"
+    note: "関数の引数や、変数として、扱える"
+  - label: "周囲の変数を捕捉する"
+    note: "外側の変数を、保持して、使える"
+  - label: "呼び出して実行する"
+    note: "必要なときに、実行する"
+  - label: "循環参照に注意する"
+    note: "self を捕捉すると、循環参照になる場合がある。[weak self] で防ぐ"
 ---
 
 ## 概要

@@ -3,6 +3,17 @@ name: Timelineの基礎
 category: ツール別
 subcategory: Unity
 summary: カットシーンや演出を、複数のトラックを時間軸上に並べて視覚的に編集できるUnityの機能。
+operationSteps:
+  - label: "Timelineアセットを作る"
+    note: "演出を並べる、タイムラインを作る"
+  - label: "トラックを追加する"
+    note: "アニメーション・音・アクティベーションなどの、トラックを追加する"
+  - label: "クリップを並べる"
+    note: "時間軸の上に、クリップを置く"
+  - label: "長さやつなぎを調整する"
+    note: "クリップの長さや、重なりを調整する"
+  - label: "再生して確認する"
+    note: "再生して、演出の流れを確かめる"
 ---
 
 ## 概要

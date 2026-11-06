@@ -4,6 +4,17 @@ category: ツール別
 subcategory: UnrealEngine
 masteryBadge: next
 summary: パーティクル(火花、煙、魔法エフェクト等)を、モジュール化された仕組みで柔軟に構築するUnreal Engineのビジュアルエフェクトシステム。
+operationSteps:
+  - label: "Niagara Systemを作る"
+    note: "エフェクトの、全体を持つ、システムを作る"
+  - label: "エミッターを追加する"
+    note: "粒を出す、エミッターを追加する"
+  - label: "モジュールで動きを組む"
+    note: "生成・初速・重力・色などを、モジュールで設定する"
+  - label: "時間による変化を加える"
+    note: "寿命の間に、大きさや色を、変える"
+  - label: "レベルに配置して再生する"
+    note: "エフェクトを、置いて、確認する"
 ---
 
 ## 概要

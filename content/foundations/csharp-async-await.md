@@ -4,6 +4,17 @@ category: プログラミング言語
 subcategory: C#
 masteryBadge: review
 summary: 時間のかかる処理を「待っている間も他の処理を進められる」形で書くための構文。UI/ゲームループの応答性維持に直結する。
+operationSteps:
+  - label: "時間のかかる処理を見つける"
+    note: "ネットワークやファイルの待ちなど、結果を待つ処理を探す"
+  - label: "asyncのメソッドにする"
+    note: "メソッドに async を付けて、戻り値を Task にする"
+  - label: "awaitで完了を待つ"
+    note: "待っているあいだ、呼び出し元のスレッドは、ほかの仕事を続けられる"
+  - label: "完了したら続きを実行する"
+    note: "結果が返ったら、awaitの次の行から再開する"
+  - label: "例外の扱いを確認する"
+    note: "非同期の中の例外も、try-catch で受け取れる"
 ---
 
 ## 概要

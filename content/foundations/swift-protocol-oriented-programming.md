@@ -4,6 +4,17 @@ category: プログラミング言語
 subcategory: Swift
 masteryBadge: advanced
 summary: 継承よりもプロトコル(インターフェース)の組み合わせを優先する、Swiftコミュニティで重視される設計思想。
+operationSteps:
+  - label: "プロトコルで振る舞いを定義する"
+    note: "必要なメソッドやプロパティを、並べる"
+  - label: "型にプロトコルを適合させる"
+    note: "struct や class、enum に、適合させる"
+  - label: "拡張で既定の実装を与える"
+    note: "protocol extension で、共通の処理を書く"
+  - label: "プロトコル型として扱う"
+    note: "適合した型を、同じ呼び出しで扱える"
+  - label: "継承より組み合わせを選ぶ"
+    note: "小さなプロトコルを、組み合わせて、機能を作る"
 ---
 
 ## 概要

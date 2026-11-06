@@ -4,6 +4,17 @@ category: プログラミング言語
 subcategory: C++
 masteryBadge: review
 summary: C++にはC言語由来のchar配列(Cスタイル文字列)と、より安全なstd::stringの2つの文字列表現がある。
+operationSteps:
+  - label: "2つの文字列表現を知る"
+    note: "C言語由来のchar配列と、std::stringがある"
+  - label: "char配列は終端が必要"
+    note: "最後に '\\0' を置いて、文字列の終わりを表す"
+  - label: "std::stringは長さを管理する"
+    note: "サイズが自動で伸び縮みする"
+  - label: "連結や比較をする"
+    note: "std::string は、+ や == で、直感的に扱える"
+  - label: "安全なstd::stringを選ぶ"
+    note: "特別な理由がなければ、std::string を使う"
 ---
 
 ## 概要

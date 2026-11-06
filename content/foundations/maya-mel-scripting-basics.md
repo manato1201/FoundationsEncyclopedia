@@ -3,6 +3,17 @@ name: MELスクリプティングの基礎
 category: DCC
 subcategory: Maya
 summary: Mayaに古くから組み込まれているスクリプト言語。多くの内部機能がMELコマンドとして実装されている。
+operationSteps:
+  - label: "スクリプトエディタを開く"
+    note: "MELのタブで、コマンドを入力できるようにする"
+  - label: "コマンドを入力する"
+    note: "`polyCube;` のように、コマンドを書く"
+  - label: "変数やループを使う"
+    note: "`$i` のような変数や、forループで、処理を繰り返す"
+  - label: "オブジェクトを操作する"
+    note: "選択やノードの属性を、コマンドで読み書きする"
+  - label: "スクリプトを保存して再利用する"
+    note: "ファイルに保存して、あとから呼び出す"
 ---
 
 ## 概要

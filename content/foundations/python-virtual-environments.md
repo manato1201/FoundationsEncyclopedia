@@ -4,6 +4,17 @@ category: プログラミング言語
 subcategory: Python
 masteryBadge: done
 summary: プロジェクトごとに独立したパッケージ環境を作り、依存関係の衝突を防ぐ仕組み。
+operationSteps:
+  - label: "仮想環境を作る"
+    note: "python -m venv .venv で、専用のフォルダを作る"
+  - label: "有効化する"
+    note: "activate で、その環境のPythonを、使う状態にする"
+  - label: "パッケージをインストールする"
+    note: "pip install は、その環境の中にだけ入る"
+  - label: "依存を記録する"
+    note: "pip freeze > requirements.txt で、一覧を保存する"
+  - label: "環境を分けて衝突を防ぐ"
+    note: "プロジェクトごとに、別の版を使える"
 ---
 
 ## 概要

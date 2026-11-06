@@ -3,6 +3,17 @@ name: Takeシステムの基礎
 category: DCC
 subcategory: Houdini
 summary: 同じシーンから、パラメータの異なる複数のバリエーションを切り替えて管理できる仕組み。
+operationSteps:
+  - label: "バリエーションを決める"
+    note: "同じシーンで、変えたい設定(色・配置・表示など)を決める"
+  - label: "新しいTakeを作る"
+    note: "Takeを作って、名前を付ける"
+  - label: "Takeの中で値を変える"
+    note: "そのTakeでだけ、変更したパラメーターを記録する"
+  - label: "Takeを切り替える"
+    note: "切り替えると、そのTakeの設定が、シーンに反映される"
+  - label: "書き出しやレンダリングに使う"
+    note: "Takeごとに、別の結果を書き出す"
 ---
 
 ## 概要

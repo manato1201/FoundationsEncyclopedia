@@ -3,6 +3,17 @@ name: ジェネレータとyield
 category: プログラミング言語
 subcategory: Python
 summary: 値を1つずつ遅延生成することで、大きなデータ列でもメモリを使い切らずに処理できる仕組み。
+operationSteps:
+  - label: "yieldを使う関数を書く"
+    note: "return の代わりに、yield で値を返す"
+  - label: "ジェネレータが作られる"
+    note: "呼び出しても、すぐには実行されない"
+  - label: "nextで1つずつ取り出す"
+    note: "要求されたときだけ、次の値まで実行される"
+  - label: "yieldの位置で一時停止する"
+    note: "状態を保ったまま、止まる"
+  - label: "メモリを節約できる"
+    note: "大きなデータを、すべて作らず、順に処理できる"
 ---
 
 ## 概要

@@ -3,6 +3,17 @@ name: モジュールとMix-in
 category: プログラミング言語
 subcategory: Ruby
 summary: インスタンス化できない名前空間・機能のまとまりを、クラスに「取り込む」ことで多重継承に似た効果を得る仕組み。
+operationSteps:
+  - label: "moduleでメソッドをまとめる"
+    note: "インスタンス化できない、機能のまとまりを作る"
+  - label: "includeでクラスに取り込む"
+    note: "クラスに、メソッドが加わる(Mix-in)"
+  - label: "複数のモジュールを取り込む"
+    note: "1つのクラスに、複数の機能を足せる"
+  - label: "名前空間としても使う"
+    note: "クラス名の衝突を、避ける"
+  - label: "継承の代わりに機能を組み合わせる"
+    note: "単一継承の制限を、Mix-inで補う"
 ---
 
 ## 概要

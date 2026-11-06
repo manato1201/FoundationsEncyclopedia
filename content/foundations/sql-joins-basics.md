@@ -4,6 +4,17 @@ category: プログラミング言語
 subcategory: SQL
 masteryBadge: review
 summary: 複数のテーブルを共通のキーで結合し、1つの結果として取り出すための操作。
+operationSteps:
+  - label: "結合したい2つのテーブルを決める"
+    note: "共通のキーを持つ、テーブルを選ぶ"
+  - label: "結合の条件を書く"
+    note: "ON で、どの列どうしを、結びつけるかを指定する"
+  - label: "INNER JOINは両方にある行だけ"
+    note: "条件に合う、両方の行だけを返す"
+  - label: "LEFT JOINは左の行を全て残す"
+    note: "右に、対応がなければ、NULLで埋める"
+  - label: "結果の行数を確認する"
+    note: "意図しない重複が、ないかを確かめる"
 ---
 
 ## 概要

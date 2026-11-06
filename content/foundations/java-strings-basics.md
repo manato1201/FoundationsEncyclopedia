@@ -4,6 +4,17 @@ category: プログラミング言語
 subcategory: Java
 masteryBadge: done
 summary: JavaのStringはchar配列に近い内部構造を持つイミュータブルな参照型。charという専用のプリミティブ型も存在する。
+operationSteps:
+  - label: "Stringは不変の参照型"
+    note: "一度作ると、中身を書き換えられない"
+  - label: "charAtで1文字を取得する"
+    note: "s.charAt(0) で、先頭の文字を取得する"
+  - label: "変更は新しい文字列を作る"
+    note: "連結や置換は、新しい String を返す"
+  - label: "連結を繰り返すと重い"
+    note: "ループでの連結は、毎回、新しい文字列を作る"
+  - label: "StringBuilderで効率よく組み立てる"
+    note: "多くの連結には、StringBuilder を使う"
 ---
 
 ## 概要

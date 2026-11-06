@@ -4,6 +4,17 @@ category: プログラミング言語
 subcategory: TypeScript
 masteryBadge: done
 summary: TypeScriptにもPythonと同様charという専用型がなく、1文字は「長さ1の文字列」として扱われる。
+operationSteps:
+  - label: "char型はない"
+    note: "1文字も、長さ1の文字列"
+  - label: "インデックスで1文字を取得する"
+    note: "s[0] や charAt で、取得する"
+  - label: "文字列は不変"
+    note: "書き換えると、新しい文字列ができる"
+  - label: "テンプレートリテラルで組み立てる"
+    note: "`${name}さん` のように、値を埋め込む"
+  - label: "サロゲートペアに注意する"
+    note: "絵文字などは、1文字でも、length が2になる場合がある"
 ---
 
 ## 概要

@@ -3,6 +3,17 @@ name: UniformとVaryingの違い
 category: プログラミング言語
 subcategory: シェーダー言語
 summary: シェーダーに値を渡す2つの経路。実行単位ごとに一定か、補間されて変化するかが分かれ目。
+operationSteps:
+  - label: "値の渡し方を2つ知る"
+    note: "Uniform と、Varying(補間される値)がある"
+  - label: "Uniformは全体で一定"
+    note: "1回の描画の間、すべての頂点・ピクセルで同じ値"
+  - label: "頂点シェーダーで値を出力する"
+    note: "頂点ごとの値を、出力する(Varying)"
+  - label: "ラスタライズで補間される"
+    note: "頂点の間の、ピクセルへ、値が補間される"
+  - label: "フラグメントシェーダーで受け取る"
+    note: "ピクセルごとの、補間された値を使う"
 ---
 
 ## 概要

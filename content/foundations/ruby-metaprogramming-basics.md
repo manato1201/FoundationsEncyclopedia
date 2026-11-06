@@ -4,6 +4,17 @@ category: プログラミング言語
 subcategory: Ruby
 masteryBadge: advanced
 summary: 実行時にクラスやメソッドの定義そのものを操作する、Rubyの柔軟性を象徴する技法。
+operationSteps:
+  - label: "クラスやメソッドも実行時のオブジェクト"
+    note: "定義そのものを、プログラムから操作できる"
+  - label: "define_methodでメソッドを作る"
+    note: "実行時に、名前を指定して、メソッドを定義する"
+  - label: "sendで名前から呼び出す"
+    note: "メソッド名を、変数で指定して、呼び出せる"
+  - label: "method_missingで未定義の呼び出しを受ける"
+    note: "存在しない名前の呼び出しを、動的に処理できる"
+  - label: "使いすぎに注意する"
+    note: "読みにくく、デバッグしにくくなる。必要な場面に絞る"
 ---
 
 ## 概要

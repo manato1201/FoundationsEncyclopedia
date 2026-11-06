@@ -4,6 +4,17 @@ category: プログラミング言語
 subcategory: Java
 masteryBadge: next
 summary: Javaの二次元配列は「配列の配列」として実装されており、C#の多次元配列(int[,])とは内部構造が異なる。
+operationSteps:
+  - label: "配列の配列として宣言する"
+    note: "int[][] grid = new int[3][4];"
+  - label: "外側の配列が行を持つ"
+    note: "各行は、別の配列への参照"
+  - label: "行ごとに長さを変えられる"
+    note: "各行を別々に作れば、長さが異なる配列(ジャグ配列)になる"
+  - label: "grid[i][j]でアクセスする"
+    note: "i行j列の要素を読み書きする"
+  - label: "二重ループで全体をたどる"
+    note: "grid.length と grid[i].length で、範囲を決める"
 ---
 
 ## 概要

@@ -4,6 +4,19 @@ category: ツール別
 subcategory: Unity
 masteryBadge: advanced
 summary: 複数のプレイヤー間でオブジェクトの状態を同期させる、Unity公式のマルチプレイヤーネットワーキングフレームワーク。
+operationSteps:
+  - label: "ネットワークの役割を決める"
+    note: "ホスト・サーバー・クライアントのどれになるかを決める"
+  - label: "NetworkManagerを設定する"
+    note: "接続の管理を行う、NetworkManagerを用意する"
+  - label: "NetworkObjectを付ける"
+    note: "同期したいオブジェクトに、NetworkObjectを付ける"
+  - label: "NetworkVariableで状態を同期する"
+    note: "値を、サーバーから、全員へ同期する"
+  - label: "RPCで処理を呼び出す"
+    note: "サーバーやクライアントの、関数を呼び出す"
+  - label: "接続して確認する"
+    note: "複数のクライアントで、同期を確かめる"
 ---
 
 ## 概要

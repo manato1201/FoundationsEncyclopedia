@@ -3,6 +3,17 @@ name: PHPの基本文法
 category: プログラミング言語
 subcategory: PHP
 summary: HTMLに埋め込んで実行できるサーバーサイドスクリプト言語。変数の$記号が特徴的。
+operationSteps:
+  - label: "<?php ... ?>で囲む"
+    note: "PHPのコードを、タグの中に書く"
+  - label: "変数は$を付ける"
+    note: "$name = \"A\"; のように、変数の名前に $ を付ける"
+  - label: "echoで出力する"
+    note: "echo で、文字列を出力する"
+  - label: "HTMLに埋め込める"
+    note: "HTMLの中に、PHPのコードを混ぜられる"
+  - label: "サーバーで実行される"
+    note: "サーバー側で実行され、結果が、ブラウザへ送られる"
 ---
 
 ## 概要

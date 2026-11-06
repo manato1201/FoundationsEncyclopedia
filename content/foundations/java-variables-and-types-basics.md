@@ -4,6 +4,17 @@ category: プログラミング言語
 subcategory: Java
 masteryBadge: done
 summary: Javaは静的型付けで、プリミティブ型と参照型を明確に区別する。全ての変数は必ずどちらかに属する。
+operationSteps:
+  - label: "型を指定して宣言する"
+    note: "例: int count = 0;"
+  - label: "プリミティブ型と参照型を区別する"
+    note: "int・double などの値と、オブジェクトへの参照がある"
+  - label: "初期化してから使う"
+    note: "ローカル変数は、初期化しないと使えない"
+  - label: "型が合わない代入はエラー"
+    note: "静的型付けで、コンパイル時に検出される"
+  - label: "キャストで型を変える"
+    note: "大きい型から小さい型へは、明示のキャストが要る"
 ---
 
 ## 概要

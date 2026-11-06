@@ -4,6 +4,17 @@ category: プログラミング言語
 subcategory: TypeScript
 masteryBadge: next
 summary: TypeScriptの二次元配列は「配列の配列」として表現する。行ごとに独立した配列を作る必要がある。
+operationSteps:
+  - label: "型を指定して宣言する"
+    note: "number[][] のように、配列の配列として書く"
+  - label: "行ごとに配列を作る"
+    note: "Array.from で、行ごとに別の配列を作る"
+  - label: "同じ配列の参照に注意する"
+    note: "fill で、同じ配列を、複数回入れると、共有されてしまう"
+  - label: "grid[i][j]でアクセスする"
+    note: "i行j列の要素を読み書きする"
+  - label: "二重ループで全体をたどる"
+    note: "外側が行、内側が列を回る"
 ---
 
 ## 概要

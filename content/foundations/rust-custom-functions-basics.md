@@ -4,6 +4,17 @@ category: プログラミング言語
 subcategory: Rust
 masteryBadge: review
 summary: Rustの関数はfnで定義し、最後の式がセミコロンなしで書かれていれば、それが暗黙的な戻り値になる。
+operationSteps:
+  - label: "fnで関数を定義する"
+    note: "引数と戻り値の型を、必ず書く"
+  - label: "最後の式が戻り値になる"
+    note: "セミコロンを付けない式が、値として返る"
+  - label: "returnで早期に返す"
+    note: "途中で返すときは、return を使う"
+  - label: "引数の所有権に注意する"
+    note: "値を渡すと、所有権が移る。参照で借りれば移らない"
+  - label: "Resultでエラーを返す"
+    note: "失敗しうる処理は、Result型で返す"
 ---
 
 ## 概要

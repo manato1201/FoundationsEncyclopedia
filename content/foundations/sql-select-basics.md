@@ -4,6 +4,17 @@ category: プログラミング言語
 subcategory: SQL
 masteryBadge: done
 summary: テーブルからデータを取り出す最も基本的な命令。WHERE/ORDER BY/LIMITとの組み合わせが土台になる。
+operationSteps:
+  - label: "取得する列とテーブルを決める"
+    note: "SELECT 列 FROM テーブル"
+  - label: "WHEREで行を絞る"
+    note: "条件に合う行だけを、取り出す"
+  - label: "ORDER BYで並べ替える"
+    note: "指定した列で、昇順または降順に並べる"
+  - label: "LIMITで件数を絞る"
+    note: "先頭から、指定した件数だけを取得する"
+  - label: "結果を確認する"
+    note: "意図した行と列が、返っているかを確かめる"
 ---
 
 ## 概要

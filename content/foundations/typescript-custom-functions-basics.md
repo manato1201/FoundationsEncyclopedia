@@ -4,6 +4,17 @@ category: プログラミング言語
 subcategory: TypeScript
 masteryBadge: done
 summary: function宣言・関数式・アロー関数という3つの書き方があり、thisの挙動がそれぞれ異なる。
+operationSteps:
+  - label: "引数と戻り値に型を付ける"
+    note: "function add(a: number, b: number): number"
+  - label: "3つの書き方を知る"
+    note: "function宣言・関数式・アロー関数"
+  - label: "thisの扱いが違う"
+    note: "アロー関数は、外側の this を使う"
+  - label: "省略可能な引数を使う"
+    note: "引数名に ? を付ける"
+  - label: "型が合わない呼び出しはエラー"
+    note: "コンパイル時に、検出される"
 ---
 
 ## 概要

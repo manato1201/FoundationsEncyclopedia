@@ -4,6 +4,17 @@ category: Framework
 subcategory: Web(Next.js等)
 masteryBadge: done
 summary: どこで実行され、何ができて何ができないかが異なる2種類のReactコンポーネント。App Routerの前提知識。
+operationSteps:
+  - label: "コンポーネントの役割を考える"
+    note: "データ取得が中心か、操作への反応が中心かを考える"
+  - label: "既定はServer Component"
+    note: "サーバー側で動き、データの取得や、秘密の値を扱える"
+  - label: "操作が必要ならClient Component"
+    note: "`\"use client\"` を付けて、状態やイベントを扱う"
+  - label: "ClientはJavaScriptがブラウザへ送られる"
+    note: "Clientにすると、その分のコードが、ブラウザへ送られる"
+  - label: "できるだけServerを使う"
+    note: "Clientは、必要な部分に限り、全体を軽く保つ"
 ---
 
 ## 概要

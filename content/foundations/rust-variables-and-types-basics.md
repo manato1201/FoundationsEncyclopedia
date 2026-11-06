@@ -4,6 +4,17 @@ category: プログラミング言語
 subcategory: Rust
 masteryBadge: review
 summary: Rustの変数はデフォルトで不変(immutable)。可変にしたい場合はmutキーワードを明示する必要がある。
+operationSteps:
+  - label: "letで宣言する"
+    note: "let x = 5; のように書く。型は推論される"
+  - label: "既定は不変"
+    note: "再代入しようとすると、コンパイルエラー"
+  - label: "mutで可変にする"
+    note: "let mut x = 5; にすると、書き換えられる"
+  - label: "シャドーイングで再宣言する"
+    note: "同じ名前で、let し直せる"
+  - label: "constは定数"
+    note: "コンパイル時に決まる、変わらない値"
 ---
 
 ## 概要

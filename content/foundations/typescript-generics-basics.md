@@ -4,6 +4,17 @@ category: プログラミング言語
 subcategory: TypeScript
 masteryBadge: advanced
 summary: 型を引数として受け取ることで、型安全性を保ったまま再利用可能な関数・型を書くための機能。
+operationSteps:
+  - label: "型パラメータを宣言する"
+    note: "function identity<T>(x: T): T"
+  - label: "Tを使って処理を書く"
+    note: "型に依存しない、共通の処理を書く"
+  - label: "呼び出し時に型が決まる"
+    note: "引数から、Tが推論される"
+  - label: "型安全に使える"
+    note: "入力と出力の型が、結びつく"
+  - label: "制約で範囲を絞る"
+    note: "T extends ... で、使える型を限定する"
 ---
 
 ## 概要

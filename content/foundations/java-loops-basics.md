@@ -4,6 +4,17 @@ category: プログラミング言語
 subcategory: Java
 masteryBadge: done
 summary: JavaはC#と同様、for/while/do-while/拡張for(foreach相当)の4種類のループ構文を持つ。
+operationSteps:
+  - label: "ループの種類を選ぶ"
+    note: "for・while・do-while・拡張forから選ぶ"
+  - label: "条件を確認する"
+    note: "条件が真のあいだ、繰り返す"
+  - label: "本体を実行する"
+    note: "処理を行う"
+  - label: "値を更新する"
+    note: "カウンターを進める"
+  - label: "breakとcontinueで制御する"
+    note: "抜ける、次の回へ進む"
 ---
 
 ## 概要

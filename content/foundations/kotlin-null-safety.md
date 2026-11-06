@@ -4,6 +4,17 @@ category: プログラミング言語
 subcategory: Kotlin
 masteryBadge: done
 summary: 型が「nullになりうるか」を明示させることで、NullPointerExceptionをコンパイル時に大幅に減らす仕組み。
+operationSteps:
+  - label: "nullを許さない型が既定"
+    note: "String には、null を入れられない"
+  - label: "?を付けてnull許容にする"
+    note: "String? は、null も入る型"
+  - label: "?.で安全に呼び出す"
+    note: "null のときは、呼び出さず、null を返す"
+  - label: "?:で代わりの値を使う"
+    note: "null のときの、既定の値を指定する"
+  - label: "コンパイル時に検出される"
+    note: "null の可能性があるまま使うと、エラーになる"
 ---
 
 ## 概要

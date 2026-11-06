@@ -4,6 +4,17 @@ category: ツール別
 subcategory: UnrealEngine
 masteryBadge: advanced
 summary: 広大なワールドを自動的にグリッド分割し、プレイヤーの周囲だけを動的にロード・アンロードする仕組み。
+operationSteps:
+  - label: "World Partitionを有効にする"
+    note: "レベルを、World Partitionとして、設定する"
+  - label: "ワールドがグリッドに分割される"
+    note: "ワールドが、自動で、セルに分かれる"
+  - label: "Actorがセルに割り当てられる"
+    note: "配置したActorが、位置に応じたセルへ入る"
+  - label: "プレイヤーの周囲だけ読み込まれる"
+    note: "近いセルだけを、ロードし、離れたセルはアンロードする"
+  - label: "データレイヤーで分ける"
+    note: "必要に応じて、データを、レイヤーで切り替える"
 ---
 
 ## 概要

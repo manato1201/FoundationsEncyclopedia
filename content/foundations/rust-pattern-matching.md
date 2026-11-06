@@ -4,6 +4,17 @@ category: プログラミング言語
 subcategory: Rust
 masteryBadge: review
 summary: 値の形に応じて分岐する強力な制御構文。網羅性がコンパイラによって強制される点が大きな特徴。
+operationSteps:
+  - label: "matchで値を調べる"
+    note: "match 値 { ... } で、形に応じて分岐する"
+  - label: "各パターンに処理を書く"
+    note: "パターン => 式 の形で、並べる"
+  - label: "上から順に照合される"
+    note: "最初に合ったパターンの処理が、実行される"
+  - label: "網羅性が強制される"
+    note: "すべての場合を書かないと、コンパイルエラー"
+  - label: "値を取り出して使う"
+    note: "パターンの中で、中身を、変数に束縛できる"
 ---
 
 ## 概要

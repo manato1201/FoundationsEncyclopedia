@@ -4,6 +4,17 @@ category: プログラミング言語
 subcategory: C#
 masteryBadge: next
 summary: 値型(struct)と参照型(class)の違い。コピーされ方とメモリ配置の違いがパフォーマンスに直結する。
+operationSteps:
+  - label: "値型か参照型かを知る"
+    note: "struct は値型、class は参照型"
+  - label: "代入するとコピーされる(struct)"
+    note: "別の変数へ代入すると、中身が複製される"
+  - label: "代入すると参照が共有される(class)"
+    note: "同じオブジェクトを、2つの変数が指す"
+  - label: "配置の違いを知る"
+    note: "struct は、変数の場所に直接置かれやすく、class はヒープに置かれる"
+  - label: "用途で選ぶ"
+    note: "小さく不変の値は struct、共有して変更するものは class"
 ---
 
 ## 概要

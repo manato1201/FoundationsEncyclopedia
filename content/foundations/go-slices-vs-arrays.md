@@ -4,6 +4,17 @@ category: プログラミング言語
 subcategory: Go
 masteryBadge: review
 summary: 固定長の配列と、それを参照する可変長のビューであるスライス。Goで日常的に使うのはほぼスライス。
+operationSteps:
+  - label: "配列は固定長"
+    note: "[3]int のように、長さが型の一部"
+  - label: "スライスは配列の一部を指す"
+    note: "配列の、ある範囲を参照する"
+  - label: "スライスは長さと容量を持つ"
+    note: "len と cap で、表示と余裕を確認する"
+  - label: "appendで追加する"
+    note: "容量が足りなければ、新しい配列へ作り直される"
+  - label: "共有に注意する"
+    note: "同じ配列を指すスライスは、変更が互いに見える"
 ---
 
 ## 概要

@@ -4,6 +4,19 @@ category: DCC
 subcategory: Blender
 masteryBadge: review
 summary: Blenderの内部構造そのものがPythonから直接操作できるよう設計された、拡張性の高いスクリプティング環境。
+operationSteps:
+  - label: "スクリプトの画面を開く"
+    note: "テキストエディターと、Pythonコンソールを使えるようにする"
+  - label: "bpyモジュールを読み込む"
+    note: "`import bpy` で、Blenderの機能へアクセスする"
+  - label: "データを読む"
+    note: "bpy.dataやbpy.contextから、オブジェクトやシーンの情報を取得する"
+  - label: "プロパティを変更する"
+    note: "位置・名前・マテリアルなどの値を、コードから書き換える"
+  - label: "オペレーターを実行する"
+    note: "bpy.opsで、メニューの操作と同じ処理を実行する"
+  - label: "繰り返し作業を自動化する"
+    note: "ループで、多数のオブジェクトに同じ処理を行う"
 ---
 
 ## 概要

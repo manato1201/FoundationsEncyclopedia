@@ -3,6 +3,17 @@ name: レベルブループリントの基礎
 category: ツール別
 subcategory: UnrealEngine
 summary: 特定のレベル(マップ)専用のイベント処理を記述する、そのレベルに紐づいた特別なブループリント。
+operationSteps:
+  - label: "レベルブループリントを開く"
+    note: "そのレベル専用の、Blueprintを開く"
+  - label: "レベル内のActorを参照する"
+    note: "配置したActorを、選んで、ノードとして使う"
+  - label: "イベントを書く"
+    note: "トリガーに入ったときなど、そのレベル固有の処理を書く"
+  - label: "レベルの進行を制御する"
+    note: "演出や、ゲームの流れの切り替えを組む"
+  - label: "再利用が必要なら別のBlueprintへ"
+    note: "ほかのレベルでも使う処理は、通常のBlueprintにする"
 ---
 
 ## 概要

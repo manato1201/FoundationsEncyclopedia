@@ -4,6 +4,17 @@ category: ツール別
 subcategory: Unity
 masteryBadge: review
 summary: Unityエディタ自体の機能をC#でカスタマイズし、独自のツールやインスペクタ表示を作る仕組み。
+operationSteps:
+  - label: "Editorフォルダにスクリプトを置く"
+    note: "エディタ専用のコードは、Editorフォルダに置く"
+  - label: "カスタムインスペクターを作る"
+    note: "Editorクラスを継承して、表示を変える"
+  - label: "メニューを追加する"
+    note: "MenuItemで、エディタのメニューに項目を足す"
+  - label: "EditorWindowで画面を作る"
+    note: "独自のツールのウィンドウを作る"
+  - label: "ビルドに含めない"
+    note: "エディタ専用のコードは、ビルドから除かれる"
 ---
 
 ## 概要

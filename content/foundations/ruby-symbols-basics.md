@@ -4,6 +4,17 @@ category: プログラミング言語
 subcategory: Ruby
 masteryBadge: review
 summary: 文字列に似ているが、同じ名前なら常に同一のオブジェクトを指す、Ruby独自の軽量な識別子。
+operationSteps:
+  - label: "シンボルを書く"
+    note: ":name のように、コロンを付ける"
+  - label: "同じ名前は同じオブジェクト"
+    note: "同じシンボルは、常に1つのオブジェクトを指す"
+  - label: "文字列は毎回別のオブジェクト"
+    note: "同じ内容の文字列でも、別のオブジェクトになる"
+  - label: "ハッシュのキーに使う"
+    note: "{ name: \"A\" } のように、キーとして、よく使う"
+  - label: "識別子として軽い"
+    note: "比較が速く、メモリも節約できる"
 ---
 
 ## 概要

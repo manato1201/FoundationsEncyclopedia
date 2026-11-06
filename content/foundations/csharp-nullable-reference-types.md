@@ -4,6 +4,17 @@ category: プログラミング言語
 subcategory: C#
 masteryBadge: review
 summary: 参照型が「nullになりうるか」を型システムで表現し、コンパイル時にnull参照例外の芽を摘む機能。
+operationSteps:
+  - label: "機能を有効にする"
+    note: "プロジェクトで、Null許容参照型を有効にする"
+  - label: "nullを許す型に?を付ける"
+    note: "string? は、null かもしれない型。string は、null でない型"
+  - label: "コンパイラが警告する"
+    note: "null の可能性があるものを、そのまま使うと、警告が出る"
+  - label: "nullを確認してから使う"
+    note: "if や ?. で、null でないことを確かめる"
+  - label: "実行前に問題を見つける"
+    note: "NullReferenceException を、事前に減らせる"
 ---
 
 ## 概要

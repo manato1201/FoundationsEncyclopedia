@@ -3,6 +3,17 @@ name: 特殊メソッド(dunderメソッド)
 category: プログラミング言語
 subcategory: Python
 summary: __init__や__str__のような前後にアンダースコア2つを持つメソッド。演算子や組み込み関数の挙動をカスタマイズする。
+operationSteps:
+  - label: "特殊メソッドを定義する"
+    note: "__init__ や __str__ のように、前後にアンダースコア2つを付ける"
+  - label: "__init__で初期化する"
+    note: "オブジェクトを作るときに、呼ばれる"
+  - label: "__str__で文字列表現を決める"
+    note: "print したときの、表示を決める"
+  - label: "演算子メソッドで演算を定義する"
+    note: "__add__ で、+ の動きを決める"
+  - label: "Pythonが自動で呼び出す"
+    note: "組み込みの機能が、これらのメソッドを呼ぶ"
 ---
 
 ## 概要

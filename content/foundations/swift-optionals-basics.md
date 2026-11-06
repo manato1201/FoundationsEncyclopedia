@@ -4,6 +4,17 @@ category: プログラミング言語
 subcategory: Swift
 masteryBadge: done
 summary: 「値があるかもしれないし、ないかもしれない」ことを型システムで表現するSwiftの中核機能。
+operationSteps:
+  - label: "?を付けてオプショナルにする"
+    note: "Int? は、値があるか、nilの型"
+  - label: "nilかどうかを確認する"
+    note: "値が入っているかを、調べる"
+  - label: "if letで安全に取り出す"
+    note: "値があるときだけ、取り出して使う"
+  - label: "??で既定の値を使う"
+    note: "nilのときの、代わりの値を指定する"
+  - label: "!での強制アンラップは避ける"
+    note: "nilだと、実行時にクラッシュする"
 ---
 
 ## 概要

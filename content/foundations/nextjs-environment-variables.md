@@ -3,6 +3,17 @@ name: Next.jsでの環境変数の扱い
 category: Framework
 subcategory: Web(Next.js等)
 summary: サーバー専用の変数と、ブラウザにも公開される変数を、NEXT_PUBLIC_プレフィックスで区別する仕組み。
+operationSteps:
+  - label: "環境変数のファイルを用意する"
+    note: "`.env.local` に、値を書く(Gitには入れない)"
+  - label: "サーバー専用の変数を使う"
+    note: "プレフィックスなしの変数は、サーバー側でだけ読める"
+  - label: "公開する変数にはプレフィックスを付ける"
+    note: "`NEXT_PUBLIC_` で始まる変数は、ブラウザへ渡される"
+  - label: "ビルド時に値が埋め込まれる"
+    note: "公開する変数は、ビルド時にコードへ埋め込まれる"
+  - label: "秘密の値を公開しない"
+    note: "APIキーなどの秘密は、プレフィックスを付けない"
 ---
 
 ## 概要

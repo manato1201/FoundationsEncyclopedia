@@ -4,6 +4,17 @@ category: プログラミング言語
 subcategory: C++
 masteryBadge: done
 summary: C++はC言語由来のfor/while/do-whileに加え、範囲ベースfor文(range-based for)を持つ。
+operationSteps:
+  - label: "ループの種類を選ぶ"
+    note: "for・while・do-while・範囲ベースforから、目的に合うものを選ぶ"
+  - label: "初期化と条件を決める"
+    note: "forでは、開始・継続の条件・更新を書く"
+  - label: "本体を実行する"
+    note: "条件が真のあいだ、処理を繰り返す"
+  - label: "カウンターを更新する"
+    note: "1回ごとに、値を進める"
+  - label: "条件が偽になったら抜ける"
+    note: "break で途中で抜けることもできる"
 ---
 
 ## 概要

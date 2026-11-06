@@ -4,6 +4,17 @@ category: プログラミング言語
 subcategory: C#
 masteryBadge: done
 summary: コレクション操作を宣言的に記述するC#の標準機能。UnityのC#スクリプトでも頻出する。
+operationSteps:
+  - label: "コレクションを用意する"
+    note: "リストや配列などの、元になるデータ"
+  - label: "Whereで条件に合うものを絞る"
+    note: "条件を満たす要素だけを取り出す"
+  - label: "Selectで値を変換する"
+    note: "各要素を、別の形へ変換する"
+  - label: "OrderByで並べ替える"
+    note: "指定したキーで、並べ替える"
+  - label: "ToListなどで結果を確定する"
+    note: "実行はここで行われる(遅延評価)"
 ---
 
 ## 概要

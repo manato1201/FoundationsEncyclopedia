@@ -4,6 +4,17 @@ category: Framework
 subcategory: テスト・CI
 masteryBadge: review
 summary: 新しい変更によって、既存の機能が壊れていないかを確認するために既存のテスト群を再実行すること。
+operationSteps:
+  - label: "既存のテストを用意しておく"
+    note: "これまでの機能を確かめる、テストを蓄積しておく"
+  - label: "コードを変更する"
+    note: "機能の追加や、修正を行う"
+  - label: "既存のテストを再実行する"
+    note: "変更のあとで、すべてのテストを、もう一度実行する"
+  - label: "失敗したら変更を見直す"
+    note: "既存の機能が壊れていたら、原因を直す"
+  - label: "CIで自動化する"
+    note: "変更のたびに、自動で実行されるようにする"
 ---
 
 ## 概要

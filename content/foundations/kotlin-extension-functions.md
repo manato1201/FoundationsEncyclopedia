@@ -3,6 +3,17 @@ name: 拡張関数
 category: プログラミング言語
 subcategory: Kotlin
 summary: C#の拡張メソッドと同様、既存の型に後からメソッドを追加したかのように見せるKotlinの機能。
+operationSteps:
+  - label: "追加したい機能を決める"
+    note: "既存の型に、あとから足したい処理を決める"
+  - label: "型.関数名の形で宣言する"
+    note: "fun String.shout() = uppercase() + \"!\" のように書く"
+  - label: "thisで対象を参照する"
+    note: "関数の中では、this が、対象のオブジェクト"
+  - label: "メンバーのように呼び出す"
+    note: "\"hi\".shout() と書ける"
+  - label: "元の型は変更されない"
+    note: "実際は、静的に解決される関数"
 ---
 
 ## 概要

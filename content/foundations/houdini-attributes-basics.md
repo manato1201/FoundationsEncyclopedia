@@ -4,6 +4,17 @@ category: DCC
 subcategory: Houdini
 masteryBadge: review
 summary: 位置・色・法線など、ジオメトリの各要素(ポイント・頂点・プリミティブ)が持つデータの総称。
+operationSteps:
+  - label: "アトリビュートとは何かを知る"
+    note: "ジオメトリの点・頂点・面などが持つ、データの総称"
+  - label: "持つ場所を確認する"
+    note: "点・頂点・プリミティブ・ディテールのどこに付いているかを確認する"
+  - label: "ジオメトリスプレッドシートで値を見る"
+    note: "位置(P)や色(Cd)などの値を、表で確認する"
+  - label: "アトリビュートを作る・書き換える"
+    note: "Attribute WrangleやAttribute Createで、値を追加・変更する"
+  - label: "ほかのノードで使う"
+    note: "後続のノードが、アトリビュートを、参照して処理に使う"
 ---
 
 ## 概要

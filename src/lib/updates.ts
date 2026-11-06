@@ -15,6 +15,13 @@ export type UpdateItem = {
  */
 export const UPDATES: UpdateItem[] = [
   {
+    id: "2026-11-06-expansion-150",
+    date: "2026-11-06",
+    title: "IT知識・DCC・ツール別を各50章追加(345件→495件)、全章をステップ表示に対応",
+    description:
+      "IT知識(103→153)・DCC(45→95)・ツール別(45→95)を、それぞれ50章ずつ追加した。IT知識は、ネットワーク(ping・VPN・ファイアウォール・リバースプロキシ・ARP)、OS(ミューテックス・スタックとヒープ・起動の流れ・コンテキストスイッチ)、Git(bisect・reflog・ブランチ戦略・フック)、データ構造(二分探索・動的計画法・トライ木・Union-Find・ダイクストラ法)、セキュリティ(MFA・レート制限・ゼロトラスト・シークレット管理・CSP)、クラウド(メッセージキュー・APIゲートウェイ・カナリアリリース)、データベース(ロック・実行計画・キャッシュ・バックアップ・OLTPとOLAP)、コンテナ(Kubernetes・レジストリ・ネットワーク)、Web(CSR/SSR/SSG・Web Storage・Service Worker・GraphQL)、開発プロセス(DI・フィーチャーフラグ・APIバージョニング・ポストモーテム)、Linux(sedとawk・df/du・apt・tmux)、AI基礎(プロンプト・ファインチューニングとRAG・評価指標・意味検索)など。DCCはMaya・Blender・Houdini、ツール別はUnity(+26)・Unreal Engine(+24)を追加した。新章の150件に加え、ステップ表示がなかった既存の164章(プログラミング言語102件、DCC・ツール別・Framework計62件)へ、ステップ(operationSteps)を後付けし、全495章をステップ表示に対応させた。",
+  },
+  {
     id: "2026-11-06-expansion-crystal",
     date: "2026-11-06",
     title: "IT知識・DCC・ツール別を52章拡充(293件→345件)、鉱石モチーフ(結晶)を追加",

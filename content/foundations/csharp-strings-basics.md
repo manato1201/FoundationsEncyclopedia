@@ -4,6 +4,17 @@ category: プログラミング言語
 subcategory: C#
 masteryBadge: done
 summary: C#のstringはchar(文字)の読み取り専用シーケンス。内部的には配列に近いが直接要素を書き換えられない。
+operationSteps:
+  - label: "文字列はcharの並び"
+    note: "string は、char(1文字)の、読み取り専用の並び"
+  - label: "インデックスで1文字を読む"
+    note: "s[0] で、先頭の文字を取得できる"
+  - label: "書き換えはできない"
+    note: "文字列は不変。変更すると、新しい文字列ができる"
+  - label: "連結を繰り返すと重い"
+    note: "ループでの連結は、毎回、新しい文字列を作る"
+  - label: "StringBuilderで効率よく組み立てる"
+    note: "多くの連結には、StringBuilderを使う"
 ---
 
 ## 概要

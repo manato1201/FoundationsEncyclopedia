@@ -4,6 +4,17 @@ category: プログラミング言語
 subcategory: Java
 masteryBadge: done
 summary: JavaはC#と同様、関数はクラス内の「メソッド」として定義する。全ての引数は値渡しである点が特徴。
+operationSteps:
+  - label: "メソッドを定義する"
+    note: "修飾子・戻り値の型・名前・引数を書く"
+  - label: "本体を書いて値を返す"
+    note: "処理を書き、return で返す"
+  - label: "呼び出して引数を渡す"
+    note: "Javaの引数は、値渡し(参照も値として渡される)"
+  - label: "オーバーロードで使い分ける"
+    note: "同じ名前で、引数が異なるメソッドを作れる"
+  - label: "staticかインスタンスかを選ぶ"
+    note: "オブジェクトなしで呼ぶなら static"
 ---
 
 ## 概要

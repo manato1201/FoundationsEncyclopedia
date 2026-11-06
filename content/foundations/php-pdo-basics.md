@@ -4,6 +4,17 @@ category: プログラミング言語
 subcategory: PHP
 masteryBadge: review
 summary: 複数のデータベース製品に対して統一的なインターフェースでアクセスできる、PHP標準の拡張機能。
+operationSteps:
+  - label: "PDOで接続する"
+    note: "DSN・ユーザー・パスワードを指定して、接続する"
+  - label: "SQLを準備する"
+    note: "prepare で、プレースホルダーを持つSQLを用意する"
+  - label: "値を束縛して実行する"
+    note: "execute で、値を渡す(SQLインジェクションを防ぐ)"
+  - label: "結果を取得する"
+    note: "fetch や fetchAll で、行を取り出す"
+  - label: "例外でエラーを扱う"
+    note: "エラーモードを例外にして、失敗を検知する"
 ---
 
 ## 概要

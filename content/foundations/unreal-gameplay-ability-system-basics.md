@@ -4,6 +4,19 @@ category: ツール別
 subcategory: UnrealEngine
 masteryBadge: advanced
 summary: スキル・ステータス・効果(バフ/デバフ)を、拡張性の高い共通の枠組みで管理するUnreal公式のフレームワーク。
+operationSteps:
+  - label: "Ability System Componentを付ける"
+    note: "能力を扱うための、コンポーネントを、キャラクターへ付ける"
+  - label: "属性(Attribute)を定義する"
+    note: "体力・マナなどの、数値を、属性として持たせる"
+  - label: "Gameplay Abilityを作る"
+    note: "スキルの、処理を、アビリティとして作る"
+  - label: "Gameplay Effectで効果を与える"
+    note: "バフやダメージを、効果として、適用する"
+  - label: "タグで条件を管理する"
+    note: "状態や発動の条件を、Gameplay Tagsで管理する"
+  - label: "アビリティを発動する"
+    note: "入力などから、アビリティを発動する"
 ---
 
 ## 概要

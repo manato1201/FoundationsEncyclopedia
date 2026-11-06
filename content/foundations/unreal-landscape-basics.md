@@ -3,6 +3,17 @@ name: ランドスケープの基礎
 category: ツール別
 subcategory: UnrealEngine
 summary: 広大な地形を、高さマップとレイヤー(草・岩・土等)の合成で効率的に構築するUnreal Engineの地形システム。
+operationSteps:
+  - label: "Landscapeを作る"
+    note: "地形の大きさと、分割を決めて、作成する"
+  - label: "スカルプトで形を作る"
+    note: "ツールで、山や谷の高さを作る"
+  - label: "レイヤーを設定する"
+    note: "草・岩・土などの、質感のレイヤーを用意する"
+  - label: "ペイントで質感を塗る"
+    note: "レイヤーを、地形の上に、塗り分ける"
+  - label: "植生を配置する"
+    note: "草や木を、地形の上へ、配置する"
 ---
 
 ## 概要

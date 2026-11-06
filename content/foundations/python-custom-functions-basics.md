@@ -4,6 +4,17 @@ category: プログラミング言語
 subcategory: Python
 masteryBadge: done
 summary: Pythonの関数はdefで定義し、型宣言は任意。デフォルト引数・可変長引数など柔軟な引数の受け取り方を持つ。
+operationSteps:
+  - label: "defで関数を定義する"
+    note: "名前と引数を書く。型は任意"
+  - label: "本体を書いてreturnで返す"
+    note: "returnがなければ、None を返す"
+  - label: "引数を渡して呼び出す"
+    note: "位置引数・キーワード引数で渡せる"
+  - label: "デフォルト値を使う"
+    note: "引数に既定値を持たせられる"
+  - label: "可変長引数を受け取る"
+    note: "*args と **kwargs で、任意の数の引数を受ける"
 ---
 
 ## 概要

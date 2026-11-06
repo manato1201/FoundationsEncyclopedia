@@ -4,6 +4,19 @@ category: Framework
 subcategory: テスト・CI
 masteryBadge: next
 summary: コードのpushをきっかけに、ビルド→テスト→デプロイを自動実行する仕組みの基本構成。
+operationSteps:
+  - label: "コードをpushする"
+    note: "pushやプルリクエストが、パイプラインのきっかけになる"
+  - label: "環境を用意する"
+    note: "実行用の環境を作り、依存を取得する"
+  - label: "ビルドする"
+    note: "コードを、ビルドして、実行できる形にする"
+  - label: "テストを実行する"
+    note: "自動テストを実行し、結果を確認する"
+  - label: "成果物を作る"
+    note: "テストを通った成果物(パッケージなど)を作る"
+  - label: "結果を通知する"
+    note: "成功か失敗かを、開発者へ知らせる"
 ---
 
 ## 概要

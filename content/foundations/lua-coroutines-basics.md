@@ -4,6 +4,17 @@ category: プログラミング言語
 subcategory: Lua
 masteryBadge: review
 summary: 明示的に中断・再開できる協調的な並行処理単位。ゲームのシーケンス制御によく使われる。
+operationSteps:
+  - label: "コルーチンを作る"
+    note: "coroutine.create で、関数をコルーチンにする"
+  - label: "resumeで開始・再開する"
+    note: "coroutine.resume で、実行を始める"
+  - label: "yieldで中断する"
+    note: "coroutine.yield で、その場で止めて、呼び出し元へ戻る"
+  - label: "続きから再開できる"
+    note: "もう一度 resume すると、中断した場所から続く"
+  - label: "終わったら終了状態になる"
+    note: "関数が終わると、dead 状態になる"
 ---
 
 ## 概要

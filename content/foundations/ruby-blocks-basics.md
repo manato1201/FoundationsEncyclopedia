@@ -3,6 +3,17 @@ name: ブロックの基礎
 category: プログラミング言語
 subcategory: Ruby
 summary: メソッド呼び出しに付随して渡す、名前を持たないコードの塊。Rubyらしさの中心的な機能。
+operationSteps:
+  - label: "メソッドにブロックを渡す"
+    note: "do ... end または { } で、コードの塊を渡す"
+  - label: "メソッドがyieldで呼び出す"
+    note: "メソッドの中で、yield を書くと、ブロックが実行される"
+  - label: "引数をブロックへ渡す"
+    note: "yield 値 で、値を渡す"
+  - label: "ブロックが結果を返す"
+    note: "ブロックの最後の式が、yield の結果になる"
+  - label: "eachやmapで使う"
+    note: "繰り返しや変換の、標準メソッドが、ブロックを受け取る"
 ---
 
 ## 概要

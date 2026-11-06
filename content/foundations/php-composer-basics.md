@@ -3,6 +3,17 @@ name: Composerによる依存管理
 category: プログラミング言語
 subcategory: PHP
 summary: PHPエコシステム標準のパッケージマネージャ。composer.jsonで依存ライブラリを宣言する。
+operationSteps:
+  - label: "composer.jsonに依存を宣言する"
+    note: "使うライブラリと、版の範囲を書く"
+  - label: "composer installで取得する"
+    note: "ライブラリを、vendorフォルダへ取得する"
+  - label: "composer.lockで版を固定する"
+    note: "取得した正確な版を、記録する"
+  - label: "オートローダーを読み込む"
+    note: "vendor/autoload.php を、require する"
+  - label: "クラスを使う"
+    note: "useで、クラスを呼び出して、使う"
 ---
 
 ## 概要

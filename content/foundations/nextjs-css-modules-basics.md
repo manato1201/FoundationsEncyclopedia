@@ -4,6 +4,17 @@ category: Framework
 subcategory: Web(Next.js等)
 masteryBadge: done
 summary: クラス名を自動的にユニーク化し、コンポーネントごとにスタイルの衝突を防ぐCSSの書き方。本図鑑全体で採用。
+operationSteps:
+  - label: "CSSファイルを作る"
+    note: "`〇〇.module.css` という名前で、スタイルを書く"
+  - label: "コンポーネントで読み込む"
+    note: "`import styles from './〇〇.module.css'` で読み込む"
+  - label: "クラス名を指定する"
+    note: "`className={styles.title}` のように使う"
+  - label: "ビルド時にクラス名が一意になる"
+    note: "クラス名に、一意の文字列が付き、衝突しない"
+  - label: "コンポーネントごとにスタイルを分けられる"
+    note: "ほかのコンポーネントへの影響を、気にせず書ける"
 ---
 
 ## 概要

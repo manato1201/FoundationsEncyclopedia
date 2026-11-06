@@ -3,6 +3,17 @@ name: メタデータAPIの基礎
 category: Framework
 subcategory: Web(Next.js等)
 summary: ページのタイトルやOGP情報を、型安全なオブジェクトとして宣言的に定義できるNext.jsの仕組み。
+operationSteps:
+  - label: "metadataを定義する"
+    note: "page.tsxやlayout.tsxで、metadataオブジェクトを書く"
+  - label: "タイトルと説明を設定する"
+    note: "title・descriptionを書く"
+  - label: "OGPなどを設定する"
+    note: "共有時に使う、画像やタイトルを設定する"
+  - label: "動的なメタデータを作る"
+    note: "generateMetadataで、データから値を作る"
+  - label: "HTMLのheadに反映される"
+    note: "ビルド結果の、headに、タグとして出力される"
 ---
 
 ## 概要

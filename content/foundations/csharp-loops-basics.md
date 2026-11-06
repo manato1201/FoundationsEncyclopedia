@@ -4,6 +4,17 @@ category: プログラミング言語
 subcategory: C#
 masteryBadge: done
 summary: C#はfor/while/do-while/foreachの4種類のループ構文を持つ。用途に応じた使い分けが基本。
+operationSteps:
+  - label: "ループの種類を選ぶ"
+    note: "for・while・do-while・foreachから、目的に合うものを選ぶ"
+  - label: "条件を確認する"
+    note: "条件が真のあいだ、繰り返す"
+  - label: "本体を実行する"
+    note: "処理を行う"
+  - label: "値を更新する"
+    note: "カウンターなどを進める"
+  - label: "breakとcontinueで制御する"
+    note: "途中で抜ける、次の回へ進む"
 ---
 
 ## 概要

@@ -4,6 +4,17 @@ category: プログラミング言語
 subcategory: Python
 masteryBadge: done
 summary: Pythonのfor文はC系言語と発想が異なり「イテラブルを順に取り出す」ことに特化している。
+operationSteps:
+  - label: "for文はイテラブルから取り出す"
+    note: "for x in 列 で、要素を順に取り出す"
+  - label: "rangeで回数を指定する"
+    note: "for i in range(5) で、0から4まで回る"
+  - label: "while文は条件で繰り返す"
+    note: "条件が真のあいだ、繰り返す"
+  - label: "breakとcontinueで制御する"
+    note: "抜ける、次の回へ進む"
+  - label: "elseで正常終了を判定する"
+    note: "ループが break されずに終わったときに、else が実行される"
 ---
 
 ## 概要

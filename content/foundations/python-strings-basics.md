@@ -4,6 +4,17 @@ category: プログラミング言語
 subcategory: Python
 masteryBadge: done
 summary: PythonにはC#やC++にあるchar(1文字専用の型)が存在せず、1文字も「長さ1の文字列」として扱われる。
+operationSteps:
+  - label: "char型はない"
+    note: "1文字も、長さ1の文字列として扱う"
+  - label: "インデックスで1文字を取得する"
+    note: "s[0] で、先頭の文字列を取得する"
+  - label: "スライスで一部を取り出す"
+    note: "s[1:3] のように、範囲を指定する"
+  - label: "文字列は不変"
+    note: "書き換えると、新しい文字列ができる"
+  - label: "f文字列で値を埋め込む"
+    note: "f\"{name}さん\" のように、変数を差し込む"
 ---
 
 ## 概要

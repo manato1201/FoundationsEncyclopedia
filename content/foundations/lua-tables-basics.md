@@ -4,6 +4,17 @@ category: プログラミング言語
 subcategory: Lua
 masteryBadge: done
 summary: 配列にも連想配列にもなる、Lua唯一のデータ構造。この単純さがゲームエンジン組み込みに向く理由の1つ。
+operationSteps:
+  - label: "テーブルを作る"
+    note: "t = {} で、空のテーブルを作る"
+  - label: "配列として使う"
+    note: "t[1], t[2] のように、番号で並べる(1から始まる)"
+  - label: "連想配列として使う"
+    note: "t.name = \"A\" のように、キーと値を持たせる"
+  - label: "両方を混ぜられる"
+    note: "1つのテーブルで、配列と連想配列を併用できる"
+  - label: "pairsとipairsで回る"
+    note: "pairs は全てのキー、ipairs は番号の並びを、順に取り出す"
 ---
 
 ## 概要

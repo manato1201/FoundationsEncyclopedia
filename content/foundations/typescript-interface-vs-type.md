@@ -3,6 +3,17 @@ name: interfaceとtypeの違い
 category: プログラミング言語
 subcategory: TypeScript
 summary: オブジェクトの形を定義する2つの方法。多くの場合置き換え可能だが、いくつかの機能差がある。
+operationSteps:
+  - label: "オブジェクトの形を定義する"
+    note: "interface と type の、どちらでも書ける"
+  - label: "interfaceは宣言のマージができる"
+    note: "同じ名前を、複数回宣言すると、結合される"
+  - label: "typeはユニオンなどを表せる"
+    note: "ユニオン型や、タプルなど、幅広い型に使える"
+  - label: "拡張のしかたが違う"
+    note: "interface は extends、type は &(交差型)"
+  - label: "使い分ける"
+    note: "オブジェクトの形は interface、それ以外は type、と決めるチームも多い"
 ---
 
 ## 概要
