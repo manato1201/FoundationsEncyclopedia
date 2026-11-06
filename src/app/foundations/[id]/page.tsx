@@ -110,7 +110,7 @@ export default async function FoundationsDetailPage({ params }: FoundationsDetai
               ステップで見る
             </h2>
             {hasOperationSteps ? (
-              <OperationStepsAnimation steps={operationSteps} />
+              <OperationStepsAnimation id={id} steps={operationSteps} />
             ) : entry.hasVisualizer ? (
               <FoundationsAnimation id={id} />
             ) : (

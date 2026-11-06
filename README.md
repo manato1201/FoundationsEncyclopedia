@@ -63,6 +63,16 @@ guide:
 
 `AsciiCrystal`(`src/lib/ascii-crystal.ts` が文字列を生成)は、結晶の格子をASCII文字で描いた静止画。出す場所は、トップのヒーロー・検索結果なしの表示・404ページだけで、本文や操作部品には出さない。乱数も時刻も使わないので、いつも同じ形になる。色は既存の青のトークンだけを使う。設計書(ASCIIモチーフの割り当て案)の「B. Grow」を、静止画から始めた形で、上流のコードは取り込んでいない(自前の生成)。動きは今後の課題。
 
+## 手順の図(平面・立体)
+
+手順(`operationSteps`)は、文字の一覧ではなく図で見せる。`src/lib/step-scene.ts`(Reactにもthree.jsにも依存しない純粋関数)が章のidから図の型を決め、各手順に線画グリフ(`src/components/scene/glyphs.tsx`)を当てる。
+
+- 平面(`FlowScene`、SVG): `pipeline`(蛇行する流れ)と`cycle`(輪)。完了=緑の線が伸びる / 現在=青のパケットと光るノード / 未到達=薄い。
+- 立体(`Scene3D`+`src/lib/three-scenes.ts`、three.js): `stack`(層の分解)・`helix`(らせん)・`ring`(輪)・`tree`(階層)・`color`(RGB立方体)・`mesh`(分割が細かくなる形)。ドラッグで回せる。
+- 主題が立体向き(色・形・層・階層・繰り返し)の章は立体を既定にし、それ以外は平面を既定にする。「平面/立体」の好みは`fe-scene-view`(localStorage)に保存する。章ごとの上書きは`step-scene.ts`の`OVERRIDES`。
+- three.jsは立体を選んだときだけ読み込む。WebGLが使えない環境では平面に戻る。動きを減らす設定では自動回転・補間を止める。
+- 詳細(操作・コマンド・補足)は図の下の「いまの手順」カード、全手順の一覧は折りたたみ。立体は概念図で、実際の寸法や数値は表さない。
+
 ## 入口の段分け
 
 カタログの入口は「まずはここから(`STARTER_IDS` の順)/ 用途から(`PURPOSE_GROUPS`)/ すべて」。どちらも `src/lib/catalog-entry-points.ts` に定義している。

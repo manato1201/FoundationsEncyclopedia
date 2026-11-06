@@ -1,0 +1,101 @@
+.stage {
+  position: relative;
+  width: 100%;
+  height: clamp(15rem, 42vw, 22rem);
+  overflow: hidden;
+  border-radius: 8px;
+  background: radial-gradient(
+    ellipse at 50% 40%,
+    var(--color-bg-surface-2),
+    var(--color-bg-surface) 70%
+  );
+  touch-action: pan-y;
+  cursor: grab;
+}
+
+.stage:active {
+  cursor: grabbing;
+}
+
+.canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* 立体の各点に重ねる番号。位置は描画ループが毎フレーム更新する */
+.label {
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  margin: -0.8rem 0 0 0.9rem;
+  pointer-events: none;
+  will-change: transform;
+  white-space: nowrap;
+}
+
+.labelNumber {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.35rem;
+  height: 1.35rem;
+  padding: 0 0.25rem;
+  border-radius: 999px;
+  border: 1px solid var(--color-line);
+  background: var(--color-bg-surface);
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.label[data-state="done"] .labelNumber {
+  border-color: var(--color-accent-green);
+  color: var(--color-accent-green);
+}
+
+.label[data-state="current"] .labelNumber {
+  border-color: var(--color-accent-blue);
+  color: var(--color-accent-blue);
+  box-shadow: var(--glow-blue);
+}
+
+.labelText {
+  padding: 0.125rem 0.5rem;
+  border-radius: 999px;
+  border: 1px solid var(--color-accent-blue);
+  background: var(--color-bg-surface);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.fixedLabel {
+  position: absolute;
+  left: 0;
+  top: 0;
+  margin: -0.5rem 0 0 0.6rem;
+  pointer-events: none;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: var(--color-text-muted);
+  will-change: transform;
+}
+
+.hint {
+  position: absolute;
+  right: 0.75rem;
+  bottom: 0.5rem;
+  font-family: var(--font-body);
+  font-size: 0.6875rem;
+  color: var(--color-text-muted);
+  pointer-events: none;
+}

@@ -9,7 +9,7 @@ import styles from "./CssStepAnimation.module.css";
 type CssStepAnimationProps = {
   frameCount: number;
   /** 関数を渡すと現在のステップ番号を受け取れる(直前ステップの表示などに使う)。その場合はオニオンスキンの切替も出る */
-  children: ReactNode | ((context: { stepIndex: number }) => ReactNode);
+  children: ReactNode | ((context: { stepIndex: number; goTo: (index: number) => void }) => ReactNode);
   resetLabel?: string;
   /**
    * ステップごとの短い名前(0番目から)。渡すと、ステージの下に「次へ: ○○」の大きなボタンを出す。
@@ -56,7 +56,7 @@ export function CssStepAnimation({
         data-onion={onion ? "on" : undefined}
         style={{ "--step-index": player.stepIndex } as CSSProperties}
       >
-        {typeof children === "function" ? children({ stepIndex: player.stepIndex }) : children}
+        {typeof children === "function" ? children({ stepIndex: player.stepIndex, goTo: player.goTo }) : children}
       </div>
       {stepLabels && stepLabels.length === frameCount ? (
         <button

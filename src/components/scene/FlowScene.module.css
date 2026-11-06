@@ -1,0 +1,127 @@
+.svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 26rem;
+  overflow: visible;
+}
+
+/* 線: 薄い下地の上に、完了した区間だけ緑が伸びる */
+.edge {
+  stroke: var(--color-line);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-dasharray: 2 7;
+}
+
+.edge[data-closing] {
+  stroke-dasharray: 2 9;
+  opacity: 0.7;
+}
+
+.edgeFill {
+  stroke: var(--color-accent-green);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 420ms ease-out;
+}
+
+.edgeFill[data-filled] {
+  stroke-dashoffset: 0;
+}
+
+/* ノード: 未到達は薄く、完了は緑、現在だけ青く光る */
+.node {
+  cursor: pointer;
+  font-family: var(--font-body);
+}
+
+.tile {
+  fill: var(--color-bg-surface-2);
+  stroke: var(--color-line);
+  stroke-width: 1.5;
+  transition:
+    stroke 240ms ease-out,
+    fill 240ms ease-out;
+}
+
+.glyph {
+  color: var(--color-text-muted);
+  transition: color 240ms ease-out;
+}
+
+.number {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  fill: var(--color-text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.label {
+  font-size: 13px;
+  fill: var(--color-text-muted);
+  transition: fill 240ms ease-out;
+}
+
+.node[data-state="todo"] {
+  opacity: 0.6;
+}
+
+.node[data-state="done"] .tile {
+  stroke: var(--color-accent-green);
+}
+
+.node[data-state="done"] .glyph {
+  color: var(--color-accent-green);
+}
+
+.node[data-state="current"] .tile {
+  stroke: var(--color-accent-blue);
+  stroke-width: 2.5;
+  fill: var(--color-bg-surface);
+  filter: drop-shadow(
+    0 0 8px color-mix(in srgb, var(--color-accent-blue) 55%, transparent)
+  );
+}
+
+.node[data-state="current"] .glyph {
+  color: var(--color-accent-blue);
+}
+
+.node[data-state="current"] .label {
+  fill: var(--color-text);
+  font-weight: 700;
+}
+
+.node[data-state="current"] .number {
+  fill: var(--color-accent-blue);
+}
+
+.node:hover .tile {
+  stroke: var(--color-accent-blue);
+}
+
+/* パケット: 現在のノードへ移る。動きは線の伸びとこの移動の2種類だけ */
+.packet {
+  transform: translate(var(--px), var(--py));
+  transition: transform 460ms cubic-bezier(0.3, 0.7, 0.2, 1);
+  pointer-events: none;
+}
+
+.packetHalo {
+  fill: color-mix(in srgb, var(--color-accent-blue) 28%, transparent);
+  transform: translateY(-58px);
+}
+
+.packetCore {
+  fill: var(--color-accent-blue);
+  transform: translateY(-58px);
+}
+
+:root[data-motion="reduce"] .edgeFill,
+:root[data-motion="reduce"] .packet,
+:root[data-motion="reduce"] .tile {
+  transition: none;
+}
