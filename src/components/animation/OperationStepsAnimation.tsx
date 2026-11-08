@@ -5,6 +5,10 @@ import { CssStepAnimation } from "./CssStepAnimation";
 import { Icon } from "@/components/icons/Icon";
 import { SceneViewToggle, StepScene, useSceneView } from "@/components/scene/StepScene";
 import { StepCaption } from "@/components/scene/StepCaption";
+import { GuessCard } from "@/components/scene/GuessCard";
+import { ProvenanceTag } from "@/components/scene/ProvenanceTag";
+import { guessTransitions } from "@/lib/guess";
+import { setGuessPref, useGuessPref } from "@/lib/guess-pref";
 import type { OperationStep } from "@/lib/content/foundations";
 import stepStyles from "./CssStepAnimation.module.css";
 import styles from "./OperationStepsAnimation.module.css";
@@ -27,11 +31,28 @@ type OperationStepsAnimationProps = {
 export function OperationStepsAnimation({ id, steps }: OperationStepsAnimationProps) {
   const [scrolly, setScrolly] = useState(false);
   const scene = useSceneView(id);
+  const guessOn = useGuessPref();
+  const prompts = guessTransitions(steps.length);
+  const canGuess = prompts.length > 0 && !scrolly;
+  const guess = canGuess && guessOn;
+  // 予想を問う手順では、「次へ」のボタンに次の手順名を出さない(答えを先に見せないため)
+  const stepLabels = steps.map((step, index) => (guess && prompts.includes(index - 1) ? "(予想してから確かめる)" : step.label));
 
   return (
     <div className={styles.root}>
       <div className={styles.modeRow}>
         <SceneViewToggle view={scene.view} disabled3d={scene.failed} />
+        {canGuess ? (
+          <button
+            type="button"
+            className={`${styles.modeButton} ${guessOn ? styles.modeButtonActive : ""}`}
+            aria-pressed={guessOn}
+            onClick={() => setGuessPref(!guessOn)}
+            title="最大3か所だけ、次の手順を先に予想できます。採点も記録もしません"
+          >
+            先に予想する
+          </button>
+        ) : null}
         <button
           type="button"
           className={`${styles.modeButton} ${scrolly ? styles.modeButtonActive : ""}`}
@@ -45,8 +66,16 @@ export function OperationStepsAnimation({ id, steps }: OperationStepsAnimationPr
       {scrolly ? (
         <ScrollSteppedList steps={steps} scene={scene} />
       ) : (
-        <CssStepAnimation frameCount={steps.length} stepLabels={steps.map((step) => step.label)}>
-          {({ stepIndex, goTo }) => <StepVisual steps={steps} stepIndex={stepIndex} scene={scene} onSeek={goTo} />}
+        <CssStepAnimation frameCount={steps.length} stepLabels={stepLabels}>
+          {({ stepIndex, goTo }) => (
+            <StepVisual
+              steps={steps}
+              stepIndex={stepIndex}
+              scene={scene}
+              onSeek={goTo}
+              guess={guess && prompts.includes(stepIndex)}
+            />
+          )}
         </CssStepAnimation>
       )}
     </div>
@@ -61,11 +90,14 @@ function StepVisual({
   stepIndex,
   scene,
   onSeek,
+  guess,
 }: {
   steps: OperationStep[];
   stepIndex: number;
   scene: SceneState;
   onSeek?: (index: number) => void;
+  /** この手順から次へ進む前に、予想のカードを出すか */
+  guess?: boolean;
 }) {
   return (
     <div className={styles.visual}>
@@ -78,6 +110,11 @@ function StepVisual({
         onFail={scene.fail}
       />
       <StepCaption steps={steps} stepIndex={stepIndex} />
+      {guess ? <GuessCard key={stepIndex} steps={steps} stepIndex={stepIndex} /> : null}
+      <p className={styles.provenance}>
+        <ProvenanceTag kind="simulated">図の形・動きは手順の進み具合を見せる概念図(実際の挙動や寸法ではありません)</ProvenanceTag>
+        <ProvenanceTag kind="read">手順名・コマンドはこの章のデータ</ProvenanceTag>
+      </p>
       <details className={styles.listDetails}>
         <summary className={styles.listSummary}>手順をすべて見る</summary>
         <StepList steps={steps} stepIndex={stepIndex} />

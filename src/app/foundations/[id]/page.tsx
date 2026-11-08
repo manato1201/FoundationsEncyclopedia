@@ -7,6 +7,8 @@ import { FoundationsAnimation } from "@/components/animation/FoundationsAnimatio
 import { OperationStepsAnimation } from "@/components/animation/OperationStepsAnimation";
 import { ChapterContent } from "@/components/chapter/ChapterContent";
 import { ChapterRail } from "@/components/chapter/ChapterRail";
+import { ChapterMap } from "@/components/chapter/ChapterMap";
+import { getChapterLinks } from "@/lib/chapter-links";
 import { ScrollSpyOutline, type OutlineItem } from "@/components/chapter/ScrollSpyOutline";
 import { splitChapterBody } from "@/lib/chapter-sections";
 import { foundationsLoader } from "@/lib/content/foundations";
@@ -35,6 +37,8 @@ export default async function FoundationsDetailPage({ params }: FoundationsDetai
   const hasOperationSteps = operationSteps.length > 0;
   const quiz = entry.quiz ?? [];
   const sections = splitChapterBody(entry.bodyHtml);
+  const links = getChapterLinks(id);
+  const hasLinks = links.refers.length + links.referredBy.length > 0;
   const hasVisual = hasOperationSteps || entry.hasVisualizer;
 
   // 現在の章の下に出す、このページの見出し(スクロールスパイ)
@@ -42,6 +46,7 @@ export default async function FoundationsDetailPage({ params }: FoundationsDetai
     ...(hasVisual ? [{ id: "visual-heading", label: "ステップで見る" }] : []),
     ...sections.headings.map((heading) => ({ id: heading.id, label: heading.text })),
     ...(quiz.length > 0 ? [{ id: "quiz-heading", label: "クイズ" }] : []),
+    ...(hasLinks ? [{ id: "map-heading", label: "つながりの地図" }] : []),
   ];
 
   const siblings = foundationsLoader
@@ -127,6 +132,8 @@ export default async function FoundationsDetailPage({ params }: FoundationsDetai
             quiz={quiz}
             guide={entry.guide}
           />
+
+          <ChapterMap name={entry.name} links={links} />
 
           <nav className={styles.pager} aria-label="前後の章">
             {previous ? (

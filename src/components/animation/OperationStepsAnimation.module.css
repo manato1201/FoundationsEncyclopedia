@@ -135,7 +135,9 @@
   }
 }
 
-:global(:root[data-motion="reduce"]) [data-onion="on"] .item[data-state="prev"] {
+:global(:root[data-motion="reduce"])
+  [data-onion="on"]
+  .item[data-state="prev"] {
   opacity: 0.45;
   border-style: solid;
 }
@@ -223,4 +225,11 @@
 
 .listDetails[open] .listSummary {
   margin-bottom: var(--space-3);
+}
+
+/* 出どころの札(模擬/読み取り)。図の下に小さく置く */
+.provenance {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
 }
