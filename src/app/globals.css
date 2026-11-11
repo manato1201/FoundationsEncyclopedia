@@ -98,6 +98,18 @@ time,
   scroll-behavior: auto !important;
 }
 
+
+/* 動きの規則(DESIGN.md「動き」)。これから足す動きは、時間とイージングをここから使う(既存の CSS は触らない。触るときに寄せる)。
+   動かすのは transform と opacity だけ。動きを減らす設定では、下のグローバルな規則がすぐ切り替えにする。 */
+:root {
+  --dur-instant: 120ms; /* 押す・切り替える */
+  --dur-open: 240ms; /* 開く・閉じる */
+  --dur-enter: 300ms; /* 画面の出現(段をずらしても全体で 400ms 以内) */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1); /* 出る */
+  --ease-in: cubic-bezier(0.7, 0, 0.84, 0); /* 入る・退く */
+  --ease-move: cubic-bezier(0.4, 0, 0.2, 1); /* 動く */
+}
+
 html {
   height: 100%;
   color-scheme: dark;
