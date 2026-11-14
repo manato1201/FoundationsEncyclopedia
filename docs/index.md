@@ -1,0 +1,10 @@
+# FoundationsEncyclopedia ドキュメント
+
+![構成図](diagrams/architecture.svg)
+
+| 読みたいもの | 場所 |
+|---|---|
+| まず知る | [README](../README.md) |
+| **基礎から学ぶ**(講義 6 回・実行できる例つき) | [講義](lecture/index.md) |
+| 保守・拡張の実務(コードの読み方・足し方・既知の問題) | [学習資料](learn/index.md) |
+| 画面の決めごと・機能の詳細 | [ui-and-features.md](reference/ui-and-features.md) |
