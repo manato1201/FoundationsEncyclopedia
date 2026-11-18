@@ -3,6 +3,7 @@ import { CornerBrackets } from "./CornerBrackets";
 import { StatusChip } from "./StatusChip";
 import { LiveClock } from "./LiveClock";
 import { MainNav } from "./MainNav";
+import { BackToTop } from "./BackToTop";
 import { ThemeToggle } from "@/components/theme/ThemeToggle";
 import { MotionToggle } from "@/components/theme/MotionToggle";
 import styles from "./AppShell.module.css";
@@ -36,6 +37,7 @@ export function AppShell({ children }: AppShellProps) {
         </div>
       </header>
       <main className={styles.main}>{children}</main>
+      <BackToTop />
     </div>
   );
 }

@@ -414,6 +414,40 @@
   }
 }
 
+/* カードの手応え(動きの規則: transform と opacity だけ・1 回きり・動きを減らす設定では止める) */
+@media (prefers-reduced-motion: no-preference) {
+  /* ホバー/フォーカスで 2px 浮き上がる */
+  .listRow {
+    transition:
+      border-color 0.15s ease,
+      transform var(--dur-instant) var(--ease-out);
+  }
+
+  .listRow:hover,
+  .listRow:focus-within {
+    transform: translateY(-2px);
+  }
+
+  /* 一覧が出る/絞り込みで新しく並ぶとき、先頭 8 枚だけ順に出す(新しく置かれたカードだけ。fill は backwards なので終了後はホバーの transform が効く) */
+  .rowEnter {
+    animation: row-enter var(--dur-enter) var(--ease-out) backwards;
+    animation-delay: calc(var(--row-i, 0) * 25ms);
+  }
+}
+
+:global(:root[data-motion="reduce"]) .listRow,
+:global(:root[data-motion="reduce"]) .listRow:hover,
+:global(:root[data-motion="reduce"]) .listRow:focus-within {
+  transform: none;
+}
+
+@keyframes row-enter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
 .listRowHead {
   display: flex;
   align-items: center;

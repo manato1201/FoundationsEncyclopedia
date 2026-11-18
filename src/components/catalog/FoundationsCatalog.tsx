@@ -466,6 +466,9 @@ export function FoundationsCatalog({ entries, featuredId }: FoundationsCatalogPr
 }
 
 /** 件数に合わせて列数を決め、最終段に余りを作らないカードグリッド(P1) */
+/** 一覧の出現演出をかける先頭の枚数(件数が多い一覧で全部を動かさない) */
+const ROW_ENTER_COUNT = 8;
+
 function EntryGrid({ entries, showCategory = false }: { entries: FoundationsMeta[]; showCategory?: boolean }) {
   const layout = computeGridLayout(entries.length);
   const gridStyle = {
@@ -480,7 +483,8 @@ function EntryGrid({ entries, showCategory = false }: { entries: FoundationsMeta
             key={entry.id}
             entry={entry}
             showCategory={showCategory}
-            style={{ "--span-lg": span } as CSSProperties}
+            style={{ "--span-lg": span, "--row-i": Math.min(index, 4) } as CSSProperties}
+            enter={index < ROW_ENTER_COUNT}
           />
         );
       })}
@@ -492,13 +496,15 @@ function FoundationsRow({
   entry,
   showCategory = false,
   style,
+  enter = false,
 }: {
   entry: FoundationsMeta;
   showCategory?: boolean;
   style?: CSSProperties;
+  enter?: boolean;
 }) {
   return (
-    <li className={styles.listRow} style={style} data-step-preview-host>
+    <li className={`${styles.listRow} ${enter ? styles.rowEnter : ""}`} style={style} data-step-preview-host>
       <Link href={`/foundations/${entry.id}`} className={styles.listRowHead}>
         <span className={styles.listName}>{entry.name}</span>
         {showCategory ? (

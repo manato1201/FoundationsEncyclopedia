@@ -1,0 +1,41 @@
+/* 右下に固定。章ページの目次レール(右端・縦 20〜80vh)とは重ならない位置 */
+.button {
+  position: fixed;
+  right: var(--space-4);
+  bottom: var(--space-4);
+  z-index: 5;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 1px solid var(--color-line);
+  border-radius: 50%;
+  background: var(--color-bg-surface);
+  color: var(--color-text-muted);
+  box-shadow: var(--shadow-card);
+  cursor: pointer;
+  transition:
+    border-color var(--dur-instant) ease,
+    color var(--dur-instant) ease;
+}
+
+.button:hover,
+.button:focus-visible {
+  border-color: var(--color-accent-blue);
+  color: var(--color-accent-blue);
+}
+
+/* 出現は 1 回きり(動きの規則: transform と opacity だけ)。動きを減らす設定では出るだけ */
+@media (prefers-reduced-motion: no-preference) {
+  .button {
+    animation: back-to-top-in var(--dur-open) var(--ease-out) backwards;
+  }
+}
+
+@keyframes back-to-top-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
