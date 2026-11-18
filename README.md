@@ -3,6 +3,7 @@
 プログラミング言語・IT 知識・DCC・ツール・フレームワークの**基礎**を、**ステップの図**で順番に見られる図鑑。
 
 - 本番: https://foundations-encyclopedia.vercel.app
+- **関連サイト**: 自作の 4 サイトは各画面のフッターから相互に行き来できます([アルゴリズム図鑑](https://the-algorithm-illustrated.vercel.app)・[基礎学習図鑑](https://foundations-encyclopedia.vercel.app)・[色彩図鑑](https://color-encyclopedia.vercel.app)・[Houdini リファレンス](https://houdini-reference.vercel.app))。サイトごとにオリジンが違うため、お気に入り・テーマ・設定は共有されません。
 - 技術: Next.js 16 / React 19(静的生成)/ three.js
 - コンテンツ: `content/foundations/*.md`(frontmatter の `operationSteps` で手順、`quiz` で章末クイズ)
 

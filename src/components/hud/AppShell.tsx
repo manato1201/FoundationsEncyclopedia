@@ -4,6 +4,7 @@ import { StatusChip } from "./StatusChip";
 import { LiveClock } from "./LiveClock";
 import { MainNav } from "./MainNav";
 import { BackToTop } from "./BackToTop";
+import { RelatedSites } from "./RelatedSites";
 import { ThemeToggle } from "@/components/theme/ThemeToggle";
 import { MotionToggle } from "@/components/theme/MotionToggle";
 import styles from "./AppShell.module.css";
@@ -26,7 +27,9 @@ export function AppShell({ children }: AppShellProps) {
           <Link href="/" className={styles.brandName}>
             FOUNDATIONS ENCYCLOPEDIA
           </Link>
-          <span className={styles.brandSub}>基礎学習図鑑 — プログラミング/IT/DCC/ツール/フレームワークの土台知識</span>
+          <span className={styles.brandSub}>
+            基礎学習図鑑 — プログラミング/IT/DCC/ツール/フレームワークの土台知識
+          </span>
         </div>
         <MainNav />
         <div className={styles.headerRight}>
@@ -37,6 +40,7 @@ export function AppShell({ children }: AppShellProps) {
         </div>
       </header>
       <main className={styles.main}>{children}</main>
+      <RelatedSites current="foundations" />
       <BackToTop />
     </div>
   );
