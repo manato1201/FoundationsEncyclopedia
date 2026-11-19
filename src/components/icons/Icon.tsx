@@ -15,6 +15,10 @@ const PATHS = {
   "chevron-down": <path d="M6 9l6 6 6-6" />,
   /** 開閉(開いている=上向き) */
   "chevron-up": <path d="M6 15l6-6 6 6" />,
+  /** 閉じる */
+  close: <path d="M6 6l12 12M18 6L6 18" />,
+  /** 一覧のメニュー(カテゴリ・サイト一覧の開閉ボタン) */
+  menu: <path d="M4 7h16M4 12h16M4 17h16" />,
   play: <path d="M8 5l11 7-11 7z" />,
   pause: <path d="M8 5v14M16 5v14" />,
   "step-back": <path d="M15 6l-6 6 6 6" />,

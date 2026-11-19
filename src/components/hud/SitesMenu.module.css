@@ -1,0 +1,112 @@
+.root {
+  position: relative;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-1) var(--space-3);
+  border: 1px solid var(--color-line);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    color 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.button:hover,
+.button[aria-expanded="true"] {
+  border-color: var(--color-accent-blue);
+  color: var(--color-accent-blue);
+}
+
+.panel {
+  position: absolute;
+  top: calc(100% + var(--space-2));
+  right: 0;
+  z-index: 30;
+  width: 22rem;
+  max-width: calc(100vw - var(--space-8));
+  padding: var(--space-2);
+  border: 1px solid var(--color-line);
+  border-radius: 8px;
+  background: var(--color-bg-surface);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+:global(:root[data-theme="light"]) .panel {
+  box-shadow: 0 8px 24px rgba(27, 34, 48, 0.16);
+}
+
+.panel[hidden] {
+  display: none;
+}
+
+/* 開くとき 1 回だけ(opacity/transform)。動きを減らす設定では globals の規則ですぐ切り替わる */
+.panel[data-open="true"] {
+  animation: sites-menu-open var(--dur-open) var(--ease-out);
+}
+
+@keyframes sites-menu-open {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: var(--space-2) var(--space-3);
+  border-radius: 6px;
+}
+
+.name {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+}
+
+.desc {
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: var(--color-text-muted);
+}
+
+.link:hover,
+.link:focus-visible {
+  background: var(--color-bg-surface-2);
+}
+
+.link:hover .name,
+.link:focus-visible .name {
+  color: var(--color-accent-blue);
+}
+
+.current .name {
+  color: var(--color-text-muted);
+}
+
+/* 狭い画面: ヘッダーが折り返してもはみ出さないよう、左端に揃えて画面幅に収める */
+@media (max-width: 639px) {
+  .panel {
+    right: auto;
+    left: 0;
+  }
+}

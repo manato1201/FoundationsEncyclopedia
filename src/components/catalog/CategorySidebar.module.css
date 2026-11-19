@@ -1,0 +1,305 @@
+/* カテゴリのサイドバー。768px 以上は sticky の左列、未満は下からのシート(切り替えは CSS だけ) */
+.root {
+  min-width: 0;
+}
+
+.trigger,
+.backdrop,
+.close,
+.sheetFooter {
+  display: none;
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.panelHead {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.heading {
+  margin-right: auto;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  color: var(--color-text-muted);
+}
+
+.reset {
+  padding: var(--space-1) var(--space-2);
+  border: none;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--color-accent-blue);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  cursor: pointer;
+}
+
+.reset:hover {
+  text-decoration: underline;
+}
+
+.list,
+.subList {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* 選んだカテゴリのサブカテゴリ: 左の細い線でぶら下げる */
+.subList {
+  margin: 2px 0 var(--space-2) var(--space-3);
+  padding-left: var(--space-2);
+  border-left: 1px solid var(--color-line);
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  width: 100%;
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid transparent;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.row:hover {
+  background: var(--color-bg-surface-2);
+}
+
+/* 色の役割: 青 = 現在地。選択中は青の枠と文字 */
+.row[aria-pressed="true"] {
+  border-color: var(--color-accent-blue);
+  color: var(--color-accent-blue);
+}
+
+.row[data-empty="true"] {
+  color: var(--color-text-muted);
+}
+
+.subRow {
+  padding: var(--space-1) var(--space-3);
+  font-size: 0.8125rem;
+}
+
+.rowName {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.count {
+  flex-shrink: 0;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+.row[aria-pressed="true"] .count {
+  color: inherit;
+}
+
+/* 絞り込み(折りたたみ) */
+.filters {
+  border-top: 1px solid var(--color-line);
+  padding-top: var(--space-3);
+}
+
+.filtersToggle {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  width: 100%;
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--color-line);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  cursor: pointer;
+}
+
+.filtersToggle > :first-child {
+  margin-right: auto;
+}
+
+.filtersToggle:hover {
+  border-color: var(--color-text-muted);
+}
+
+.filtersBody {
+  padding-top: var(--space-3);
+}
+
+.filtersBody[hidden] {
+  display: none;
+}
+
+.filterBadge {
+  min-width: 1.25rem;
+  padding: 0 var(--space-1);
+  border-radius: 999px;
+  background: var(--color-accent-blue);
+  color: var(--color-bg-void);
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  line-height: 1.25rem;
+  text-align: center;
+}
+
+/* ---- 広い画面: sticky の左列 ---- */
+@media (min-width: 768px) {
+  .root {
+    position: sticky;
+    top: var(--space-4);
+    align-self: start;
+    max-height: calc(100dvh - var(--space-8));
+    overflow-y: auto;
+    scrollbar-width: thin;
+    padding-right: var(--space-2);
+  }
+}
+
+/* ---- 狭い画面: 下からのシート ---- */
+@media (max-width: 767px) {
+  .trigger {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    width: 100%;
+    padding: var(--space-3) var(--space-4);
+    border: 1px solid var(--color-line);
+    border-radius: 8px;
+    background: var(--color-bg-surface);
+    color: var(--color-text);
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    text-align: left;
+    cursor: pointer;
+  }
+
+  .triggerLabel {
+    flex-shrink: 0;
+    font-weight: 700;
+  }
+
+  .triggerCurrent {
+    flex: 1 1 auto;
+    min-width: 0;
+    overflow: hidden;
+    color: var(--color-text-muted);
+    font-size: 0.8125rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 40;
+    background: rgba(5, 7, 12, 0.6);
+    opacity: 0;
+    visibility: hidden;
+    transition:
+      opacity var(--dur-open) var(--ease-move),
+      visibility 0s linear var(--dur-open);
+  }
+
+  .backdrop[data-open="true"] {
+    opacity: 1;
+    visibility: visible;
+    transition-delay: 0s;
+  }
+
+  .panel {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 41;
+    max-height: 85dvh;
+    overflow-y: auto;
+    padding: var(--space-4) var(--space-4) 0;
+    border: 1px solid var(--color-line);
+    border-bottom: none;
+    border-radius: 14px 14px 0 0;
+    background: var(--color-bg-surface);
+    transform: translateY(100%);
+    visibility: hidden;
+    transition:
+      transform var(--dur-open) var(--ease-move),
+      visibility 0s linear var(--dur-open);
+  }
+
+  .panel[data-open="true"] {
+    transform: translateY(0);
+    visibility: visible;
+    transition-delay: 0s;
+  }
+
+  .close {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border: 1px solid var(--color-line);
+    border-radius: 999px;
+    background: transparent;
+    color: var(--color-text-muted);
+    cursor: pointer;
+  }
+
+  .row {
+    padding: var(--space-3);
+  }
+
+  .subRow {
+    padding: var(--space-2) var(--space-3);
+  }
+
+  /* 「N件を見る」: シートの下端に貼り付ける */
+  .sheetFooter {
+    display: block;
+    position: sticky;
+    bottom: 0;
+    margin: 0 calc(var(--space-4) * -1);
+    padding: var(--space-3) var(--space-4) calc(var(--space-3) + env(safe-area-inset-bottom));
+    border-top: 1px solid var(--color-line);
+    background: var(--color-bg-surface);
+  }
+
+  .apply {
+    width: 100%;
+    padding: var(--space-3);
+    border: 1px solid var(--color-accent-blue);
+    border-radius: 8px;
+    background: transparent;
+    color: var(--color-accent-blue);
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    font-weight: 700;
+    cursor: pointer;
+  }
+}

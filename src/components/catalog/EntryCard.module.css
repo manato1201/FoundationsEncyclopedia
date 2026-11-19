@@ -1,0 +1,198 @@
+/* 一覧のカード(グリッド)と行(リスト)。色・間隔は globals.css のトークンだけを使う */
+.card {
+  position: relative;
+  display: flex;
+  min-width: 0;
+  border: 1px solid var(--color-line);
+  border-radius: 8px;
+  background: var(--color-bg-surface);
+  box-shadow: var(--shadow-card);
+  list-style: none;
+  transition: border-color 0.15s ease;
+}
+
+.card:hover,
+.card:focus-within {
+  border-color: var(--color-accent-blue);
+}
+
+.grid {
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* プレビュー枠: 高さ固定。中身が入る前(未マウント)も同じ高さなので、スクロール中に一覧が跳ねない */
+.media {
+  flex: none;
+  height: 6.25rem;
+  border-bottom: 1px solid var(--color-line);
+  background: var(--color-bg-void);
+}
+
+.body {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  gap: var(--space-2);
+  min-width: 0;
+  padding: var(--space-4);
+}
+
+.name {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
+/* カード全面をリンクの当たり判定にする(見出しのリンクだけが a 要素=読み上げは名前だけ) */
+.link {
+  transition: color 0.15s ease;
+}
+
+.link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+}
+
+.link:hover,
+.link:focus-visible {
+  color: var(--color-accent-blue);
+}
+
+.link:focus-visible {
+  outline: none;
+}
+
+.card:has(.link:focus-visible) {
+  outline: 2px solid var(--color-accent-blue);
+  outline-offset: 2px;
+}
+
+.summary {
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  color: var(--color-text-muted);
+}
+
+.grid .summary {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: auto;
+}
+
+.grid .meta {
+  padding-top: var(--space-1);
+}
+
+.category {
+  flex-basis: 100%;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  color: var(--color-text-muted);
+}
+
+/* リスト表示: プレビューなしの 1 行(名前と一言 | 印)。密に並べて長い一覧を流し見できる */
+.list {
+  flex-direction: row;
+}
+
+.list .body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas:
+    "name meta"
+    "summary meta";
+  column-gap: var(--space-4);
+  row-gap: var(--space-1);
+  align-items: center;
+  padding: var(--space-3) var(--space-4);
+}
+
+.list .name {
+  grid-area: name;
+}
+
+.list .summary {
+  grid-area: summary;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.list .meta {
+  grid-area: meta;
+  justify-content: flex-end;
+  margin-top: 0;
+}
+
+.list .category {
+  flex-basis: auto;
+}
+
+@media (max-width: 639px) {
+  .list .body {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "name"
+      "summary"
+      "meta";
+  }
+
+  .list .summary {
+    white-space: normal;
+  }
+
+  .list .meta {
+    justify-content: flex-start;
+    margin-top: var(--space-1);
+  }
+}
+
+/* カードの手応え(動きの規則: transform と opacity だけ・1 回きり・動きを減らす設定では止める) */
+@media (prefers-reduced-motion: no-preference) {
+  .card {
+    transition:
+      border-color 0.15s ease,
+      transform var(--dur-instant) var(--ease-out);
+  }
+
+  .card:hover,
+  .card:focus-within {
+    transform: translateY(-2px);
+  }
+
+  /* 先頭 8 枚だけ順に出す(終了後はホバーの transform が効くよう fill は backwards) */
+  .enter {
+    animation: card-enter var(--dur-enter) var(--ease-out) backwards;
+    animation-delay: calc(var(--row-i, 0) * 25ms);
+  }
+}
+
+:global(:root[data-motion="reduce"]) .card,
+:global(:root[data-motion="reduce"]) .card:hover,
+:global(:root[data-motion="reduce"]) .card:focus-within {
+  transform: none;
+}
+
+@keyframes card-enter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}

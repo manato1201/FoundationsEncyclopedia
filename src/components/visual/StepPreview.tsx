@@ -10,6 +10,11 @@ type StepPreviewProps = {
   steps?: OperationStep[];
   /** 専用アニメ(operationSteps なし)の章。ラベルは固定表示にする */
   bespoke?: boolean;
+  /**
+   * inline: 本文の途中に置く細い見本(従来)。
+   * tile: カード上部の固定高さの見本。ステップが無い章も同じ高さの枠を出し、一覧の高さが揃う。
+   */
+  variant?: "inline" | "tile";
 };
 
 /**
@@ -18,9 +23,21 @@ type StepPreviewProps = {
  * 「プレビューを動かす」がONのときだけ再生する。動きを減らす設定では常に静止。
  * 動きの種類は「ステップが順に点灯する」の1つだけにしている。
  */
-export function StepPreview({ steps, bespoke = false }: StepPreviewProps) {
+export function StepPreview({ steps, bespoke = false, variant = "inline" }: StepPreviewProps) {
   const hasSteps = steps !== undefined && steps.length > 0;
-  if (!hasSteps && !bespoke) return null;
+  const isTile = variant === "tile";
+  if (!hasSteps && !bespoke) {
+    return isTile ? (
+      <div className={`${styles.preview} ${styles.tile} ${styles.tileEmpty}`} aria-hidden="true">
+        <div className={styles.track}>
+          <span className={styles.barStill} />
+        </div>
+        <div className={styles.labels}>
+          <span className={styles.labelStatic}>文章で学ぶ章</span>
+        </div>
+      </div>
+    ) : null;
+  }
 
   const shown = hasSteps
     ? steps.slice(0, MAX_STEPS)
@@ -28,7 +45,7 @@ export function StepPreview({ steps, bespoke = false }: StepPreviewProps) {
   const n = shown.length;
 
   return (
-    <div className={`${styles.preview} ${styles[`n${n}`]}`} aria-hidden="true">
+    <div className={`${styles.preview} ${styles[`n${n}`]} ${isTile ? styles.tile : ""}`} aria-hidden="true">
       <div className={styles.track}>
         {shown.map((_, index) => (
           // --o: 点灯のずれ。停止中は最初のバーだけが点灯して見えるように、位相をずらしておく
@@ -54,7 +71,9 @@ export function StepPreview({ steps, bespoke = false }: StepPreviewProps) {
           <span className={styles.labelStatic}>段階アニメで確認できる</span>
         )}
       </div>
-      {hasSteps && steps.length > MAX_STEPS ? (
+      {isTile && hasSteps ? (
+        <span className={styles.more}>全{steps.length}段階</span>
+      ) : hasSteps && steps.length > MAX_STEPS ? (
         <span className={styles.more}>全{steps.length}段階</span>
       ) : null}
     </div>
