@@ -23,7 +23,7 @@
 
 | 場所 | 役割 |
 |---|---|
-| `content/foundations/` | 章(Markdown + frontmatter。495 件) |
+| `content/foundations/` | 章(Markdown + frontmatter。545 件) |
 | `src/lib/content/` | `createContentLoader`・`foundationsLoader`(frontmatter の型) |
 | `src/lib/step-scene.ts` | 章の id → 図の型・手順 → グリフ(規則表。純粋関数) |
 | `src/lib/three-scenes.ts` | 立体(three.js)のシーン(738 行) |

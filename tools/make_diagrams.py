@@ -21,7 +21,7 @@ def architecture() -> Diagram:
     d.text(40, 66, "青=主な流れ / 灰の破線=補助。章は Markdown、図の型は規則表、保存はブラウザの中だけ", cls="note")
 
     d.group(40, 100, 300, 600, "CONTENT", color="orange")
-    md = d.card(190, 250, "doc", "content/foundations", "章 495 件(Markdown)\n手順・クイズ・ガイドは frontmatter")
+    md = d.card(190, 250, "doc", "content/foundations", "章 545 件(Markdown)\n手順・クイズ・ガイドは frontmatter")
     up = d.card(190, 470, "list", "updates.ts", "更新履歴(手書きの静的データ)")
 
     d.group(400, 100, 380, 600, "LIB — 純粋関数", color="teal")

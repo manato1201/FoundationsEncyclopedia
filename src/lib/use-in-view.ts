@@ -8,7 +8,7 @@ const listeners = new WeakMap<Element, Listener>();
 let sharedObserver: IntersectionObserver | null = null;
 
 /**
- * 画面(上下 240px の余白つき)に入っているかを見る。495 件のカードがそれぞれ Observer を作らないよう、
+ * 画面(上下 240px の余白つき)に入っているかを見る。545 件のカードがそれぞれ Observer を作らないよう、
  * ページ全体で 1 つの IntersectionObserver を共有する。入ったら true・十分に離れたら false を返す。
  * IntersectionObserver が無い環境では、常に true(従来どおり全部描く)にする。
  */

@@ -15,6 +15,20 @@ export type UpdateItem = {
  */
 export const UPDATES: UpdateItem[] = [
   {
+    id: "2026-11-20-expansion-50",
+    date: "2026-11-20",
+    title: "実務で必要なのに抜けていた基礎を50章追加(495件→545件)",
+    description:
+      "薄かった分野と、抜けていた入口の章を、5カテゴリにまたがって50章足した。プログラミング言語13章(JavaScript: let・const・var / 配列メソッド / async・await、SQL: GROUP BYとHAVING / サブクエリとCTE、Python: 辞書 / クラス、Kotlin・Swift・Go・Rust・PHP・シェーダー言語の各1章)、IT知識16章(HTTP/2・HTTP/3、文字コード、Gitのステージングとリモート、ER図とキー、ビット演算、公開鍵暗号、クラウドのIAM、Dockerのボリューム、HTML・CSSの基礎3章、ログ、Vim、シェルスクリプト、ニューラルネットワーク)、DCC9章(Blender・Maya・Houdini各3章)、ツール別6章(Unity 3・Unreal Engine 3)、Framework 6章(React・Server Actions・ベクトル計算・AABB衝突・GitHub Actions・テストピラミッド)。すべてにステップ表示(operationSteps)と章末クイズ1問を付けた。DCCとゲームエンジンのメニュー名・ショートカットは、版によって違う場合がある。",
+    entryIds: [
+      "git-staging-area-basics",
+      "css-box-model-basics",
+      "game-vector-math-basics",
+      "unity-gameobject-component-basics",
+      "blender-object-edit-mode-basics",
+    ],
+  },
+  {
     id: "2026-11-08-provenance-guess-map",
     date: "2026-11-08",
     title: "手順の図に「出どころの札」と任意の「先に予想」、章末に「つながりの地図」を追加",
