@@ -6,7 +6,7 @@
   margin: var(--space-3) 0 var(--space-1);
   padding: var(--space-3);
   border: 1px solid var(--color-line);
-  border-radius: 6px;
+  border-radius: 0;
   background: var(--color-bg-void);
 }
 
@@ -18,7 +18,7 @@
 .bar {
   flex: 1 1 0;
   height: 0.375rem;
-  border-radius: 999px;
+  border-radius: 0;
   background: var(--color-line);
   transform-origin: 50% 100%;
 }
@@ -351,6 +351,6 @@
 .barStill {
   flex: 1 1 0;
   height: 0.375rem;
-  border-radius: 999px;
+  border-radius: 0;
   background: var(--color-line);
 }

@@ -28,7 +28,7 @@
   max-width: 100%;
   padding: 0.375rem 0.5rem;
   border: 1px solid var(--color-text-muted);
-  border-radius: 4px;
+  border-radius: 0;
   background: var(--color-bg-surface);
   font-family: var(--font-body);
   font-size: 0.8125rem;
@@ -46,7 +46,7 @@
 .actorState {
   min-height: 1.25rem;
   padding: 0.0625rem 0.375rem;
-  border-radius: 3px;
+  border-radius: 0;
   font-family: var(--font-mono);
   font-size: 0.6875rem;
   font-weight: 700;
@@ -58,8 +58,9 @@
 }
 
 .actorState[data-on] {
-  background: var(--t);
-  color: var(--vz-ink);
+  border: 1px var(--t-style) var(--t-ink);
+  background: var(--t-fill);
+  color: var(--t-text);
   opacity: 1;
   transform: none;
 }
@@ -80,14 +81,19 @@
   visibility: hidden;
 }
 
-.message[data-status="past"] {
+/* 済んだメッセージ: 矢印だけ薄くし、文字は補助の色にする(文字を半透明にすると 4.5:1 を割るため) */
+.message[data-status="past"] .arrow {
   opacity: 0.6;
+}
+
+.message[data-status="past"] .messageLabel {
+  color: var(--color-text-muted);
 }
 
 .messageLabel {
   max-width: 100%;
   padding: 0 0.25rem;
-  border-radius: 2px;
+  border-radius: 0;
   background: var(--vz-panel);
   font-family: var(--font-body);
   font-size: 0.8125rem;
@@ -105,9 +111,10 @@
   display: inline-block;
   margin-right: 0.25rem;
   padding: 0 0.25rem;
-  border-radius: 2px;
-  background: var(--t);
-  color: var(--vz-ink);
+  border: 1px var(--t-style) var(--t-ink);
+  border-radius: 0;
+  background: var(--t-fill);
+  color: var(--t-text);
   font-family: var(--font-mono);
   font-size: 0.625rem;
   font-weight: 700;
@@ -136,7 +143,7 @@
   top: 50%;
   height: 2px;
   margin-top: -1px;
-  background: var(--t-ink);
+  background: var(--t-stroke);
   transform-origin: left center;
 }
 

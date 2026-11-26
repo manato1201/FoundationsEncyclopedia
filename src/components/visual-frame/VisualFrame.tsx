@@ -36,6 +36,8 @@ type VisualFrameProps = {
   children: ReactNode;
   /** 再生操作など、枠の下に置くもの */
   controls?: ReactNode;
+  /** 枠線の上に乗る図名(製図の図面名)。既定は「FIG · 図」 */
+  sheetTitle?: string;
 };
 
 /**
@@ -60,13 +62,14 @@ export function VisualFrame({
   showNote = true,
   children,
   controls,
+  sheetTitle = "FIG · 図",
 }: VisualFrameProps) {
   const step = steps?.[stepIndex];
   const total = steps?.length ?? 0;
   const approxText = approx === true ? "数値は目安" : typeof approx === "string" ? approx : null;
 
   return (
-    <figure className={`${palette.palette} ${styles.frame}`}>
+    <figure className={`${palette.palette} ${styles.frame} bp-sheet`} data-title={sheetTitle}>
       <header className={styles.head}>
         <div className={styles.topRow}>
           <p className={styles.eyebrow}>{eyebrow}</p>

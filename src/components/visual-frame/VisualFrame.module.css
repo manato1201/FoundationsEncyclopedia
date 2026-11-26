@@ -1,14 +1,24 @@
-/* 図の共通の枠。暗いパネル(ライトでは淡い面)・等幅の小ラベル・進み具合・凡例 */
+/* 図の共通の枠 = 1 枚の図面(global の bp-sheet で細線の枠・四隅の見当・枠線の上の図名)。
+   台は紺(ライトは白)、中は方眼。等幅の小ラベル・進み具合・凡例 */
 .frame {
   container-type: inline-size;
   display: flex;
   flex-direction: column;
   gap: var(--space-4);
-  margin: 0;
-  padding: var(--space-4) var(--space-4) var(--space-3);
-  border: 1px solid var(--color-line);
-  border-radius: 8px;
-  background: var(--vz-panel);
+  margin: 0.75rem 0 0;
+  padding: var(--space-6) var(--space-4) var(--space-3);
+  border-radius: 0;
+  background-color: var(--vz-panel);
+  background-image:
+    linear-gradient(var(--bp-grid-b) 1px, transparent 1px),
+    linear-gradient(90deg, var(--bp-grid-b) 1px, transparent 1px),
+    linear-gradient(var(--bp-grid-a) 1px, transparent 1px),
+    linear-gradient(90deg, var(--bp-grid-a) 1px, transparent 1px);
+  background-size:
+    60px 60px,
+    60px 60px,
+    12px 12px,
+    12px 12px;
   color: var(--color-text);
 }
 
@@ -28,7 +38,7 @@
   flex-direction: column;
   gap: var(--space-3);
   padding-bottom: var(--space-3);
-  border-bottom: 1px solid var(--vz-panel-line);
+  border-bottom: 3px double var(--vz-panel-line);
 }
 
 .topRow {
@@ -42,8 +52,8 @@
 .eyebrow {
   font-family: var(--font-mono);
   font-size: 0.6875rem;
-  letter-spacing: 0.08em;
-  color: var(--vz-cyan-ink);
+  letter-spacing: 0.14em;
+  color: var(--color-text-muted);
 }
 
 /* 進み具合: 01 編集 — 02 確認 — 03 add */
@@ -77,8 +87,17 @@
 }
 
 .progressItem[data-state="current"] {
-  color: var(--color-text);
+  color: var(--color-accent-blue);
   font-weight: 700;
+}
+
+.progressItem[data-state="current"] .progressNo {
+  display: inline-grid;
+  place-items: center;
+  width: 1.375rem;
+  height: 1.375rem;
+  border: 1px solid currentColor;
+  border-radius: 50%;
 }
 
 .progressItem[data-state="done"] {
@@ -135,11 +154,13 @@
 .kicker {
   font-family: var(--font-mono);
   font-size: 0.6875rem;
-  letter-spacing: 0.06em;
-  color: var(--vz-cyan-ink);
+  letter-spacing: 0.14em;
+  color: var(--color-accent-blue);
 }
 
 .title {
+  padding-left: 0.625rem;
+  border-left: 3px solid var(--color-accent-blue);
   font-family: var(--font-display);
   font-size: clamp(1.125rem, 1rem + 0.6vw, 1.5rem);
   font-weight: 700;
@@ -153,22 +174,28 @@
   color: var(--color-text-muted);
 }
 
-/* 右上の大きな数(「~100倍」) */
+/* 右上の大きな数(「~100倍」)= 寸法。数値の下に寸法線、両端に止め線、線の下に何の寸法か */
 .callout {
   flex: none;
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
-  gap: 0.125rem;
+  align-items: stretch;
+  gap: 0.25rem;
+  text-align: center;
   animation: callout-in var(--dur-enter) var(--ease-out) backwards;
 }
 
 .calloutValue {
+  padding: 0 0.75rem 0.375rem;
+  border-bottom: 1px solid var(--bp-line);
+  background:
+    linear-gradient(var(--bp-line), var(--bp-line)) left bottom / 1px 0.875rem no-repeat,
+    linear-gradient(var(--bp-line), var(--bp-line)) right bottom / 1px 0.875rem no-repeat;
   font-family: var(--font-mono);
   font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2.25rem);
   font-weight: 700;
   line-height: 1;
-  color: var(--vz-pink-ink);
+  color: var(--color-accent-blue);
 }
 
 .calloutLabel {
@@ -198,9 +225,10 @@
   flex-direction: column;
   gap: 0.25rem;
   padding: var(--space-3);
-  border-left: 2px solid var(--color-accent-blue);
-  background: var(--color-bg-surface);
-  border-radius: 0 4px 4px 0;
+  border: 1px dashed var(--vz-panel-line);
+  border-left: 3px solid var(--color-accent-blue);
+  background: var(--vz-panel);
+  border-radius: 0;
   animation: caption-in var(--dur-enter) var(--ease-out) backwards;
 }
 
@@ -236,17 +264,17 @@
   flex-direction: column;
   gap: var(--space-2);
   padding: var(--space-3);
-  border: 1px solid var(--vz-panel-line);
-  border-radius: 4px;
-  background: var(--color-bg-surface);
+  border: 1px solid var(--color-line-strong);
+  border-radius: 0;
+  background: var(--vz-panel);
   animation: caption-in var(--dur-enter) var(--ease-out) backwards;
 }
 
 .summaryKicker {
   font-family: var(--font-mono);
   font-size: 0.6875rem;
-  letter-spacing: 0.08em;
-  color: var(--vz-cyan-ink);
+  letter-spacing: 0.14em;
+  color: var(--color-text-muted);
 }
 
 .summaryText {
@@ -254,9 +282,11 @@
   line-height: 1.6;
 }
 
+/* まとめの表 = 部品表(罫線の表) */
 .summaryTable {
   width: 100%;
   border-collapse: collapse;
+  border: 1px solid var(--color-line-strong);
   font-size: 0.8125rem;
 }
 
@@ -264,14 +294,17 @@
 .summaryTable td {
   padding: 0.375rem 0.5rem;
   border-bottom: 1px solid var(--vz-panel-line);
+  border-right: 1px solid var(--vz-panel-line);
   text-align: left;
   vertical-align: top;
   line-height: 1.5;
 }
 
 .summaryTable thead th {
+  background: var(--bp-grid-a);
   font-family: var(--font-mono);
   font-size: 0.75rem;
+  letter-spacing: 0.06em;
   color: var(--color-text-muted);
 }
 
@@ -288,7 +321,7 @@
   justify-content: space-between;
   gap: var(--space-2) var(--space-4);
   padding-top: var(--space-2);
-  border-top: 1px solid var(--vz-panel-line);
+  border-top: 3px double var(--vz-panel-line);
 }
 
 .legendList {
@@ -312,13 +345,13 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 1.1rem;
-  height: 1.1rem;
+  min-width: 1.375rem;
+  height: 1.25rem;
   padding: 0 0.125rem;
-  border-radius: 2px;
-  background: var(--t);
-  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.18);
-  color: var(--vz-ink);
+  border: 1px var(--t-style) var(--t-ink);
+  border-radius: 0;
+  background: var(--t-fill);
+  color: var(--t-text);
   font-family: var(--font-mono);
   font-size: 0.625rem;
   font-weight: 700;
@@ -327,7 +360,8 @@
 .approx {
   font-family: var(--font-mono);
   font-size: 0.6875rem;
-  color: var(--vz-amber-ink);
+  letter-spacing: 0.04em;
+  color: var(--color-accent-amber);
 }
 
 .controls {
@@ -354,6 +388,16 @@
 @container (max-width: 36rem) {
   .progressItem:not([data-state="current"]) .progressLabel {
     display: none;
+  }
+
+  /* 寸法(右上の大きな数)は題名の下へ回し、題名を細く押しつぶさない */
+  .titleRow {
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .callout {
+    align-self: flex-start;
   }
 
   .summaryTable thead {

@@ -54,8 +54,19 @@
   transform: none;
 }
 
-.row[data-shown][data-dim] {
-  opacity: 0.62;
+/* いまの段で見ていない階層: 図(箱・棒)だけ薄くし、文字は薄くしない(本文のコントラスト 4.5:1 を保つ) */
+.row[data-shown][data-dim] .track {
+  opacity: 0.5;
+}
+
+/* 箱はハッチングを外して線だけにする(線の色・線の種類で、どの階層かは残る) */
+.row[data-shown][data-dim] .box {
+  background: var(--vz-panel);
+  color: var(--color-text-muted);
+}
+
+.row[data-shown][data-dim] .value {
+  color: var(--color-text-muted);
 }
 
 .tierCell {
@@ -86,10 +97,10 @@
   width: var(--w);
   min-width: 0;
   padding: 0.25rem 0.5rem;
-  border-radius: 3px;
-  background: var(--t);
-  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.18);
-  color: var(--vz-ink);
+  border: 1.5px var(--t-style) var(--t-ink);
+  border-radius: 0;
+  background: var(--t-fill);
+  color: var(--t-text);
   font-family: var(--font-body);
   font-size: 0.8125rem;
   font-weight: 700;
@@ -108,7 +119,7 @@
   flex: none;
   padding: 0.0625rem 0.375rem;
   border: 1px solid var(--t-ink);
-  border-radius: 999px;
+  border-radius: 0;
   color: var(--t-ink);
   font-family: var(--font-mono);
   font-size: 0.6875rem;
@@ -130,20 +141,34 @@
   color: var(--color-text-muted);
 }
 
+/* 時間の値 = 寸法(下に寸法線、両端に止め線) */
+.value {
+  justify-self: start;
+  max-width: 100%;
+  padding: 0 0.375rem 0.25rem;
+  border-bottom: 1px solid var(--bp-line);
+  background:
+    linear-gradient(var(--bp-line), var(--bp-line)) left bottom / 1px 7px no-repeat,
+    linear-gradient(var(--bp-line), var(--bp-line)) right bottom / 1px 7px no-repeat;
+}
+
 .track {
   position: relative;
   display: block;
-  height: 0.375rem;
-  border-radius: 999px;
-  background: var(--vz-dim);
+  height: 0.625rem;
+  border-radius: 0;
+  background: linear-gradient(var(--vz-panel-line), var(--vz-panel-line)) left center / 100% 1px no-repeat;
   overflow: hidden;
 }
 
 .bar {
   position: absolute;
   inset: 0;
-  border-radius: 999px;
-  background: var(--t-ink);
+  top: 0.0625rem;
+  bottom: 0.0625rem;
+  border-radius: 0;
+  background: var(--t-fill);
+  box-shadow: inset 0 0 0 1px var(--t-ink);
   transform: scaleX(0);
   transform-origin: left center;
   transition: transform 640ms var(--ease-out);

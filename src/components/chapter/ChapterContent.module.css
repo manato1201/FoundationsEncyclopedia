@@ -1,14 +1,15 @@
 /* 解説 / 例 / クイズ の切替(タブ) */
 .tabs {
   display: flex;
-  gap: var(--space-1);
+  gap: 0;
   margin-bottom: var(--space-6);
-  border-bottom: 1px solid var(--color-line);
+  border-bottom: 1px solid var(--color-line-strong);
 }
 
+/* タブ = 図面のつまみ(選ばれたものだけ枠で囲み、下の線を切る) */
 .tab {
   padding: var(--space-2) var(--space-4);
-  border: none;
+  border: 1px solid transparent;
   border-bottom: 2px solid transparent;
   margin-bottom: -1px;
   background: transparent;
@@ -24,7 +25,9 @@
 
 /* 現在のタブは青(色の役割: 青 = 現在地) */
 .tabActive {
+  border-color: var(--color-line-strong);
   border-bottom-color: var(--color-accent-blue);
+  background: var(--color-bg-void);
   color: var(--color-accent-blue);
 }
 
@@ -34,12 +37,34 @@
 }
 
 /* 章の定型項目(見るポイント / 使うときの注意 / よくある誤解) */
+/* 注記の枠(global の bp-sheet)。各項目は丸囲みの番号+NOTE / CAUTION の札 */
 .guide {
   margin-top: var(--space-8);
-  padding: var(--space-4) var(--space-6);
-  border: 1px solid var(--color-line);
-  border-radius: 6px;
-  background: var(--color-bg-surface);
+  padding: var(--space-6) var(--space-6) var(--space-4);
+  border-radius: 0;
+  background: color-mix(in srgb, var(--color-bg-void) 88%, transparent);
+}
+
+.guideRow {
+  padding-bottom: var(--space-3);
+  border-bottom: 1px dotted var(--color-line);
+}
+
+.guideRow:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.guideRow dd {
+  margin-left: calc(1.625rem + var(--space-3));
+}
+
+.guideTag {
+  color: var(--color-accent-green);
+}
+
+.guideTermCaution .guideTag {
+  color: var(--color-accent-amber);
 }
 
 .guideTitle {
@@ -56,6 +81,10 @@
 }
 
 .guideTerm {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-1);
   font-size: 0.8125rem;
   font-weight: 700;
   color: var(--color-text);
@@ -80,6 +109,8 @@
 }
 
 .markdownBody h2 {
+  padding-bottom: var(--space-1);
+  border-bottom: 1px solid var(--color-line);
   font-family: var(--font-display-en);
   font-size: 0.9375rem;
   font-weight: 700;
@@ -118,7 +149,7 @@
   color: var(--color-text);
   background: var(--color-bg-surface);
   padding: 0.125em 0.375em;
-  border-radius: 3px;
+  border-radius: 0;
 }
 
 .markdownBody strong {
@@ -131,7 +162,7 @@
   overflow-x: auto;
   background: var(--color-bg-void);
   border: 1px solid var(--color-line);
-  border-radius: 4px;
+  border-radius: 0;
 }
 
 .markdownBody pre code {
@@ -145,9 +176,11 @@
 }
 
 /* 比較表(章本文内のMarkdownテーブル) */
+/* 部品表の罫線 */
 .markdownBody table {
   width: 100%;
   margin-bottom: var(--space-4);
+  border: 1px solid var(--color-line-strong);
   border-collapse: collapse;
   font-size: 0.8125rem;
 }
@@ -158,6 +191,7 @@
   text-align: left;
   vertical-align: top;
   border-bottom: 1px solid var(--color-line);
+  border-right: 1px solid var(--color-line);
 }
 
 .markdownBody th {

@@ -1,0 +1,94 @@
+/* 表題欄: 罫線で区切った小欄。上段 = 図面番号(大きく・差し色)と分類、下段 = 何枚目・図・段・問・改訂 */
+.block {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  max-width: 44rem;
+  margin: 0;
+  border: 1px solid var(--color-line-strong);
+  background: color-mix(in srgb, var(--color-bg-void) 88%, transparent);
+}
+
+.cell {
+  min-width: 0;
+  padding: 0.25rem 0.625rem 0.375rem;
+  border-right: 1px solid var(--color-line);
+  border-bottom: 1px solid var(--color-line);
+}
+
+.cell:nth-child(2),
+.cell:last-child {
+  border-right: 0;
+}
+
+.cell:nth-child(n + 3) {
+  border-bottom: 0;
+}
+
+.dwg {
+  grid-column: span 2;
+}
+
+.kind {
+  grid-column: span 3;
+}
+
+.block dt {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  letter-spacing: 0.14em;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.block dd {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: var(--color-text);
+  overflow-wrap: anywhere;
+}
+
+.kind dd {
+  font-family: var(--font-body);
+}
+
+.dwg dd {
+  font-size: 1.125rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--color-accent-blue);
+}
+
+/* 狭い画面: 3 列(番号 | 分類 / 何枚目・図・段 / 問・改訂) */
+@media (max-width: 639px) {
+  .block {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .dwg {
+    grid-column: span 1;
+  }
+
+  .kind {
+    grid-column: span 2;
+  }
+
+  .cell:nth-child(n + 3) {
+    border-bottom: 1px solid var(--color-line);
+  }
+
+  .cell:nth-child(5) {
+    border-right: 0;
+  }
+
+  .cell:nth-child(n + 6) {
+    border-bottom: 0;
+  }
+
+  .cell:last-child {
+    grid-column: span 2;
+  }
+}

@@ -1,11 +1,12 @@
 /* 一覧のカード(グリッド)と行(リスト)。色・間隔は globals.css のトークンだけを使う */
+/* カード = 1 枚の図面(図版+表題欄)。細線の枠の中に、図版の枠と罫線で区切った欄 */
 .card {
   position: relative;
   display: flex;
   min-width: 0;
-  border: 1px solid var(--color-line);
-  border-radius: 8px;
-  background: var(--color-bg-surface);
+  border: 1px solid var(--color-line-strong);
+  border-radius: 0;
+  background: color-mix(in srgb, var(--color-bg-void) 85%, transparent);
   box-shadow: var(--shadow-card);
   list-style: none;
   transition: border-color 0.15s ease;
@@ -13,7 +14,7 @@
 
 .card:hover,
 .card:focus-within {
-  border-color: var(--color-accent-blue);
+  border-color: var(--bp-line);
 }
 
 .grid {
@@ -25,8 +26,9 @@
 .media {
   flex: none;
   height: 6.25rem;
-  border-bottom: 1px solid var(--color-line);
-  background: var(--color-bg-void);
+  margin: var(--space-2) var(--space-2) 0;
+  border: 1px solid var(--color-line);
+  background: var(--bp-plate);
 }
 
 .body {
@@ -36,6 +38,28 @@
   gap: var(--space-2);
   min-width: 0;
   padding: var(--space-4);
+}
+
+/* グリッド: 本文を表題欄の形に(名前 | 一言 | 印 を罫線で区切る) */
+.grid .body {
+  gap: 0;
+  margin: var(--space-2);
+  padding: 0;
+  border: 1px solid var(--color-line-strong);
+}
+
+.grid .body > * {
+  padding: 0.375rem 0.625rem;
+}
+
+.grid .name {
+  border-bottom: 1px solid var(--color-line);
+}
+
+/* 2 行で切る一言: 下の余白に 3 行目がのぞかないよう、余白は外側(margin)に持たせる */
+.grid .summary {
+  padding-bottom: 0;
+  margin: 0 0 0.375rem;
 }
 
 .name {
@@ -96,7 +120,11 @@
 }
 
 .grid .meta {
-  padding-top: var(--space-1);
+  border-top: 1px solid var(--color-line);
+}
+
+.grid .meta:empty {
+  display: none;
 }
 
 .category {

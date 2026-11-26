@@ -4,9 +4,18 @@
   flex-direction: column;
 }
 
+/* ヒーロー = 表紙の図面(global の bp-sheet: 細線の枠・四隅の見当・枠線の上の図名) */
 .hero {
-  padding: var(--space-16) var(--space-6) var(--space-12);
-  max-width: 56rem;
+  margin: var(--space-8) var(--space-6) var(--space-6);
+  padding: var(--space-12) var(--space-8) var(--space-8);
+  background: color-mix(in srgb, var(--color-bg-void) 82%, transparent);
+}
+
+@media (max-width: 639px) {
+  .hero {
+    margin: var(--space-6) var(--space-4) var(--space-4);
+    padding: var(--space-8) var(--space-4) var(--space-6);
+  }
 }
 
 .eyebrow {
@@ -48,11 +57,15 @@
   margin-bottom: var(--space-6);
 }
 
+/* 主要数値 = 表題欄の小欄(上に太い線・左に細い線) */
 .stat {
   display: flex;
   flex-direction: column;
-  gap: var(--space-1);
-  min-width: 5rem;
+  gap: var(--space-2);
+  min-width: 6rem;
+  padding: var(--space-2) var(--space-3) 0;
+  border-top: 1px solid var(--color-line-strong);
+  border-left: 1px solid var(--color-line);
 }
 
 .statLabel {
@@ -62,10 +75,17 @@
   color: var(--color-text-muted);
 }
 
+/* 数値 = 寸法(下に寸法線、両端に止め線) */
 .statValue {
   display: flex;
   align-items: baseline;
+  align-self: flex-start;
   gap: var(--space-1);
+  padding: 0 0.5rem 0.375rem;
+  border-bottom: 1px solid var(--bp-line);
+  background:
+    linear-gradient(var(--bp-line), var(--bp-line)) left bottom / 1px 0.75rem no-repeat,
+    linear-gradient(var(--bp-line), var(--bp-line)) right bottom / 1px 0.75rem no-repeat;
   font-family: var(--font-mono);
   font-variant-numeric: tabular-nums;
   font-size: 2.25rem;
@@ -86,7 +106,7 @@
   margin-bottom: var(--space-8);
   padding: var(--space-2) var(--space-4);
   border: 1px solid var(--color-line);
-  border-radius: 999px;
+  border-radius: 0;
   font-family: var(--font-mono);
   font-size: 0.8125rem;
   letter-spacing: 0.08em;
@@ -105,10 +125,11 @@
   display: flex;
   align-items: center;
   gap: var(--space-3);
-  border: 1px solid var(--color-line);
-  border-radius: 4px;
+  border: 1px solid var(--color-line-strong);
+  border-radius: 0;
   padding: var(--space-3) var(--space-4);
   max-width: 32rem;
+  background: var(--color-bg-void);
   transition:
     border-color 0.15s ease,
     box-shadow 0.15s ease;
@@ -155,7 +176,7 @@
   gap: var(--space-2);
   flex-shrink: 0;
   border: 1px solid var(--color-line);
-  border-radius: 999px;
+  border-radius: 0;
   padding: var(--space-2) var(--space-4);
   background: transparent;
   color: var(--color-text-muted);
@@ -175,13 +196,13 @@
 
 .chipActive {
   border-color: var(--color-accent-blue);
+  background: var(--bp-accent-soft);
   color: var(--color-accent-blue);
 }
 
 .chipCount {
   font-size: 0.6875rem;
   color: inherit;
-  opacity: 0.7;
 }
 
 /* 習得度バッジで絞り込む専用チップ。masteryBadge固有の色ではなく通常チップと同じ配色を用い、
@@ -199,7 +220,7 @@
 .chipAnimatedDot {
   width: 6px;
   height: 6px;
-  border-radius: 999px;
+  border-radius: 0;
   flex-shrink: 0;
   background: var(--color-accent-green);
 }
@@ -219,7 +240,7 @@
 .featuredCard {
   display: block;
   border: 1px solid var(--color-line);
-  border-radius: 8px;
+  border-radius: 0;
   padding: var(--space-8);
   background: var(--color-bg-surface);
   box-shadow: var(--shadow-card);
@@ -273,7 +294,7 @@
   gap: var(--space-8);
   align-items: start;
   padding: var(--space-6) var(--space-6) 0;
-  border-top: 1px solid var(--color-line);
+  border-top: 3px double var(--color-line-strong);
 }
 
 .content {
@@ -306,7 +327,7 @@
 .viewToggle {
   display: inline-flex;
   border: 1px solid var(--color-line);
-  border-radius: 999px;
+  border-radius: 0;
   overflow: hidden;
 }
 
@@ -370,7 +391,7 @@
 .sortControl select {
   background: transparent;
   border: 1px solid var(--color-line);
-  border-radius: 4px;
+  border-radius: 0;
   padding: var(--space-1) var(--space-2);
   color: var(--color-text);
   font-family: var(--font-mono);
@@ -437,7 +458,7 @@
 
 .emptyState {
   border: 1px dashed var(--color-line);
-  border-radius: 8px;
+  border-radius: 0;
   padding: var(--space-8);
   text-align: center;
   font-family: var(--font-body);
@@ -451,13 +472,13 @@
   align-items: flex-end;
   gap: var(--space-2) var(--space-4);
   margin-bottom: var(--space-6);
-  border-bottom: 1px solid var(--color-line);
+  border-bottom: 1px solid var(--color-line-strong);
 }
 
 .entryTabList {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-1);
+  gap: 0;
 }
 
 .entryTabs .controls {
@@ -470,7 +491,7 @@
   gap: var(--space-2);
   padding: var(--space-2) var(--space-4);
   margin-bottom: -1px;
-  border: none;
+  border: 1px solid transparent;
   border-bottom: 2px solid transparent;
   background: transparent;
   color: var(--color-text-muted);
@@ -483,8 +504,11 @@
   color: var(--color-text);
 }
 
+/* 選んだ入口 = 図面のつまみ(枠で囲み、下に差し色の線) */
 .entryTabActive {
+  border-color: var(--color-line-strong);
   border-bottom-color: var(--color-accent-blue);
+  background: var(--color-bg-void);
   color: var(--color-accent-blue);
 }
 
@@ -492,24 +516,28 @@
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: var(--space-3);
+  gap: var(--space-6);
+  padding-top: var(--space-2);
 }
 
+/* 入口の 1 件 = 番号札(丸囲み)が枠線の左上に乗った図面 */
 .startItem {
+  position: relative;
   display: flex;
   gap: var(--space-4);
-  padding: var(--space-4) var(--space-6);
-  border: 1px solid var(--color-line);
-  border-radius: 6px;
-  background: var(--color-bg-surface);
+  padding: var(--space-6) var(--space-6) var(--space-4);
+  border: 1px solid var(--color-line-strong);
+  border-radius: 0;
+  background: color-mix(in srgb, var(--color-bg-void) 85%, transparent);
   box-shadow: var(--shadow-card);
 }
 
 .startNumber {
-  flex-shrink: 0;
-  font-family: var(--font-mono);
-  font-size: 1.25rem;
+  position: absolute;
+  top: -0.8125rem;
+  left: var(--space-3);
   color: var(--color-accent-blue);
+  border-color: var(--color-accent-blue);
 }
 
 .startBody {
@@ -546,7 +574,7 @@
   margin-top: var(--space-3);
   padding: var(--space-1) var(--space-3);
   border: 1px solid var(--color-line);
-  border-radius: 999px;
+  border-radius: 0;
   background: transparent;
   color: var(--color-text-muted);
   font-family: var(--font-mono);
@@ -578,7 +606,7 @@
   width: 2rem;
   height: 1.125rem;
   border: 1px solid var(--color-line);
-  border-radius: 999px;
+  border-radius: 0;
 }
 
 .liveThumb {
@@ -618,8 +646,9 @@
 @media (min-width: 1100px) {
   .heroCrystal {
     position: absolute;
-    top: var(--space-12);
-    right: var(--space-12);
+    top: var(--space-16);
+    right: var(--space-16);
+    z-index: 3;
     display: block;
   }
 }

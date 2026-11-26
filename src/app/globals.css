@@ -1,29 +1,42 @@
-/* デザイントークン。
-   The-Algorithm-Illustrated(アンバー×グリーン)・ColorEncyclopedia(バイオレット)との差別化として、
-   ブランドアクセントをブルー系に変更している。CSSステップアニメーション(Phase 3)のステップ配色は
-   blue(初期化・進行中)/green(完了・本体実行)/amber(更新・注意)の3色を意味用途別に使い分ける。 */
+/* デザイントークン — 製図(ブループリント)の見た目(2026-11-26)。
+   ダーク = 青焼き(紺の方眼に白線)、ライト = 白焼き(白地に青線)。角は丸めず、影の代わりに細線と四隅の見当で区切る。
+   トークン名は以前の HUD のまま(部品の CSS を書き換えずに済むように)。意味:
+   --color-accent-blue  = 現在地・操作・リンク(製図の朱/黄の差し線。名前は「blue」のまま)
+   --color-accent-green = 完了・正解
+   --color-accent-amber = 注意・補足(CAUTION の色)
+   図の状態の色(凡例)は components/visual-kinds/palette.module.css が、線の色+ハッチング+記号で区別する。 */
 :root {
   /* コアカラー(ダーク。ライトは下の :root[data-theme="light"] で同じトークン名の値だけ替える) */
-  --color-bg-void: #05070c;
-  --color-bg-surface: #10141d;
-  --color-bg-surface-2: #171c28;
-  --color-text: #eaf0f7;
-  --color-text-muted: #8792a6;
-  /* 色の役割: 青=現在地・操作 / 緑=完了・正解 / アンバー=注意・補足(ほかの用途には使わない) */
-  --color-accent-blue: #3ba7ff;
-  --color-accent-green: #4dffb0;
-  --color-accent-amber: #ffa733;
+  --color-bg-void: #0b2240;
+  --color-bg-surface: #0e2a50;
+  --color-bg-surface-2: #12335f;
+  --color-text: #ecf5ff;
+  --color-text-muted: #93b4d9;
+  --color-accent-blue: #ffd27a;
+  --color-accent-green: #8fe3bf;
+  --color-accent-amber: #ff9f7f;
+  /* 差し色の上に載せる文字(塗りのボタンなど) */
+  --color-accent-ink: #0b2240;
 
-  /* 罫線 */
-  --color-line: rgba(59, 167, 255, 0.16);
+  /* 罫線: 細(区切り)・強(枠)・線画(見当・寸法線) */
+  --color-line: rgba(185, 220, 255, 0.26);
+  --color-line-strong: rgba(185, 220, 255, 0.55);
+  --bp-line: rgba(220, 238, 255, 0.85);
+  --bp-faint: #7c9cc4;
+  /* 方眼(細 12px・太 60px) */
+  --bp-grid-a: rgba(185, 220, 255, 0.06);
+  --bp-grid-b: rgba(185, 220, 255, 0.13);
+  /* 図版の台(図の舞台・カードのプレビュー) */
+  --bp-plate: #0a2340;
+  /* 差し色の淡い面(選択中の行など) */
+  --bp-accent-soft: rgba(255, 210, 122, 0.12);
 
-  /* グロー: 「現在の段階」の要素にだけ使う。静的な装飾には使わない(P7)。
-     ライトテーマでは発光が意味を持たないため、同じトークン名のまま影に置き換える。 */
-  --glow-blue: 0 0 12px rgba(59, 167, 255, 0.35);
-  --glow-green: 0 0 12px rgba(77, 255, 176, 0.35);
-  --glow-amber: 0 0 12px rgba(255, 167, 51, 0.35);
+  /* 「現在の段階」の強調。製図では発光させず、細い線を 1 本足す(トークン名は互換のため glow のまま) */
+  --glow-blue: 0 0 0 1px var(--color-accent-blue);
+  --glow-green: 0 0 0 1px var(--color-accent-green);
+  --glow-amber: 0 0 0 1px var(--color-accent-amber);
 
-  /* 静的カードの浮き(ダークでは使わない=none、ライトでは影で代替) */
+  /* 静的カードの浮き(製図では影を落とさない) */
   --shadow-card: none;
 
 /* タイポグラフィ
@@ -47,27 +60,28 @@
   --space-16: 4rem;
 }
 
-/* ライトテーマ(P10)。トークン名はダークと同一、値だけ替える。
-   文字 #1b2230 on #f6f8fb = 約15:1、補助文字 #556075 on #f6f8fb = 約6:1(いずれもAA以上)。 */
+/* ライトテーマ = 白焼き。トークン名はダークと同一、値だけ替える。
+   文字 #0b2a55 on #f5f8fc = 約13:1、補助文字 #4b6a93 on #f5f8fc = 約5.3:1、差し色 #b8400b on #fff = 約5.2:1。 */
 :root[data-theme="light"] {
   color-scheme: light;
-  --color-bg-void: #f6f8fb;
+  --color-bg-void: #f5f8fc;
   --color-bg-surface: #ffffff;
-  --color-bg-surface-2: #eef2f7;
-  --color-text: #1b2230;
-  --color-text-muted: #556075;
-  --color-accent-blue: #0b62c4;
-  --color-accent-green: #0b7a4b;
-  --color-accent-amber: #a35a00;
-  --color-line: rgba(27, 34, 48, 0.16);
-  --glow-blue: 0 1px 4px rgba(11, 98, 196, 0.35);
-  --glow-green: 0 1px 4px rgba(11, 122, 75, 0.35);
-  --glow-amber: 0 1px 4px rgba(163, 90, 0, 0.35);
-  --shadow-card: 0 1px 2px rgba(27, 34, 48, 0.08);
-}
-
-:root[data-theme="light"] body::before {
-  opacity: 0.02;
+  --color-bg-surface-2: #eef3fa;
+  --color-text: #0b2a55;
+  --color-text-muted: #4b6a93;
+  --color-accent-blue: #b8400b;
+  --color-accent-green: #0b6b45;
+  --color-accent-amber: #8a5800;
+  --color-accent-ink: #ffffff;
+  --color-line: rgba(23, 74, 150, 0.25);
+  --color-line-strong: rgba(23, 74, 150, 0.6);
+  --bp-line: rgba(16, 60, 130, 0.85);
+  --bp-faint: #5a779e;
+  --bp-grid-a: rgba(30, 90, 180, 0.06);
+  --bp-grid-b: rgba(30, 90, 180, 0.13);
+  --bp-plate: #ffffff;
+  --bp-accent-soft: rgba(184, 64, 11, 0.08);
+  --shadow-card: none;
 }
 
 /* 数字は半角・等幅で桁を揃える(P1) */
@@ -122,25 +136,26 @@ body {
   overflow-x: clip;
 }
 
+/* 地: 紺(白)の方眼。細 12px・太 60px。画面に固定してスクロールしても動かない */
 body {
   min-height: 100%;
-  background: var(--color-bg-void);
+  background-color: var(--color-bg-void);
+  background-image:
+    linear-gradient(var(--bp-grid-b) 1px, transparent 1px),
+    linear-gradient(90deg, var(--bp-grid-b) 1px, transparent 1px),
+    linear-gradient(var(--bp-grid-a) 1px, transparent 1px),
+    linear-gradient(90deg, var(--bp-grid-a) 1px, transparent 1px);
+  background-size:
+    60px 60px,
+    60px 60px,
+    12px 12px,
+    12px 12px;
+  background-attachment: fixed;
   color: var(--color-text);
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   position: relative;
-}
-
-/* グレインテクスチャ */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  opacity: 0.05;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
 }
 
 * {
@@ -172,4 +187,84 @@ h4 {
   font-family: var(--font-display);
   font-weight: 700;
   letter-spacing: 0.01em;
+}
+
+/* ---- 製図の部品(どの画面でも同じ形。CSS Modules から className="bp-sheet" などで使う) ---- */
+
+/* 図面の枠: 細線の枠+四隅の見当(枠の外へ 5px はみ出す十字の角)+枠線に乗る図名(data-title)。
+   ::before / ::after を使うので、この部品を付ける要素は自分では疑似要素を使わない。 */
+.bp-sheet {
+  position: relative;
+  border: 1px solid var(--color-line-strong);
+}
+
+.bp-sheet[data-title]::before {
+  content: attr(data-title);
+  position: absolute;
+  top: -0.5625rem;
+  left: 0.875rem;
+  z-index: 2;
+  max-width: calc(100% - 1.75rem);
+  overflow: hidden;
+  padding: 0 0.375rem;
+  background: var(--color-bg-void);
+  font: 600 0.65625rem/1rem var(--font-mono);
+  letter-spacing: 0.14em;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: var(--color-text-muted);
+}
+
+.bp-sheet::after {
+  content: "";
+  position: absolute;
+  inset: -5px;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    linear-gradient(var(--bp-line), var(--bp-line)) left top / 11px 1px no-repeat,
+    linear-gradient(var(--bp-line), var(--bp-line)) left top / 1px 11px no-repeat,
+    linear-gradient(var(--bp-line), var(--bp-line)) right top / 11px 1px no-repeat,
+    linear-gradient(var(--bp-line), var(--bp-line)) right top / 1px 11px no-repeat,
+    linear-gradient(var(--bp-line), var(--bp-line)) left bottom / 11px 1px no-repeat,
+    linear-gradient(var(--bp-line), var(--bp-line)) left bottom / 1px 11px no-repeat,
+    linear-gradient(var(--bp-line), var(--bp-line)) right bottom / 11px 1px no-repeat,
+    linear-gradient(var(--bp-line), var(--bp-line)) right bottom / 1px 11px no-repeat;
+}
+
+/* 寸法: 数値の下に寸法線、両端に止め線(数値チップ・目安の数値) */
+.bp-dim {
+  display: inline-block;
+  padding: 0.0625rem 0.625rem 0.375rem;
+  border-bottom: 1px solid var(--bp-line);
+  background:
+    linear-gradient(var(--bp-line), var(--bp-line)) left bottom / 1px 9px no-repeat,
+    linear-gradient(var(--bp-line), var(--bp-line)) right bottom / 1px 9px no-repeat;
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+/* 丸囲みの番号(真似するときのポイント・入口の順番) */
+.bp-balloon {
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  width: 1.625rem;
+  height: 1.625rem;
+  border: 1px solid var(--bp-line);
+  border-radius: 50%;
+  background: var(--color-bg-void);
+  font: 600 0.6875rem/1 var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  color: var(--color-text);
+}
+
+/* 等幅の英字の小札(NOTE・CAUTION・DWG など) */
+.bp-tag {
+  font-family: var(--font-mono);
+  font-size: 0.65625rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
 }

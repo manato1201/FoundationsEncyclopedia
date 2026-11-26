@@ -101,14 +101,18 @@ export function ChapterContent({ entryId, explanationHtml, exampleHtml, quiz, gu
           dangerouslySetInnerHTML={{ __html: explanationHtml }}
         />
         {guide && guideItems.length > 0 ? (
-          <section className={styles.guide} aria-labelledby="guide-heading">
+          <section className={`${styles.guide} bp-sheet`} data-title="NOTES · 注記" aria-labelledby="guide-heading">
             <h2 id="guide-heading" className={styles.guideTitle}>
               この章の見方
             </h2>
             <dl className={styles.guideList}>
-              {guideItems.map((item) => (
-                <div key={item.key}>
+              {guideItems.map((item, index) => (
+                <div key={item.key} className={styles.guideRow}>
                   <dt className={`${styles.guideTerm} ${item.caution ? styles.guideTermCaution : ""}`}>
+                    <span className="bp-balloon" aria-hidden="true">
+                      {index + 1}
+                    </span>
+                    <span className={`${styles.guideTag} bp-tag`}>{item.caution ? "CAUTION" : "NOTE"}</span>
                     {item.label}
                   </dt>
                   <dd className={styles.guideDesc}>{guide[item.key]}</dd>

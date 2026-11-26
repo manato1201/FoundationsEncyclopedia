@@ -15,6 +15,9 @@ import { getChapterLinks } from "@/lib/chapter-links";
 import { ScrollSpyOutline, type OutlineItem } from "@/components/chapter/ScrollSpyOutline";
 import { splitChapterBody } from "@/lib/chapter-sections";
 import { foundationsLoader } from "@/lib/content/foundations";
+import { TitleBlock } from "@/components/chapter/TitleBlock";
+import { chapterRevision } from "@/lib/chapter-revision";
+import { FOUNDATIONS_TAXONOMY } from "@/lib/foundations-categories";
 
 type FoundationsDetailPageProps = {
   params: Promise<{ id: string }>;
@@ -66,6 +69,22 @@ export default async function FoundationsDetailPage({ params }: FoundationsDetai
   const previous = currentIndex > 0 ? siblings[currentIndex - 1] : null;
   const next = currentIndex >= 0 && currentIndex < siblings.length - 1 ? siblings[currentIndex + 1] : null;
 
+  // 表題欄の値(すべて分類表と frontmatter から決まる)。DWG = カテゴリ番号.サブカテゴリ番号-章番号
+  const categoryNo = FOUNDATIONS_TAXONOMY.findIndex((group) => group.category === entry.category) + 1;
+  const subcategoryNo =
+    categoryNo > 0
+      ? (FOUNDATIONS_TAXONOMY[categoryNo - 1].subcategories as readonly string[]).indexOf(entry.subcategory) + 1
+      : 0;
+  const sheetNo = currentIndex + 1;
+  const dwg = `${categoryNo || "?"}.${subcategoryNo || "?"}-${String(sheetNo).padStart(2, "0")}`;
+  const fig = visual
+    ? visual.kind.toUpperCase()
+    : hasOperationSteps
+      ? "TRACK"
+      : entry.hasVisualizer
+        ? "ANIM"
+        : "—";
+
   return (
     <div className={styles.page}>
       <Link href="/" className={styles.backLink}>
@@ -105,9 +124,16 @@ export default async function FoundationsDetailPage({ params }: FoundationsDetai
 
         <article className={styles.main}>
           <header className={styles.header}>
-            <p className={styles.category}>
-              {entry.category} ・ {entry.subcategory}
-            </p>
+            <TitleBlock
+              dwg={dwg}
+              category={entry.category}
+              subcategory={entry.subcategory}
+              sheet={{ index: sheetNo, total: siblings.length }}
+              fig={fig}
+              steps={operationSteps.length}
+              quiz={quiz.length}
+              rev={chapterRevision(id)}
+            />
             <h1 className={styles.title}>{entry.name}</h1>
             <p className={styles.subtitle}>{entry.summary}</p>
             {entry.claim ? (

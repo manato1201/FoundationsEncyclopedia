@@ -15,7 +15,8 @@ export function MasteryBadgeChip({ badge }: MasteryBadgeChipProps) {
   return (
     <span
       className={styles.badge}
-      style={{ borderColor: meta.color, color: meta.color }}
+      // バッジの色は枠と左の太線に使う。文字は本文色(紺・白の地のどちらでも 4.5:1 以上を保つため)
+      style={{ borderColor: meta.color, boxShadow: `inset 3px 0 0 ${meta.color}` }}
     >
       {meta.emoji} {meta.label}
     </span>

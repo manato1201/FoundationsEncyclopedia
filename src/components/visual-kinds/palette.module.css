@@ -1,89 +1,144 @@
 /*
- * 図の色(VisualFrame・6 型・カードの縮小コマで共通)。
- * --vz-<tone>     : 箱・マス・棒の塗り。どのテーマでも文字は --vz-ink(暗い色)を載せる(コントラスト 7:1 前後)。
- * --vz-<tone>-ink : 地(surface/void)の上に置く文字・線の色。テーマごとに読める明るさにする。
- * 既存のトークン(--color-accent-*)の 3 色に、図のための 3 色(pink・violet・cyan)と gray を足したもの。
- * 要素は data-tone="<tone>" を付けると --t / --t-ink が決まる。
+ * 図の色(VisualFrame・6 型・カードの縮小コマで共通)— 製図の配色(2026-11-26)。
+ * 製図は線画なので、状態は「線の色 × ハッチング(地の模様)× 線の種類 × 記号」の 4 つで区別する。色だけでは区別しない。
+ *
+ *   tone    線の色(ダーク / ライト)   ハッチング       線の種類   既定の記号
+ *   blue    #8fd0ff / #0d4fa8        右上がり斜線    実線       凡例の mark
+ *   green   #8fe3bf / #0b6b45        点              実線
+ *   amber   #ffd27a / #8a5800        右下がり斜線    破線
+ *   pink    #ff9f9f / #b4235a        綾目(交差斜線) 実線(太)
+ *   violet  #c8b6ff / #5b3fb0        横線            破線
+ *   cyan    #7fe3f0 / #0a6680        縦線            点線
+ *   gray    #a9bdd6 / #4b6a93        なし            破線
+ *
+ * --t-ink    : 線・文字の色。地(--vz-panel・surface)の上で 4.5:1 以上。
+ * --t        : 淡い塗り(線の色を地に 18% 混ぜた単色)。SVG の fill にも使える。
+ * --t-fill   : 箱・マスの背景(ハッチング+淡い塗り)。background に使う。
+ * --t-text   : --t-fill の上の文字(本文色。ハッチングの線の上でも 4.5:1 以上)。
+ * --t-style  : 枠の線の種類(solid / dashed / dotted)。--t-dash は SVG の stroke-dasharray。
+ * --t-stroke : 横向きの線(矢印の軸など)の背景。破線の tone は破線になる。
+ * 要素は data-tone="<tone>" を付けると決まる。
  */
 .palette {
-  --vz-ink: #0a0e16;
-  --vz-panel: #0a0e16;
-  --vz-panel-line: rgba(59, 167, 255, 0.14);
-  --vz-dim: rgba(135, 146, 166, 0.16);
+  --vz-ink: #0a2340;
+  --vz-panel: #0a2340;
+  --vz-panel-line: rgba(185, 220, 255, 0.24);
+  --vz-dim: rgba(185, 220, 255, 0.1);
+  --vz-hatch-a: 0.34;
 
-  --vz-blue: #3ba7ff;
-  --vz-green: #4dffb0;
-  --vz-amber: #ffc04d;
-  --vz-pink: #ff6fae;
-  --vz-violet: #b59cff;
-  --vz-cyan: #4fd8ff;
-  --vz-gray: #8b97ab;
+  --vz-blue-ink: #8fd0ff;
+  --vz-green-ink: #8fe3bf;
+  --vz-amber-ink: #ffd27a;
+  --vz-pink-ink: #ff9f9f;
+  --vz-violet-ink: #c8b6ff;
+  --vz-cyan-ink: #7fe3f0;
+  --vz-gray-ink: #a9bdd6;
 
-  --vz-blue-ink: #3ba7ff;
-  --vz-green-ink: #4dffb0;
-  --vz-amber-ink: #ffc04d;
-  --vz-pink-ink: #ff6fae;
-  --vz-violet-ink: #b59cff;
-  --vz-cyan-ink: #4fd8ff;
-  --vz-gray-ink: #a3adbf;
+  /* 互換: 以前の「塗りの色」トークン。いまは淡い塗りを指す */
+  --vz-blue: color-mix(in srgb, var(--vz-blue-ink) 18%, var(--vz-panel));
+  --vz-green: color-mix(in srgb, var(--vz-green-ink) 18%, var(--vz-panel));
+  --vz-amber: color-mix(in srgb, var(--vz-amber-ink) 18%, var(--vz-panel));
+  --vz-pink: color-mix(in srgb, var(--vz-pink-ink) 18%, var(--vz-panel));
+  --vz-violet: color-mix(in srgb, var(--vz-violet-ink) 18%, var(--vz-panel));
+  --vz-cyan: color-mix(in srgb, var(--vz-cyan-ink) 18%, var(--vz-panel));
+  --vz-gray: color-mix(in srgb, var(--vz-gray-ink) 12%, var(--vz-panel));
 
   --vz-good: var(--vz-green-ink);
   --vz-fair: var(--vz-amber-ink);
   --vz-poor: var(--vz-pink-ink);
 
-  --t: var(--vz-gray);
   --t-ink: var(--vz-gray-ink);
+  --t-pattern: linear-gradient(transparent, transparent);
+  --t-style: dashed;
+  --t-dash: 5 3;
+  --t-mix: 12%;
 }
 
 :global(:root[data-theme="light"]) .palette {
-  --vz-panel: #f3f6fa;
-  --vz-panel-line: rgba(27, 34, 48, 0.14);
-  --vz-dim: rgba(27, 34, 48, 0.08);
+  --vz-ink: #0b2a55;
+  --vz-panel: #ffffff;
+  --vz-panel-line: rgba(23, 74, 150, 0.24);
+  --vz-dim: rgba(23, 74, 150, 0.07);
+  --vz-hatch-a: 0.3;
 
-  --vz-blue: #74b9ff;
-  --vz-green: #4ddba0;
-  --vz-amber: #ffc35c;
-  --vz-pink: #ff92c2;
-  --vz-violet: #bba6ff;
-  --vz-cyan: #6ad6f2;
-  --vz-gray: #b9c3d2;
-
-  --vz-blue-ink: #0b62c4;
-  --vz-green-ink: #0b7a4b;
-  --vz-amber-ink: #a35a00;
-  --vz-pink-ink: #b0306e;
-  --vz-violet-ink: #6a4bc4;
-  --vz-cyan-ink: #0a7390;
-  --vz-gray-ink: #556075;
+  --vz-blue-ink: #0d4fa8;
+  --vz-green-ink: #0b6b45;
+  --vz-amber-ink: #8a5800;
+  --vz-pink-ink: #b4235a;
+  --vz-violet-ink: #5b3fb0;
+  --vz-cyan-ink: #0a6680;
+  --vz-gray-ink: #4b6a93;
 }
 
+/* tone ごとの値。--t-pattern は「線の色を薄めた色」で描く模様(1 層) */
 .palette [data-tone="blue"] {
-  --t: var(--vz-blue);
   --t-ink: var(--vz-blue-ink);
+  --t-pattern: repeating-linear-gradient(-45deg, var(--t-hatch) 0 1px, transparent 1px 6px);
+  --t-style: solid;
+  --t-dash: none;
+  --t-mix: 18%;
 }
 .palette [data-tone="green"] {
-  --t: var(--vz-green);
   --t-ink: var(--vz-green-ink);
+  --t-pattern: radial-gradient(circle, var(--t-hatch) 0 1px, transparent 1.4px) 0 0 / 5px 5px;
+  --t-style: solid;
+  --t-dash: none;
+  --t-mix: 18%;
 }
 .palette [data-tone="amber"] {
-  --t: var(--vz-amber);
   --t-ink: var(--vz-amber-ink);
+  --t-pattern: repeating-linear-gradient(45deg, var(--t-hatch) 0 1px, transparent 1px 6px);
+  --t-style: dashed;
+  --t-dash: 6 3;
+  --t-mix: 18%;
 }
 .palette [data-tone="pink"] {
-  --t: var(--vz-pink);
   --t-ink: var(--vz-pink-ink);
+  --t-pattern:
+    repeating-linear-gradient(45deg, var(--t-hatch) 0 1px, transparent 1px 7px),
+    repeating-linear-gradient(-45deg, var(--t-hatch) 0 1px, transparent 1px 7px);
+  --t-style: solid;
+  --t-dash: none;
+  --t-mix: 18%;
 }
 .palette [data-tone="violet"] {
-  --t: var(--vz-violet);
   --t-ink: var(--vz-violet-ink);
+  --t-pattern: repeating-linear-gradient(0deg, var(--t-hatch) 0 1px, transparent 1px 5px);
+  --t-style: dashed;
+  --t-dash: 8 3 2 3;
+  --t-mix: 18%;
 }
 .palette [data-tone="cyan"] {
-  --t: var(--vz-cyan);
   --t-ink: var(--vz-cyan-ink);
+  --t-pattern: repeating-linear-gradient(90deg, var(--t-hatch) 0 1px, transparent 1px 5px);
+  --t-style: dotted;
+  --t-dash: 2 3;
+  --t-mix: 18%;
 }
 .palette [data-tone="gray"] {
-  --t: var(--vz-gray);
   --t-ink: var(--vz-gray-ink);
+  --t-pattern: linear-gradient(transparent, transparent);
+  --t-style: dashed;
+  --t-dash: 5 3;
+  --t-mix: 12%;
+}
+
+/* 派生値は、tone を持つ要素と枠の根元の両方で計算する(子はここで決まった値を受け継ぐ) */
+.palette,
+.palette [data-tone] {
+  --t-hatch: color-mix(in srgb, var(--t-ink) calc(var(--vz-hatch-a) * 100%), transparent);
+  --t: color-mix(in srgb, var(--t-ink) var(--t-mix), var(--vz-panel));
+  --t-fill: var(--t-pattern), var(--t);
+  --t-text: var(--color-text);
+  --t-stroke: var(--t-ink);
+}
+.palette [data-tone="amber"],
+.palette [data-tone="violet"],
+.palette [data-tone="gray"] {
+  --t-stroke: repeating-linear-gradient(90deg, var(--t-ink) 0 6px, transparent 6px 9px);
+}
+.palette [data-tone="cyan"] {
+  --t-stroke: repeating-linear-gradient(90deg, var(--t-ink) 0 2px, transparent 2px 5px);
 }
 
 /* 評価記号 ○ △ × */
@@ -113,9 +168,8 @@
   flex: none;
   width: 0.75rem;
   height: 0.75rem;
-  border-radius: 2px;
-  background: var(--t);
-  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.18);
+  border: 1px var(--t-style) var(--t-ink);
+  background: var(--t-fill);
 }
 
 /* 縮小の静止コマ: 動きを全部止める */

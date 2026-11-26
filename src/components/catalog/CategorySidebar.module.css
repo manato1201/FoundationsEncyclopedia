@@ -22,6 +22,11 @@
   gap: var(--space-3);
 }
 
+.panelHead {
+  padding-bottom: var(--space-2);
+  border-bottom: 1px solid var(--color-line-strong);
+}
+
 .heading {
   margin-right: auto;
   font-family: var(--font-mono);
@@ -34,7 +39,7 @@
 .reset {
   padding: var(--space-1) var(--space-2);
   border: none;
-  border-radius: 4px;
+  border-radius: 0;
   background: transparent;
   color: var(--color-accent-blue);
   font-family: var(--font-mono);
@@ -63,6 +68,7 @@
   border-left: 1px solid var(--color-line);
 }
 
+/* 行 = 図面の一覧の 1 行(破線で区切る) */
 .row {
   display: flex;
   align-items: center;
@@ -70,8 +76,9 @@
   gap: var(--space-3);
   width: 100%;
   padding: var(--space-2) var(--space-3);
-  border: 1px solid transparent;
-  border-radius: 6px;
+  border: 0;
+  border-bottom: 1px dashed var(--color-line);
+  border-radius: 0;
   background: transparent;
   color: var(--color-text);
   font-family: var(--font-body);
@@ -87,9 +94,10 @@
   background: var(--color-bg-surface-2);
 }
 
-/* 色の役割: 青 = 現在地。選択中は青の枠と文字 */
+/* 色の役割: 現在地 = 差し色。選択中は左の太線・淡い面・差し色の文字 */
 .row[aria-pressed="true"] {
-  border-color: var(--color-accent-blue);
+  background: var(--bp-accent-soft);
+  box-shadow: inset 3px 0 0 var(--color-accent-blue);
   color: var(--color-accent-blue);
 }
 
@@ -131,7 +139,7 @@
   width: 100%;
   padding: var(--space-2) var(--space-3);
   border: 1px solid var(--color-line);
-  border-radius: 6px;
+  border-radius: 0;
   background: transparent;
   color: var(--color-text);
   font-family: var(--font-body);
@@ -158,9 +166,9 @@
 .filterBadge {
   min-width: 1.25rem;
   padding: 0 var(--space-1);
-  border-radius: 999px;
+  border-radius: 0;
   background: var(--color-accent-blue);
-  color: var(--color-bg-void);
+  color: var(--color-accent-ink);
   font-family: var(--font-mono);
   font-size: 0.6875rem;
   line-height: 1.25rem;
@@ -176,7 +184,8 @@
     max-height: calc(100dvh - var(--space-8));
     overflow-y: auto;
     scrollbar-width: thin;
-    padding-right: var(--space-2);
+    padding-right: var(--space-3);
+    border-right: 3px double var(--color-line-strong);
   }
 }
 
@@ -189,7 +198,7 @@
     width: 100%;
     padding: var(--space-3) var(--space-4);
     border: 1px solid var(--color-line);
-    border-radius: 8px;
+    border-radius: 0;
     background: var(--color-bg-surface);
     color: var(--color-text);
     font-family: var(--font-body);
@@ -218,7 +227,7 @@
     position: fixed;
     inset: 0;
     z-index: 40;
-    background: rgba(5, 7, 12, 0.6);
+    background: color-mix(in srgb, var(--color-bg-void) 70%, transparent);
     opacity: 0;
     visibility: hidden;
     transition:
@@ -243,7 +252,7 @@
     padding: var(--space-4) var(--space-4) 0;
     border: 1px solid var(--color-line);
     border-bottom: none;
-    border-radius: 14px 14px 0 0;
+    border-radius: 0;
     background: var(--color-bg-surface);
     transform: translateY(100%);
     visibility: hidden;
@@ -265,7 +274,7 @@
     width: 2.25rem;
     height: 2.25rem;
     border: 1px solid var(--color-line);
-    border-radius: 999px;
+    border-radius: 0;
     background: transparent;
     color: var(--color-text-muted);
     cursor: pointer;
@@ -294,7 +303,7 @@
     width: 100%;
     padding: var(--space-3);
     border: 1px solid var(--color-accent-blue);
-    border-radius: 8px;
+    border-radius: 0;
     background: transparent;
     color: var(--color-accent-blue);
     font-family: var(--font-body);

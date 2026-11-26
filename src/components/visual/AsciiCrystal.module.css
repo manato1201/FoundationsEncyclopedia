@@ -5,7 +5,7 @@
   line-height: 1;
   letter-spacing: 0;
   white-space: pre;
-  color: var(--color-accent-blue);
+  color: var(--bp-line);
   opacity: 0.55;
   user-select: none;
   pointer-events: none;

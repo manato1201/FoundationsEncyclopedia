@@ -167,6 +167,7 @@ function FramedVisual({
       showSummary={isLast}
       showNote={spec !== undefined}
       controls={controls}
+      sheetTitle={spec ? `FIG · ${spec.kind.toUpperCase()} · 図` : "FIG · TRACK · 手順"}
     >
       {spec ? (
         <VisualStage spec={spec} step={stepIndex} />

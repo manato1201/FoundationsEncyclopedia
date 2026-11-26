@@ -3,7 +3,7 @@
   padding: var(--space-4) var(--space-6);
   border: 1px solid var(--color-line);
   border-left: 3px solid var(--color-accent-amber);
-  border-radius: 6px;
+  border-radius: 0;
   background: var(--color-bg-surface);
   box-shadow: var(--shadow-card);
 }
@@ -20,7 +20,7 @@
   font-size: 0.8125rem;
   padding: 0 var(--space-2);
   border: 1px solid var(--color-accent-amber);
-  border-radius: 999px;
+  border-radius: 0;
   color: var(--color-accent-amber);
 }
 
@@ -84,7 +84,7 @@
 .toolButton {
   padding: var(--space-1) var(--space-3);
   border: 1px solid var(--color-line);
-  border-radius: 4px;
+  border-radius: 0;
   background: transparent;
   color: var(--color-text);
   font-family: var(--font-mono);

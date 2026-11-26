@@ -15,7 +15,7 @@
 | `kind` | ○ | `zones` / `tiers` / `compare` / `grid` / `sequence` / `graph` |
 | `question` | ○ | 図の問いかけ(枠の副題)。「commit されるのは、どの変更?」の形 |
 | `steps` | ○ | **段の数・順は `operationSteps` と同じ**。段の題名・注記は `operationSteps` から出る |
-| `legend` | 型による | `[{ key, label, tone?, mark? }]`。状態の色。`tone` は blue / green / amber / pink / violet / cyan / gray。`mark` は箱に添える 1〜2 文字(省略時は label の 1 文字目) |
+| `legend` | 型による | `[{ key, label, tone?, mark? }]`。状態の色。`tone` は blue / green / amber / pink / violet / cyan / gray。`mark` は箱に添える 1〜2 文字(省略時は label の 1 文字目)。製図の見た目では tone ごとに線の色・ハッチング・線の種類が決まる(表は `palette.module.css` の冒頭)ので、**同じ図で同じ tone を 2 つの凡例に使わない** |
 | `summary` | | 最後の段で出すまとめ。一言(文字列)か `{ title?, columns, rows: [{ label, cells }], note? }` |
 | `approx` | | `true` で「数値は目安」を出す。文字列ならその文言 |
 | `eyebrow` | | 英字の小ラベルの上書き(既定はカテゴリ/サブカテゴリの英字) |

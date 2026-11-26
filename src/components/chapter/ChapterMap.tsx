@@ -41,7 +41,7 @@ export function ChapterMap({ name, links }: { name: string; links: ChapterLinks 
       <h2 id="map-heading" className={styles.heading}>
         つながりの地図
       </h2>
-      <div className={styles.grid}>
+      <div className={`${styles.grid} bp-sheet`} data-title="MAP · 参照の図">
         <Column title="本文で参照している章" items={links.refers} />
         <span className={styles.arrow} aria-hidden="true">
           <Icon name="arrow-right" size={16} />

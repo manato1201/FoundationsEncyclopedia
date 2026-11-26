@@ -274,7 +274,7 @@ export function FoundationsCatalog({ entries, featuredId }: FoundationsCatalogPr
   return (
     <div className={styles.page} data-preview={livePreview ? "live" : undefined}>
       <AsciiCrystal className={styles.heroCrystal} />
-      <section className={styles.hero}>
+      <section className={`${styles.hero} bp-sheet`} data-title="CATALOG · 図面一覧">
         <p className={styles.eyebrow}>CATALOG</p>
         <h1 className={styles.heroTitle}>
           基礎を、<span className={styles.heroAccent}>順番に</span>。
@@ -408,7 +408,7 @@ export function FoundationsCatalog({ entries, featuredId }: FoundationsCatalogPr
                   <ol className={styles.startList}>
                     {starterEntries.map((entry, index) => (
                       <li key={entry.id} className={styles.startItem} data-step-preview-host>
-                        <span className={styles.startNumber} data-tabular>
+                        <span className={`${styles.startNumber} bp-balloon`} data-tabular>
                           {String(index + 1).padStart(2, "0")}
                         </span>
                         <div className={styles.startBody}>
