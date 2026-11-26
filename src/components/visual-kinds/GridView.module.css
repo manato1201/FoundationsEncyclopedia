@@ -1,0 +1,101 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  width: 100%;
+  max-width: 40rem;
+  margin: 0 auto;
+}
+
+.body {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+}
+
+.axisCol {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--color-text-muted);
+}
+
+.axisCol {
+  padding-left: 3.5rem;
+}
+
+/* 左上の角: 行の見出しの名前 */
+.table th.corner {
+  font-size: 0.625rem;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.table {
+  flex: 1 1 auto;
+  table-layout: fixed;
+  border-collapse: separate;
+  border-spacing: 3px;
+  width: 100%;
+}
+
+.table th {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 400;
+  color: var(--color-text-muted);
+}
+
+.table thead th:first-child,
+.table tbody th {
+  width: 2.75rem;
+}
+
+/* マス: 空は暗い面、埋まると凡例の色+右下の記号 */
+.cell {
+  position: relative;
+  height: 2.5rem;
+  border-radius: 3px;
+  background: var(--vz-dim);
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  color: var(--color-text);
+}
+
+.cell[data-filled] {
+  background: var(--t);
+  color: var(--vz-ink);
+  font-weight: 700;
+  animation: cell-on 280ms var(--ease-out) backwards;
+}
+
+.cell[data-focus] {
+  outline: 2px solid var(--color-text);
+  outline-offset: 1px;
+}
+
+@keyframes cell-on {
+  from {
+    opacity: 0.2;
+    transform: scale(0.85);
+  }
+}
+
+.mark {
+  position: absolute;
+  right: 2px;
+  bottom: 1px;
+  font-size: 0.5625rem;
+  font-weight: 700;
+  opacity: 0.75;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cell[data-filled] {
+    animation: none;
+  }
+}
+
+:global(:root[data-motion="reduce"]) .cell[data-filled] {
+  animation: none;
+}

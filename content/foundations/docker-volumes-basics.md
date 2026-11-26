@@ -23,6 +23,56 @@ quiz:
       - "コンテナを停止だけして、削除しない"
     answer: 1
     explanation: "ボリュームは、コンテナと独立して保存される。コンテナの削除・作り直しをしても、データが残る。"
+visual:
+  kind: zones
+  arrows: false
+  question: "コンテナを消しても、データが残るのはどこ?"
+  legend:
+    - { key: temp, label: "書き込み層(削除で消える)", tone: amber, mark: "×" }
+    - { key: mount, label: "ボリュームを接続", tone: blue, mark: "⇄" }
+    - { key: kept, label: "コンテナの外に残る", tone: green, mark: "○" }
+    - { key: bind, label: "手元と同じ中身", tone: violet, mark: "=" }
+  zones:
+    - { id: host, label: "ホストのフォルダ", note: "手元のフォルダ(バインドマウント)" }
+    - { id: ctr, label: "コンテナの中", note: "書き込み層はコンテナと一緒に消える" }
+    - { id: vol, label: "ボリューム data", note: "Docker が管理する、コンテナの外の領域" }
+  items:
+    - { id: tmp, label: "tmp.txt" }
+    - { id: mnt, label: "/var/lib/app" }
+    - { id: db, label: "DB のデータ" }
+    - { id: code, label: "ソースコード" }
+    - { id: app, label: "/app" }
+  steps:
+    - short: "一時的"
+      place: { tmp: ctr }
+      state: { tmp: temp }
+      zoneFocus: [ctr]
+      verdict: "× コンテナの中に書いた tmp.txt は書き込み層にあり、コンテナを消すと一緒に消える"
+    - short: "volume create"
+      zoneFocus: [vol]
+      verdict: "docker volume create data で、コンテナの外に保存領域を用意する(まだ空)"
+    - short: "-v で接続"
+      place: { mnt: ctr, db: vol }
+      state: { mnt: mount, db: kept }
+      highlight: [mnt, db]
+      verdict: "-v data:/var/lib/app で接続。アプリが /var/lib/app に書いたデータは、ボリュームに入る"
+    - short: "削除しても残る"
+      place: { tmp: null }
+      highlight: [db, mnt]
+      zoneFocus: [vol]
+      verdict: "○ コンテナを消すと tmp.txt は消えるが、DB のデータは残る。新しいコンテナに同じボリュームを付ければ引き継げる"
+    - short: "バインドマウント"
+      place: { code: host, app: ctr }
+      state: { code: bind, app: bind }
+      highlight: [code, app]
+      zoneFocus: [host]
+      verdict: '-v "$(pwd)":/app で、手元のフォルダをそのままコンテナに見せる。直したコードがすぐ反映される'
+  summary:
+    columns: ["保存先", "コンテナを消すと", "主な用途"]
+    rows:
+      - { label: "書き込み層", cells: ["コンテナの中", "× 消える", "残さなくてよいデータ"] }
+      - { label: "ボリューム", cells: ["Docker が管理する領域", "○ 残る", "DB など残したいデータ"] }
+      - { label: "バインドマウント", cells: ["ホストの指定フォルダ", "○ 手元に残る", "開発中のコードの共有"] }
 ---
 
 ## 概要

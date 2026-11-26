@@ -23,6 +23,72 @@ quiz:
       - "ハッシュテーブル"
     answer: 1
     explanation: "先に入れた点から順に調べるため、キュー(先入れ先出し)を使う。深さ優先はスタックか再帰を使う。"
+visual:
+  kind: graph
+  question: "同じグラフを、幅優先(左)と深さ優先(右)はどの順に訪ねる?"
+  legend:
+    - { key: "seen", label: "訪問済み(入れ物の中)", tone: "amber", mark: "□" }
+    - { key: "cur", label: "取り出して調べ中", tone: "pink", mark: "▶" }
+    - { key: "done", label: "調べ終わった", tone: "green", mark: "✓" }
+    - { key: "tree", label: "見つけたときに通った辺", tone: "blue", mark: "—" }
+  nodes:
+    - { id: "bA", label: "A", x: 0, y: 45 }
+    - { id: "bB", label: "B", x: 20, y: 8 }
+    - { id: "bC", label: "C", x: 20, y: 85 }
+    - { id: "bD", label: "D", x: 42, y: 0 }
+    - { id: "bE", label: "E", x: 42, y: 45 }
+    - { id: "bF", label: "F", x: 42, y: 92 }
+    - { id: "dA", label: "A", x: 56, y: 45 }
+    - { id: "dB", label: "B", x: 76, y: 8 }
+    - { id: "dC", label: "C", x: 76, y: 85 }
+    - { id: "dD", label: "D", x: 98, y: 0 }
+    - { id: "dE", label: "E", x: 98, y: 45 }
+    - { id: "dF", label: "F", x: 98, y: 92 }
+  edges:
+    - { from: bA, to: bB }
+    - { from: bA, to: bC }
+    - { from: bB, to: bD }
+    - { from: bB, to: bE }
+    - { from: bC, to: bF }
+    - { from: bE, to: bF }
+    - { from: dA, to: dB }
+    - { from: dA, to: dC }
+    - { from: dB, to: dD }
+    - { from: dB, to: dE }
+    - { from: dC, to: dF }
+    - { from: dE, to: dF }
+  steps:
+    - short: "出発"
+      nodes: { bA: "seen", dA: "seen" }
+      notes: { bA: "BFS ①", dA: "DFS ①" }
+      focus: ["bA", "dA"]
+      verdict: "どちらも A から。A に訪問済みの印を付けて入れ物へ"
+    - short: "入れ物"
+      focus: ["bA", "dA"]
+      callout: { value: "キュー / スタック", label: "左 BFS / 右 DFS" }
+      verdict: "BFS は先に入れた点から、DFS は最後に入れた点から取り出す"
+    - short: "取り出す"
+      nodes: { bA: "cur", dA: "cur" }
+      focus: ["bA", "dA"]
+      verdict: "入れ物から A を取り出して調べる"
+    - short: "追加"
+      nodes: { bA: "done", dA: "done", bB: "seen", bC: "seen", dB: "seen", dC: "seen" }
+      edges: { "bA>bB": "tree", "bA>bC": "tree", "dA>dB": "tree", "dA>dC": "tree" }
+      focus: ["bB", "bC", "dB", "dC"]
+      verdict: "A の隣の B・C を入れ物へ。ここまでは左右とも同じ"
+    - short: "繰り返す"
+      nodes: { bA: "done", bB: "done", bC: "done", bD: "done", bE: "done", bF: "done", dA: "done", dB: "done", dC: "done", dD: "done", dE: "done", dF: "done" }
+      edges: { "bB>bD": "tree", "bB>bE": "tree", "bC>bF": "tree", "dC>dF": "tree", "dE>dF": "tree", "dB>dD": "tree" }
+      notes: { bB: "②", bC: "③", bD: "④", bE: "⑤", bF: "⑥", dC: "②", dF: "③", dE: "④", dB: "⑤", dD: "⑥" }
+      callout: { value: "O(V+E)", label: "どちらも" }
+      verdict: "BFS は近い順 A→B→C→D→E→F。DFS は最後に入れた C から奥へ A→C→F→E、戻って B→D"
+  summary:
+    columns: ["BFS(幅優先)", "DFS(深さ優先)"]
+    rows:
+      - { label: "入れ物", cells: ["キュー(先に入れた点から)", "スタック(最後に入れた点から)"] }
+      - { label: "この図の順", cells: ["A B C D E F", "A C F E B D"] }
+      - { label: "向く用途", cells: ["○ 辺の数が最少の道", "○ 経路の有無・迷路・閉路"] }
+    note: "隣は名前の順に入れ物へ追加した場合。追加の順が変わると、訪ねる順も変わる"
 ---
 
 ## 概要

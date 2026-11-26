@@ -6,7 +6,7 @@ masteryBadge: next
 summary: Pythonの二次元配列は「リストのリスト」で表現する。作り方次第で行同士が意図せず共有されてしまう罠がある。
 operationSteps:
   - label: "リストのリストで作る"
-    note: "[[0, 0], [0, 0]] のように、リストを入れ子にする"
+    note: "[[0, 0, 0], [0, 0, 0]] のように、リストを入れ子にする"
   - label: "内包表記で作る"
     note: "[[0] * 3 for _ in range(2)] で、行ごとに別のリストを作る"
   - label: "乗算での作成に注意する"
@@ -15,6 +15,47 @@ operationSteps:
     note: "i行j列の要素を読み書きする"
   - label: "二重ループで全体をたどる"
     note: "外側が行、内側が列を回る"
+visual:
+  kind: grid
+  question: "grid[i][j] はどのマス? 行を * で複製すると何が起きる?"
+  legend:
+    - { key: "own", label: "行ごとに別のリスト", tone: "blue", mark: "別" }
+    - { key: "shared", label: "同じ行を共有", tone: "pink", mark: "共" }
+    - { key: "set", label: "書き込んだ", tone: "green", mark: "書" }
+    - { key: "read", label: "たどった", tone: "amber", mark: "読" }
+  rows: ["0", "1"]
+  cols: ["0", "1", "2"]
+  rowLabel: "行 i"
+  colLabel: "列 j"
+  steps:
+    - short: "入れ子"
+      cells: { "0,0": "own", "0,1": "own", "0,2": "own", "1,0": "own", "1,1": "own", "1,2": "own" }
+      values: { "0,0": "0", "0,1": "0", "0,2": "0", "1,0": "0", "1,1": "0", "1,2": "0" }
+      verdict: "外側のリストに、行のリストが 2 つ入る"
+    - short: "内包表記"
+      clear: true
+      cells: { "0,0": "set", "0,1": "own", "0,2": "own", "1,0": "own", "1,1": "own", "1,2": "own" }
+      values: { "0,0": "1", "0,1": "0", "0,2": "0", "1,0": "0", "1,1": "0", "1,2": "0" }
+      focus: ["0,0"]
+      verdict: "○ grid[0][0] = 1 で変わるのは行 0 だけ"
+    - short: "* の罠"
+      clear: true
+      cells: { "0,0": "shared", "0,1": "shared", "0,2": "shared", "1,0": "shared", "1,1": "shared", "1,2": "shared" }
+      values: { "0,0": "1", "0,1": "0", "0,2": "0", "1,0": "1", "1,1": "0", "1,2": "0" }
+      focus: ["0,0", "1,0"]
+      verdict: "× 同じ書き込みで行 1 も変わる。2 つの行が同じリストを指している"
+    - short: "grid[i][j]"
+      clear: true
+      cells: { "0,0": "own", "0,1": "own", "0,2": "own", "1,0": "own", "1,1": "own", "1,2": "set" }
+      values: { "0,0": "0", "0,1": "0", "0,2": "0", "1,0": "0", "1,1": "0", "1,2": "5" }
+      focus: ["1,2"]
+      verdict: "grid[1][2] = 5 → 行 1・列 2 のマスだけが変わる"
+    - short: "二重ループ"
+      cells: { "0,0": "read", "0,1": "read", "0,2": "read", "1,0": "read", "1,1": "read", "1,2": "read" }
+      values: { "0,0": "①", "0,1": "②", "0,2": "③", "1,0": "④", "1,1": "⑤", "1,2": "⑥" }
+      focus: ["1,2"]
+      verdict: "外側のループが行、内側が列。数字はたどる順(①→⑥)"
+  summary: "行は grid[i]、マスは grid[i][j]。行ごとに別のリストを作るのは内包表記で、[[0] * 3] * 2 は同じ行を共有してしまう。"
 ---
 
 ## 概要

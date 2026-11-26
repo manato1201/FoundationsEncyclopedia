@@ -23,6 +23,49 @@ quiz:
       - "MeshRenderer"
     answer: 1
     explanation: "Transformは、すべてのGameObjectが持つ(外せない)。Rigidbody などは、必要なときに追加する。"
+visual:
+  kind: zones
+  question: "このオブジェクトの振る舞いは、どこが決めている?"
+  legend:
+    - { key: core, label: "必ずある(外せない)", tone: gray, mark: "T" }
+    - { key: added, label: "追加した Component", tone: blue, mark: "+" }
+    - { key: script, label: "自作スクリプト", tone: violet, mark: "S" }
+    - { key: got, label: "GetComponent で取得", tone: green, mark: "→" }
+  zones:
+    - { id: lib, label: "Add Component の候補", note: "Inspector から選んで付ける" }
+    - { id: go, label: "GameObject「Player」", note: "名前と有効状態を持つ入れ物" }
+  items:
+    - { id: tf, label: "Transform" }
+    - { id: rb, label: "Rigidbody" }
+    - { id: col, label: "BoxCollider" }
+    - { id: mr, label: "MeshRenderer" }
+    - { id: jp, label: "Jumper(スクリプト)" }
+  steps:
+    - short: "作る"
+      place: { tf: go, rb: lib, col: lib, mr: lib, jp: lib }
+      state: { tf: core }
+      highlight: [tf]
+      zoneFocus: [go]
+      verdict: "Create Empty の直後は Transform(位置・回転・拡縮)だけを持つ、空の入れ物"
+    - short: "Add Component"
+      place: { rb: go, col: go, mr: go }
+      state: { rb: added, col: added, mr: added }
+      highlight: [rb, col, mr]
+      verdict: "Add Component で、Rigidbody・BoxCollider・MeshRenderer を付ける"
+    - short: "性質が決まる"
+      zoneFocus: [go]
+      verdict: "○ 重力で落ちる・ぶつかる・見える。どれも付けた Component が持つ性質"
+    - short: "スクリプト"
+      place: { jp: go }
+      state: { jp: script }
+      highlight: [jp]
+      verdict: "MonoBehaviour を継承した Jumper も、同じように付ける Component の 1 つ"
+    - short: "GetComponent"
+      state: { rb: got }
+      highlight: [jp, rb]
+      zoneFocus: [go]
+      verdict: "Jumper は GetComponent で同じ GameObject の Rigidbody を取り出し、力を加える"
+  summary: "GameObject は入れ物。落ちる・ぶつかる・見える・跳ぶといった振る舞いは、付けた Component が持つ。"
 ---
 
 ## 概要

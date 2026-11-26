@@ -149,6 +149,12 @@
   margin-bottom: var(--space-12);
 }
 
+/* 専用アニメを共通の枠に入れるときの幅 */
+.bespoke {
+  width: 100%;
+  min-width: 0;
+}
+
 .placeholder {
   border: 1px dashed var(--color-line);
   border-radius: 8px;

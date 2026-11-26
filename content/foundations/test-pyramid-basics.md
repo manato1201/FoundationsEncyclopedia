@@ -23,6 +23,59 @@ quiz:
       - "単体テスト"
     answer: 2
     explanation: "単体テストは、速くて安定していて、失敗箇所も分かりやすい。そのため土台として、数を多く持つ。"
+visual:
+  kind: tiers
+  question: "どの層のテストを、どれだけ持つ?"
+  approx: true
+  legend:
+    - { key: e2e, label: "E2E テスト", tone: pink }
+    - { key: integ, label: "結合テスト", tone: blue }
+    - { key: unit, label: "単体テスト", tone: green }
+    - { key: many, label: "数を多く持つ", tone: green, mark: "多" }
+    - { key: few, label: "件数を絞る", tone: amber, mark: "少" }
+    - { key: move, label: "下の層へ移せないか", tone: cyan, mark: "↓" }
+  scale: { label: "1 件の実行時間(対数)", ticks: ["1ms", "10ms", "100ms", "1s", "10s"] }
+  columns: { value: "1 件の時間", extra: "件数" }
+  tiers:
+    - { id: e2e, label: "E2E", key: e2e, bar: 88, value: "数秒〜", extra: "少なく" }
+    - { id: integ, label: "結合", key: integ, bar: 55, value: "数十ms〜数秒", extra: "中くらい" }
+    - { id: unit, label: "単体", key: unit, bar: 12, value: "数ms", extra: "多く" }
+  gaps:
+    - { id: toE2e, after: e2e, label: "画面やネットワークを通すぶん、遅く不安定になりやすい" }
+    - { id: toInteg, after: integ, label: "外部とつなぐぶん、準備と待ち時間が増える" }
+  steps:
+    - short: "単体"
+      reveal: [unit]
+      focus: [unit]
+      state: { unit: many }
+      callout: { value: "数ms", label: "単体 1 件" }
+      verdict: "○ 速く、失敗した場所がすぐ分かる。だから土台にして数を多く持つ"
+    - short: "結合"
+      reveal: [integ]
+      focus: [integ]
+      verdict: "部品どうしのつなぎ目は、単体では見えない。結合テストで確かめる"
+    - short: "E2E"
+      reveal: [e2e]
+      focus: [e2e]
+      callout: { value: "数秒〜", label: "E2E 1 件" }
+      verdict: "△ ログインから購入まで通しで確かめられるが、1 件が重い"
+    - short: "上ほど絞る"
+      focus: [e2e, integ]
+      gaps: [toE2e, toInteg]
+      state: { integ: few, e2e: few }
+      verdict: "上の層ほど遅く、環境の影響を受けやすい。単体では確かめにくい点だけを任せる"
+    - short: "見直す"
+      focus: [e2e, unit]
+      state: { e2e: move }
+      verdict: "× E2E ばかりの逆ピラミッドは遅い。下の層で確かめられるものは置き換える"
+  summary:
+    columns: ["単体", "結合", "E2E"]
+    rows:
+      - { label: "速さ", cells: ["○ 速い", "△ 中", "× 遅い"] }
+      - { label: "安定性", cells: ["○ 壊れにくい", "△ 中", "× 不安定になりやすい"] }
+      - { label: "原因の特定", cells: ["○ 容易", "△ 中", "× 難しい"] }
+      - { label: "件数", cells: ["多く", "中くらい", "少なく"] }
+    note: "比率に決まった正解はない。目的は、速く信頼できて直しやすいテストの集まりを持つこと"
 ---
 
 ## 概要

@@ -13,6 +13,49 @@ operationSteps:
     note: 利用者はデータの入力・利用のみを行う
   - label: 必要な管理範囲に応じて選ぶ
     note: 手軽さと自由度はトレードオフの関係にある
+visual:
+  kind: tiers
+  question: "クラウドの提供者は、どこまで管理してくれる?"
+  legend:
+    - { key: saas, label: "SaaS", tone: green }
+    - { key: paas, label: "PaaS", tone: blue }
+    - { key: iaas, label: "IaaS", tone: violet }
+    - { key: easy, label: "手軽さを取る", tone: cyan, mark: "手" }
+    - { key: free, label: "自由度を取る", tone: amber, mark: "自" }
+  scale: { label: "利用者が管理する範囲", ticks: ["狭い", "広い"] }
+  columns: { value: "利用者", extra: "例" }
+  tiers:
+    - { id: saas, label: "SaaS", key: saas, bar: 12, value: "データだけ", extra: "Gmail・Slack" }
+    - { id: paas, label: "PaaS", key: paas, bar: 40, value: "コード", extra: "Vercel・Heroku" }
+    - { id: iaas, label: "IaaS", key: iaas, bar: 75, value: "OS から上", extra: "EC2 など" }
+  gaps:
+    - { id: toSaas, after: saas, label: "アプリ全体も提供者が管理する" }
+    - { id: toPaas, after: paas, label: "OS と実行環境も提供者が管理する" }
+  steps:
+    - short: "IaaS"
+      reveal: [iaas]
+      focus: [iaas]
+      verdict: "提供者は物理サーバーと仮想化基盤まで。OS のパッチやスケーリングの設定は利用者の仕事"
+    - short: "PaaS"
+      reveal: [paas]
+      focus: [paas]
+      gaps: [toPaas]
+      verdict: "OS と実行環境も提供者が持つ。利用者はコードを置けば動く"
+    - short: "SaaS"
+      reveal: [saas]
+      focus: [saas]
+      gaps: [toSaas]
+      verdict: "アプリも提供者のもの。利用者はデータを入れて使うだけ"
+    - short: "選ぶ"
+      state: { saas: easy, iaas: free }
+      verdict: "○ 上ほど手軽、下ほど自由。自分で管理したい範囲に合わせて選ぶ"
+  summary:
+    columns: ["IaaS", "PaaS", "SaaS"]
+    rows:
+      - { label: "提供者が管理", cells: ["物理・仮想化基盤", "+ OS・実行環境", "アプリ全体"] }
+      - { label: "利用者が管理", cells: ["OS・ミドルウェア・アプリ", "アプリのコード", "データの入力・利用"] }
+      - { label: "手軽さ", cells: ["△ 設定が多い", "○ コードを置くだけ", "○ すぐ使える"] }
+      - { label: "自由度", cells: ["○ OS から選べる", "△ 実行環境の範囲内", "× 機能は提供者しだい"] }
 ---
 
 ## 概要

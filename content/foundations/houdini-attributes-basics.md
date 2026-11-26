@@ -15,6 +15,45 @@ operationSteps:
     note: "Attribute WrangleやAttribute Createで、値を追加・変更する"
   - label: "ほかのノードで使う"
     note: "後続のノードが、アトリビュートを、参照して処理に使う"
+visual:
+  kind: grid
+  question: "どの要素が、どのアトリビュートを持っている?"
+  legend:
+    - { key: "point", label: "ポイントの値", tone: "blue", mark: "点" }
+    - { key: "prim", label: "プリミティブの値", tone: "violet", mark: "面" }
+    - { key: "new", label: "作った・変えた", tone: "green", mark: "新" }
+    - { key: "read", label: "読んだ", tone: "amber", mark: "読" }
+  rows: ["点0", "点1", "点2", "点3", "面0"]
+  cols: ["P", "Cd", "N", "w"]
+  rowLabel: "要素"
+  colLabel: "アトリビュート(ジオメトリスプレッドシート風)"
+  steps:
+    - short: "P"
+      cells: { "0,0": "point", "1,0": "point", "2,0": "point", "3,0": "point" }
+      values: { "0,0": "0,0,0", "1,0": "1,0,0", "2,0": "1,0,1", "3,0": "0,0,1" }
+      focus: ["0,0"]
+      verdict: "アトリビュート = 要素ごとに付く、名前つきの値。P は点の位置"
+    - short: "クラス"
+      cells: { "4,2": "prim" }
+      values: { "4,2": "0,1,0" }
+      focus: ["4,2"]
+      verdict: "P は点ごと、N はここでは面ごと。ほかに頂点・ディテール(全体で 1 つ)がある"
+    - short: "表で見る"
+      cells: { "0,1": "point", "1,1": "point", "2,1": "point", "3,1": "point" }
+      values: { "0,1": "1,1,1", "1,1": "1,1,1", "2,1": "1,1,1", "3,1": "1,1,1" }
+      focus: ["0,1", "1,1", "2,1", "3,1"]
+      verdict: "1 行 = 1 つの要素、1 列 = 1 つのアトリビュート"
+    - short: "作る"
+      cells: { "0,3": "new", "1,3": "new", "2,3": "new", "3,3": "new" }
+      values: { "0,3": "0", "1,3": "1", "2,3": "1", "3,3": "0" }
+      focus: ["0,3", "1,3", "2,3", "3,3"]
+      verdict: "Wrangle(点ごと)で f@w = @P.x; → 新しい列 w ができる"
+    - short: "使う"
+      cells: { "0,3": "read", "1,3": "read", "2,3": "read", "3,3": "read", "1,0": "new", "2,0": "new" }
+      values: { "1,0": "1,1,0", "2,0": "1,1,1" }
+      focus: ["1,0", "2,0"]
+      verdict: "後のノードが w を読む。@P.y += @w; で、w が 1 の点だけ上がる"
+  summary: "アトリビュートは、点・頂点・面・全体のどこかに付く名前つきの値。スプレッドシートで値を確かめ、Wrangle で作り、後のノードが読んで使う。"
 ---
 
 ## 概要

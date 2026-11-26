@@ -13,6 +13,48 @@ operationSteps:
     note: 衝突(異なるキーが同じバケットになる)した場合は連結リスト等で対応する
   - label: 検索時も同じ計算で直接アクセスする
     note: 先頭から探す必要がなく、平均してO(1)で見つかる
+visual:
+  kind: grid
+  question: "キーは、どのバケットに入る? 探すときはどこを見る?"
+  legend:
+    - { key: "target", label: "行き先のバケット", tone: "amber", mark: "→" }
+    - { key: "stored", label: "格納済み", tone: "green", mark: "済" }
+    - { key: "collide", label: "衝突(同じバケット)", tone: "pink", mark: "衝" }
+    - { key: "read", label: "検索で見た", tone: "blue", mark: "見" }
+  rows: ["0", "1", "2", "3", "4", "5", "6", "7"]
+  cols: ["キー", "値", "次のキー", "次の値"]
+  rowLabel: "番号"
+  colLabel: "バケットの中身"
+  initial:
+    - ["", "", "", ""]
+    - ["", "", "", ""]
+    - ["", "", "", ""]
+    - ["", "", "", ""]
+    - ["", "", "", ""]
+    - ["Bob", "80", "", ""]
+    - ["", "", "", ""]
+    - ["", "", "", ""]
+  steps:
+    - short: "ハッシュ"
+      cells: { "5,0": "stored", "5,1": "stored" }
+      callout: { value: "Alice → 3", label: "ハッシュ値(例。0〜7 に収めた値)" }
+      verdict: "キーを決まった範囲の数に変える。同じキーなら毎回同じ数"
+    - short: "番号"
+      cells: { "3,0": "target", "3,1": "target" }
+      focus: ["3,0"]
+      verdict: "○ 3 番のバケットへ直接行く。ほかの番号は見ない"
+    - short: "格納"
+      cells: { "3,0": "stored", "3,1": "stored", "3,2": "collide", "3,3": "collide" }
+      values: { "3,0": "Alice", "3,1": "100", "3,2": "Carol", "3,3": "90" }
+      focus: ["3,2"]
+      callout: { value: "Carol → 3", label: "別のキーが同じ番号(衝突)" }
+      verdict: "衝突したキーは、同じバケットの後ろにつなぐ(チェイン法)"
+    - short: "検索"
+      cells: { "3,0": "read", "3,1": "read" }
+      focus: ["3,0", "3,1"]
+      callout: { value: "O(1)", label: "平均の検索" }
+      verdict: "○ 同じ計算で 3 番だけを見る。衝突が多いと、つないだ分をたどる手間が増える"
+  summary: "キー → ハッシュ値 → バケットの番号。保存も検索も同じ計算で 1 か所へ直接行くので、平均 O(1)。衝突したキーは同じバケットにつなぐ。"
 ---
 
 ## 概要

@@ -12,6 +12,50 @@ operationSteps:
     note: 見つからなければより大きく低速な階層を順に探す
   - label: 主記憶(DRAM)まで取りに行く
     note: どのキャッシュにもなければ、最も低速な主記憶へアクセスする
+visual:
+  kind: tiers
+  question: "欲しいデータは、どの層で見つかる? そこまで何倍かかる?"
+  approx: true
+  legend:
+    - { key: reg, label: "レジスタ", tone: pink }
+    - { key: sram, label: "キャッシュ(SRAM)", tone: amber }
+    - { key: dram, label: "主記憶(DRAM)", tone: green }
+    - { key: storage, label: "ストレージ(SSD)", tone: violet }
+    - { key: miss, label: "なかった(次の層へ)", tone: gray, mark: "×" }
+    - { key: hit, label: "見つかった", tone: cyan, mark: "○" }
+  scale: { label: "アクセスの時間(対数)", ticks: ["1ns", "10ns", "100ns", "1µs", "10µs", "100µs"] }
+  columns: { value: "時間", extra: "容量" }
+  tiers:
+    - { id: reg, label: "レジスタ", key: reg, bar: 2, value: "1ns 未満", extra: "〜数KB" }
+    - { id: l1, label: "L1 キャッシュ", key: sram, bar: 4, value: "~1ns", extra: "数十KB" }
+    - { id: l2, label: "L2 キャッシュ", key: sram, bar: 12, value: "数ns", extra: "数百KB〜数MB" }
+    - { id: l3, label: "L3 キャッシュ", key: sram, bar: 24, value: "10〜数十ns", extra: "数MB〜数十MB" }
+    - { id: dram, label: "主記憶(DRAM)", key: dram, bar: 40, value: "~100ns", extra: "数GB〜数十GB" }
+    - { id: ssd, label: "ストレージ(SSD)", key: storage, bar: 92, value: "数十〜100µs", extra: "数百GB〜数TB" }
+  gaps:
+    - { id: toDram, after: l3, label: "主記憶は L1 の約 100 倍遠い" }
+    - { id: toSsd, after: dram, label: "ストレージはさらに約 1000 倍遠い" }
+  steps:
+    - short: "要求"
+      focus: [reg]
+      verdict: "計算に使う値は、レジスタになければ近い層から順に探す"
+    - short: "L1"
+      focus: [l1]
+      state: { l1: miss }
+      callout: { value: "~1ns", label: "L1 にあれば" }
+      verdict: "L1 にあれば約 1ns で返る。今回はなかったので次の層へ"
+    - short: "L2・L3"
+      focus: [l2, l3]
+      state: { l2: miss, l3: miss }
+      callout: { value: "~10ns", label: "L3 にあれば" }
+      verdict: "下の層ほど大きいが遅い。L2・L3 にもなかった"
+    - short: "DRAM"
+      focus: [dram]
+      state: { dram: hit }
+      gaps: [toDram, toSsd]
+      callout: { value: "~100×", label: "L1 → DRAM" }
+      verdict: "○ 主記憶で見つかった。ただし L1 の約 100 倍の時間がかかる"
+  summary: "近い層ほど速くて小さい。よく使うデータが上の層(キャッシュ)に載っているかで、速さが大きく変わる。"
 ---
 
 ## 概要

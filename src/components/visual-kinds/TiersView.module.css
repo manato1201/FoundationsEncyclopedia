@@ -1,0 +1,219 @@
+.root {
+  --cols: minmax(0, 1.25fr) 4.75rem minmax(0, 1fr) 6.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  width: 100%;
+  font-size: 0.8125rem;
+}
+
+.head,
+.row {
+  display: grid;
+  grid-template-columns: var(--cols);
+  align-items: center;
+  column-gap: var(--space-3);
+}
+
+.head {
+  padding-bottom: var(--space-2);
+  border-bottom: 1px solid var(--vz-panel-line);
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  letter-spacing: 0.08em;
+  color: var(--color-text-muted);
+}
+
+.headBar {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
+.ticks {
+  display: flex;
+  justify-content: space-between;
+}
+
+.scaleLabel {
+  text-transform: uppercase;
+}
+
+/* 階層の行: まだ出していない段は透明(場所は取っておく) */
+.row {
+  min-height: 1.75rem;
+  opacity: 0;
+  transform: translateY(6px);
+  transition:
+    opacity var(--dur-enter) var(--ease-out),
+    transform var(--dur-enter) var(--ease-out);
+}
+
+.row[data-shown] {
+  opacity: 1;
+  transform: none;
+}
+
+.row[data-shown][data-dim] {
+  opacity: 0.62;
+}
+
+.tierCell {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-width: 0;
+  padding-left: 1rem;
+}
+
+.pointer {
+  position: absolute;
+  left: 0;
+  font-size: 0.625rem;
+  color: var(--color-text);
+  opacity: 0;
+}
+
+.row[data-focus] .pointer {
+  opacity: 1;
+}
+
+/* ラベル付きの色の箱。幅で階層の大きさ(ピラミッド)を見せる */
+.box {
+  display: block;
+  width: var(--w);
+  min-width: 0;
+  padding: 0.25rem 0.5rem;
+  border-radius: 3px;
+  background: var(--t);
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.18);
+  color: var(--vz-ink);
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.row[data-focus] .box {
+  outline: 2px solid var(--color-text);
+  outline-offset: 2px;
+}
+
+.state {
+  flex: none;
+  padding: 0.0625rem 0.375rem;
+  border: 1px solid var(--t-ink);
+  border-radius: 999px;
+  color: var(--t-ink);
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+}
+
+.value,
+.extra {
+  min-width: 0;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1.35;
+  color: var(--color-text);
+  /* 「数十ms〜数秒」は 〜 の後ろで折り返す(TiersView が <wbr> を入れる)。それでも入らなければどこでも折る */
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+
+.extra {
+  color: var(--color-text-muted);
+}
+
+.track {
+  position: relative;
+  display: block;
+  height: 0.375rem;
+  border-radius: 999px;
+  background: var(--vz-dim);
+  overflow: hidden;
+}
+
+.bar {
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  background: var(--t-ink);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 640ms var(--ease-out);
+}
+
+.row[data-shown] .bar {
+  transform: scaleX(var(--b));
+}
+
+/* 段の間の断層の注記 */
+.gap {
+  display: flex;
+  justify-content: center;
+  padding: 0.125rem 0;
+  border-top: 1px dashed var(--vz-pink-ink);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--vz-pink-ink);
+  opacity: 0;
+  transition: opacity var(--dur-enter) var(--ease-out);
+}
+
+.gap[data-shown] {
+  opacity: 1;
+}
+
+/* 狭い枠: 補足の数値を数値の下へ回し、箱と棒を詰める */
+@container (max-width: 34rem) {
+  .root {
+    --cols: minmax(0, 1.3fr) 4.25rem minmax(0, 0.7fr);
+  }
+
+  .row {
+    grid-template-areas:
+      "tier value bar"
+      "tier extra bar";
+  }
+
+  .tierCell {
+    grid-area: tier;
+    flex-wrap: wrap;
+  }
+
+  .value {
+    grid-area: value;
+  }
+
+  .barCell {
+    grid-area: bar;
+  }
+
+  .extra {
+    grid-area: extra;
+    font-size: 0.6875rem;
+  }
+
+  .headExtra {
+    display: none;
+  }
+
+  /* ピラミッドの幅は保ちつつ、名前が切れない幅を確保する */
+  .box {
+    width: max(var(--w), 78%);
+    font-size: 0.75rem;
+    padding: 0.25rem 0.25rem;
+  }
+
+  /* 目盛りは両端だけ */
+  .ticks span:not(:first-child):not(:last-child) {
+    display: none;
+  }
+}

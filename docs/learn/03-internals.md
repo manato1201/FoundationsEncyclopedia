@@ -20,7 +20,21 @@ hasAnimation,
 - **`operationSteps` で動く章は、ここに含めない**(frontmatter のフィールドの有無で、直接判定する)。
 - **frontmatter に `hasAnimation` を直書きしない**(コンテンツとコードの 2 か所で、食い違うため)。
 
-## 手順の図(`StepScene`)
+## 手順の図(`VisualPlayer`)
+
+2026-11-26 から、章ページの図は **共通の枠+章の中身の図** にした(書き方: [visual-authoring.md](../reference/visual-authoring.md))。
+
+| 部品 | 役割 |
+|---|---|
+| `visual-frame/VisualPlayer.tsx` | 再生操作(`useStepPlayer`・`PlaybackControls`)・先に予想・スクロールで進める |
+| `visual-frame/VisualFrame.tsx` | 枠: 英字の小ラベル・進み具合・STEP と手順名・問いかけ・右上の大きな数・段の結論・まとめ・凡例・「数値は目安」 |
+| `visual-frame/VisualStage.tsx` | `visual.kind` で 6 型(`visual-kinds/*View.tsx`)を出し分ける。カードの縮小コマ(`VisualThumb`)でも使う |
+| `visual-frame/StepTrack.tsx` | `visual` のない章: 手順の一覧を段として見せる(中身と無関係な形は描かない) |
+| `lib/visual/schema.ts` | `VisualSpec`(6 型の判別共用体)と `validateVisual`。`npm run verify:visuals` も同じ関数を使う |
+
+### 旧: 汎用の図(`StepScene`。既定では使わない)
+
+章の id から汎用の形を選ぶだけで中身を描かないため、既定の画面から外した(ファイルは残してある)。
 
 | 部品 | 役割 |
 |---|---|

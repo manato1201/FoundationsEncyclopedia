@@ -1,0 +1,36 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+  width: min(100%, 64rem);
+  margin: 0 auto;
+  padding: var(--space-8) var(--space-4);
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.heading {
+  font-size: 1rem;
+}
+
+.errors {
+  white-space: pre-wrap;
+  color: var(--color-accent-amber);
+}
+
+/* カードと同じ大きさの縮小コマ */
+.thumb {
+  width: 16rem;
+  height: 6.25rem;
+  border: 1px solid var(--color-line);
+  background: var(--color-bg-void);
+}

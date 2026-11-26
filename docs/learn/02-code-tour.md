@@ -12,15 +12,15 @@
 | 6 | `src/lib/chapter-sections.ts`・`chapter-links.ts`・`foundations-search.ts` | 本文・地図・検索 |
 | 7 | `src/lib/review-store.ts` | 復習(localStorage と一体) |
 | 8 | `src/app/foundations/[id]/page.tsx` | 章ページの組み立て |
-| 9 | `src/components/scene/StepScene.tsx` → `FlowScene.tsx` / `Scene3D.tsx` | 手順の図 |
-| 10 | `src/lib/three-scenes.ts` | 立体(長いので、必要なシーンだけ) |
+| 9 | `src/components/visual-frame/VisualPlayer.tsx` → `VisualFrame.tsx` / `VisualStage.tsx` / `StepTrack.tsx` | 手順の図(共通の枠+型の図 / 手順トラック) |
+| 10 | `src/lib/visual/schema.ts`・`src/components/visual-kinds/*` | 図のデータの形と検証・6 型の描画 |
 
 ## 章ページが作られる流れ
 
 1. `foundationsLoader.getDetail(id)` が、frontmatter と本文 HTML を返す(静的生成で 1 回)。
 2. `splitChapterBody` が、本文を**解説**と**例**に分け、解説の見出しに目次用の id を付ける。
-3. `resolveScene(id)` で図の型を決める(`OVERRIDES` → 規則表 → 既定)。
-4. `operationSteps` があれば、手順の図(`StepScene`)。各手順に `inferGlyph` でアイコンを当てる。
+3. `usableVisual(entry.visual, operationSteps.length)` で、frontmatter の `visual` を検証する(通らなければ使わない)。
+4. `operationSteps` があれば `VisualPlayer`。`visual` があればその型の図、なければ手順トラック(`StepTrack`)。専用アニメの章は、同じ枠(`VisualFrame`)の中で従来どおり動く。
 5. `getChapterLinks(id)` で、章のつながりの地図(ビルド時に全章の本文を走査して作る)。
 6. クイズ(`ChapterQuiz`)は、間違えた問題を `recordAnswer` で復習に記録する。
 

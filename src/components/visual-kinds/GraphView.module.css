@@ -1,0 +1,114 @@
+.root {
+  display: block;
+  width: 100%;
+  max-width: 40rem;
+  height: auto;
+  margin: 0 auto;
+  overflow: visible;
+}
+
+/* エッジ: 状態がなければ細い灰色、あれば凡例の色の太線。隠れている間は透明 */
+.edge {
+  transition: opacity var(--dur-enter) var(--ease-out);
+}
+
+.edge[data-hidden] {
+  opacity: 0;
+}
+
+.edge line {
+  stroke: var(--color-text-muted);
+  stroke-width: 1.5;
+  stroke-opacity: 0.55;
+}
+
+.edge[data-on] line {
+  stroke: var(--t-ink);
+  stroke-width: 3;
+  stroke-opacity: 1;
+}
+
+/* 矢印の三角(エッジと同じ色) */
+.head {
+  fill: var(--color-text-muted);
+  fill-opacity: 0.7;
+}
+
+.edge[data-on] .head {
+  fill: var(--t-ink);
+  fill-opacity: 1;
+}
+
+.edgeLabel {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  fill: var(--color-text-muted);
+  text-anchor: middle;
+}
+
+/* ノード: 隠れている間は透明で少し小さく、現れるときに opacity と scale で戻る */
+.node {
+  transform-box: fill-box;
+  transform-origin: center;
+  transition:
+    opacity var(--dur-enter) var(--ease-out),
+    transform var(--dur-enter) var(--ease-out);
+}
+
+.node[data-hidden] {
+  opacity: 0;
+  transform: scale(0.6);
+}
+
+.disc {
+  fill: var(--color-bg-surface);
+  stroke: var(--color-text-muted);
+  stroke-width: 1.5;
+}
+
+.node[data-on] .disc {
+  fill: var(--t);
+  stroke: rgba(0, 0, 0, 0.25);
+}
+
+.label {
+  font-family: var(--font-mono);
+  font-size: 15px;
+  font-weight: 700;
+  fill: var(--color-text);
+  text-anchor: middle;
+}
+
+.node[data-on] .label {
+  fill: var(--vz-ink);
+}
+
+/* 状態の記号(色だけで区別しない) */
+.state {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  fill: var(--t-ink);
+  text-anchor: middle;
+}
+
+.note {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  fill: var(--color-text);
+  text-anchor: middle;
+}
+
+/* いまの段のノード: 外側の輪が現れる */
+.ring {
+  fill: none;
+  stroke: var(--color-text);
+  stroke-width: 2;
+  stroke-dasharray: 4 3;
+  opacity: 0;
+  transition: opacity var(--dur-enter) var(--ease-out);
+}
+
+.node[data-focus] .ring {
+  opacity: 1;
+}

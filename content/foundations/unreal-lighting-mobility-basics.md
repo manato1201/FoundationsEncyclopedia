@@ -23,6 +23,54 @@ quiz:
       - "Movable"
     answer: 2
     explanation: "位置を動かせるのは Movable だけ。Static と Stationary は、位置が固定。"
+visual:
+  kind: compare
+  question: "光をどこまで焼いておくと、何を変えられなくなる?"
+  approx: "実行時の計算量は定性的な傾向(版・設定で変わる)"
+  columns:
+    - { id: static, label: "Static", tag: "BAKED", tone: blue, units: { count: 8, cols: 4, label: "実行時の計算(傾向)" } }
+    - { id: stationary, label: "Stationary", tag: "MIXED", tone: amber, units: { count: 8, cols: 4, label: "実行時の計算(傾向)" } }
+    - { id: movable, label: "Movable", tag: "DYNAMIC", tone: pink, units: { count: 8, cols: 4, label: "実行時の計算(傾向)" } }
+  steps:
+    - short: "配置"
+      cells:
+        static: { lit: 0, text: "同じライトを置く" }
+        stationary: { lit: 0, text: "同じライトを置く" }
+        movable: { lit: 0, text: "同じライトを置く" }
+      verdict: "同じライトを、Mobility だけ変えて比べる"
+    - short: "Mobility"
+      cells:
+        static: { lit: 1, order: all, text: "光をすべて焼く" }
+        stationary: { lit: 4, order: all, text: "一部を焼く" }
+        movable: { lit: 8, order: all, text: "毎フレーム計算する" }
+      verdict: "焼く部分が多いほど、実行時は軽く、変えられることは減る"
+    - short: "軽さ"
+      cells:
+        static: { lit: 1, order: all, mark: good, text: "実行時の計算はほぼ不要", note: "ライトマップに焼き込む" }
+        stationary: { lit: 4, order: all, mark: fair, text: "中くらい" }
+        movable: { lit: 8, order: all, mark: poor, text: "重い", note: "影も毎フレーム計算" }
+      verdict: "動かさない照明は、焼いて軽くできる"
+    - short: "色・強さ"
+      cells:
+        static: { lit: 1, order: all, mark: poor, text: "変えられない", note: "変更はライティングのビルドが要る" }
+        stationary: { lit: 4, order: all, mark: good, text: "実行時に変えられる", note: "静的な物の影は焼く" }
+        movable: { lit: 8, order: all, mark: good, text: "実行時に変えられる" }
+      verdict: "色・強さを変えたいなら、Stationary か Movable"
+    - short: "移動"
+      cells:
+        static: { lit: 1, order: all, mark: poor, text: "動かせない" }
+        stationary: { lit: 4, order: all, mark: poor, text: "位置は固定" }
+        movable: { lit: 8, order: all, mark: good, text: "自由に動かせる", note: "そのぶん負荷が高い" }
+      verdict: "位置を動かせるのは Movable だけ"
+  summary:
+    title: "焼くほど軽く、変えにくい"
+    columns: ["Static", "Stationary", "Movable"]
+    rows:
+      - { label: "位置の移動", cells: ["× できない", "× できない", "○ できる"] }
+      - { label: "色・強さの変更", cells: ["× できない", "○ できる", "○ できる"] }
+      - { label: "影・間接光", cells: ["焼き込み", "静的な物の影は焼き込み", "動的"] }
+      - { label: "実行時の負荷", cells: ["○ 低い", "△ 中", "× 高い"] }
+    note: "UE5 の Lumen など動的な GI を使う場合は事情が変わる。Stationary の重なりの上限などの細部は、使う版で確かめる。"
 ---
 
 ## 概要

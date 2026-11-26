@@ -13,6 +13,46 @@ operationSteps:
     note: パスワードそのものはアプリに一切渡らない
   - label: アプリがアクセストークンを取得する
     note: 認可コードを使い、Google側からアクセストークンを取得してAPIを呼び出す
+visual:
+  kind: sequence
+  question: "パスワードを渡さずに、アプリはどう権限を受け取る?"
+  legend:
+    - { key: "nav", label: "画面の移動", tone: "blue", mark: "→" }
+    - { key: "consent", label: "本人の同意", tone: "amber", mark: "✓" }
+    - { key: "code", label: "認可コード", tone: "violet", mark: "C" }
+    - { key: "token", label: "アクセストークン", tone: "green", mark: "T" }
+  actors:
+    - { id: "user", label: "ユーザー", note: "ブラウザ" }
+    - { id: "app", label: "アプリ", note: "クライアント" }
+    - { id: "authz", label: "認可サーバー", note: "例: Google のログイン" }
+    - { id: "api", label: "リソースサーバー", note: "例: Google の API" }
+  messages:
+    - { id: "click", from: "user", to: "app", label: "ログインを押す", note: "「Google でログイン」", key: "nav" }
+    - { id: "redirect", from: "app", to: "authz", label: "認可リクエスト", note: "ブラウザを認可画面へ送る(client_id・scope)", key: "nav" }
+    - { id: "screen", from: "authz", to: "user", label: "同意画面", note: "渡す範囲(名前・メールなど)を示す", key: "consent" }
+    - { id: "approve", from: "user", to: "authz", label: "承認", note: "パスワードは認可サーバーにだけ入力する", key: "consent" }
+    - { id: "code", from: "authz", to: "app", label: "認可コード", note: "ブラウザ経由で redirect_uri へ届く", key: "code" }
+    - { id: "exchange", from: "app", to: "authz", label: "コードを渡す", note: "アプリ自身の認証も添える", key: "code" }
+    - { id: "token", from: "authz", to: "app", label: "アクセストークン", note: "許可された範囲だけ使える", key: "token" }
+    - { id: "call", from: "app", to: "api", label: "API を呼ぶ", note: "トークンを添える", key: "token" }
+    - { id: "data", from: "api", to: "app", label: "名前・メール", note: "許可された範囲のデータだけ", key: "token" }
+  steps:
+    - short: "認可を求める"
+      send: ["click", "redirect"]
+      verdict: "アプリはユーザーを認可サーバーへ送るだけ。パスワードは聞かない"
+    - short: "承認"
+      send: ["screen", "approve"]
+      state: { user: "consent" }
+      verdict: "○ どの範囲を渡すかを、ユーザー自身が決める"
+    - short: "認可コード"
+      send: ["code"]
+      state: { app: "code" }
+      verdict: "○ アプリに届くのは短命なコードだけ。パスワードは含まない"
+    - short: "トークン"
+      send: ["exchange", "token", "call", "data"]
+      state: { app: "token" }
+      verdict: "○ コードをトークンに替え、許可された範囲だけ API を使う"
+  summary: "パスワードを入力するのは認可サーバーだけ。アプリは認可コードをアクセストークンに替え、許可された範囲だけ API を使う。"
 ---
 
 ## 概要

@@ -4,7 +4,10 @@ import styles from "./page.module.css";
 import { Icon } from "@/components/icons/Icon";
 import { MasteryBadgeChip } from "@/components/badge/MasteryBadgeChip";
 import { FoundationsAnimation } from "@/components/animation/FoundationsAnimation";
-import { OperationStepsAnimation } from "@/components/animation/OperationStepsAnimation";
+import { VisualPlayer } from "@/components/visual-frame/VisualPlayer";
+import { VisualFrame } from "@/components/visual-frame/VisualFrame";
+import { usableVisual, validateVisual } from "@/lib/visual/schema";
+import { eyebrowFor } from "@/lib/visual/eyebrow";
 import { ChapterContent } from "@/components/chapter/ChapterContent";
 import { ChapterRail } from "@/components/chapter/ChapterRail";
 import { ChapterMap } from "@/components/chapter/ChapterMap";
@@ -40,6 +43,12 @@ export default async function FoundationsDetailPage({ params }: FoundationsDetai
   const links = getChapterLinks(id);
   const hasLinks = links.refers.length + links.referredBy.length > 0;
   const hasVisual = hasOperationSteps || entry.hasVisualizer;
+  const eyebrow = eyebrowFor(entry.category, entry.subcategory);
+  // 章の図(visual)。検証を通らなければ図は出さず、手順トラックへフォールバックする(ビルドのログに理由を出す)
+  const visual = usableVisual(entry.visual, operationSteps.length);
+  if (entry.visual !== undefined && !visual) {
+    console.warn(`[visual] ${id}: ${validateVisual(entry.visual, operationSteps.length).join(" / ")}`);
+  }
 
   // 現在の章の下に出す、このページの見出し(スクロールスパイ)
   const outline: OutlineItem[] = [
@@ -115,9 +124,16 @@ export default async function FoundationsDetailPage({ params }: FoundationsDetai
               ステップで見る
             </h2>
             {hasOperationSteps ? (
-              <OperationStepsAnimation id={id} steps={operationSteps} />
+              // 汎用の 3D/流れの図(OperationStepsAnimation・StepScene)は中身と無関係なので既定から外した。
+              // visual があればその型の図、なければ手順トラック
+              <VisualPlayer eyebrow={eyebrow} steps={operationSteps} spec={visual} />
             ) : entry.hasVisualizer ? (
-              <FoundationsAnimation id={id} />
+              // 専用アニメ(operationSteps なし)は、共通の枠の中で従来どおり動かす
+              <VisualFrame eyebrow={eyebrow} title={entry.name} question={entry.claim ?? entry.summary}>
+                <div className={styles.bespoke}>
+                  <FoundationsAnimation id={id} />
+                </div>
+              </VisualFrame>
             ) : (
               <div className={styles.placeholder}>
                 このエントリにはまだCSSステップアニメーションが用意されていません。概要の説明を参照してください。

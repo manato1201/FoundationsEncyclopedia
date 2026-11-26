@@ -13,6 +13,43 @@ operationSteps:
     note: VMは数十秒〜分単位、コンテナは数秒以内で起動できる
   - label: 隔離の強さを比較する
     note: VMの方が強い隔離を提供する。コンテナは軽量さとのトレードオフがある
+visual:
+  kind: compare
+  question: "アプリを 3 つ動かすとき、何を起動する?"
+  approx: "起動時間は目安(構成や環境で変わる)"
+  columns:
+    - { id: vm, label: "仮想マシン", tag: "GUEST OS", tone: violet, units: { count: 6, cols: 3, label: "起動するもの(上=アプリ・下=OS)" } }
+    - { id: ctr, label: "コンテナ", tag: "SHARED KERNEL", tone: cyan, units: { count: 6, cols: 3, label: "起動するもの(上=アプリ・下=OS)" } }
+  steps:
+    - short: "VM"
+      cells:
+        vm: { lit: 6, order: row, text: "アプリごとにゲスト OS も起動", note: "ハイパーバイザーの上で動く" }
+        ctr: { lit: 3, order: row, text: "アプリと必要なファイルだけ", note: "下の段(OS)は持たない" }
+      verdict: "VM は、OS 全体を丸ごと仮想化する"
+    - short: "カーネル"
+      cells:
+        vm: { lit: 6, order: all, text: "それぞれが自分のカーネルを持つ" }
+        ctr: { lit: 3, order: all, text: "ホスト OS のカーネルを共有", note: "プロセスとファイルを隔離する" }
+      verdict: "コンテナは、OS の中心(カーネル)をホストと共有する"
+    - short: "起動時間"
+      cells:
+        vm: { lit: 6, order: row, mark: fair, text: "数十秒〜分単位", note: "OS の起動を待つ" }
+        ctr: { lit: 3, order: all, mark: good, text: "数秒以内", note: "OS を起動しない" }
+      verdict: "起動の速さと軽さはコンテナ"
+    - short: "隔離"
+      cells:
+        vm: { lit: 6, order: all, mark: good, text: "OS ごと分かれ、隔離が強い" }
+        ctr: { lit: 3, order: all, mark: fair, text: "カーネル共有。VM より弱い", note: "「完全に分離」ではない" }
+      verdict: "軽さと隔離の強さはトレードオフ"
+  summary:
+    title: "軽さか、隔離の強さか"
+    columns: ["仮想マシン", "コンテナ"]
+    rows:
+      - { label: "OS", cells: ["アプリごとにゲスト OS", "ホストのカーネルを共有"] }
+      - { label: "起動の速さ", cells: ["△ 数十秒〜分", "○ 数秒以内"] }
+      - { label: "資源の消費", cells: ["△ OS の分だけ大きい", "○ 小さい"] }
+      - { label: "隔離の強さ", cells: ["○ 強い", "△ VM より弱い"] }
+    note: "信頼できないコードを動かすなど、強い隔離が要る場面では、VM やより強固なサンドボックスが使われる。"
 ---
 
 ## 概要

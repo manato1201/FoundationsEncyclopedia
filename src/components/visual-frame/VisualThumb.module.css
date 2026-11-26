@@ -1,0 +1,28 @@
+.thumb {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* 48rem の幅で描いた図を 0.34 倍にして、横の中央に置く */
+.canvas {
+  position: absolute;
+  top: 0.5rem;
+  left: 50%;
+  width: 48rem;
+  transform: translateX(-50%) scale(0.34);
+  transform-origin: top center;
+}
+
+/* 下端で切れる部分を、地の色へ溶かす */
+.thumb::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1.25rem;
+  background: linear-gradient(to bottom, transparent, var(--color-bg-void));
+}

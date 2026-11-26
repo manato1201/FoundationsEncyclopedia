@@ -13,6 +13,42 @@ operationSteps:
     note: 直接変数を共有できる反面、同時書き込みの危険がある
   - label: ロック等で同期し競合を防ぐ
     note: データ競合(レースコンディション)を避けるための仕組みが必要になる
+visual:
+  kind: compare
+  question: "2 つの仕事を並行させるとき、メモリはどう分かれる?"
+  columns:
+    - { id: proc, label: "マルチプロセス", tag: "SEPARATE", tone: cyan, units: { count: 8, cols: 4, label: "使うメモリ空間(1 行 = 1 つ分)" } }
+    - { id: thread, label: "マルチスレッド", tag: "SHARED", tone: green, units: { count: 8, cols: 4, label: "使うメモリ空間(1 行 = 1 つ分)" } }
+  steps:
+    - short: "起動"
+      cells:
+        proc: { lit: 4, order: row, text: "プロセス A に専用の空間", note: "OS が割り当てる" }
+        thread: { lit: 4, order: row, text: "同じく、プロセスを 1 つ起動", note: "ここまでは同じ" }
+      verdict: "プロセスは、独立したメモリ空間をもらう"
+    - short: "もう 1 本"
+      cells:
+        proc: { lit: 8, order: row, mark: fair, text: "もう 1 つプロセスを起動", note: "空間も 2 つ分。重め" }
+        thread: { lit: 4, order: all, mark: good, text: "スレッドを足しても空間は 1 つ", note: "同じ空間に同居する。軽め" }
+      verdict: "スレッドは、プロセスのメモリ空間を共有する"
+    - short: "共有変数"
+      cells:
+        proc: { lit: 8, order: all, mark: fair, text: "相手の変数は見えない", note: "IPC(パイプ・ソケット等)で渡す" }
+        thread: { lit: 4, order: all, mark: fair, text: "同じ変数を直接読み書き", note: "同時に書くと競合の危険" }
+      verdict: "共有が手軽なほど、同時書き込みの危険も増える"
+    - short: "同期"
+      cells:
+        proc: { lit: 8, order: all, mark: good, text: "空間が別なので壊し合いにくい", note: "共有メモリの IPC では同期が要る" }
+        thread: { lit: 4, order: row, mark: good, text: "ロックで 1 本ずつ順に書く", note: "設計を誤ると、かえって遅くなる" }
+      verdict: "スレッドは同期で守る(ロック・アトミック操作など)"
+  summary:
+    title: "分けて守るか、共有して同期するか"
+    columns: ["プロセス", "スレッド"]
+    rows:
+      - { label: "メモリ空間", cells: ["それぞれ独立", "プロセス内で共有"] }
+      - { label: "作る重さ", cells: ["△ 重め", "○ 軽め"] }
+      - { label: "データの受け渡し", cells: ["△ IPC が要る", "○ 変数を直接"] }
+      - { label: "同時書き込みの競合", cells: ["○ 起きにくい", "× 同期が要る"] }
+    note: "「プロセス=安全だが重い/スレッド=軽いが危険」はおおむね正しい単純化。ロックの設計しだいで、スレッドがかえって遅くなることもある。"
 ---
 
 ## 概要

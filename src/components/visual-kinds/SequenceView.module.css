@@ -1,0 +1,297 @@
+.root {
+  display: grid;
+  grid-template-columns: repeat(var(--n), minmax(0, 1fr));
+  row-gap: var(--space-2);
+  width: 100%;
+}
+
+/* 生存線: 列の中央の縦の点線 */
+.lifeline {
+  justify-self: center;
+  width: 0;
+  border-left: 1px dashed var(--color-text-muted);
+  opacity: 0.5;
+  margin-top: 1.5rem;
+}
+
+.actor {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0 0.25rem var(--space-2);
+  text-align: center;
+}
+
+.actorBox {
+  max-width: 100%;
+  padding: 0.375rem 0.5rem;
+  border: 1px solid var(--color-text-muted);
+  border-radius: 4px;
+  background: var(--color-bg-surface);
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--color-text);
+  overflow-wrap: anywhere;
+}
+
+.actorNote {
+  font-size: 0.6875rem;
+  color: var(--color-text-muted);
+}
+
+/* 登場者の状態(「共通鍵を持つ」など)。場所は常に取っておく */
+.actorState {
+  min-height: 1.25rem;
+  padding: 0.0625rem 0.375rem;
+  border-radius: 3px;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  opacity: 0;
+  transform: translateY(-3px);
+  transition:
+    opacity var(--dur-enter) var(--ease-out),
+    transform var(--dur-enter) var(--ease-out);
+}
+
+.actorState[data-on] {
+  background: var(--t);
+  color: var(--vz-ink);
+  opacity: 1;
+  transform: none;
+}
+
+/* メッセージの行: 文字(上)・矢印・補足(下) */
+.message {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.125rem;
+  min-width: 0;
+  padding: 0;
+}
+
+.message[data-status="future"] {
+  visibility: hidden;
+}
+
+.message[data-status="past"] {
+  opacity: 0.6;
+}
+
+.messageLabel {
+  max-width: 100%;
+  padding: 0 0.25rem;
+  border-radius: 2px;
+  background: var(--vz-panel);
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  color: var(--color-text);
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+.message[data-status="current"] .messageLabel {
+  font-weight: 700;
+}
+
+.messageMark {
+  display: inline-block;
+  margin-right: 0.25rem;
+  padding: 0 0.25rem;
+  border-radius: 2px;
+  background: var(--t);
+  color: var(--vz-ink);
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  font-weight: 700;
+}
+
+.messageNote {
+  font-size: 0.6875rem;
+  line-height: 1.4;
+  color: var(--color-text-muted);
+  text-align: center;
+}
+
+.arrow {
+  position: relative;
+  display: block;
+  align-self: stretch;
+  height: 0.75rem;
+  /* 矢印は送り手の列の中央から受け手の列の中央まで(1 列の幅の半分ずつ内側へ) */
+  margin-inline: calc(50% / var(--span));
+}
+
+.shaft {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 2px;
+  margin-top: -1px;
+  background: var(--t-ink);
+  transform-origin: left center;
+}
+
+.message[data-dir="left"] .shaft {
+  transform-origin: right center;
+}
+
+.message[data-status="past"] .shaft {
+  background: var(--color-text-muted);
+  height: 1px;
+}
+
+.head {
+  position: absolute;
+  top: 50%;
+  width: 0;
+  height: 0;
+  margin-top: -5px;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+}
+
+.message[data-dir="right"] .head {
+  right: -1px;
+  border-left: 8px solid var(--t-ink);
+}
+
+.message[data-dir="left"] .head {
+  left: -1px;
+  border-right: 8px solid var(--t-ink);
+}
+
+.message[data-status="past"][data-dir="right"] .head {
+  border-left-color: var(--color-text-muted);
+}
+
+.message[data-status="past"][data-dir="left"] .head {
+  border-right-color: var(--color-text-muted);
+}
+
+/* 自分の中での処理: 生存線から右へ出て戻る小さな輪 */
+.message[data-dir="self"] {
+  align-items: flex-start;
+  padding-left: calc(50% / var(--span));
+}
+
+.message[data-dir="self-left"] {
+  align-items: flex-end;
+  padding-right: calc(50% / var(--span));
+}
+
+.message[data-dir="self-left"] .messageLabel,
+.message[data-dir="self-left"] .messageNote {
+  text-align: right;
+}
+
+.message[data-dir="self-left"] .arrow {
+  align-self: flex-end;
+  margin-inline: 0;
+  width: 1.5rem;
+  height: 0.875rem;
+  border: 2px solid var(--t-ink);
+  border-right: none;
+  border-radius: 6px 0 0 6px;
+}
+
+.message[data-dir="self-left"] .shaft {
+  display: none;
+}
+
+.message[data-dir="self-left"] .head {
+  top: auto;
+  bottom: -6px;
+  right: -2px;
+  border-left: 7px solid var(--t-ink);
+}
+
+.message[data-dir="self"] .messageLabel,
+.message[data-dir="self"] .messageNote {
+  text-align: left;
+}
+
+.message[data-dir="self"] .arrow {
+  align-self: flex-start;
+  margin-inline: 0;
+  width: 1.5rem;
+  height: 0.875rem;
+  border: 2px solid var(--t-ink);
+  border-left: none;
+  border-radius: 0 6px 6px 0;
+}
+
+.message[data-dir="self"] .shaft {
+  display: none;
+}
+
+.message[data-dir="self"] .head {
+  top: auto;
+  bottom: -6px;
+  left: -2px;
+  border-right: 7px solid var(--t-ink);
+}
+
+/* いまの段のメッセージ: 送り手の側から線が伸び、文字が現れる */
+.message[data-status="current"] .shaft {
+  animation: shaft-in 520ms var(--ease-move) backwards;
+}
+
+.message[data-status="current"] .head,
+.message[data-status="current"] .messageLabel,
+.message[data-status="current"] .messageNote {
+  animation: fade-in var(--dur-enter) var(--ease-out) backwards;
+  animation-delay: 360ms;
+}
+
+@keyframes shaft-in {
+  from {
+    transform: scaleX(0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .message[data-status="current"] .shaft,
+  .message[data-status="current"] .head,
+  .message[data-status="current"] .messageLabel,
+  .message[data-status="current"] .messageNote {
+    animation: none;
+  }
+}
+
+:global(:root[data-motion="reduce"]) .message[data-status="current"] .shaft,
+:global(:root[data-motion="reduce"]) .message[data-status="current"] .head,
+:global(:root[data-motion="reduce"])
+  .message[data-status="current"]
+  .messageLabel,
+:global(:root[data-motion="reduce"])
+  .message[data-status="current"]
+  .messageNote {
+  animation: none;
+}
+
+@container (max-width: 30rem) {
+  .actorBox,
+  .messageLabel {
+    font-size: 0.75rem;
+  }
+
+  /* 登場者が 4 人以上のときは、狭い枠では登場者の補足を省く(名前の札に title で残す) */
+  .root[data-many] .actorNote {
+    display: none;
+  }
+}

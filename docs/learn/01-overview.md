@@ -9,9 +9,9 @@ flowchart LR
     L -->|"メタ"| C["カタログ<br/>(検索・分類・入口)"]
     L -->|"本文 HTML"| P["章ページ"]
     P --> S["splitChapterBody<br/>(解説 / 例)"]
-    P --> T["resolveScene(id)<br/>図の型"]
-    T --> F["FlowScene(SVG)"]
-    T --> D["Scene3D(three.js)"]
+    P --> T["VisualPlayer<br/>(枠 VisualFrame)"]
+    T --> F["visual の 6 型の図<br/>(SVG・CSS)"]
+    T --> D["StepTrack<br/>(visual なし)"]
     P --> Q["ChapterQuiz"]
     Q -->|"間違えた問題"| R["review-store<br/>(localStorage)"]
     R --> V["トップの「復習」"]
@@ -32,7 +32,7 @@ flowchart LR
 | 章 | `content/foundations/*.md`(Git に入る) |
 | 更新履歴 | `src/lib/updates.ts`(手書き。新しいものを先頭に足す) |
 | 復習の記録 | localStorage `fe-review-v1` |
-| 好み | localStorage: `fe-scene-view`(平面 / 立体)・`fe-guess-first`(先に予想)・`fe-motion`(動きを減らす)・`fe-theme`(テーマ) |
+| 好み | localStorage: `fe-scene-view`(平面 / 立体。2026-11-26 から既定の画面では使わない)・`fe-guess-first`(先に予想)・`fe-motion`(動きを減らす)・`fe-theme`(テーマ) |
 | サーバー・DB | **無い**(Vercel の静的生成) |
 
 ## コマンド・環境

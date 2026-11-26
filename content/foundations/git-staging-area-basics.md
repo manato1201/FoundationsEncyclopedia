@@ -23,6 +23,43 @@ quiz:
       - "git restore --staged ファイル名"
     answer: 2
     explanation: "restore --staged は、ステージだけを取り消し、作業ツリーの編集内容は変えない。"
+visual:
+  kind: zones
+  question: "commit されるのは、どの変更?"
+  legend:
+    - { key: edited, label: "編集済み", tone: amber, mark: "M" }
+    - { key: staged, label: "ステージ済み", tone: blue, mark: "S" }
+    - { key: committed, label: "記録済み", tone: green, mark: "✓" }
+  zones:
+    - { id: work, label: "作業ツリー", note: "ふだん編集する場所" }
+    - { id: stage, label: "ステージ", note: "次のコミットに入れる変更" }
+    - { id: repo, label: "リポジトリ", note: "コミットの履歴" }
+  items:
+    - { id: a, label: "a.txt の変更" }
+    - { id: b, label: "b.txt の変更" }
+  steps:
+    - short: "編集"
+      place: { a: work, b: work }
+      state: { a: edited, b: edited }
+      verdict: "2 つのファイルを書き換えた。まだ Git には何も記録されていない"
+    - short: "status"
+      highlight: [a, b]
+      zoneFocus: [work]
+      verdict: "status では、2 つとも「ステージされていない変更」として見える"
+    - short: "add"
+      place: { a: stage }
+      state: { a: staged }
+      verdict: "git add a.txt で、a.txt の変更だけが次のコミットの候補になる"
+    - short: "diff --staged"
+      highlight: [a]
+      zoneFocus: [stage]
+      verdict: "diff --staged は a.txt だけ、diff は b.txt だけを表示する"
+    - short: "commit"
+      place: { a: repo }
+      state: { a: committed }
+      zoneFocus: [repo]
+      verdict: "○ 記録されるのはステージにあった a.txt だけ。b.txt の変更は作業ツリーに残る"
+  summary: "commit に入るのは add でステージした変更だけ。作業ツリーの残りの変更は、次の add まで待つ。"
 ---
 
 ## 概要

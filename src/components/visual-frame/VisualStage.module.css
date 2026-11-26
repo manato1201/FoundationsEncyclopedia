@@ -1,0 +1,6 @@
+/* 図の舞台。6 型はこの幅でコンテナクエリを使い、狭い枠では縦積み・列の詰めをする */
+.stage {
+  container-type: inline-size;
+  width: 100%;
+  min-width: 0;
+}

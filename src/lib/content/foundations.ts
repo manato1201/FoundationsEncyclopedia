@@ -36,6 +36,11 @@ export interface FoundationsFrontmatter extends ContentFrontmatterBase {
   guide?: ChapterGuideFrontmatter;
   /** 章の主張を1文で(「GPUは同じ計算を一斉に行う」の形)。1文で言えない章は2つに分ける */
   claim?: string;
+  /**
+   * 章の図(src/lib/visual/schema.ts の VisualSpec)。frontmatter のままなので未検証。
+   * 使う側は必ず usableVisual(visual, operationSteps.length) を通す(壊れていれば手順トラックへフォールバック)。
+   */
+  visual?: unknown;
 }
 
 /**

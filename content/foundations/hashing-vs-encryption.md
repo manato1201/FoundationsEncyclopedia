@@ -13,6 +13,43 @@ operationSteps:
     note: 鍵が漏洩すると元のデータが復元されてしまう
   - label: 用途に応じて正しく使い分ける
     note: パスワードを暗号化で保管すると、鍵の漏洩がそのまま漏洩に直結し危険
+visual:
+  kind: compare
+  question: "変換したデータは、元に戻せる?"
+  columns:
+    - { id: hash, label: "ハッシュ化", tag: "ONE-WAY", tone: violet, units: { count: 8, cols: 4, label: "読めない状態のデータ" } }
+    - { id: enc, label: "暗号化", tag: "KEY", tone: cyan, units: { count: 8, cols: 4, label: "読めない状態のデータ" } }
+  steps:
+    - short: "ハッシュ化"
+      cells:
+        hash: { lit: 8, order: diagonal, text: "一方向に変換する", note: "元に戻す方法はない" }
+        enc: { lit: 0, text: "変換前のデータ", note: "次の段で、鍵を使って変換" }
+      verdict: "ハッシュ化は、元のデータへ戻せない変換"
+    - short: "暗号化"
+      cells:
+        hash: { lit: 8, order: all, text: "戻す方法はない" }
+        enc: { lit: 8, order: diagonal, text: "鍵を使って変換する", note: "鍵がなければ読めない" }
+      verdict: "暗号化は、鍵を使う変換"
+    - short: "復号"
+      cells:
+        hash: { lit: 8, order: all, text: "鍵がなく、戻す手段もない" }
+        enc: { lit: 0, mark: fair, text: "同じ鍵で元どおり", note: "鍵が漏れると誰でも戻せる" }
+      verdict: "暗号化は、鍵があれば元のデータに戻せる"
+    - short: "使い分け"
+      cells:
+        hash: { lit: 8, order: all, mark: good, text: "パスワードの保管に", note: "ソルト+bcrypt 等の専用関数" }
+        enc: { lit: 8, order: all, mark: good, text: "通信内容の秘匿に", note: "パスワードの保管には使わない" }
+      verdict: "× パスワードを暗号化で保管すると、鍵の漏洩がそのまま漏洩になる"
+  summary:
+    title: "戻せないか、鍵で戻せるか"
+    columns: ["ハッシュ化", "暗号化"]
+    rows:
+      - { label: "元に戻せるか", cells: ["戻せない(一方向)", "鍵があれば復号できる"] }
+      - { label: "鍵", cells: ["使わない", "使う(漏洩に注意)"] }
+      - { label: "主な用途", cells: ["パスワードの保管・改ざん検知", "通信内容の秘匿"] }
+      - { label: "代表例", cells: ["SHA-256・bcrypt", "AES・RSA"] }
+      - { label: "パスワードの保管", cells: ["○ 向く", "× 鍵の漏洩が即漏洩"] }
+    note: "パスワードには、ソルトを混ぜ、bcrypt・Argon2 のような計算を重くした専用のハッシュ関数を使う。MD5・SHA-1 は安全でないとされている。"
 ---
 
 ## 概要
