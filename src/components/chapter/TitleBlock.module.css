@@ -62,8 +62,8 @@
   color: var(--color-accent-blue);
 }
 
-/* 狭い画面: 3 列(番号 | 分類 / 何枚目・図・段 / 問・改訂) */
-@media (max-width: 639px) {
+/* 狭い枠(右の列・スマホ。SPEC パネルが container): 3 列(番号 | 分類 / 何枚目・図・段 / 問・改訂) */
+@container (max-width: 639px) {
   .block {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }

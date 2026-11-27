@@ -33,15 +33,13 @@ function Column({ title, items }: { title: string; items: LinkedChapter[] }) {
 /**
  * つながりの地図(依存の地図の考え方): 左=この章の本文が参照している章 → 中央=この章 → 右=この章を参照している章。
  * 「前提」と断定せず、本文のリンクから読み取った事実だけを出す(出どころの札=読み取り)。
+ * 詳細画面の RELATED パネルの中身として使う(枠と図名はパネル側)。つながりが無い章では何も出さない。
  */
 export function ChapterMap({ name, links }: { name: string; links: ChapterLinks }) {
   if (links.refers.length === 0 && links.referredBy.length === 0) return null;
   return (
-    <section className={styles.map} aria-labelledby="map-heading">
-      <h2 id="map-heading" className={styles.heading}>
-        つながりの地図
-      </h2>
-      <div className={`${styles.grid} bp-sheet`} data-title="MAP · 参照の図">
+    <div className={styles.map}>
+      <div className={styles.grid}>
         <Column title="本文で参照している章" items={links.refers} />
         <span className={styles.arrow} aria-hidden="true">
           <Icon name="arrow-right" size={16} />
@@ -58,6 +56,6 @@ export function ChapterMap({ name, links }: { name: string; links: ChapterLinks 
       <p className={styles.note}>
         <ProvenanceTag kind="read">各章の本文にあるリンクから集めました。学ぶ順序の「前提」と決めたものではありません。</ProvenanceTag>
       </p>
-    </section>
+    </div>
   );
 }

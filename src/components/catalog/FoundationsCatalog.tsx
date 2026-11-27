@@ -13,6 +13,7 @@ import { AsciiCrystal } from "@/components/visual/AsciiCrystal";
 import { CategorySidebar, type SidebarCategory } from "./CategorySidebar";
 import { EntryCard, type EntryView } from "./EntryCard";
 import { isAnimated } from "@/lib/is-animated";
+import { useFavorites } from "@/lib/favorites-store";
 import { matchesSearchQuery } from "@/lib/foundations-search";
 import { PURPOSE_GROUPS, STARTER_IDS, type EntryMode } from "@/lib/catalog-entry-points";
 import { MASTERY_BADGE_META, MASTERY_BADGE_ORDER, type MasteryBadge } from "@/lib/mastery-badge";
@@ -39,6 +40,8 @@ export function FoundationsCatalog({ entries, featuredId }: FoundationsCatalogPr
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const [activeSubcategory, setActiveSubcategory] = useState<string | null>(null);
   const [animatedOnly, setAnimatedOnly] = useState(false);
+  const [favoritesOnly, setFavoritesOnly] = useState(false);
+  const favorites = useFavorites();
   const [activeBadge, setActiveBadge] = useState<MasteryBadge | null>(null);
   const [sortOrder, setSortOrder] = useState<SortOrder>("category");
   const [mode, setMode] = useState<EntryMode>("start");
@@ -47,12 +50,15 @@ export function FoundationsCatalog({ entries, featuredId }: FoundationsCatalogPr
   const [expandedPurposes, setExpandedPurposes] = useState<Set<string>>(new Set());
   const trimmedQuery = query.trim().toLowerCase();
   const isSearching = trimmedQuery.length > 0;
-  const isFiltering = isSearching || activeCategory !== null || animatedOnly || activeBadge !== null;
+  const isFiltering = isSearching || activeCategory !== null || animatedOnly || favoritesOnly || activeBadge !== null;
 
   const animatedCount = useMemo(
     () => entries.reduce((count, e) => count + (isAnimated(e) ? 1 : 0), 0),
     [entries],
   );
+
+  // お気に入り(章ページの ITEM の星で入れる)。この一覧にある章だけ数える
+  const favoriteCount = useMemo(() => entries.reduce((count, e) => count + (favorites.has(e.id) ? 1 : 0), 0), [entries, favorites]);
 
   const featured = entries.find((e) => e.id === featuredId) ?? entries[0];
 
@@ -78,11 +84,12 @@ export function FoundationsCatalog({ entries, featuredId }: FoundationsCatalogPr
     () =>
       entries.filter((entry) => {
         if (animatedOnly && !isAnimated(entry)) return false;
+        if (favoritesOnly && !favorites.has(entry.id)) return false;
         if (activeBadge && entry.masteryBadge !== activeBadge) return false;
         if (isSearching && !matchesSearchQuery(entry, query)) return false;
         return true;
       }),
-    [entries, animatedOnly, activeBadge, query, isSearching],
+    [entries, animatedOnly, favoritesOnly, favorites, activeBadge, query, isSearching],
   );
 
   const sidebarCategories = useMemo<SidebarCategory[]>(() => {
@@ -119,6 +126,7 @@ export function FoundationsCatalog({ entries, featuredId }: FoundationsCatalogPr
     setActiveCategory(null);
     setActiveSubcategory(null);
     setAnimatedOnly(false);
+    setFavoritesOnly(false);
     setActiveBadge(null);
   };
 
@@ -140,6 +148,7 @@ export function FoundationsCatalog({ entries, featuredId }: FoundationsCatalogPr
     filterLabelParts.push(activeSubcategory ? `${activeCategory} ・ ${activeSubcategory}` : activeCategory);
   }
   if (animatedOnly) filterLabelParts.push("アニメーション対応のみ");
+  if (favoritesOnly) filterLabelParts.push("お気に入りのみ");
   if (activeBadge) filterLabelParts.push(`${MASTERY_BADGE_META[activeBadge].emoji} ${MASTERY_BADGE_META[activeBadge].label}のみ`);
   if (isSearching) filterLabelParts.push(`「${query}」`);
   const filterLabel = filterLabelParts.join(" ／ ");
@@ -185,7 +194,7 @@ export function FoundationsCatalog({ entries, featuredId }: FoundationsCatalogPr
     });
   };
 
-  const activeFilterCount = (animatedOnly ? 1 : 0) + (activeBadge ? 1 : 0);
+  const activeFilterCount = (animatedOnly ? 1 : 0) + (favoritesOnly ? 1 : 0) + (activeBadge ? 1 : 0);
   const currentLabel = activeCategory
     ? activeSubcategory
       ? `${activeCategory} ・ ${activeSubcategory}`
@@ -268,6 +277,25 @@ export function FoundationsCatalog({ entries, featuredId }: FoundationsCatalogPr
           </button>
         </div>
       </div>
+      {favoriteCount > 0 || favoritesOnly ? (
+        <div role="group" aria-labelledby="filter-favorite-label">
+          <p id="filter-favorite-label" className={styles.filterLabel}>
+            お気に入り
+          </p>
+          <div className={styles.chipRow}>
+            <button
+              type="button"
+              className={`${styles.chip} ${favoritesOnly ? styles.chipActive : ""}`}
+              aria-pressed={favoritesOnly}
+              onClick={() => setFavoritesOnly((current) => !current)}
+            >
+              <Icon name="star" size={12} fill={favoritesOnly ? "currentColor" : "none"} />
+              お気に入りのみ
+              <span className={styles.chipCount}>{favoriteCount}</span>
+            </button>
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 

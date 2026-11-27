@@ -4,18 +4,11 @@
   margin: 0 auto;
 }
 
-.backLink {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-2);
-  font-family: var(--font-mono);
-  font-size: 0.8125rem;
-  color: var(--color-text-muted);
-  margin-bottom: var(--space-6);
-}
-
-.backLink:hover {
-  color: var(--color-accent-blue);
+/* 広い画面: 図と本文の右にパネルの列を置けるよう、幅を広げる(並びは ChapterDetail.module.css) */
+@media (min-width: 1400px) {
+  .page {
+    max-width: 120rem;
+  }
 }
 
 /* 左=目次 / 中央=解説+段階アニメ */
@@ -115,35 +108,10 @@
   max-width: 52rem;
 }
 
-.header {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  gap: var(--space-3);
-  margin-bottom: var(--space-8);
-}
-
-.header > :last-child:not(.claim) {
-  align-self: flex-start;
-}
-
-/* 見出し: 左に差し色の太線(図面の題名) */
-.title {
-  margin-top: var(--space-2);
-  padding-left: var(--space-3);
-  border-left: 3px solid var(--color-accent-blue);
-  font-family: var(--font-display);
-  font-size: clamp(1.5rem, 3vw, 2.25rem);
-  font-weight: 700;
-  line-height: 1.3;
-}
-
-/* 見出し + 灰色の副題(その章で分かること)の2段 */
-.subtitle {
-  font-size: 0.9375rem;
-  line-height: 1.7;
-  color: var(--color-text-muted);
-  max-width: 42rem;
+@media (min-width: 1400px) {
+  .main {
+    max-width: none;
+  }
 }
 
 .sectionLabel {
@@ -175,10 +143,6 @@
   text-align: center;
 }
 
-.explainPane {
-  padding-top: var(--space-1);
-}
-
 /* 前後の章 */
 .pager {
   display: flex;
@@ -205,29 +169,4 @@
 .pagerNext {
   margin-left: auto;
   text-align: right;
-}
-
-/* 章の主張(1文)。見出し・副題の下に置く */
-.claim {
-  display: flex;
-  align-items: baseline;
-  gap: var(--space-3);
-  margin-top: var(--space-2);
-  padding: var(--space-2) var(--space-4);
-  border: 1px dashed var(--color-line);
-  border-left: 3px solid var(--color-accent-blue);
-  background: color-mix(in srgb, var(--color-bg-void) 85%, transparent);
-  font-size: 1rem;
-  font-weight: 700;
-  line-height: 1.6;
-  color: var(--color-text);
-}
-
-.claimLabel {
-  flex-shrink: 0;
-  font-family: var(--font-mono);
-  font-size: 0.6875rem;
-  font-weight: 400;
-  letter-spacing: 0.08em;
-  color: var(--color-text-muted);
 }

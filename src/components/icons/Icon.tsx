@@ -25,6 +25,10 @@ const PATHS = {
   "step-forward": <path d="M9 6l6 6-6 6" />,
   reset: <path d="M4 12a8 8 0 1 0 3-6.2M4 4v5h5" />,
   check: <path d="M5 12.5l4.5 4.5L19 7.5" />,
+  /** お気に入り(押した状態は fill="currentColor" で塗る) */
+  star: (
+    <path d="M12 3.5l2.6 5.3 5.9.86-4.25 4.14 1 5.85L12 16.9l-5.25 2.75 1-5.85L3.5 9.66l5.9-.86z" />
+  ),
   sun: (
     <>
       <circle cx="12" cy="12" r="4" />

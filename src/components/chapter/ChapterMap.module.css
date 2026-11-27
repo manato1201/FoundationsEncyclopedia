@@ -2,13 +2,6 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-3);
-  margin-top: var(--space-8);
-}
-
-.heading {
-  font-size: 1.125rem;
-  font-weight: 700;
-  color: var(--color-text);
 }
 
 .grid {
@@ -16,10 +9,6 @@
   grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr);
   gap: var(--space-3);
   align-items: center;
-  margin-top: var(--space-4);
-  padding: var(--space-6) var(--space-4) var(--space-4);
-  border-radius: 0;
-  background: color-mix(in srgb, var(--color-bg-void) 88%, transparent);
 }
 
 .column {
@@ -102,7 +91,8 @@
   line-height: 1.6;
 }
 
-@media (max-width: 40rem) {
+/* 狭い枠(右の列・スマホ)では縦に並べる。枠の幅で決める(パネルが container) */
+@container (max-width: 40rem) {
   .grid {
     grid-template-columns: minmax(0, 1fr);
   }

@@ -1,0 +1,381 @@
+/* 章の詳細画面のパネル(シェーダー・3Dモーション図鑑の詳細と同じ並び: ITEM・SPEC・NOTES・METHODS・RELATED)。
+   見た目は製図のまま: 各パネルは global の bp-sheet(細線の枠+四隅の見当+枠線に乗る図名)。
+   並び: 1 列のとき = ITEM → SPEC → 図と本文 → NOTES → METHODS → クイズ → RELATED。
+         広いとき = 左に図と本文、右の列に ITEM・SPEC・NOTES・METHODS・RELATED、クイズは下に全幅。 */
+
+/* 枠の幅で並びを決める(container)。中の .detail が並びのグリッド */
+.wrap {
+  container-type: inline-size;
+}
+
+.detail {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-8);
+}
+
+/* 広い枠(本文の列が 66rem 以上): 左 = 図と本文、右 = パネルの列 */
+@container (min-width: 66rem) {
+  .detail {
+    grid-template-columns: minmax(0, 1fr) clamp(26rem, 30%, 32rem);
+    grid-template-rows: auto auto auto auto auto 1fr auto;
+    grid-template-areas:
+      "stage item"
+      "stage spec"
+      "stage notes"
+      "stage methods"
+      "stage related"
+      "stage ."
+      "quiz quiz";
+    column-gap: var(--space-8);
+    row-gap: var(--space-6);
+    align-items: start;
+  }
+
+  .detail > .item {
+    grid-area: item;
+  }
+
+  .detail > .spec {
+    grid-area: spec;
+  }
+
+  .detail > .stage {
+    grid-area: stage;
+  }
+
+  .detail > .notes {
+    grid-area: notes;
+  }
+
+  .detail > .methods {
+    grid-area: methods;
+  }
+
+  .detail > .related {
+    grid-area: related;
+  }
+
+  .detail > .quiz {
+    grid-area: quiz;
+  }
+}
+
+/* ---- パネル ---- */
+.panel {
+  min-width: 0;
+  padding: var(--space-6) var(--space-4) var(--space-4);
+  background: color-mix(in srgb, var(--color-bg-void) 88%, transparent);
+  container-type: inline-size;
+  /* 出るときの動き: 1 回だけ・transform と opacity のみ。動きを減らす設定では globals の規則ですぐ終わる */
+  animation: panel-in var(--dur-enter) var(--ease-out) both;
+  animation-delay: calc(var(--i, 0) * 30ms);
+}
+
+@keyframes panel-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ---- ITEM: 操作列・分類・題名・ひと言 ---- */
+.nav {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+  padding-bottom: var(--space-3);
+  border-bottom: 1px dashed var(--color-line);
+}
+
+.navButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-1);
+  min-width: 2.25rem;
+  height: 2.25rem;
+  padding: 0 var(--space-2);
+  border: 1px solid var(--color-line-strong);
+  background: var(--color-bg-void);
+  color: var(--color-text);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: transform var(--dur-instant) var(--ease-out);
+}
+
+.navButton:hover {
+  border-color: var(--color-accent-blue);
+  color: var(--color-accent-blue);
+}
+
+.navButton:active {
+  transform: translateY(1px);
+}
+
+.navButton:focus-visible {
+  outline: 2px solid var(--color-accent-blue);
+  outline-offset: 2px;
+}
+
+/* お気に入り(押した状態): 差し色の塗り(色の役割: 差し色 = 操作・現在地) */
+.navButtonOn {
+  border-color: var(--color-accent-blue);
+  background: var(--bp-accent-soft);
+  color: var(--color-accent-blue);
+}
+
+.navPos {
+  min-width: 4.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  text-align: center;
+  color: var(--color-text-muted);
+}
+
+.navGrow {
+  flex: 1;
+}
+
+.navBackText {
+  letter-spacing: 0.06em;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.1em;
+  color: var(--color-text-muted);
+}
+
+/* 見出し: 左に差し色の太線(図面の題名) */
+.title {
+  margin-top: var(--space-2);
+  padding-left: var(--space-3);
+  border-left: 3px solid var(--color-accent-blue);
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3vw, 2.125rem);
+  font-weight: 700;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+}
+
+/* 右の列では題名を少し小さく */
+@container (max-width: 30rem) {
+  .title {
+    font-size: 1.5rem;
+  }
+}
+
+.summary {
+  margin-top: var(--space-3);
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: var(--color-text-muted);
+}
+
+/* ---- SPEC: 表題欄・習得度・数値チップ ---- */
+.specRows {
+  display: grid;
+  margin-top: var(--space-3);
+  border-top: 1px dashed var(--color-line);
+}
+
+.specRow {
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-2) 0;
+  border-bottom: 1px dashed var(--color-line);
+}
+
+.specRow dt {
+  white-space: nowrap;
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  letter-spacing: 0.14em;
+  color: var(--color-text-muted);
+}
+
+.specRow dd {
+  margin: 0;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3) var(--space-4);
+  margin-top: var(--space-4);
+  list-style: none;
+  padding: 0;
+}
+
+.chip {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.125rem;
+}
+
+.chipValue {
+  font-size: 0.875rem;
+  color: var(--color-text);
+}
+
+.chipLabel {
+  font-size: 0.6875rem;
+  color: var(--color-text-muted);
+}
+
+.approx {
+  margin-top: var(--space-3);
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+/* ---- 図と本文 ---- */
+.stage {
+  min-width: 0;
+}
+
+.body {
+  max-width: 52rem;
+}
+
+/* ---- NOTES: 見るポイント / 使うときの注意(2 枚のカード) ---- */
+.cards {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.card {
+  padding: var(--space-3) var(--space-4) var(--space-2);
+  border: 1px solid var(--color-line);
+  border-top: 3px solid var(--color-accent-green);
+  background: var(--color-bg-void);
+}
+
+/* 注意はアンバー(色の役割: アンバー = 注意・補足) */
+.cardCaution {
+  border-top-color: var(--color-accent-amber);
+}
+
+.cardTitle {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-2);
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.cardTag {
+  color: var(--color-accent-green);
+}
+
+.cardCaution .cardTag {
+  color: var(--color-accent-amber);
+}
+
+.cardText {
+  margin-bottom: var(--space-2);
+  font-size: 0.9375rem;
+  line-height: 1.75;
+  color: var(--color-text);
+}
+
+.cardSub {
+  margin-right: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  color: var(--color-text-muted);
+}
+
+.cardBody {
+  font-size: 0.875rem;
+}
+
+/* ---- METHODS: 言語の札・コピー・実装例 ---- */
+.methodsHead {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
+}
+
+.methodsLangs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  flex: 1;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.methodsLang {
+  padding: 0.125rem var(--space-2);
+  border: 1px solid var(--color-accent-blue);
+  color: var(--color-accent-blue);
+}
+
+.copyStatus {
+  font-size: 0.75rem;
+  color: var(--color-accent-green);
+}
+
+.copyButton {
+  padding: var(--space-1) var(--space-3);
+  border: 1px solid var(--color-line-strong);
+  background: var(--color-bg-void);
+  color: var(--color-text);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: transform var(--dur-instant) var(--ease-out);
+}
+
+.copyButton:hover {
+  border-color: var(--color-accent-blue);
+  color: var(--color-accent-blue);
+}
+
+.copyButton:active {
+  transform: translateY(1px);
+}
+
+.copyButton:focus-visible {
+  outline: 2px solid var(--color-accent-blue);
+  outline-offset: 2px;
+}
+
+/* ---- クイズ(パネルの外。章の終わりに確かめる) ---- */
+.quiz {
+  min-width: 0;
+  max-width: 52rem;
+}
+
+.quiz > section {
+  margin-top: 0;
+}
