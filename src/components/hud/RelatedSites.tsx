@@ -1,9 +1,9 @@
 import styles from "./RelatedSites.module.css";
 
-export type SiteId = "algorithm" | "foundations" | "color" | "houdini";
+export type SiteId = "algorithm" | "foundations" | "color" | "houdini" | "shader";
 
 /**
- * 自作の関連サイト 4 つ(図鑑 3 つ+Houdini リファレンス)の名前・URL・一言。各サイトに同じ内容を置く(共有パッケージは作らない)。
+ * 自作の関連サイト 5 つ(図鑑 4 つ+Houdini リファレンス)の名前・URL・一言。各サイトに同じ内容を置く(共有パッケージは作らない)。
  * url が空文字のサイトは、リンクを出さない(本番 URL が確認できるまで推測で書かない)。
  */
 export const RELATED_SITES: { id: SiteId; name: string; desc: string; url: string }[] = [
@@ -30,6 +30,12 @@ export const RELATED_SITES: { id: SiteId; name: string; desc: string; url: strin
     name: "Houdini リファレンス",
     desc: "Tips・ニュース・リファレンスを自動で集めて見る",
     url: "https://houdini-reference.vercel.app",
+  },
+  {
+    id: "shader",
+    name: "シェーダー・3Dモーション図鑑",
+    desc: "シェーダーと 3D の動きを、動くデモと 4 つの作り方で引く",
+    url: "https://shader-motion-encyclopedia.pages.dev",
   },
 ];
 
